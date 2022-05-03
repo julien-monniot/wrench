@@ -6,6 +6,7 @@
   <title>Index &mdash; WRENCH 2.1-dev documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -25,7 +26,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> WRENCH
+            <a href="index.html">
+            <img src="_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1-dev
@@ -1821,8 +1823,6 @@
 </li>
       <li><a href="api_internal/classwrench_1_1_job_manager_wakeup_message.html#_CPPv4N6wrench23JobManagerWakeupMessageE">wrench::JobManagerWakeupMessage (C++ class)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_internal/classwrench_1_1_job_manager_wakeup_message.html#_CPPv4N6wrench23JobManagerWakeupMessage23JobManagerWakeupMessageEv">wrench::JobManagerWakeupMessage::JobManagerWakeupMessage (C++ function)</a>
 </li>
       <li><a href="api_developer/classwrench_1_1_job_timeout.html#_CPPv4N6wrench10JobTimeoutE">wrench::JobTimeout (C++ class)</a>, <a href="api_internal/classwrench_1_1_job_timeout.html#_CPPv4N6wrench10JobTimeoutE">[1]</a>
@@ -1833,6 +1833,8 @@
 </li>
       <li><a href="api_developer/classwrench_1_1_job_timeout.html#_CPPv4N6wrench10JobTimeout8toStringEv">wrench::JobTimeout::toString (C++ function)</a>, <a href="api_internal/classwrench_1_1_job_timeout.html#_CPPv4N6wrench10JobTimeout8toStringEv">[1]</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_internal/classwrench_1_1_logical_file_system.html#_CPPv4N6wrench17LogicalFileSystemE">wrench::LogicalFileSystem (C++ class)</a>
 </li>
       <li><a href="api_internal/classwrench_1_1_logical_file_system.html#_CPPv4N6wrench17LogicalFileSystem15createDirectoryERKNSt6stringE">wrench::LogicalFileSystem::createDirectory (C++ function)</a>
@@ -2471,11 +2473,23 @@
 </li>
       <li><a href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayloadE">wrench::ServiceMessagePayload (C++ class)</a>, <a href="api_internal/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayloadE">[1]</a>, <a href="api_user/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayloadE">[2]</a>
 </li>
+      <li><a href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload17addMessagePayloadENSt6stringENSt6stringE">wrench::ServiceMessagePayload::addMessagePayload (C++ function)</a>, <a href="api_internal/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload17addMessagePayloadENSt6stringENSt6stringE">[1]</a>, <a href="api_user/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload17addMessagePayloadENSt6stringENSt6stringE">[2]</a>
+</li>
       <li><a href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload30DAEMON_STOPPED_MESSAGE_PAYLOADE">wrench::ServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD (C++ member)</a>, <a href="api_internal/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload30DAEMON_STOPPED_MESSAGE_PAYLOADE">[1]</a>, <a href="api_user/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload30DAEMON_STOPPED_MESSAGE_PAYLOADE">[2]</a>
 </li>
       <li><a href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload27STOP_DAEMON_MESSAGE_PAYLOADE">wrench::ServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD (C++ member)</a>, <a href="api_internal/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload27STOP_DAEMON_MESSAGE_PAYLOADE">[1]</a>, <a href="api_user/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload27STOP_DAEMON_MESSAGE_PAYLOADE">[2]</a>
 </li>
+      <li><a href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload20translatePayloadTypeE26WRENCH_MESSAGEPAYLOAD_TYPE">wrench::ServiceMessagePayload::translatePayloadType (C++ function)</a>, <a href="api_internal/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload20translatePayloadTypeE26WRENCH_MESSAGEPAYLOAD_TYPE">[1]</a>, <a href="api_user/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload20translatePayloadTypeE26WRENCH_MESSAGEPAYLOAD_TYPE">[2]</a>
+</li>
+      <li><a href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload15translateStringENSt6stringE">wrench::ServiceMessagePayload::translateString (C++ function)</a>, <a href="api_internal/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload15translateStringENSt6stringE">[1]</a>, <a href="api_user/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload15translateStringENSt6stringE">[2]</a>
+</li>
       <li><a href="api_developer/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServicePropertyE">wrench::ServiceProperty (C++ class)</a>, <a href="api_internal/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServicePropertyE">[1]</a>, <a href="api_user/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServicePropertyE">[2]</a>
+</li>
+      <li><a href="api_developer/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty18addServicePropertyENSt6stringENSt6stringE">wrench::ServiceProperty::addServiceProperty (C++ function)</a>, <a href="api_internal/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty18addServicePropertyENSt6stringENSt6stringE">[1]</a>, <a href="api_user/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty18addServicePropertyENSt6stringENSt6stringE">[2]</a>
+</li>
+      <li><a href="api_developer/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty21translatePropertyTypeE20WRENCH_PROPERTY_TYPE">wrench::ServiceProperty::translatePropertyType (C++ function)</a>, <a href="api_internal/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty21translatePropertyTypeE20WRENCH_PROPERTY_TYPE">[1]</a>, <a href="api_user/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty21translatePropertyTypeE20WRENCH_PROPERTY_TYPE">[2]</a>
+</li>
+      <li><a href="api_developer/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty15translateStringENSt6stringE">wrench::ServiceProperty::translateString (C++ function)</a>, <a href="api_internal/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty15translateStringENSt6stringE">[1]</a>, <a href="api_user/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServiceProperty15translateStringENSt6stringE">[2]</a>
 </li>
       <li><a href="api_internal/classwrench_1_1_service_stop_daemon_message.html#_CPPv4N6wrench24ServiceStopDaemonMessageE">wrench::ServiceStopDaemonMessage (C++ class)</a>
 </li>
@@ -3283,6 +3297,10 @@
 </li>
       <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow14createWorkflowEv">wrench::Workflow::createWorkflow (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow14createWorkflowEv">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow14createWorkflowEv">[2]</a>
 </li>
+      <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv">wrench::Workflow::disableTopLevelDynamicUpdates (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv">[2]</a>
+</li>
+      <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv">wrench::Workflow::enableTopLevelDynamicUpdates (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv">[2]</a>
+</li>
       <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow11exportToEPSERKNSt6stringE">wrench::Workflow::exportToEPS (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow11exportToEPSERKNSt6stringE">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow11exportToEPSERKNSt6stringE">[2]</a>
 </li>
       <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow17getCompletionDateEv">wrench::Workflow::getCompletionDate (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow17getCompletionDateEv">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow17getCompletionDateEv">[2]</a>
@@ -3350,6 +3368,8 @@
       <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow10removeFileERKNSt10shared_ptrI8DataFileEE">wrench::Workflow::removeFile (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow10removeFileERKNSt10shared_ptrI8DataFileEE">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow10removeFileERKNSt10shared_ptrI8DataFileEE">[2]</a>
 </li>
       <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow10removeTaskERKNSt10shared_ptrI12WorkflowTaskEE">wrench::Workflow::removeTask (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow10removeTaskERKNSt10shared_ptrI12WorkflowTaskEE">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow10removeTaskERKNSt10shared_ptrI12WorkflowTaskEE">[2]</a>
+</li>
+      <li><a href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow18updateAllTopLevelsEv">wrench::Workflow::updateAllTopLevels (C++ function)</a>, <a href="api_internal/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow18updateAllTopLevelsEv">[1]</a>, <a href="api_user/classwrench_1_1_workflow.html#_CPPv4N6wrench8Workflow18updateAllTopLevelsEv">[2]</a>
 </li>
       <li><a href="api_developer/classwrench_1_1_workflow_task.html#_CPPv4N6wrench12WorkflowTaskE">wrench::WorkflowTask (C++ class)</a>, <a href="api_internal/classwrench_1_1_workflow_task.html#_CPPv4N6wrench12WorkflowTaskE">[1]</a>, <a href="api_user/classwrench_1_1_workflow_task.html#_CPPv4N6wrench12WorkflowTaskE">[2]</a>
 </li>

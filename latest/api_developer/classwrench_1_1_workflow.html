@@ -7,6 +7,7 @@
   <title>wrench::Workflow &mdash; WRENCH 2.1-dev documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -28,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1-dev
@@ -282,6 +284,18 @@
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow5clearEv">
 <span id="_CPPv3N6wrench8Workflow5clearEv"></span><span id="_CPPv2N6wrench8Workflow5clearEv"></span><span id="wrench::Workflow::clear"></span><span class="target" id="classwrench_1_1_workflow_1abebf8b242fbb41c4c6048539d958e894"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench8Workflow5clearEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Method that will delete all workflow tasks and all files used by these tasks. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv">
+<span id="_CPPv3N6wrench8Workflow29disableTopLevelDynamicUpdatesEv"></span><span id="_CPPv2N6wrench8Workflow29disableTopLevelDynamicUpdatesEv"></span><span id="wrench::Workflow::disableTopLevelDynamicUpdates"></span><span class="target" id="classwrench_1_1_workflow_1a3576bfeeb292b379c169631a36e8f64e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disableTopLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable dynamic top level updates (so that each task dependency update does not trigger a recursive, and thus expensive, top level computations) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv">
+<span id="_CPPv3N6wrench8Workflow28enableTopLevelDynamicUpdatesEv"></span><span id="_CPPv2N6wrench8Workflow28enableTopLevelDynamicUpdatesEv"></span><span id="wrench::Workflow::enableTopLevelDynamicUpdates"></span><span class="target" id="classwrench_1_1_workflow_1a69bb5cb84994690df0b804152cab446a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enableTopLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable dynamic top level updates. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -696,6 +710,12 @@
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow18updateAllTopLevelsEv">
+<span id="_CPPv3N6wrench8Workflow18updateAllTopLevelsEv"></span><span id="_CPPv2N6wrench8Workflow18updateAllTopLevelsEv"></span><span id="wrench::Workflow::updateAllTopLevels"></span><span class="target" id="classwrench_1_1_workflow_1a81767c55e24822e8d0d5f1d855c2e669"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateAllTopLevels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench8Workflow18updateAllTopLevelsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update the top level of all tasks (in case dynamic top level udpates had been disabled) </p>
 </dd></dl>
 
 </div>
