@@ -433,15 +433,14 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv">
-<span id="_CPPv3N6wrench8Workflow29disableTopLevelDynamicUpdatesEv"></span><span id="_CPPv2N6wrench8Workflow29disableTopLevelDynamicUpdatesEv"></span><span id="wrench::Workflow::disableTopLevelDynamicUpdates"></span><span class="target" id="classwrench_1_1_workflow_1a3576bfeeb292b379c169631a36e8f64e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disableTopLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Disable dynamic top level updates (so that each task dependency update does not trigger a recursive, and thus expensive, top level computations) </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv">
-<span id="_CPPv3N6wrench8Workflow28enableTopLevelDynamicUpdatesEv"></span><span id="_CPPv2N6wrench8Workflow28enableTopLevelDynamicUpdatesEv"></span><span id="wrench::Workflow::enableTopLevelDynamicUpdates"></span><span class="target" id="classwrench_1_1_workflow_1a69bb5cb84994690df0b804152cab446a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enableTopLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Enable dynamic top level updates. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow34enableTopBottomLevelDynamicUpdatesEb">
+<span id="_CPPv3N6wrench8Workflow34enableTopBottomLevelDynamicUpdatesEb"></span><span id="_CPPv2N6wrench8Workflow34enableTopBottomLevelDynamicUpdatesEb"></span><span id="wrench::Workflow::enableTopBottomLevelDynamicUpdates__b"></span><span class="target" id="classwrench_1_1_workflow_1a13944286502449e69b3733557f1b5fd6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enableTopBottomLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Enable dynamic top/bottom level updates. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>enabled</strong> – true if dynamic updates are to be enabled, false otherwise </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
@@ -730,6 +729,23 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow26getTasksInBottomLevelRangeEmm">
+<span id="_CPPv3N6wrench8Workflow26getTasksInBottomLevelRangeEmm"></span><span id="_CPPv2N6wrench8Workflow26getTasksInBottomLevelRangeEmm"></span><span id="wrench::Workflow::getTasksInBottomLevelRange__unsigned-l.unsigned-l"></span><span class="target" id="classwrench_1_1_workflow_1a47ddb108d5698867c48051f41f79e87f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_workflow_task.html#_CPPv4N6wrench12WorkflowTaskE" title="wrench::WorkflowTask"><span class="n"><span class="pre">WorkflowTask</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTasksInBottomLevelRange</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">min</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Returns all tasks with bottom-levels in a range. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min</strong> – the low end of the range (inclusive) </p></li>
+<li><p><strong>max</strong> – the high end of the range (inclusive) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a vector of tasks </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow23getTasksInTopLevelRangeEmm">
 <span id="_CPPv3N6wrench8Workflow23getTasksInTopLevelRangeEmm"></span><span id="_CPPv2N6wrench8Workflow23getTasksInTopLevelRangeEmm"></span><span id="wrench::Workflow::getTasksInTopLevelRange__unsigned-l.unsigned-l"></span><span class="target" id="classwrench_1_1_workflow_1aa5ddd346ae6f20adf42ee3430bc7850b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_workflow_task.html#_CPPv4N6wrench12WorkflowTaskE" title="wrench::WorkflowTask"><span class="n"><span class="pre">WorkflowTask</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTasksInTopLevelRange</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">min</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max</span></span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Returns all tasks with top-levels in a range. </p>
@@ -859,8 +875,8 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow18updateAllTopLevelsEv">
-<span id="_CPPv3N6wrench8Workflow18updateAllTopLevelsEv"></span><span id="_CPPv2N6wrench8Workflow18updateAllTopLevelsEv"></span><span id="wrench::Workflow::updateAllTopLevels"></span><span class="target" id="classwrench_1_1_workflow_1a81767c55e24822e8d0d5f1d855c2e669"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateAllTopLevels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow24updateAllTopBottomLevelsEv">
+<span id="_CPPv3N6wrench8Workflow24updateAllTopBottomLevelsEv"></span><span id="_CPPv2N6wrench8Workflow24updateAllTopBottomLevelsEv"></span><span id="wrench::Workflow::updateAllTopBottomLevels"></span><span class="target" id="classwrench_1_1_workflow_1a63702ef249bbfa459d9985463f0b225a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateAllTopBottomLevels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Update the top level of all tasks (in case dynamic top level udpates had been disabled) </p>
 </dd></dl>
 

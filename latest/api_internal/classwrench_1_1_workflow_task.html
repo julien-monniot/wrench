@@ -477,6 +477,17 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench12WorkflowTask14getBottomLevelEv">
+<span id="_CPPv3NK6wrench12WorkflowTask14getBottomLevelEv"></span><span id="_CPPv2NK6wrench12WorkflowTask14getBottomLevelEv"></span><span id="wrench::WorkflowTask::getBottomLevelC"></span><span class="target" id="classwrench_1_1_workflow_task_1a5f0461cc3c06bf310ad34867eb0c53b4"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getBottomLevel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<dd><p>Returns the task’s bottom level (max number of hops on a path down to an exit task. Exit tasks have a bottom-level of 0) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6wrench12WorkflowTask12getBytesReadEv">
 <span id="_CPPv3NK6wrench12WorkflowTask12getBytesReadEv"></span><span id="_CPPv2NK6wrench12WorkflowTask12getBytesReadEv"></span><span id="wrench::WorkflowTask::getBytesReadC"></span><span class="target" id="classwrench_1_1_workflow_task_1aa058314eed75bf58cbfc86441c9e75cc"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getBytesRead</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
 <dd><p>Get the number of bytes read by the task. </p>
@@ -1181,6 +1192,17 @@
 </dd>
 <dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench12WorkflowTask17updateBottomLevelEv">
+<span id="_CPPv3N6wrench12WorkflowTask17updateBottomLevelEv"></span><span id="_CPPv2N6wrench12WorkflowTask17updateBottomLevelEv"></span><span id="wrench::WorkflowTask::updateBottomLevel"></span><span class="target" id="classwrench_1_1_workflow_task_1a7df53974142a0335dfe50b7ebbff2758"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateBottomLevel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12WorkflowTask17updateBottomLevelEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update the task’s bottom level (looking only at the children, and updating parents) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the task’s updated bottom level </p>
 </dd>
 </dl>
 </dd></dl>
