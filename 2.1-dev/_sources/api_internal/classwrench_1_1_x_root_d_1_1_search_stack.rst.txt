@@ -1,0 +1,8 @@
+.. _XRootD::SearchStack:
+wrench::XRootD::SearchStack
+***************************
+
+.. doxygenclass:: wrench::XRootD::SearchStack
+   :project: internal
+   :members:
+

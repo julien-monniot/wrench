@@ -1,0 +1,8 @@
+.. _XRootD::FileDeleteRequestMessage:
+wrench::XRootD::FileDeleteRequestMessage
+****************************************
+
+.. doxygenclass:: wrench::XRootD::FileDeleteRequestMessage
+   :project: internal
+   :members:
+

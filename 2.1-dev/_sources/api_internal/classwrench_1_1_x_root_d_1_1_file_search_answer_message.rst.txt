@@ -1,0 +1,8 @@
+.. _XRootD::FileSearchAnswerMessage:
+wrench::XRootD::FileSearchAnswerMessage
+***************************************
+
+.. doxygenclass:: wrench::XRootD::FileSearchAnswerMessage
+   :project: internal
+   :members:
+
