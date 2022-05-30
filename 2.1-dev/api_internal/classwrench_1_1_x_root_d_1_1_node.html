@@ -393,6 +393,53 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node13getMountPointEv">
+<span id="_CPPv3N6wrench6XRootD4Node13getMountPointEv"></span><span id="_CPPv2N6wrench6XRootD4Node13getMountPointEv"></span><span id="wrench::XRootD::Node::getMountPoint"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a0c98a52946ba8665deba5c131c2b5c27"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMountPoint</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Get the mount point (will throw is more than one) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the (sole) mount point of the service </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node14getMountPointsEv">
+<span id="_CPPv3N6wrench6XRootD4Node14getMountPointsEv"></span><span id="_CPPv2N6wrench6XRootD4Node14getMountPointsEv"></span><span id="wrench::XRootD::Node::getMountPoints"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1aa8bea1cfb08471072958991a6cd9c254"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMountPoints</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Get the set of mount points. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the set of mount points </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node13hasMountPointERKNSt6stringE">
+<span id="_CPPv3N6wrench6XRootD4Node13hasMountPointERKNSt6stringE"></span><span id="_CPPv2N6wrench6XRootD4Node13hasMountPointERKNSt6stringE"></span><span id="wrench::XRootD::Node::hasMountPoint__ssCR"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a0620baaef90f9965c63b3fc4a3760334"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasMountPoint</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mp</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Checked whether the storage service has a particular mount point. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mp</strong> – a mount point</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true whether the service has that mount point </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node22hasMultipleMountPointsEv">
+<span id="_CPPv3N6wrench6XRootD4Node22hasMultipleMountPointsEv"></span><span id="_CPPv2N6wrench6XRootD4Node22hasMultipleMountPointsEv"></span><span id="wrench::XRootD::Node::hasMultipleMountPoints"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a2e9603efbe42764af5852a33f5e0da3c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasMultipleMountPoints</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Checked whether the storage service has multiple mount points. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true whether the service has multiple mount points </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node4mainEv">
 <span id="_CPPv3N6wrench6XRootD4Node4mainEv"></span><span id="_CPPv2N6wrench6XRootD4Node4mainEv"></span><span id="wrench::XRootD::Node::main"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ac4f478c96c6d5fa2e3115357138bd5db"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node4mainEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The daemon’s main method, to be overridden. </p>
