@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wrench::XRootD::SearchStack" href="classwrench_1_1_x_root_d_1_1_search_stack.html" />
+    <link rel="next" title="wrench::XRootD::Property" href="classwrench_1_1_x_root_d_1_1_property.html" />
     <link rel="prev" title="wrench::XRootD::MessagePayload" href="classwrench_1_1_x_root_d_1_1_message_payload.html" /> 
 </head>
 
@@ -333,12 +333,13 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_delete_request_message.html">wrench::XRootD::FileDeleteRequestMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_search_answer_message.html">wrench::XRootD::FileSearchAnswerMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_search_request_message.html">wrench::XRootD::FileSearchRequestMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_search_stack.html">wrench::XRootD::SearchStack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d.html">wrench::XRootD::XRootD</a></li>
@@ -393,53 +394,6 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node13getMountPointEv">
-<span id="_CPPv3N6wrench6XRootD4Node13getMountPointEv"></span><span id="_CPPv2N6wrench6XRootD4Node13getMountPointEv"></span><span id="wrench::XRootD::Node::getMountPoint"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a0c98a52946ba8665deba5c131c2b5c27"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMountPoint</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
-<dd><p>Get mount point of underlying storage service. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the (sole) mount point of the service if there is one, and null otherwise </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node14getMountPointsEv">
-<span id="_CPPv3N6wrench6XRootD4Node14getMountPointsEv"></span><span id="_CPPv2N6wrench6XRootD4Node14getMountPointsEv"></span><span id="wrench::XRootD::Node::getMountPoints"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1aa8bea1cfb08471072958991a6cd9c254"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMountPoints</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
-<dd><p>Get the set of mount points of the underlying storage service. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the set of mount points of the service if there is one, and empty set otherwise </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node13hasMountPointERKNSt6stringE">
-<span id="_CPPv3N6wrench6XRootD4Node13hasMountPointERKNSt6stringE"></span><span id="_CPPv2N6wrench6XRootD4Node13hasMountPointERKNSt6stringE"></span><span id="wrench::XRootD::Node::hasMountPoint__ssCR"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a0620baaef90f9965c63b3fc4a3760334"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasMountPoint</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mp</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
-<dd><p>Check whether the underlying storage service has a particular mount point. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mp</strong> – a mount point</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>whether the underlying service has that mount point, if there is no storage service, returns false </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node22hasMultipleMountPointsEv">
-<span id="_CPPv3N6wrench6XRootD4Node22hasMultipleMountPointsEv"></span><span id="_CPPv2N6wrench6XRootD4Node22hasMultipleMountPointsEv"></span><span id="wrench::XRootD::Node::hasMultipleMountPoints"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a2e9603efbe42764af5852a33f5e0da3c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hasMultipleMountPoints</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
-<dd><p>Check whether the underlying storage service has multiple mount points. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>whether the service has multiple mount points, if there is no storage service, returns false </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node4mainEv">
 <span id="_CPPv3N6wrench6XRootD4Node4mainEv"></span><span id="_CPPv2N6wrench6XRootD4Node4mainEv"></span><span id="wrench::XRootD::Node::main"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ac4f478c96c6d5fa2e3115357138bd5db"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node4mainEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The daemon’s main method, to be overridden. </p>
@@ -471,7 +425,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="classwrench_1_1_x_root_d_1_1_message_payload.html" class="btn btn-neutral float-left" title="wrench::XRootD::MessagePayload" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="classwrench_1_1_x_root_d_1_1_search_stack.html" class="btn btn-neutral float-right" title="wrench::XRootD::SearchStack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classwrench_1_1_x_root_d_1_1_property.html" class="btn btn-neutral float-right" title="wrench::XRootD::Property" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
