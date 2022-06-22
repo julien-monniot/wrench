@@ -379,6 +379,20 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node4NodeERKNSt6stringE">
+<span id="_CPPv3N6wrench6XRootD4Node4NodeERKNSt6stringE"></span><span id="_CPPv2N6wrench6XRootD4Node4NodeERKNSt6stringE"></span><span id="wrench::XRootD::Node::Node__ssCR"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ab1f5b0d86a57215f12e2aba3ef5a41bf"></span><span class="sig-name descname"><span class="n"><span class="pre">Node</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host on which the service and its storage service should run</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a shared pointer to the newly created <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_node.html#classwrench_1_1_x_root_d_1_1_node"><span class="std std-ref">Node</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE">
 <span id="_CPPv3N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE"></span><span id="_CPPv2N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE"></span><span id="wrench::XRootD::Node::addChild__std::shared_ptr:Node:"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ab8d3b037999380ed070a2fced75da27b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addChild</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">child</span></span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Adds a child node to an <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> supervisor. </p>
@@ -452,6 +466,17 @@
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>pointer supervisor. Will be nullptr if root </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node16getStorageServerEv">
+<span id="_CPPv3N6wrench6XRootD4Node16getStorageServerEv"></span><span id="_CPPv2N6wrench6XRootD4Node16getStorageServerEv"></span><span id="wrench::XRootD::Node::getStorageServer"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1acfa0fdfe6815e8184055dba1add26bec"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><span class="n"><span class="pre">SimpleStorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getStorageServer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Gets the underlying storage server. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A pointer to the simple storage server for this file server </p>
 </dd>
 </dl>
 </dd></dl>
