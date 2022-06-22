@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wrench::XRootD::FileSearchAnswerMessage" href="classwrench_1_1_x_root_d_1_1_file_search_answer_message.html" />
+    <link rel="next" title="wrench::XRootD::Message" href="classwrench_1_1_x_root_d_1_1_message.html" />
     <link rel="prev" title="wrench::XRootD::Cache" href="classwrench_1_1_x_root_d_1_1_cache.html" /> 
 </head>
 
@@ -333,8 +333,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">wrench::XRootD::ContinueSearchMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_search_answer_message.html">wrench::XRootD::FileSearchAnswerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_search_request_message.html">wrench::XRootD::FileSearchRequestMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
@@ -377,7 +375,41 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD21ContinueSearchMessageE">
 <span id="_CPPv3N6wrench6XRootD21ContinueSearchMessageE"></span><span id="_CPPv2N6wrench6XRootD21ContinueSearchMessageE"></span><span id="wrench::XRootD::ContinueSearchMessage"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_continue_search_message"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">XRootD</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">ContinueSearchMessage</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">XRootD</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html#_CPPv4N6wrench6XRootD7MessageE" title="wrench::XRootD::Message"><span class="n"><span class="pre">Message</span></span></a><a class="headerlink" href="#_CPPv4N6wrench6XRootD21ContinueSearchMessageE" title="Permalink to this definition"></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>A message sent to a <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_node.html#classwrench_1_1_x_root_d_1_1_node"><span class="std std-ref">Node</span></a> to continue an ongoing search for a file. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEP21ContinueSearchMessage">
+<span id="_CPPv3N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEP21ContinueSearchMessage"></span><span id="_CPPv2N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEP21ContinueSearchMessage"></span><span id="wrench::XRootD::ContinueSearchMessage::ContinueSearchMessage__ContinueSearchMessageP"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_continue_search_message_1a70d251e0c414e26f4af39e952867327f"></span><span class="sig-name descname"><span class="n"><span class="pre">ContinueSearchMessage</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEP21ContinueSearchMessage" title="wrench::XRootD::ContinueSearchMessage::ContinueSearchMessage"><span class="n"><span class="pre">ContinueSearchMessage</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">toCopy</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEP21ContinueSearchMessage" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copy Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – The message to copy. timeToLive is decremented </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEPN7simgrid3s4u7MailboxENSt10shared_ptrI36StorageServiceFileReadRequestMessageEENSt10shared_ptrI8DataFileEEP4NodedNSt10shared_ptrIbEEi">
+<span id="_CPPv3N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEPN7simgrid3s4u7MailboxENSt10shared_ptrI36StorageServiceFileReadRequestMessageEENSt10shared_ptrI8DataFileEEP4NodedNSt10shared_ptrIbEEi"></span><span id="_CPPv2N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEPN7simgrid3s4u7MailboxENSt10shared_ptrI36StorageServiceFileReadRequestMessageEENSt10shared_ptrI8DataFileEEP4NodedNSt10shared_ptrIbEEi"></span><span id="wrench::XRootD::ContinueSearchMessage::ContinueSearchMessage__simgrid::s4u::MailboxP.std::shared_ptr:StorageServiceFileReadRequestMessage:.std::shared_ptr:DataFile:.NodeP.double.std::shared_ptr:b:.i"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_continue_search_message_1ab8127bc931fcc317644af8c6410544ce"></span><span class="sig-name descname"><span class="n"><span class="pre">ContinueSearchMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">answer_mailbox</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service_file_read_request_message.html#_CPPv4N6wrench36StorageServiceFileReadRequestMessageE" title="wrench::StorageServiceFileReadRequestMessage"><span class="n"><span class="pre">StorageServiceFileReadRequestMessage</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">original</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">file</span></span>, <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">node</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">answered</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeToLive</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD21ContinueSearchMessage21ContinueSearchMessageEPN7simgrid3s4u7MailboxENSt10shared_ptrI36StorageServiceFileReadRequestMessageEENSt10shared_ptrI8DataFileEEP4NodedNSt10shared_ptrIbEEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>answer_mailbox</strong> – The mailbox the final answer should be sent to </p></li>
+<li><p><strong>original</strong> – The original file read request being responded too. If this is a file locate search, this should be null </p></li>
+<li><p><strong>file</strong> – The file to search for </p></li>
+<li><p><strong>node</strong> – The node where the search was initiated </p></li>
+<li><p><strong>payload</strong> – The message size in bytes </p></li>
+<li><p><strong>answered</strong> – A shared boolean for if the answer has been sent to the client. This should be the same for all messages searching for this request. Used to prevent the multiple response problem </p></li>
+<li><p><strong>timeToLive</strong> – The max number of hops this message can take </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD21ContinueSearchMessage14answer_mailboxE">
@@ -425,7 +457,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="classwrench_1_1_x_root_d_1_1_cache.html" class="btn btn-neutral float-left" title="wrench::XRootD::Cache" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="classwrench_1_1_x_root_d_1_1_file_search_answer_message.html" class="btn btn-neutral float-right" title="wrench::XRootD::FileSearchAnswerMessage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classwrench_1_1_x_root_d_1_1_message.html" class="btn btn-neutral float-right" title="wrench::XRootD::Message" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
