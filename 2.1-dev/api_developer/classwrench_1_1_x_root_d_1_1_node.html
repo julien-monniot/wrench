@@ -227,6 +227,20 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE">
+<span id="_CPPv3N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE"></span><span id="_CPPv2N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE"></span><span id="wrench::XRootD::Node::addChild__std::shared_ptr:Node:"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ab8d3b037999380ed070a2fced75da27b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addChild</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">child</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a child node to an <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> supervisor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>child</strong> – the new child to add </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the child id of the new node, or -1 if the supervisor already has 64 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node6cachedE10shared_ptrI8DataFileE">
 <span id="_CPPv3N6wrench6XRootD4Node6cachedE10shared_ptrI8DataFileE"></span><span id="_CPPv2N6wrench6XRootD4Node6cachedE10shared_ptrI8DataFileE"></span><span id="wrench::XRootD::Node::cached__shared_ptr:DataFile:"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1abebe5ee39bbc5aecf4b5e58332315c19"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cached</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node6cachedE10shared_ptrI8DataFileE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Check the cache for a file. </p>
@@ -269,12 +283,37 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node8getChildEj">
+<span id="_CPPv3N6wrench6XRootD4Node8getChildEj"></span><span id="_CPPv2N6wrench6XRootD4Node8getChildEj"></span><span id="wrench::XRootD::Node::getChild__unsigned-i"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a44d38257ef67a298b5a8acfbec2cbef3"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getChild</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node8getChildEj" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A meta tree traversal operation to get the nth child of this node. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – The index of the child to receive. Nodes are in order added </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the Child Nodes shared pointer, or nullptr if this node is a leaf </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node7getLoadEv">
 <span id="_CPPv3N6wrench6XRootD4Node7getLoadEv"></span><span id="_CPPv2N6wrench6XRootD4Node7getLoadEv"></span><span id="wrench::XRootD::Node::getLoad"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a6b97d6f3d69a34e4b73a79d39120bba9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getLoad</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node7getLoadEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get the load of the underlying storage service. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the load on the service </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node9getParentEv">
+<span id="_CPPv3N6wrench6XRootD4Node9getParentEv"></span><span id="_CPPv2N6wrench6XRootD4Node9getParentEv"></span><span id="wrench::XRootD::Node::getParent"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a7c7b88b17128a9ed475d866598ee5417"></span><a class="reference internal" href="#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getParent</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node9getParentEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A Meta tree traversal to get the parent of this node. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>pointer supervisor. Will be nullptr if root </p>
 </dd>
 </dl>
 </dd></dl>
