@@ -406,6 +406,17 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD5Cache5cleanEv">
+<span id="_CPPv3N6wrench6XRootD5Cache5cleanEv"></span><span id="_CPPv2N6wrench6XRootD5Cache5cleanEv"></span><span id="wrench::XRootD::Cache::clean"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_cache_1a3c88a93c93ba2f8616683b61d138e937"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clean</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD5Cache5cleanEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deap Clean the cache of outdated entries. Possibly slow, but if the cache size is getting out of hand, this can help. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> – The file to check the cache for </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD5Cache3getENSt10shared_ptrI8DataFileEE">
 <span id="_CPPv3N6wrench6XRootD5Cache3getENSt10shared_ptrI8DataFileEE"></span><span id="_CPPv2N6wrench6XRootD5Cache3getENSt10shared_ptrI8DataFileEE"></span><span id="wrench::XRootD::Cache::get__std::shared_ptr:DataFile:"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_cache_1a9c5f783c7c0764e00cc816f75d6f5100"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD5Cache3getENSt10shared_ptrI8DataFileEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>get all valid cached copies. </p>
@@ -456,6 +467,15 @@
 <dd class="field-odd"><p><strong>file</strong> – The file to check the cache for </p>
 </dd>
 </dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD5Cache12maxCacheTimeE">
+<span id="_CPPv3N6wrench6XRootD5Cache12maxCacheTimeE"></span><span id="_CPPv2N6wrench6XRootD5Cache12maxCacheTimeE"></span><span id="wrench::XRootD::Cache::maxCacheTime__double"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_cache_1a26b5508f21357aa72729216524355684"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxCacheTime</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">numeric_limits</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">infinity</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N6wrench6XRootD5Cache12maxCacheTimeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The maximum time an unupdated entry can remain in the cache. </p>
 </dd></dl>
 
 </div>

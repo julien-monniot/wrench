@@ -379,12 +379,16 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node4NodeERKNSt6stringE">
-<span id="_CPPv3N6wrench6XRootD4Node4NodeERKNSt6stringE"></span><span id="_CPPv2N6wrench6XRootD4Node4NodeERKNSt6stringE"></span><span id="wrench::XRootD::Node::Node__ssCR"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ab1f5b0d86a57215f12e2aba3ef5a41bf"></span><span class="sig-name descname"><span class="n"><span class="pre">Node</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Constructor. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node4NodeERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE">
+<span id="_CPPv3N6wrench6XRootD4Node4NodeERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="_CPPv2N6wrench6XRootD4Node4NodeERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="wrench::XRootD::Node::Node__ssCR.WRENCH_PROPERTY_COLLECTION_TYPE.WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1acb4994ec69dc83d578240089adc4bd9f"></span><span class="sig-name descname"><span class="n"><span class="pre">Node</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="n"><span class="pre">WRENCH_PROPERTY_COLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">storage_property_list</span></span>, <span class="n"><span class="pre">WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">storage_messagepayload_list</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench6XRootD4Node4NodeERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor, should not be used directly except by <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> createNode. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>hostname</strong> – the name of the host on which the service and its storage service should run</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the name of the host on which the service and its storage service should run </p></li>
+<li><p><strong>property_list</strong> – A property list </p></li>
+<li><p><strong>messagepayload_list</strong> – A <a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html#classwrench_1_1_x_root_d_1_1_message"><span class="std std-ref">Message</span></a> Payload list</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>a shared pointer to the newly created <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_node.html#classwrench_1_1_x_root_d_1_1_node"><span class="std std-ref">Node</span></a> </p>
