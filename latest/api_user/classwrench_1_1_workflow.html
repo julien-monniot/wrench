@@ -133,10 +133,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d.html">wrench::XRootD::XRootD</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_developer.html">WRENCH Developer API</a></li>
@@ -241,15 +237,14 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow29disableTopLevelDynamicUpdatesEv">
-<span id="_CPPv3N6wrench8Workflow29disableTopLevelDynamicUpdatesEv"></span><span id="_CPPv2N6wrench8Workflow29disableTopLevelDynamicUpdatesEv"></span><span id="wrench::Workflow::disableTopLevelDynamicUpdates"></span><span class="target" id="classwrench_1_1_workflow_1a3576bfeeb292b379c169631a36e8f64e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disableTopLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Disable dynamic top level updates (so that each task dependency update does not trigger a recursive, and thus expensive, top level computations) </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow28enableTopLevelDynamicUpdatesEv">
-<span id="_CPPv3N6wrench8Workflow28enableTopLevelDynamicUpdatesEv"></span><span id="_CPPv2N6wrench8Workflow28enableTopLevelDynamicUpdatesEv"></span><span id="wrench::Workflow::enableTopLevelDynamicUpdates"></span><span class="target" id="classwrench_1_1_workflow_1a69bb5cb84994690df0b804152cab446a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enableTopLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Enable dynamic top level updates. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow34enableTopBottomLevelDynamicUpdatesEb">
+<span id="_CPPv3N6wrench8Workflow34enableTopBottomLevelDynamicUpdatesEb"></span><span id="_CPPv2N6wrench8Workflow34enableTopBottomLevelDynamicUpdatesEb"></span><span id="wrench::Workflow::enableTopBottomLevelDynamicUpdates__b"></span><span class="target" id="classwrench_1_1_workflow_1a13944286502449e69b3733557f1b5fd6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enableTopBottomLevelDynamicUpdates</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">enabled</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Enable dynamic top/bottom level updates. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>enabled</strong> – true if dynamic updates are to be enabled, false otherwise </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
@@ -628,8 +623,8 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow18updateAllTopLevelsEv">
-<span id="_CPPv3N6wrench8Workflow18updateAllTopLevelsEv"></span><span id="_CPPv2N6wrench8Workflow18updateAllTopLevelsEv"></span><span id="wrench::Workflow::updateAllTopLevels"></span><span class="target" id="classwrench_1_1_workflow_1a81767c55e24822e8d0d5f1d855c2e669"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateAllTopLevels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench8Workflow24updateAllTopBottomLevelsEv">
+<span id="_CPPv3N6wrench8Workflow24updateAllTopBottomLevelsEv"></span><span id="_CPPv2N6wrench8Workflow24updateAllTopBottomLevelsEv"></span><span id="wrench::Workflow::updateAllTopBottomLevels"></span><span class="target" id="classwrench_1_1_workflow_1a63702ef249bbfa459d9985463f0b225a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updateAllTopBottomLevels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
 <dd><p>Update the top level of all tasks (in case dynamic top level udpates had been disabled) </p>
 </dd></dl>
 
