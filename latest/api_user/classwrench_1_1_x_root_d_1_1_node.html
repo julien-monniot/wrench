@@ -136,7 +136,7 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">wrench::XRootD::Node</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d.html">wrench::XRootD::XRootD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d_deployment.html">wrench::XRootD::XRootDDeployment</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_developer.html">WRENCH Developer API</a></li>
@@ -173,26 +173,9 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4NodeE">
 <span id="_CPPv3N6wrench6XRootD4NodeE"></span><span id="_CPPv2N6wrench6XRootD4NodeE"></span><span id="wrench::XRootD::Node"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">XRootD</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Node</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><br /></dt>
-<dd><p>An <a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> node, this can be either a supervisor or a storage server. All nodes are classified as storage services even though not all have physical storage Unless a node is also has an internal storage service, some normal storage service messages will error out. Only File Read, locate, and delete are supported at this time, anything else requires talking directly to a specific file server with physical storage. Nodes not directly be created, instead an <a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> Metavisor should create them. </p>
+<dd><p>An XRootD node, this can be either a supervisor or a storage server. All nodes are classified as storage services even though not all have physical storage Unless a node is also has an internal storage service, some normal storage service messages will error out. Only File Read, locate, and delete are supported at this time, anything else requires talking directly to a specific file server with physical storage. Nodes not directly be created, instead an XRootD Metavisor should create them. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE">
-<span id="_CPPv3N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE"></span><span id="_CPPv2N6wrench6XRootD4Node8addChildENSt10shared_ptrI4NodeEE"></span><span id="wrench::XRootD::Node::addChild__std::shared_ptr:Node:"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1ab8d3b037999380ed070a2fced75da27b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addChild</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">child</span></span><span class="sig-paren">)</span><br /></dt>
-<dd><p>Adds a child node to an <a class="reference internal" href="classwrench_1_1_x_root_d_1_1_x_root_d.html#classwrench_1_1_x_root_d_1_1_x_root_d"><span class="std std-ref">XRootD</span></a> supervisor. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>child</strong> – the new child to add </p>
-</dd>
-<dt class="field-even">Throws</dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">runtime_error</span></span></span> – if node already has 64 children. </p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the child id of the new node </p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD4Node8getChildEj">
 <span id="_CPPv3N6wrench6XRootD4Node8getChildEj"></span><span id="_CPPv2N6wrench6XRootD4Node8getChildEj"></span><span id="wrench::XRootD::Node::getChild__unsigned-i"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_node_1a44d38257ef67a298b5a8acfbec2cbef3"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><span class="n"><span class="pre">Node</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getChild</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><br /></dt>
