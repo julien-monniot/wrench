@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating an XRootD storage service &mdash; WRENCH 2.1-dev documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.1-dev
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Quickstart</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing WRENCH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../simulation_101.html">Simulation 101</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrench_101.html">WRENCH 101</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrench_102.html">WRENCH 102</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_user.html">WRENCH User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_developer.html">WRENCH Developer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_internal.html">WRENCH Internal API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">WRENCH</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Creating an XRootD storage service</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/wrench_101/xrootd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creating-an-xrootd-storage-service">
+<span id="guide-101-xrootd"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#creating-an-xrootd-storage-service" title="Permalink to this headline"></a></h1>
+</section>
+<section id="overview">
+<span id="guide-xrootd-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<p>TO UPDATE
+A Simple storage service is the simplest possible abstraction for a
+service that can store and provide access to workflow files. It has a
+certain storage capacity, and provides write, read, and delete
+operations on files. In addition, higher-level semantics such as copying
+a file directly from a storage service to another are provided.
+END TO UPDATE</p>
+</section>
+<section id="guide-xrootd-creating">
+<span id="id1"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#guide-xrootd-creating" title="Permalink to this headline"></a></h1>
+<p>TO UPDATE
+In WRENCH, a Simple storage service represents a storage service
+(<a class="reference internal" href="../api_developer/classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StorageService</span></code></a>), which is defined by the
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorage</span></code> class. An instantiation of a Simple storage
+service requires the following parameters:</p>
+<ul class="simple">
+<li><p>The name of a host on which to start the service;</p></li>
+<li><p>A list of mount points (corresponding to disks attached to the host);
+and</p></li>
+<li><p>Maps (<code class="docutils literal notranslate"><span class="pre">std::map</span></code>) of configurable properties
+(<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_property.html#_CPPv4N6wrench28SimpleStorageServicePropertyE" title="wrench::SimpleStorageServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code></a>) and configurable message
+payloads (<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_message_payload.html#_CPPv4N6wrench34SimpleStorageServiceMessagePayloadE" title="wrench::SimpleStorageServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code></a>).</p></li>
+</ul>
+<p>The example below creates an instance of a Simple storage service that
+runs on host <code class="docutils literal notranslate"><span class="pre">BigDisk</span></code>, has access to the disks mounted at paths
+<code class="docutils literal notranslate"><span class="pre">/data/</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/</span></code> at host <code class="docutils literal notranslate"><span class="pre">BigDisk</span></code>. Furthermore, the number
+of maximum concurrent data connections supported by the service is
+configured to be 8, and the message sent to the service to find out its
+free space is configured to be 1KiB:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">storage_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="w"></span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageService</span><span class="p">(</span><span class="s">&quot;BigDisk&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                  </span><span class="p">{</span><span class="s">&quot;/data/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/home/&quot;</span><span class="p">},</span><span class="w"></span>
+<span class="w">                                       </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageProperty</span><span class="o">::</span><span class="n">MAX_NUM_CONCURRENT_DATA_CONNECTIONS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;8&quot;</span><span class="p">}},</span><span class="w"></span>
+<span class="w">                                       </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageServiceMessagePayload</span><span class="o">::</span><span class="n">FREE_SPACE_REQUEST_MESSAGE_PAYLOAD</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1024&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="w">                                      </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>See the documentation of <a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_property.html#_CPPv4N6wrench28SimpleStorageServicePropertyE" title="wrench::SimpleStorageServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code></a> and
+<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_message_payload.html#_CPPv4N6wrench34SimpleStorageServiceMessagePayloadE" title="wrench::SimpleStorageServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code></a> for all possible
+configuration options.</p>
+<p>Also see the simulators in the <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/*</span></code> and
+<code class="docutils literal notranslate"><span class="pre">examples/action_api/*</span></code>
+directories, which all use simple storage services.
+END TO UPDATE</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2022, WRENCH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
