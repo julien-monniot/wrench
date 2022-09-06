@@ -98,7 +98,7 @@ by service-specific arguments passed or not passed to the
 controller. Let’s start with the creation (in main). Note that arguments
 to service constructors are omitted for brevity (see the execution
 controller implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/condor-grid-example/CondorWMS.cp</span></code> for a complete and working
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/condor-grid-example/CondorWMS.cp</span></code> for a complete and working
 example).</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// One BareMetalComputeService instance</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">wrench</span><span class="o">::</span><span class="n">BareMetalComputeService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">some_baremetal_cs</span><span class="p">;</span><span class="w"></span>
@@ -179,7 +179,7 @@ optional if there is a single child batch compute service).</p></li>
 </pre></div>
 </div>
 <p>The above covers the essentials. See the API documnetation for more
-options, and the code in the <code class="docutils literal notranslate"><span class="pre">examples/condor-grid-example/</span></code> directory
+options, and the code in the <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/condor-grid-example/</span></code> directory
 for working/usable code.</p>
 </section>
 <section id="anatomy-of-the-htcondor-service">

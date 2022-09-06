@@ -153,7 +153,7 @@ how many compute hosts the service has access to in total. A
 how many bytes of free space are available on it. And so on…</p>
 <p>To take a concrete example, consider the execution controller
 implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/batch-bag-of-tasks/TwoTasksAtATimeBatchWMS.cpp</span></code>.
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/batch-bag-of-tasks/TwoTasksAtATimeBatchWMS.cpp</span></code>.
 This WMS finds out the compute speed of the cores of the compute nodes
 available to a <a class="reference internal" href="api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a> as:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">core_flop_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">batch_service</span><span class="o">-&gt;</span><span class="n">getCoreFlopRate</span><span class="p">().</span><span class="n">begin</span><span class="p">())).</span><span class="n">second</span><span class="p">;</span><span class="w"></span>
@@ -215,7 +215,7 @@ instantiating and starting these managers:
 <a class="reference internal" href="api_developer/classwrench_1_1_execution_controller.html#_CPPv4N6wrench19ExecutionController25createDataMovementManagerEv" title="wrench::ExecutionController::createDataMovementManager"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ExecutionController::createDataMovementManager()</span></code></a>.</p>
 <p>Creating one or two of these managers typically is the first thing an
 execution controller does. For instance, the execution controller in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/bare-metal-data-movement/DataMovementWMS.cpp</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/bare-metal-data-movement/DataMovementWMS.cpp</span></code>
 starts by doing:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">job_manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">createJobManager</span><span class="p">();</span><span class="w"></span>
 <span class="k">auto</span><span class="w"> </span><span class="n">data_movement_manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">createDataMovementManager</span><span class="p">();</span><span class="w"></span>
@@ -226,27 +226,15 @@ sections below.</p>
 </section>
 <section id="interacting-with-storage-services">
 <span id="wrench-102-controller-services-storage"></span><h3>Interacting with storage services<a class="headerlink" href="#interacting-with-storage-services" title="Permalink to this headline"></a></h3>
-<p>The possible interactions between an execution controller and a storage
-service include:</p>
+<p>Typical interactions between an execution controller and a storage
+service include locating, reading, writing, and copying files. Different storage
+service implementations may or not implement some of of these operations.
+Click on the following links to see concrete examples
+of interactions with the currently available storage service type:</p>
 <ul class="simple">
-<li><p>Synchronously check that a file exists</p></li>
-<li><p>Synchronously read a file (rarely used by an execution controller but
-included for completeness)</p></li>
-<li><p>Synchronously write a file (rarely used by an execution controller
-but included for completeness)</p></li>
-<li><p>Synchronously delete a file</p></li>
-<li><p>Synchronously copy a file from one storage service to another</p></li>
-<li><p>Asynchronously copy a file from one storage service to another</p></li>
+<li><p><a class="reference internal" href="wrench_102/simplestorage.html#guide-102-simplestorage"><span class="std std-ref">Simple storage service</span></a></p></li>
+<li><p><span class="xref std std-ref">XRootD storage service</span></p></li>
 </ul>
-<p>The first 4 interactions above are done by calling member functions of
-the <a class="reference internal" href="api_developer/classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StorageService</span></code></a> class. The last two are done via a Data
-Movement Manager, i.e., by calling member functions of the
-<a class="reference internal" href="api_developer/classwrench_1_1_data_movement_manager.html#_CPPv4N6wrench19DataMovementManagerE" title="wrench::DataMovementManager"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::DataMovementManager</span></code></a> class. Some of these member functions
-take an optional <a class="reference internal" href="api_developer/classwrench_1_1_file_registry_service.html#_CPPv4N6wrench19FileRegistryServiceE" title="wrench::FileRegistryService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::FileRegistryService</span></code></a> argument, in which case
-they will also update entries in a file registry service (e.g., removing
-an entry when a file is deleted).</p>
-<p>See <a class="reference internal" href="wrench_102/simplestorage.html#guide-102-simplestorage"><span class="std std-ref">this page</span></a> for concrete examples
-of interactions with a <a class="reference internal" href="api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code></a>.</p>
 </section>
 <section id="interacting-with-compute-services">
 <span id="wrench-102-controller-services-compute"></span><h3>Interacting with compute services<a class="headerlink" href="#interacting-with-compute-services" title="Permalink to this headline"></a></h3>
@@ -432,7 +420,7 @@ case of failure, the event includes a <a class="reference internal" href="api_de
 which can be accessed to analyze (or just display) the root cause of the
 failure.</p>
 <p>Consider the execution controller in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/bare-metal-bag-of-tasks/TwoTasksAtATimeWMS.cpp</span></code>.
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/bare-metal-bag-of-tasks/TwoTasksAtATimeWMS.cpp</span></code>.
 At each each iteration of its main loop it does:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Submit some standard job to some compute  service</span>
 <span class="n">job_manager</span><span class="o">-&gt;</span><span class="n">submitJob</span><span class="p">(...);</span><span class="w"></span>
@@ -472,7 +460,7 @@ functions as follows:</p>
 </pre></div>
 </div>
 <p>You may note some difference between the above code and that in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/bare-metal-bag-of-tasks/TwoTasksAtATimeWMS.cpp</span></code>.
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/bare-metal-bag-of-tasks/TwoTasksAtATimeWMS.cpp</span></code>.
 This is for clarity purposes, and especially because we have not yet
 explained how WRENCH does message logging. See <a class="reference internal" href="#wrench-102-controller-logging"><span class="std std-ref">an upcoming section
 about logging</span></a>.</p>
@@ -482,7 +470,7 @@ in the code of the main loop of the execution controller rather than in
 a callback member function. This is done by calling the
 <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::waitForNextEvent()</span></code> member function. For instance, the
 execution controller in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/bare-metal-data-movement/DataMovementWMS.cpp</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/bare-metal-data-movement/DataMovementWMS.cpp</span></code>
 does it as:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Initiate an asynchronous file copy</span>
 <span class="n">data_movement_manager</span><span class="o">-&gt;</span><span class="n">initiateAsynchronousFileCopy</span><span class="p">(...);</span><span class="w"></span>
@@ -536,9 +524,9 @@ and then check that a host exists (given a hostname) and, if so, set its
 <p>See the documentation of the <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code></a> class for all
 details. Specifically regarding host pstates, see the example execution
 controller in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/cloud-bag-of-tasks-energy/TwoTasksAtATimeCloudWMS.cpp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/cloud-bag-of-tasks-energy/TwoTasksAtATimeCloudWMS.cpp</span></code>,
 which interacts with host pstates (and the
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/cloud-bag-of-tasks-energy/four_hosts_energy.xml</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/cloud-bag-of-tasks-energy/four_hosts_energy.xml</span></code>
 platform description file which defines pstates).</p>
 </section>
 <section id="logging">
@@ -568,7 +556,7 @@ function, which takes as parameter a color specification:</p>
 simulators you will find many examples of calls to
 <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::WRENCH_INFO()</span></code>. The logging is per <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file, each of
 which corresponds to a declared logging category. For instance, in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/batch-bag-of-tasks/TwoTasksAtATimeBatchWMS.cpp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/batch-bag-of-tasks/TwoTasksAtATimeBatchWMS.cpp</span></code>,
 you will find the typical pattern:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define a log category name for this file</span>
 <span class="n">WRENCH_LOG_CATEGORY</span><span class="p">(</span><span class="n">custom_wms</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log category for TwoTasksAtATimeBatchWMS&quot;</span><span class="p">);</span><span class="w"></span>

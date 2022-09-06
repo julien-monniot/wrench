@@ -132,7 +132,7 @@ whatever it wanted to accomplish).</p>
 <span id="id1"></span><h2>1,000-ft view of a WRENCH simulator<a class="headerlink" href="#wrench-101-simulator-1000ft" title="Permalink to this headline"></a></h2>
 <p>In this section, we dive deeper into what it takes to implement a WRENCH
 simulator. <em>To provide context, we refer to the example simulator in
-the</em> <code class="docutils literal notranslate"><span class="pre">examples/basic-examples/action_api/multi-action-multi-job</span></code>
+the</em> <code class="docutils literal notranslate"><span class="pre">examples/action_api/multi-action-multi-job</span></code>
 <em>directory of the WRENCH distribution</em>. This simulator simulates the
 execution of a few jobs, each of which consists of one or more actions,
 on a 4-host platform that runs a couple of compute services and storage
@@ -414,7 +414,7 @@ description file</span>. The
 energy consumed by all hosts in the platform. <strong>Important:</strong> The energy
 plugin is NOT enabled by default in WRENCH simulations. To enable it,
 pass the <code class="docutils literal notranslate"><span class="pre">--wrench-energy-simulation</span></code> command line option to the
-simulator. See <code class="docutils literal notranslate"><span class="pre">examples/basic-examples/cloud-bag-of-tasks-energy</span></code> for
+simulator. See <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/cloud-bag-of-tasks-energy</span></code> for
 an example simulator that makes use of this plugin (and an example
 platform description file that defines host power consumption profiles).</p>
 <p>It is also possible to dump all simulation output to a JSON file. This
