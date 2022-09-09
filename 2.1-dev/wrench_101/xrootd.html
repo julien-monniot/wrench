@@ -88,50 +88,73 @@
 </section>
 <section id="overview">
 <span id="guide-xrootd-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
-<p>TO UPDATE
-A Simple storage service is the simplest possible abstraction for a
-service that can store and provide access to workflow files. It has a
-certain storage capacity, and provides write, read, and delete
-operations on files. In addition, higher-level semantics such as copying
-a file directly from a storage service to another are provided.
-END TO UPDATE</p>
+<p>An XRootD storage service is a distributed file system that is
+composed of individual storage services arranged in a tree of arity at most 64. There are two kinds of
+nodes, <em>storage nodes</em> and <em>supervisor nodes</em>.
+A storage node internally uses a <a class="reference internal" href="simplestorage.html#guide-101-simplestorage"><span class="std std-ref">Simple Storage Service</span></a>
+and supports all the Simple Storage Service operations. A supervisor node is always the root of a
+sub-tree and can perform file searches in that sub-tree, all the while maintaining a cache
+of recent file search results (with a time-to-live for remembering these results).</p>
 </section>
 <section id="guide-xrootd-creating">
 <span id="id1"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#guide-xrootd-creating" title="Permalink to this headline"></a></h1>
-<p>TO UPDATE
-In WRENCH, a Simple storage service represents a storage service
-(<a class="reference internal" href="../api_developer/classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StorageService</span></code></a>), which is defined by the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorage</span></code> class. An instantiation of a Simple storage
-service requires the following parameters:</p>
+<p>An XRootD storage service is described by specifying the deployment of the nodes in the XRootD tree
+on hardware resources (i.e., hosts where individual nodes in the</p>
+<blockquote>
+<div><p>tree will execute and access disks available at these hosts). To this end,</p>
+</div></blockquote>
+<p>a <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_x_root_d_deployment.html#_CPPv4N6wrench6XRootD16XRootDDeploymentE" title="wrench::XRootD::XRootDDeployment"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::XRootDDeployment</span></code></a> object must be created first, before the
+simulation is launched. An instance of an XRootDDeployment is constructed based on:</p>
 <ul class="simple">
-<li><p>The name of a host on which to start the service;</p></li>
-<li><p>A list of mount points (corresponding to disks attached to the host);
-and</p></li>
-<li><p>Maps (<code class="docutils literal notranslate"><span class="pre">std::map</span></code>) of configurable properties
-(<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_property.html#_CPPv4N6wrench28SimpleStorageServicePropertyE" title="wrench::SimpleStorageServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code></a>) and configurable message
-payloads (<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_message_payload.html#_CPPv4N6wrench34SimpleStorageServiceMessagePayloadE" title="wrench::SimpleStorageServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code></a>).</p></li>
+<li><p>A <a class="reference internal" href="../api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code></a> object;</p></li>
+<li><p>Optional Maps (<code class="docutils literal notranslate"><span class="pre">std::map</span></code>) of configurable default properties
+(<a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_property.html#_CPPv4N6wrench6XRootD8PropertyE" title="wrench::XRootD::Property"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Property</span></code></a>) and configurable default message
+payloads (<a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_message_payload.html#_CPPv4N6wrench6XRootD14MessagePayloadE" title="wrench::XRootD::MessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::MessagePayload</span></code></a>).</p></li>
 </ul>
-<p>The example below creates an instance of a Simple storage service that
-runs on host <code class="docutils literal notranslate"><span class="pre">BigDisk</span></code>, has access to the disks mounted at paths
-<code class="docutils literal notranslate"><span class="pre">/data/</span></code> and <code class="docutils literal notranslate"><span class="pre">/home/</span></code> at host <code class="docutils literal notranslate"><span class="pre">BigDisk</span></code>. Furthermore, the number
-of maximum concurrent data connections supported by the service is
-configured to be 8, and the message sent to the service to find out its
-free space is configured to be 1KiB:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">storage_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageService</span><span class="p">(</span><span class="s">&quot;BigDisk&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                  </span><span class="p">{</span><span class="s">&quot;/data/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/home/&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">                                       </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageProperty</span><span class="o">::</span><span class="n">MAX_NUM_CONCURRENT_DATA_CONNECTIONS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;8&quot;</span><span class="p">}},</span><span class="w"></span>
-<span class="w">                                       </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageServiceMessagePayload</span><span class="o">::</span><span class="n">FREE_SPACE_REQUEST_MESSAGE_PAYLOAD</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1024&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">                                      </span><span class="p">);</span><span class="w"></span>
+<p>Once the deployment object is created, it can be used to add nodes to the tree, i.e., instances
+of the <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Node</span></code></a> class.  First a root node must be instantiated by calling the
+<a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_x_root_d_deployment.html#_CPPv4N6wrench6XRootD16XRootDDeployment20createRootSupervisorERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE" title="wrench::XRootD::XRootDDeployment::createRootSupervisor"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::XRootDDeployment::createRootSupervisor()</span></code></a> method.</p>
+<p>Once the root node has been instantiated, it can be used to build the rest of XRootD tree. Some nodes
+in the trees are <em>supervisors</em>, i.e., they know about all other nodes in the subtree of which they are the root and can direct
+searches for files down this subtree. Creating a new supervisor node in the tree is simply done
+by calling the <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4Node18addChildSupervisorERKNSt6stringE" title="wrench::XRootD::Node::addChildSupervisor"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Node::addChildSupervisor()</span></code></a> method on the
+node that will be the new node’s parent.</p>
+<p>The other kind of node is a <em>storage node</em>, which can store files.
+A storage node has an underlying ref:<cite>Simple Storage Service &lt;guide-101-simplestorage&gt;</cite>
+that stores the files.
+Creating a storage node is done by calling the <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4Node21addChildStorageServerERKNSt6stringERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE" title="wrench::XRootD::Node::addChildStorageServer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Node::addChildStorageServer()</span></code></a> on the
+node that will be the new node’s parent.</p>
+<p>The example below creates a small XRootD deployment of 3 nodes, a root on host <code class="docutils literal notranslate"><span class="pre">Root</span></code>, a supervisor node
+on host <code class="docutils literal notranslate"><span class="pre">Super</span></code>, and a Storage node on <code class="docutils literal notranslate"><span class="pre">Storage</span></code>. The nodes are arranged in a tree of arity 1 as follows <code class="docutils literal notranslate"><span class="pre">Root-&gt;Super-&gt;Storage</span></code>.
+The XRootD deployment is configured to simulate all underlying communications involved during a search
+(the <code class="docutils literal notranslate"><span class="pre">REDUCED_SIMULATION</span></code> property). The cache lifetime is at most to 1 hour (the <code class="docutils literal notranslate"><span class="pre">CACHE_MAX_LIFETIME</span></code> property), but
+the supervisor running on <code class="docutils literal notranslate"><span class="pre">Super</span></code> has only a 30-minute cache lifetime. The cache is where a supervisor keeps
+the locations of files that it has previous found via searches. The storage node running on
+<code class="docutils literal notranslate"><span class="pre">Storage</span></code> is created with parameters similar to that used to create a SimpleStorageService instance. In
+this example, it has mountpoint <code class="docutils literal notranslate"><span class="pre">/</span></code>, can support up to 8 concurrent data connections, and the size of the
+control message that is sent to it to request a file read is 2KiB.  Finally, in this example, a copy of file
+<code class="docutils literal notranslate"><span class="pre">someFile</span></code> is created ab initio on the storage node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">XRootDDeploment</span><span class="w"> </span><span class="nf">xrootd_deployment</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">Property</span><span class="o">::</span><span class="n">CACHE_MAX_LIFETIME</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3600&quot;</span><span class="p">},</span><span class="w"></span>
+<span class="w">                           </span><span class="p">{</span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">Property</span><span class="o">::</span><span class="n">REDUCED_SIMULATION</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="p">}},</span><span class="w"></span>
+<span class="w">                           </span><span class="p">{});</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xrootd_deployment</span><span class="p">.</span><span class="n">createRootSupervisor</span><span class="p">(</span><span class="s">&quot;Root&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">super</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">root</span><span class="o">-&gt;</span><span class="n">addChildSupervisor</span><span class="p">(</span><span class="s">&quot;Super&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">Property</span><span class="o">::</span><span class="n">CACHE_MAX_LIFETIME</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1800&quot;</span><span class="p">});</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">super</span><span class="o">-&gt;</span><span class="n">addChildStorageServer</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;Storage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageProperty</span><span class="o">::</span><span class="n">MAX_NUM_CONCURRENT_DATA_CONNECTIONS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;8&quot;</span><span class="p">}},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageServiceMessagePayload</span><span class="o">::</span><span class="n">FILE_READ_REQUEST_MESSAGE_PAYLOAD</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2048&quot;</span><span class="p">});</span><span class="w"></span>
+
+<span class="n">storage</span><span class="o">-&gt;</span><span class="n">createFile</span><span class="p">(</span><span class="n">someFile</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p>See the documentation of <a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_property.html#_CPPv4N6wrench28SimpleStorageServicePropertyE" title="wrench::SimpleStorageServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code></a> and
-<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_message_payload.html#_CPPv4N6wrench34SimpleStorageServiceMessagePayloadE" title="wrench::SimpleStorageServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code></a> for all possible
+<p>See the documentation of <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_property.html#_CPPv4N6wrench6XRootD8PropertyE" title="wrench::XRootD::Property"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Property</span></code></a> and
+<a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_message_payload.html#_CPPv4N6wrench6XRootD14MessagePayloadE" title="wrench::XRootD::MessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::MessagePayload</span></code></a> for all possible
 configuration options.</p>
-<p>Also see the simulators in the <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/*</span></code> and
-<code class="docutils literal notranslate"><span class="pre">examples/action_api/*</span></code>
-directories, which all use simple storage services.
-END TO UPDATE</p>
+<p>See the example simulator in the <code class="docutils literal notranslate"><span class="pre">examples/action_api/XRootD</span></code> directory for a more complex XRootD
+deployment.</p>
 </section>
 
 

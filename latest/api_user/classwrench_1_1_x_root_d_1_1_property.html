@@ -185,7 +185,7 @@
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD8Property18CACHE_MAX_LIFETIMEE">
 <span id="_CPPv3N6wrench6XRootD8Property18CACHE_MAX_LIFETIMEE"></span><span id="_CPPv2N6wrench6XRootD8Property18CACHE_MAX_LIFETIMEE"></span><span id="wrench::XRootD::Property::CACHE_MAX_LIFETIME__ssC"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_property_1aa8076f8c070c7db77c88665413c97d31"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CACHE_MAX_LIFETIME</span></span></span><br /></dt>
-<dd><p>The time an entry can remain in the cache. </p>
+<dd><p>The time an entry will remain in the cache before being erased, in seconds. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -197,7 +197,7 @@
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench6XRootD8Property18REDUCED_SIMULATIONE">
 <span id="_CPPv3N6wrench6XRootD8Property18REDUCED_SIMULATIONE"></span><span id="_CPPv2N6wrench6XRootD8Property18REDUCED_SIMULATIONE"></span><span id="wrench::XRootD::Property::REDUCED_SIMULATION__ssC"></span><span class="target" id="classwrench_1_1_x_root_d_1_1_property_1aea87c56ceb2931ffc27bc2e48de794f7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">REDUCED_SIMULATION</span></span></span><br /></dt>
-<dd><p>Should the <a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html#classwrench_1_1_x_root_d_1_1_node"><span class="std std-ref">Node</span></a> use Meta operations to reduce simulation overhead. </p>
+<dd><p>If set to “true”, then the simulation of the XRootD search does not simulate all control message sends/receives, but just those to the node that the search will find (which can be determined in zero simulation time based on data structure lookups). This makes the simulation faster but less accurate, which may not be desirable if the overhead and/or network load of the control messages involved in the search is an important part of the simulation (default is “false”) </p>
 </dd></dl>
 
 <dl class="cpp var">
