@@ -103,8 +103,8 @@ on hardware resources (i.e., hosts where individual nodes in the</p>
 <blockquote>
 <div><p>tree will execute and access disks available at these hosts). To this end,</p>
 </div></blockquote>
-<p>a <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_x_root_d_deployment.html#_CPPv4N6wrench6XRootD16XRootDDeploymentE" title="wrench::XRootD::XRootDDeployment"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::XRootDDeployment</span></code></a> object must be created first, before the
-simulation is launched. An instance of an XRootDDeployment is constructed based on:</p>
+<p>a <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_deployment.html#_CPPv4N6wrench6XRootD10DeploymentE" title="wrench::XRootD::Deployment"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Deployment</span></code></a> object must be created first, before the
+simulation is launched. An instance of an Deployment is constructed based on:</p>
 <ul class="simple">
 <li><p>A <a class="reference internal" href="../api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code></a> object;</p></li>
 <li><p>Optional Maps (<code class="docutils literal notranslate"><span class="pre">std::map</span></code>) of configurable default properties
@@ -113,7 +113,7 @@ payloads (<a class="reference internal" href="../api_developer/classwrench_1_1_x
 </ul>
 <p>Once the deployment object is created, it can be used to add nodes to the tree, i.e., instances
 of the <a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_node.html#_CPPv4N6wrench6XRootD4NodeE" title="wrench::XRootD::Node"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Node</span></code></a> class.  First a root node must be instantiated by calling the
-<a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_x_root_d_deployment.html#_CPPv4N6wrench6XRootD16XRootDDeployment20createRootSupervisorERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE" title="wrench::XRootD::XRootDDeployment::createRootSupervisor"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::XRootDDeployment::createRootSupervisor()</span></code></a> method.</p>
+<a class="reference internal" href="../api_developer/classwrench_1_1_x_root_d_1_1_deployment.html#_CPPv4N6wrench6XRootD10Deployment20createRootSupervisorERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE" title="wrench::XRootD::Deployment::createRootSupervisor"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::XRootD::Deployment::createRootSupervisor()</span></code></a> method.</p>
 <p>Once the root node has been instantiated, it can be used to build the rest of XRootD tree. Some nodes
 in the trees are <em>supervisors</em>, i.e., they know about all other nodes in the subtree of which they are the root and can direct
 searches for files down this subtree. Creating a new supervisor node in the tree is simply done
