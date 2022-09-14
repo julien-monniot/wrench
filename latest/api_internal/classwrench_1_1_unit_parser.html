@@ -378,6 +378,23 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench10UnitParser15parse_bandwidthERKNSt6stringE">
+<span id="_CPPv3N6wrench10UnitParser15parse_bandwidthERKNSt6stringE"></span><span id="_CPPv2N6wrench10UnitParser15parse_bandwidthERKNSt6stringE"></span><span id="wrench::UnitParser::parse_bandwidth__ssCR"></span><span class="target" id="classwrench_1_1_unit_parser_1ad0d5f654e16738fb600240e05ee1e50d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_bandwidth</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">string</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench10UnitParser15parse_bandwidthERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Given a string bandwidth specification with units (e.g., “3Mbps”, “40MiBps”) return the size in bytes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> – the bandwidth specification </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the bandwidth in byte/sec</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench10UnitParser19parse_compute_speedERKNSt6stringE">
 <span id="_CPPv3N6wrench10UnitParser19parse_compute_speedERKNSt6stringE"></span><span id="_CPPv2N6wrench10UnitParser19parse_compute_speedERKNSt6stringE"></span><span id="wrench::UnitParser::parse_compute_speed__ssCR"></span><span class="target" id="classwrench_1_1_unit_parser_1aa60aa84a739024ddb8c036a1fdec1520"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_compute_speed</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">string</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench10UnitParser19parse_compute_speedERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Given a string compute speed specification with units (e.g., “3f”, “10Gf”) return the size in bytes. </p>
@@ -407,6 +424,23 @@
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the size in bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench10UnitParser10parse_timeERKNSt6stringE">
+<span id="_CPPv3N6wrench10UnitParser10parse_timeERKNSt6stringE"></span><span id="_CPPv2N6wrench10UnitParser10parse_timeERKNSt6stringE"></span><span id="wrench::UnitParser::parse_time__ssCR"></span><span class="target" id="classwrench_1_1_unit_parser_1ae003e7f9600b5831c9be37fb1b6bcbe3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_time</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">string</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench10UnitParser10parse_timeERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Given a string time with units (e.g., “10us”, “10ms”) return the time in seconds. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> – the time specification </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the time in second</p>
 </dd>
 </dl>
 </dd></dl>
