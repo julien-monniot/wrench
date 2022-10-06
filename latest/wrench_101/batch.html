@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-batch-compute-service">
-<span id="guide-101-batch"></span><h1>Creating a batch compute service<a class="headerlink" href="#creating-a-batch-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-batch"></span><h1>Creating a batch compute service<a class="headerlink" href="#creating-a-batch-compute-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-batch-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-batch-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>A batch service is a service that makes it possible to run jobs on a
 homogeneous cluster managed by a batch scheduler. The batch scheduler
 receives requests that ask for a number of compute nodes, with a number
@@ -111,7 +113,7 @@ used in any manner by the submitter. This allows late binding of
 workflow tasks to compute resources.</p>
 </section>
 <section id="guide-batch-creating">
-<span id="id1"></span><h1>Creating a batch compute service<a class="headerlink" href="#guide-batch-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating a batch compute service<a class="headerlink" href="#guide-batch-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, a batch service is defined by the
 <a class="reference internal" href="../api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a> class. An instantiation of a batch
 service requires the following parameters:</p>

@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-network-proximity-service">
-<span id="guide-101-networkproximity"></span><h1>Creating a network proximity service<a class="headerlink" href="#creating-a-network-proximity-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-networkproximity"></span><h1>Creating a network proximity service<a class="headerlink" href="#creating-a-network-proximity-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-networkproximity-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-networkproximity-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>A network proximity service answers queries regarding the network
 proximity between hosts. The service accomplishes this by periodically
 performing round-trip network transfer experiments between hosts,
@@ -95,7 +97,7 @@ keeping a record of observed network transfer times, and computing
 network distances.</p>
 </section>
 <section id="guide-networkproximity-creating">
-<span id="id1"></span><h1>Creating a network proximity service<a class="headerlink" href="#guide-networkproximity-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating a network proximity service<a class="headerlink" href="#guide-networkproximity-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, a network proximity service is defined by the
 <a class="reference internal" href="../api_developer/classwrench_1_1_network_proximity_service.html#_CPPv4N6wrench23NetworkProximityServiceE" title="wrench::NetworkProximityService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::NetworkProximityService</span></code></a> class, an instantiation of which
 requires the following parameters:</p>

@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-bare-metal-compute-service">
-<span id="guide-101-baremetal"></span><h1>Creating a bare-metal compute service<a class="headerlink" href="#creating-a-bare-metal-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-baremetal"></span><h1>Creating a bare-metal compute service<a class="headerlink" href="#creating-a-bare-metal-compute-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-baremetal-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-baremetal-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>A bare-metal compute service makes it possible to run tasks directly on
 hardware resources. Think of it as a set of multi-core hosts on which
 multi-threaded processes can be started using something like Ssh. The
@@ -105,7 +107,7 @@ that disallows swapping and implements a FCFS access policy for RAM
 allocation).</p>
 </section>
 <section id="guide-baremetal-creating">
-<span id="id1"></span><h1>Creating a bare-metal compute service<a class="headerlink" href="#guide-baremetal-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating a bare-metal compute service<a class="headerlink" href="#guide-baremetal-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, a bare-metal service is defined in the
 <a class="reference internal" href="../api_developer/classwrench_1_1_bare_metal_compute_service.html#_CPPv4N6wrench23BareMetalComputeServiceE" title="wrench::BareMetalComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BareMetalComputeService</span></code></a> class. An instantiation of a
 bare-metal service requires the following parameters:</p>

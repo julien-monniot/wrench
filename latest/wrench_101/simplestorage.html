@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-simple-storage-service">
-<span id="guide-101-simplestorage"></span><h1>Creating a simple storage service<a class="headerlink" href="#creating-a-simple-storage-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-simplestorage"></span><h1>Creating a simple storage service<a class="headerlink" href="#creating-a-simple-storage-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-simplestorage-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-simplestorage-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>A Simple storage service is the simplest possible abstraction for a
 service that can store and provide access to workflow files. It has a
 certain storage capacity, and provides write, read, and delete
@@ -95,7 +97,7 @@ operations on files. In addition, higher-level semantics such as copying
 a file directly from a storage service to another are provided.</p>
 </section>
 <section id="guide-simplestorage-creating">
-<span id="id1"></span><h1>Creating a Simple storage service<a class="headerlink" href="#guide-simplestorage-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating a Simple storage service<a class="headerlink" href="#guide-simplestorage-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, a Simple storage service represents a storage service
 (<a class="reference internal" href="../api_developer/classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StorageService</span></code></a>), which is defined by the
 <a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code></a> class. An instantiation of a Simple storage

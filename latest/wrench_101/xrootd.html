@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-an-xrootd-storage-service">
-<span id="guide-101-xrootd"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#creating-an-xrootd-storage-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-xrootd"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#creating-an-xrootd-storage-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-xrootd-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-xrootd-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>An XRootD storage service is a distributed file system that is
 composed of individual storage services arranged in a tree of arity at most 64. There are two kinds of
 nodes, <em>storage nodes</em> and <em>supervisor nodes</em>.
@@ -97,7 +99,7 @@ sub-tree and can perform file searches in that sub-tree, all the while maintaini
 of recent file search results (with a time-to-live for remembering these results).</p>
 </section>
 <section id="guide-xrootd-creating">
-<span id="id1"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#guide-xrootd-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating an XRootD storage service<a class="headerlink" href="#guide-xrootd-creating" title="Permalink to this heading"></a></h1>
 <p>An XRootD storage service is described by specifying the deployment of the nodes in the XRootD tree
 on hardware resources (i.e., hosts where individual nodes in the</p>
 <blockquote>
@@ -134,7 +136,7 @@ the locations of files that it has previous found via searches. The storage node
 this example, it has mountpoint <code class="docutils literal notranslate"><span class="pre">/</span></code>, can support up to 8 concurrent data connections, and the size of the
 control message that is sent to it to request a file read is 2KiB.  Finally, in this example, a copy of file
 <code class="docutils literal notranslate"><span class="pre">someFile</span></code> is created ab initio on the storage node.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">XRootDDeploment</span><span class="w"> </span><span class="nf">xrootd_deployment</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">XRootDDeploment</span><span class="w"> </span><span class="n">xrootd_deployment</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span><span class="w"></span>
 <span class="w">                           </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">Property</span><span class="o">::</span><span class="n">CACHE_MAX_LIFETIME</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3600&quot;</span><span class="p">},</span><span class="w"></span>
 <span class="w">                           </span><span class="p">{</span><span class="n">wrench</span><span class="o">::</span><span class="n">XRootD</span><span class="o">::</span><span class="n">Property</span><span class="o">::</span><span class="n">REDUCED_SIMULATION</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="p">}},</span><span class="w"></span>
 <span class="w">                           </span><span class="p">{});</span><span class="w"></span>

@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -102,7 +104,7 @@
            <div itemprop="articleBody">
              
   <section id="wrench-101">
-<span id="wrench-101-header"></span><h1>WRENCH 101<a class="headerlink" href="#wrench-101" title="Permalink to this headline"></a></h1>
+<span id="wrench-101-header"></span><h1>WRENCH 101<a class="headerlink" href="#wrench-101" title="Permalink to this heading"></a></h1>
 <p>This page provides high-level and detailed information about what WRENCH
 simulators can simulate and how they do it. Full API details are
 provided in the <a class="reference internal" href="api_user.html#user-api"><span class="std std-ref">User API Reference</span></a>. See the
@@ -110,7 +112,7 @@ relevant pages for instructions on how to <a class="reference internal" href="in
 WRENCH</span></a> and how to <a class="reference internal" href="getting_started.html#getting-started"><span class="std std-ref">setup a simulator
 project</span></a>.</p>
 <section id="ft-view-of-a-wrench-simulator">
-<span id="wrench-101-simulator-10000ft"></span><h2>10,000-ft view of a WRENCH simulator<a class="headerlink" href="#ft-view-of-a-wrench-simulator" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-simulator-10000ft"></span><h2>10,000-ft view of a WRENCH simulator<a class="headerlink" href="#ft-view-of-a-wrench-simulator" title="Permalink to this heading"></a></h2>
 <p>A WRENCH simulator can be as simple as a single <code class="docutils literal notranslate"><span class="pre">main()</span></code> function that
 creates a platform to be simulated (the hardware) and a set of services
 that run on the platform (the software). These services correspond to
@@ -129,7 +131,7 @@ controller has terminated (after completing or failing to complete
 whatever it wanted to accomplish).</p>
 </section>
 <section id="wrench-101-simulator-1000ft">
-<span id="id1"></span><h2>1,000-ft view of a WRENCH simulator<a class="headerlink" href="#wrench-101-simulator-1000ft" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>1,000-ft view of a WRENCH simulator<a class="headerlink" href="#wrench-101-simulator-1000ft" title="Permalink to this heading"></a></h2>
 <p>In this section, we dive deeper into what it takes to implement a WRENCH
 simulator. <em>To provide context, we refer to the example simulator in
 the</em> <code class="docutils literal notranslate"><span class="pre">examples/action_api/multi-action-multi-job</span></code>
@@ -142,7 +144,7 @@ most of what a WRENCH simulator does, which consists in going through
 the steps below. Note that all simulator codes in the <code class="docutils literal notranslate"><span class="pre">examples</span></code>
 directory contain extensive comments.</p>
 <section id="step-0-include-wrench-h">
-<span id="wrench-101-simulator-1000ft-step-0"></span><h3>Step 0: Include wrench.h<a class="headerlink" href="#step-0-include-wrench-h" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-0"></span><h3>Step 0: Include wrench.h<a class="headerlink" href="#step-0-include-wrench-h" title="Permalink to this heading"></a></h3>
 <p>For ease of use, all WRENCH abstractions in the <a class="reference internal" href="api_user.html#user-api"><span class="std std-ref">WRENCH User
 API</span></a> are available through a single header file:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;wrench.h&gt;</span><span class="cp"></span>
@@ -150,7 +152,7 @@ API</span></a> are available through a single header file:</p>
 </div>
 </section>
 <section id="step-1-create-and-initialize-a-simulation">
-<span id="wrench-101-simulator-1000ft-step-1"></span><h3>Step 1: Create and initialize a simulation<a class="headerlink" href="#step-1-create-and-initialize-a-simulation" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-1"></span><h3>Step 1: Create and initialize a simulation<a class="headerlink" href="#step-1-create-and-initialize-a-simulation" title="Permalink to this heading"></a></h3>
 <p>The state of a WRENCH simulation is defined by the
 <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code></a> class. A simulator must create an instance of
 this class by calling <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation16createSimulationEv" title="wrench::Simulation::createSimulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::createSimulation()</span></code></a> and
@@ -172,7 +174,7 @@ Another one is <code class="docutils literal notranslate"><span class="pre">--wr
 logs (see below for more details).</p>
 </section>
 <section id="step-2-instantiate-a-simulated-platform">
-<span id="wrench-101-simulator-1000ft-step-2"></span><h3>Step 2: Instantiate a simulated platform<a class="headerlink" href="#step-2-instantiate-a-simulated-platform" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-2"></span><h3>Step 2: Instantiate a simulated platform<a class="headerlink" href="#step-2-instantiate-a-simulated-platform" title="Permalink to this heading"></a></h3>
 <p>This is done with the <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation19instantiatePlatformERKNSt8functionIFvvEEE" title="wrench::Simulation::instantiatePlatform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code></a>
 method. There are two versions of this method. The <strong>first version</strong>
 takes as argument a <span class="xref std std-ref">SimGrid virtual platform description
@@ -278,7 +280,7 @@ functor to <a class="reference internal" href="api_developer/classwrench_1_1_sim
 plain lambda.)</p>
 </section>
 <section id="step-3-instantiate-services-on-the-platform">
-<span id="wrench-101-simulator-1000ft-step-3"></span><h3>Step 3: Instantiate services on the platform<a class="headerlink" href="#step-3-instantiate-services-on-the-platform" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-3"></span><h3>Step 3: Instantiate services on the platform<a class="headerlink" href="#step-3-instantiate-services-on-the-platform" title="Permalink to this heading"></a></h3>
 <p>While the previous step defines the hardware platform, this step defines
 what software services run on that hardware. The
 <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4I0EN6wrench10Simulation3addENSt10shared_ptrI1TEENSt10shared_ptrI1TEE" title="wrench::Simulation::add"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::add()</span></code></a> member function is used to add services to
@@ -337,7 +339,7 @@ below</span></a>).</p>
 <code class="docutils literal notranslate"><span class="pre">StorageHost2</span></code>.</p>
 </section>
 <section id="step-4-instantiate-at-least-one-execution-controller">
-<span id="wrench-101-simulator-1000ft-step-4"></span><h3>Step 4: Instantiate at least one Execution controller<a class="headerlink" href="#step-4-instantiate-at-least-one-execution-controller" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-4"></span><h3>Step 4: Instantiate at least one Execution controller<a class="headerlink" href="#step-4-instantiate-at-least-one-execution-controller" title="Permalink to this heading"></a></h3>
 <p>At leave on <em>execution controller</em> must be created and added to the
 simulation. This is a special service that is in charge of executing an
 application workload on the platform. It is implemented as a class that
@@ -377,7 +379,7 @@ in the examples in directory <code class="docutils literal notranslate"><span cl
 class names.</p>
 </section>
 <section id="step-5-launch-the-simulation">
-<span id="wrench-101-simulator-1000ft-step-5"></span><h3>Step 5: Launch the simulation<a class="headerlink" href="#step-5-launch-the-simulation" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-5"></span><h3>Step 5: Launch the simulation<a class="headerlink" href="#step-5-launch-the-simulation" title="Permalink to this heading"></a></h3>
 <p>This is the easiest step, and is done by simply calling
 <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation6launchEv" title="wrench::Simulation::launch"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::launch()</span></code></a>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="p">.</span><span class="n">launch</span><span class="p">();</span><span class="w"></span>
@@ -387,7 +389,7 @@ class names.</p>
 controller terminates.</p>
 </section>
 <section id="step-6-process-simulation-output">
-<span id="wrench-101-simulator-1000ft-step-6"></span><h3>Step 6: Process simulation output<a class="headerlink" href="#step-6-process-simulation-output" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-6"></span><h3>Step 6: Process simulation output<a class="headerlink" href="#step-6-process-simulation-output" title="Permalink to this heading"></a></h3>
 <p>The processing of simulation output is up to the user as different users
 are interested in different output. For instance, the examples in
 directory <code class="docutils literal notranslate"><span class="pre">examples/action_api</span></code> merely print some information to the
@@ -437,7 +439,7 @@ generation since they are the ones who know what they are interested in.</p>
 </section>
 </section>
 <section id="available-services">
-<span id="wrench-101-simulator-services"></span><h2>Available services<a class="headerlink" href="#available-services" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-simulator-services"></span><h2>Available services<a class="headerlink" href="#available-services" title="Permalink to this heading"></a></h2>
 <p>Below is the list of services available to-date in WRENCH. Click on the
 corresponding links for more information on what these services are and
 on how to create them.</p>
@@ -491,7 +493,7 @@ in the simulation output:</p>
 </ul>
 </section>
 <section id="customizing-services">
-<span id="wrench-101-customizing-services"></span><h2>Customizing services<a class="headerlink" href="#customizing-services" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-customizing-services"></span><h2>Customizing services<a class="headerlink" href="#customizing-services" title="Permalink to this heading"></a></h2>
 <p>Each service is customizable by passing to its constructor a <em>property
 list</em>, i.e., a key-value map where each key is a property and each value
 is a string. Each service defines a property class. For instance, the
@@ -524,7 +526,7 @@ message payload class, and the API documentation for these message
 payload classes details all messages whose payload can be customized.</p>
 </section>
 <section id="customizing-logging">
-<span id="wrench-101-logging"></span><h2>Customizing logging<a class="headerlink" href="#customizing-logging" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-logging"></span><h2>Customizing logging<a class="headerlink" href="#customizing-logging" title="Permalink to this heading"></a></h2>
 <p>When running a WRENCH simulator you may notice that there is no logging
 output. By default logging output is disabled, but it is often useful to
 enable it (remembering that it can slow down the simulation). WRENCH’s

@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,7 +86,7 @@
            <div itemprop="articleBody">
              
   <section id="interacting-with-a-batch-compute-service">
-<span id="guide-102-batch"></span><h1>Interacting with a batch compute service<a class="headerlink" href="#interacting-with-a-batch-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-102-batch"></span><h1>Interacting with a batch compute service<a class="headerlink" href="#interacting-with-a-batch-compute-service" title="Permalink to this heading"></a></h1>
 <p>A job, either <a class="reference internal" href="../api_developer/classwrench_1_1_standard_job.html#_CPPv4N6wrench11StandardJobE" title="wrench::StandardJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StandardJob</span></code></a> or <a class="reference internal" href="../api_developer/classwrench_1_1_pilot_job.html#_CPPv4N6wrench8PilotJobE" title="wrench::PilotJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::PilotJob</span></code></a>, can be
 submitted to a <a class="reference internal" href="../api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a> by a call to the
 <a class="reference internal" href="../api_developer/classwrench_1_1_job_manager.html#_CPPv4N6wrench10JobManager9submitJobERKNSt10shared_ptrI11CompoundJobEERKNSt10shared_ptrI14ComputeServiceEENSt3mapINSt6stringENSt6stringEEE" title="wrench::JobManager::submitJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code></a> method. However, it is <strong>required</strong>

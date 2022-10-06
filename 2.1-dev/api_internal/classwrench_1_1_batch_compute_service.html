@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -370,10 +372,10 @@
            <div itemprop="articleBody">
              
   <section id="wrench-batchcomputeservice">
-<h1>wrench::BatchComputeService<a class="headerlink" href="#wrench-batchcomputeservice" title="Permalink to this headline"></a></h1>
+<h1>wrench::BatchComputeService<a class="headerlink" href="#wrench-batchcomputeservice" title="Permalink to this heading"></a></h1>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench19BatchComputeServiceE">
-<span id="_CPPv3N6wrench19BatchComputeServiceE"></span><span id="_CPPv2N6wrench19BatchComputeServiceE"></span><span id="wrench::BatchComputeService"></span><span class="target" id="classwrench_1_1_batch_compute_service"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">BatchComputeService</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><span class="n"><span class="pre">ComputeService</span></span></a><br /></dt>
+<span id="_CPPv3N6wrench19BatchComputeServiceE"></span><span id="_CPPv2N6wrench19BatchComputeServiceE"></span><span id="wrench::BatchComputeService"></span><span class="target" id="classwrench_1_1_batch_compute_service"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BatchComputeService</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><span class="n"><span class="pre">ComputeService</span></span></a><br /></dt>
 <dd><p>A batch-scheduled compute service that manages a set of compute hosts and controls access to their resource via a batch queue. </p>
 <p>In the current implementation of this service, like for many of its real-world counterparts, memory_manager_service partitioning among jobs onq the same host is not handled. When multiple jobs share hosts, which can happen when jobs require only a few cores per host and can thus be co-located on the same hosts in a non-exclusive fashion, each job simply runs as if it had access to the full RAM of each compute host it is scheduled on. The simulation of these memory_manager_service contended scenarios is thus, for now, not realistic as there is no simulation of the effects of memory_manager_service sharing (e.g., swapping). </p>
 <div class="breathe-sectiondef docutils container">

@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,7 +86,7 @@
            <div itemprop="articleBody">
              
   <section id="interacting-with-a-htcondor-compute-service">
-<span id="guide-102-htcondor"></span><h1>Interacting with a HTCondor compute service<a class="headerlink" href="#interacting-with-a-htcondor-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-102-htcondor"></span><h1>Interacting with a HTCondor compute service<a class="headerlink" href="#interacting-with-a-htcondor-compute-service" title="Permalink to this heading"></a></h1>
 <p>A <a class="reference internal" href="../api_developer/classwrench_1_1_h_t_condor_compute_service.html#_CPPv4N6wrench22HTCondorComputeServiceE" title="wrench::HTCondorComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code></a> instance is essentially a front-end
 to several “child” compute services. As such, one can submit jobs to it,
 just like one would do to any compute service, but it then “decides” to
@@ -183,7 +185,7 @@ options, and the code in the <code class="docutils literal notranslate"><span cl
 for working/usable code.</p>
 </section>
 <section id="anatomy-of-the-htcondor-service">
-<span id="guide-htcondor-anatomy"></span><h1>Anatomy of the HTCondor Service<a class="headerlink" href="#anatomy-of-the-htcondor-service" title="Permalink to this headline"></a></h1>
+<span id="guide-htcondor-anatomy"></span><h1>Anatomy of the HTCondor Service<a class="headerlink" href="#anatomy-of-the-htcondor-service" title="Permalink to this heading"></a></h1>
 <p>The in-simulation implementation of HTCondor in WRENCH is simplified in
 terms of its functionality and design when compared to the actual
 implementation of HTCondor. The <a class="reference internal" href="../api_developer/classwrench_1_1_h_t_condor_compute_service.html#_CPPv4N6wrench22HTCondorComputeServiceE" title="wrench::HTCondorComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code></a>

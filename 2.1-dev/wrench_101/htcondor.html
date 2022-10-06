@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -84,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-htcondor-compute-service">
-<span id="guide-101-htcondor"></span><h1>Creating a HTCondor compute service<a class="headerlink" href="#creating-a-htcondor-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-htcondor"></span><h1>Creating a HTCondor compute service<a class="headerlink" href="#creating-a-htcondor-compute-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-htcondor-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-htcondor-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p><span class="xref std std-ref">HTCondor</span> is a workload management framework
 that supervises task executions on various sets of resources. HTCondor
 is composed of six main service daemons (<code class="docutils literal notranslate"><span class="pre">startd</span></code>, <code class="docutils literal notranslate"><span class="pre">starter</span></code>,
@@ -97,7 +99,7 @@ a <code class="docutils literal notranslate"><span class="pre">master</span></co
 (including initialization and completion).</p>
 </section>
 <section id="creating-an-htcondor-service">
-<span id="guide-htcondor-creating"></span><h1>Creating an HTCondor Service<a class="headerlink" href="#creating-an-htcondor-service" title="Permalink to this headline"></a></h1>
+<span id="guide-htcondor-creating"></span><h1>Creating an HTCondor Service<a class="headerlink" href="#creating-an-htcondor-service" title="Permalink to this heading"></a></h1>
 <p>HTCondor is composed of a pool of resources in which jobs are submitted
 to perform their computation. In WRENCH, an HTCondor service represents
 a compute service (<a class="reference internal" href="../api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ComputeService</span></code></a>), which is defined by the

@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -219,10 +221,10 @@
            <div itemprop="articleBody">
              
   <section id="wrench-workflowtask">
-<h1>wrench::WorkflowTask<a class="headerlink" href="#wrench-workflowtask" title="Permalink to this headline"></a></h1>
+<h1>wrench::WorkflowTask<a class="headerlink" href="#wrench-workflowtask" title="Permalink to this heading"></a></h1>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench12WorkflowTaskE">
-<span id="_CPPv3N6wrench12WorkflowTaskE"></span><span id="_CPPv2N6wrench12WorkflowTaskE"></span><span id="wrench::WorkflowTask"></span><span class="target" id="classwrench_1_1_workflow_task"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">WorkflowTask</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12WorkflowTaskE" title="wrench::WorkflowTask"><span class="n"><span class="pre">WorkflowTask</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6wrench12WorkflowTaskE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6wrench12WorkflowTaskE"></span><span id="_CPPv2N6wrench12WorkflowTaskE"></span><span id="wrench::WorkflowTask"></span><span class="target" id="classwrench_1_1_workflow_task"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WorkflowTask</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12WorkflowTaskE" title="wrench::WorkflowTask"><span class="n"><span class="pre">WorkflowTask</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6wrench12WorkflowTaskE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>A computational task in a <a class="reference internal" href="../api_user/classwrench_1_1_workflow.html#classwrench_1_1_workflow"><span class="std std-ref">Workflow</span></a>. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
@@ -304,7 +306,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6wrench12WorkflowTask14getBottomLevelEv">
-<span id="_CPPv3NK6wrench12WorkflowTask14getBottomLevelEv"></span><span id="_CPPv2NK6wrench12WorkflowTask14getBottomLevelEv"></span><span id="wrench::WorkflowTask::getBottomLevelC"></span><span class="target" id="classwrench_1_1_workflow_task_1a5f0461cc3c06bf310ad34867eb0c53b4"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getBottomLevel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench12WorkflowTask14getBottomLevelEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6wrench12WorkflowTask14getBottomLevelEv"></span><span id="_CPPv2NK6wrench12WorkflowTask14getBottomLevelEv"></span><span id="wrench::WorkflowTask::getBottomLevelC"></span><span class="target" id="classwrench_1_1_workflow_task_1ac3726c5576c6159f6fe553fc3bf56735"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getBottomLevel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench12WorkflowTask14getBottomLevelEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Returns the task’s bottom level (max number of hops on a path down to an exit task. Exit tasks have a bottom-level of 0) </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -689,7 +691,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6wrench12WorkflowTask11getTopLevelEv">
-<span id="_CPPv3NK6wrench12WorkflowTask11getTopLevelEv"></span><span id="_CPPv2NK6wrench12WorkflowTask11getTopLevelEv"></span><span id="wrench::WorkflowTask::getTopLevelC"></span><span class="target" id="classwrench_1_1_workflow_task_1abb3822710e61c2e6988a538f9ce4c0cb"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTopLevel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench12WorkflowTask11getTopLevelEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6wrench12WorkflowTask11getTopLevelEv"></span><span id="_CPPv2NK6wrench12WorkflowTask11getTopLevelEv"></span><span id="wrench::WorkflowTask::getTopLevelC"></span><span class="target" id="classwrench_1_1_workflow_task_1a49c09e99628b6241a2b269bb7f62cc5a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTopLevel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench12WorkflowTask11getTopLevelEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Returns the task’s top level (max number of hops on a reverse path up to an entry task. Entry tasks have a top-level of 0) </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

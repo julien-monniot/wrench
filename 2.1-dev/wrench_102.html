@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -105,7 +107,7 @@
            <div itemprop="articleBody">
              
   <section id="wrench-102">
-<span id="wrench-102-header"></span><h1>WRENCH 102<a class="headerlink" href="#wrench-102" title="Permalink to this headline"></a></h1>
+<span id="wrench-102-header"></span><h1>WRENCH 102<a class="headerlink" href="#wrench-102" title="Permalink to this heading"></a></h1>
 <p>In WRENCH’s terminology, and <em>execution controller</em> is software that
 makes all decisions and takes all actions for executing some application
 workflow using cyberinfrastructure services. It is thus a crucial
@@ -116,7 +118,7 @@ detailed information about implementing an execution controller in
 WRENCH. Full API details are provided in the <a class="reference internal" href="api_developer.html#developer-api"><span class="std std-ref">Developer API
 Reference</span></a>.</p>
 <section id="basic-blueprint-for-an-execution-controller-implementation">
-<span id="wrench-102-execution-controller-10000ft"></span><h2>Basic blueprint for an execution controller implementation<a class="headerlink" href="#basic-blueprint-for-an-execution-controller-implementation" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-execution-controller-10000ft"></span><h2>Basic blueprint for an execution controller implementation<a class="headerlink" href="#basic-blueprint-for-an-execution-controller-implementation" title="Permalink to this heading"></a></h2>
 <p>An execution controller implementation needs to use many WRENCH classes,
 which are accessed by including a single header file:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;wrench-dev.h&gt;</span><span class="cp"></span>
@@ -141,7 +143,7 @@ controllers implemented as part of the example simulators in the
 features and functionality relevant to execution controller development.</p>
 </section>
 <section id="a-finding-out-information-about-running-services">
-<span id="wrench-102-obtain-information"></span><h2>A) Finding out information about running services<a class="headerlink" href="#a-finding-out-information-about-running-services" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-obtain-information"></span><h2>A) Finding out information about running services<a class="headerlink" href="#a-finding-out-information-about-running-services" title="Permalink to this heading"></a></h2>
 <p>Services that the execution controller can use are typically passed to
 its constructor. Most service classes provide member functions to get
 information about the capabilities and properties of the services. For
@@ -174,14 +176,14 @@ executed once and the core compute speed is stored in the
 repeatedly throughout its execution.</p>
 </section>
 <section id="b-interacting-with-services">
-<span id="wrench-102-controller-services"></span><h2>B) Interacting with services<a class="headerlink" href="#b-interacting-with-services" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-controller-services"></span><h2>B) Interacting with services<a class="headerlink" href="#b-interacting-with-services" title="Permalink to this heading"></a></h2>
 <p>An execution controller can have many and complex interactions with
 services, especially with compute and storage services. In this section,
 we describe how WRENCH makes these interactions relatively easy,
 providing examples for each kind of interaction for each kind of
 service.</p>
 <section id="job-manager-and-data-movement-manager">
-<span id="wrench-102-controller-services-managers"></span><h3>Job Manager and Data Movement Manager<a class="headerlink" href="#job-manager-and-data-movement-manager" title="Permalink to this headline"></a></h3>
+<span id="wrench-102-controller-services-managers"></span><h3>Job Manager and Data Movement Manager<a class="headerlink" href="#job-manager-and-data-movement-manager" title="Permalink to this heading"></a></h3>
 <p>As expected, each service type provides its own API. For instance, a
 network proximity service provides member functions to query the
 service’s host distance databases. The <a class="reference internal" href="api_developer.html#developer-api"><span class="std std-ref">Developer API
@@ -225,7 +227,7 @@ starts by doing:</p>
 sections below.</p>
 </section>
 <section id="interacting-with-storage-services">
-<span id="wrench-102-controller-services-storage"></span><h3>Interacting with storage services<a class="headerlink" href="#interacting-with-storage-services" title="Permalink to this headline"></a></h3>
+<span id="wrench-102-controller-services-storage"></span><h3>Interacting with storage services<a class="headerlink" href="#interacting-with-storage-services" title="Permalink to this heading"></a></h3>
 <p>Typical interactions between an execution controller and a storage
 service include locating, reading, writing, and copying files. Different storage
 service implementations may or not implement some of of these operations.
@@ -239,9 +241,9 @@ of interactions with the currently available storage service type:</p>
 </div></blockquote>
 </section>
 <section id="interacting-with-compute-services">
-<span id="wrench-102-controller-services-compute"></span><h3>Interacting with compute services<a class="headerlink" href="#interacting-with-compute-services" title="Permalink to this headline"></a></h3>
+<span id="wrench-102-controller-services-compute"></span><h3>Interacting with compute services<a class="headerlink" href="#interacting-with-compute-services" title="Permalink to this heading"></a></h3>
 <section id="the-job-abstraction">
-<span id="wrench-102-controller-services-compute-job"></span><h4>The Job abstraction<a class="headerlink" href="#the-job-abstraction" title="Permalink to this headline"></a></h4>
+<span id="wrench-102-controller-services-compute-job"></span><h4>The Job abstraction<a class="headerlink" href="#the-job-abstraction" title="Permalink to this heading"></a></h4>
 <p>The main activity of an execution controller is to execute workflow
 tasks on compute services. Rather than submitting tasks directly to
 compute services, an execution controller must create “jobs”, which can
@@ -316,7 +318,7 @@ of how jobs are submitted to each compute service type:</p>
 </section>
 </section>
 <section id="interacting-with-file-registry-services">
-<span id="wrench-102-controller-services-registry"></span><h3>Interacting with file registry services<a class="headerlink" href="#interacting-with-file-registry-services" title="Permalink to this headline"></a></h3>
+<span id="wrench-102-controller-services-registry"></span><h3>Interacting with file registry services<a class="headerlink" href="#interacting-with-file-registry-services" title="Permalink to this heading"></a></h3>
 <p>Interaction with a file registry service is straightforward and done by
 directly calling member functions of the <a class="reference internal" href="api_developer/classwrench_1_1_file_registry_service.html#_CPPv4N6wrench19FileRegistryServiceE" title="wrench::FileRegistryService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::FileRegistryService</span></code></a>
 class. Note that often file registry service entries are managed
@@ -365,7 +367,7 @@ instance:</p>
 for more API member functions.</p>
 </section>
 <section id="interacting-with-network-proximity-services">
-<span id="wrench-102-controller-services-network"></span><h3>Interacting with network proximity services<a class="headerlink" href="#interacting-with-network-proximity-services" title="Permalink to this headline"></a></h3>
+<span id="wrench-102-controller-services-network"></span><h3>Interacting with network proximity services<a class="headerlink" href="#interacting-with-network-proximity-services" title="Permalink to this heading"></a></h3>
 <p>Querying a network proximity service is straightforward. For instance,
 to obtain a measure of the network distance between hosts “Host1” and
 “Host2”, one simply does:</p>
@@ -388,7 +390,7 @@ for more API member functions.</p>
 </section>
 </section>
 <section id="c-workflow-execution-events">
-<span id="wrench-102-controller-events"></span><h2>C) Workflow execution events<a class="headerlink" href="#c-workflow-execution-events" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-controller-events"></span><h2>C) Workflow execution events<a class="headerlink" href="#c-workflow-execution-events" title="Permalink to this heading"></a></h2>
 <p>Because the execution controller performs asynchronous operations, it
 needs to wait for and re-act to events. This is done by calling the
 <a class="reference internal" href="api_developer/classwrench_1_1_execution_controller.html#_CPPv4N6wrench19ExecutionController26waitForAndProcessNextEventEv" title="wrench::ExecutionController::waitForAndProcessNextEvent"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ExecutionController::waitForAndProcessNextEvent()</span></code></a> member
@@ -491,7 +493,7 @@ does it as:</p>
 </div>
 </section>
 <section id="exceptions">
-<span id="wrench-102-controller-exceptions"></span><h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-controller-exceptions"></span><h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading"></a></h2>
 <p>Most member functions in the WRENCH Developer API throw exceptions. In
 fact, most of the code fragments above should be in try-catch clauses,
 catching these exceptions.</p>
@@ -505,7 +507,7 @@ which are used for detecting misuses of the WRENCH API or internal
 WRENCH errors.</p>
 </section>
 <section id="finding-information-and-interacting-with-hardware-resources">
-<span id="wrench-102-controller-hardware"></span><h2>Finding information and interacting with hardware resources<a class="headerlink" href="#finding-information-and-interacting-with-hardware-resources" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-controller-hardware"></span><h2>Finding information and interacting with hardware resources<a class="headerlink" href="#finding-information-and-interacting-with-hardware-resources" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code></a> class provides many member functions to
 discover information about the (simulated) hardware platform and
 interact with it. It also provides other useful information about the
@@ -532,7 +534,7 @@ which interacts with host pstates (and the
 platform description file which defines pstates).</p>
 </section>
 <section id="logging">
-<span id="wrench-102-controller-logging"></span><h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline"></a></h2>
+<span id="wrench-102-controller-logging"></span><h2>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h2>
 <p>It is typically desirable for the execution controller to print log
 output to the terminal. This is easily accomplished using the
 <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::WRENCH_INFO()</span></code>, <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::WRENCH_DEBUG()</span></code>, and

@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -105,9 +107,9 @@
            <div itemprop="articleBody">
              
   <section id="installing-wrench">
-<span id="install"></span><h1>Installing WRENCH<a class="headerlink" href="#installing-wrench" title="Permalink to this headline"></a></h1>
+<span id="install"></span><h1>Installing WRENCH<a class="headerlink" href="#installing-wrench" title="Permalink to this heading"></a></h1>
 <section id="prerequisites">
-<span id="install-prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"></a></h2>
+<span id="install-prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
 <p>WRENCH is developed in <code class="docutils literal notranslate"><span class="pre">C++</span></code>. The code follows the C++14 standard, and
 thus older compilers may fail to compile it. Therefore, we strongly
 recommend users to satisfy the following requirements:</p>
@@ -117,9 +119,9 @@ recommend users to satisfy the following requirements:</p>
 <p>And, one of the following: - <strong>g++</strong> - version 7.5 or higher - <strong>clang</strong>
 - version 9.0 or higher</p>
 <section id="required-dependencies">
-<span id="install-prerequisites-dependencies"></span><h3>Required Dependencies<a class="headerlink" href="#required-dependencies" title="Permalink to this headline"></a></h3>
+<span id="install-prerequisites-dependencies"></span><h3>Required Dependencies<a class="headerlink" href="#required-dependencies" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://simgrid.org/">SimGrid</a> – version 3.31</p></li>
+<li><p><a class="reference external" href="https://simgrid.org/">SimGrid</a> – version 3.32</p></li>
 <li><p><a class="reference external" href="https://github.com/nlohmann/json">JSON for Modern C++</a> – version
 3.9.0 or higher</p></li>
 </ul>
@@ -127,7 +129,7 @@ recommend users to satisfy the following requirements:</p>
 installing dependencies)</p>
 </section>
 <section id="optional-dependencies">
-<span id="install-prerequisites-opt-dependencies"></span><h3>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline"></a></h3>
+<span id="install-prerequisites-opt-dependencies"></span><h3>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/google/googletest">Google Test</a> – version 1.8
 or higher (only required for running tests)</p></li>
@@ -144,9 +146,9 @@ capabilities</p></li>
 </section>
 </section>
 <section id="source-install">
-<span id="install-source"></span><h2>Source Install<a class="headerlink" href="#source-install" title="Permalink to this headline"></a></h2>
+<span id="install-source"></span><h2>Source Install<a class="headerlink" href="#source-install" title="Permalink to this heading"></a></h2>
 <section id="building-wrench">
-<span id="install-source-build"></span><h3>Building WRENCH<a class="headerlink" href="#building-wrench" title="Permalink to this headline"></a></h3>
+<span id="install-source-build"></span><h3>Building WRENCH<a class="headerlink" href="#building-wrench" title="Permalink to this heading"></a></h3>
 <p>You can download the <code class="docutils literal notranslate"><span class="pre">wrench-&lt;version&gt;.tar.gz</span></code> archive from the <a class="reference external" href="https://github.com/wrench-project/wrench/releases">GitHub
 releases</a> page.
 Once you have installed dependencies (see above), you can install WRENCH
@@ -177,7 +179,7 @@ version, and recompile it as you would do for an official archive:</p>
 </div>
 </section>
 <section id="compiling-and-running-unit-tests">
-<span id="install-unit-tests"></span><h3>Compiling and running unit tests<a class="headerlink" href="#compiling-and-running-unit-tests" title="Permalink to this headline"></a></h3>
+<span id="install-unit-tests"></span><h3>Compiling and running unit tests<a class="headerlink" href="#compiling-and-running-unit-tests" title="Permalink to this heading"></a></h3>
 <p>Building and running the unit tests, which requires Google Test, is done
 as:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make -j8 unit_tests
@@ -186,7 +188,7 @@ as:</p>
 </div>
 </section>
 <section id="compiling-and-running-examples">
-<span id="install-examples"></span><h3>Compiling and running examples<a class="headerlink" href="#compiling-and-running-examples" title="Permalink to this headline"></a></h3>
+<span id="install-examples"></span><h3>Compiling and running examples<a class="headerlink" href="#compiling-and-running-examples" title="Permalink to this heading"></a></h3>
 <p>Building the examples is done as:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make -j8 examples
 </pre></div>
@@ -195,9 +197,9 @@ as:</p>
 <code class="docutils literal notranslate"><span class="pre">build/examples/</span></code></p>
 </section>
 <section id="installation-troubleshooting">
-<span id="install-troubleshooting"></span><h3>Installation Troubleshooting<a class="headerlink" href="#installation-troubleshooting" title="Permalink to this headline"></a></h3>
+<span id="install-troubleshooting"></span><h3>Installation Troubleshooting<a class="headerlink" href="#installation-troubleshooting" title="Permalink to this heading"></a></h3>
 <section id="could-not-find-pkgconfig-missing-pkg-config-executable">
-<h4>Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE)<a class="headerlink" href="#could-not-find-pkgconfig-missing-pkg-config-executable" title="Permalink to this headline"></a></h4>
+<h4>Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE)<a class="headerlink" href="#could-not-find-pkgconfig-missing-pkg-config-executable" title="Permalink to this heading"></a></h4>
 <ul class="simple">
 <li><p>This error on MacOS is because the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> package is not
 installed</p></li>
@@ -210,7 +212,7 @@ installed</p></li>
 </ul>
 </section>
 <section id="could-not-find-libgfortran-when-building-the-simgrid-dependency">
-<h4>Could not find libgfortran when building the SimGrid dependency<a class="headerlink" href="#could-not-find-libgfortran-when-building-the-simgrid-dependency" title="Permalink to this headline"></a></h4>
+<h4>Could not find libgfortran when building the SimGrid dependency<a class="headerlink" href="#could-not-find-libgfortran-when-building-the-simgrid-dependency" title="Permalink to this heading"></a></h4>
 <ul class="simple">
 <li><p>This is an error that sometimes occurs on MacOS</p></li>
 <li><p>A quick fix is to disable the SMPI feature of SimGrid when
@@ -220,7 +222,7 @@ configuring it: <code class="docutils literal notranslate"><span class="pre">cma
 </section>
 </section>
 <section id="docker-containers">
-<span id="install-docker"></span><h2>Docker Containers<a class="headerlink" href="#docker-containers" title="Permalink to this headline"></a></h2>
+<span id="install-docker"></span><h2>Docker Containers<a class="headerlink" href="#docker-containers" title="Permalink to this heading"></a></h2>
 <p>WRENCH is also distributed in Docker containers. Please, visit the
 <a class="reference external" href="https://hub.docker.com/r/wrenchproject/wrench/">WRENCH Repository on Docker
 Hub</a> to pull WRENCH’s
