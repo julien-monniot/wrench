@@ -1,0 +1,8 @@
+.. _BatschedBatchScheduler:
+wrench::BatschedBatchScheduler
+******************************
+
+.. doxygenclass:: wrench::BatschedBatchScheduler
+   :project: internal
+   :members:
+

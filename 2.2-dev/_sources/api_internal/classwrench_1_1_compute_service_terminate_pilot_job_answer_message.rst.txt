@@ -1,0 +1,8 @@
+.. _ComputeServiceTerminatePilotJobAnswerMessage:
+wrench::ComputeServiceTerminatePilotJobAnswerMessage
+****************************************************
+
+.. doxygenclass:: wrench::ComputeServiceTerminatePilotJobAnswerMessage
+   :project: internal
+   :members:
+

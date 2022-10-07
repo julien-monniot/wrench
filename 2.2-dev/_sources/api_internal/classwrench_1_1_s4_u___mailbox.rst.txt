@@ -1,0 +1,8 @@
+.. _S4U_Mailbox:
+wrench::S4U_Mailbox
+*******************
+
+.. doxygenclass:: wrench::S4U_Mailbox
+   :project: internal
+   :members:
+

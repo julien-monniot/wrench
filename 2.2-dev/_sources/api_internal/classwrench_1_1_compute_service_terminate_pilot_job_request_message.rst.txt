@@ -1,0 +1,8 @@
+.. _ComputeServiceTerminatePilotJobRequestMessage:
+wrench::ComputeServiceTerminatePilotJobRequestMessage
+*****************************************************
+
+.. doxygenclass:: wrench::ComputeServiceTerminatePilotJobRequestMessage
+   :project: internal
+   :members:
+
