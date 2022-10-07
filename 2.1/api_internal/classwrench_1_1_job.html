@@ -7,6 +7,7 @@
   <title>wrench::Job &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,161 @@
            <div itemprop="articleBody">
              
   <section id="wrench-job">
-<h1>wrench::Job<a class="headerlink" href="#wrench-job" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::Job<a class="headerlink" href="#wrench-job" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3JobE">
+<span id="_CPPv3N6wrench3JobE"></span><span id="_CPPv2N6wrench3JobE"></span><span id="wrench::Job"></span><span class="target" id="classwrench_1_1_job"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Job</span></span></span><br /></dt>
+<dd><p>Abstraction of a job used for executing tasks in a <a class="reference internal" href="../api_user/classwrench_1_1_workflow.html#classwrench_1_1_workflow"><span class="std std-ref">Workflow</span></a>. </p>
+<p>Subclassed by <a class="reference internal" href="classwrench_1_1_compound_job.html#classwrench_1_1_compound_job"><span class="std std-ref">wrench::CompoundJob</span></a>, <a class="reference internal" href="classwrench_1_1_pilot_job.html#classwrench_1_1_pilot_job"><span class="std std-ref">wrench::PilotJob</span></a>, <a class="reference internal" href="classwrench_1_1_standard_job.html#classwrench_1_1_standard_job"><span class="std std-ref">wrench::StandardJob</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3JobD0Ev">
+<span id="_CPPv3N6wrench3JobD0Ev"></span><span id="_CPPv2N6wrench3JobD0Ev"></span><span id="wrench::Job::~Job"></span><span class="target" id="classwrench_1_1_job_1aef70105641519a8f813653bc0e425d7a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Job</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3JobD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job18getCallbackMailboxEv">
+<span id="_CPPv3N6wrench3Job18getCallbackMailboxEv"></span><span id="_CPPv2N6wrench3Job18getCallbackMailboxEv"></span><span id="wrench::Job::getCallbackMailbox"></span><span class="target" id="classwrench_1_1_job_1a6249d35b20edfddb007e02e83a2f217e"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getCallbackMailbox</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job18getCallbackMailboxEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the job’s “next” callback mailbox, without popping it. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the next callback mailbox </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job10getEndDateEv">
+<span id="_CPPv3N6wrench3Job10getEndDateEv"></span><span id="_CPPv2N6wrench3Job10getEndDateEv"></span><span id="wrench::Job::getEndDate"></span><span class="target" id="classwrench_1_1_job_1a5cdbbe36f9025a11c50b00d23b8e92b1"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getEndDate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Get the date at which the job ended (&lt;0 means “never submitted”) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the end date </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job7getNameEv">
+<span id="_CPPv3N6wrench3Job7getNameEv"></span><span id="_CPPv2N6wrench3Job7getNameEv"></span><span id="wrench::Job::getName"></span><span class="target" id="classwrench_1_1_job_1a67f92b511338a061d7c7c59ac3bab970"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getName</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Get the job’s name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name as a string </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job24getOriginCallbackMailboxEv">
+<span id="_CPPv3N6wrench3Job24getOriginCallbackMailboxEv"></span><span id="_CPPv2N6wrench3Job24getOriginCallbackMailboxEv"></span><span id="wrench::Job::getOriginCallbackMailbox"></span><span class="target" id="classwrench_1_1_job_1a7c4e80caf9e554cc998a1905acdaf47b"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getOriginCallbackMailbox</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job24getOriginCallbackMailboxEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the “origin” callback mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the next callback mailbox </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job23getParentComputeServiceEv">
+<span id="_CPPv3N6wrench3Job23getParentComputeServiceEv"></span><span id="_CPPv2N6wrench3Job23getParentComputeServiceEv"></span><span id="wrench::Job::getParentComputeService"></span><span class="target" id="classwrench_1_1_job_1ae60eac5337c7d4636ed17528235fb595"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><span class="n"><span class="pre">ComputeService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getParentComputeService</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job23getParentComputeServiceEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the compute service that is running /ran the job. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a compute service </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench3Job11getPriorityEv">
+<span id="_CPPv3NK6wrench3Job11getPriorityEv"></span><span id="_CPPv2NK6wrench3Job11getPriorityEv"></span><span id="wrench::Job::getPriorityC"></span><span class="target" id="classwrench_1_1_job_1a321a1f81452c397ace0381f28e50e2d8"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getPriority</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench3Job11getPriorityEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the job’s priority (the higher the priority value, the higher the priority) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the job’s priority </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job27getServiceSpecificArgumentsEv">
+<span id="_CPPv3N6wrench3Job27getServiceSpecificArgumentsEv"></span><span id="_CPPv2N6wrench3Job27getServiceSpecificArgumentsEv"></span><span id="wrench::Job::getServiceSpecificArguments"></span><span class="target" id="classwrench_1_1_job_1af6228d5c43faed3e4934cb1a59b48c35"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">getServiceSpecificArguments</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job27getServiceSpecificArgumentsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Return the service-specific arguments that are used during job submission. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a map of argument name/values </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job13getSubmitDateEv">
+<span id="_CPPv3N6wrench3Job13getSubmitDateEv"></span><span id="_CPPv2N6wrench3Job13getSubmitDateEv"></span><span id="wrench::Job::getSubmitDate"></span><span class="target" id="classwrench_1_1_job_1aae1102f33587e9cd4488fdac0a3c6991"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getSubmitDate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Get the date at which the job was last submitted (&lt;0 means “never submitted”) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the submit date </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job18popCallbackMailboxEv">
+<span id="_CPPv3N6wrench3Job18popCallbackMailboxEv"></span><span id="_CPPv2N6wrench3Job18popCallbackMailboxEv"></span><span id="wrench::Job::popCallbackMailbox"></span><span class="target" id="classwrench_1_1_job_1a74a55752c7f1cdc05f9d36dd43cc4d04"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">popCallbackMailbox</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job18popCallbackMailboxEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the “next” callback mailbox (returns the workflow mailbox if the mailbox stack is empty), and pops it. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the next callback mailbox </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job25printCallbackMailboxStackEv">
+<span id="_CPPv3N6wrench3Job25printCallbackMailboxStackEv"></span><span id="_CPPv2N6wrench3Job25printCallbackMailboxStackEv"></span><span id="wrench::Job::printCallbackMailboxStack"></span><span class="target" id="classwrench_1_1_job_1a011ec4d7cf6ff99b2feaa966fc8a96d7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">printCallbackMailboxStack</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job25printCallbackMailboxStackEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Method to print the call back stack. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job19pushCallbackMailboxEPN7simgrid3s4u7MailboxE">
+<span id="_CPPv3N6wrench3Job19pushCallbackMailboxEPN7simgrid3s4u7MailboxE"></span><span id="_CPPv2N6wrench3Job19pushCallbackMailboxEPN7simgrid3s4u7MailboxE"></span><span id="wrench::Job::pushCallbackMailbox__simgrid::s4u::MailboxP"></span><span class="target" id="classwrench_1_1_job_1a8b79028149fb6f541845d18477fcbda4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pushCallbackMailbox</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job19pushCallbackMailboxEPN7simgrid3s4u7MailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pushes a callback mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mailbox</strong> – the mailbox name </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job23setParentComputeServiceENSt10shared_ptrI14ComputeServiceEE">
+<span id="_CPPv3N6wrench3Job23setParentComputeServiceENSt10shared_ptrI14ComputeServiceEE"></span><span id="_CPPv2N6wrench3Job23setParentComputeServiceENSt10shared_ptrI14ComputeServiceEE"></span><span id="wrench::Job::setParentComputeService__std::shared_ptr:ComputeService:"></span><span class="target" id="classwrench_1_1_job_1a0d3bcc025b460c71124735aa1b30d251"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setParentComputeService</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><span class="n"><span class="pre">ComputeService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">compute_service</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job23setParentComputeServiceENSt10shared_ptrI14ComputeServiceEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the parent compute service of the job. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>compute_service</strong> – a compute service </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench3Job11setPriorityEd">
+<span id="_CPPv3N6wrench3Job11setPriorityEd"></span><span id="_CPPv2N6wrench3Job11setPriorityEd"></span><span id="wrench::Job::setPriority__double"></span><span class="target" id="classwrench_1_1_job_1aeafc00c443d8bcfac94be4205a0b0d4e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPriority</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench3Job11setPriorityEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the job’s priority (the higher the priority value, the higher the priority) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> – a priority </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

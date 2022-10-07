@@ -7,6 +7,7 @@
   <title>Interacting with a cloud compute service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,7 +86,7 @@
            <div itemprop="articleBody">
              
   <section id="interacting-with-a-cloud-compute-service">
-<span id="guide-102-cloud"></span><h1>Interacting with a cloud compute service<a class="headerlink" href="#interacting-with-a-cloud-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-102-cloud"></span><h1>Interacting with a cloud compute service<a class="headerlink" href="#interacting-with-a-cloud-compute-service" title="Permalink to this heading"></a></h1>
 <p>A cloud service provides mechanisms to manage the set of VMs
 instantiated on hardware resources. Each VM instance, while it’s
 running, exposes its own bare-metal compute service to which <a class="reference internal" href="baremetal.html#guide-102-baremetal"><span class="std std-ref">standard
@@ -90,12 +94,12 @@ jobs can be submitted</span></a>. As a result, one
 never submits a job directly to a cloud service.</p>
 <p>It is possible to create, shutdown, start, suspend, and resume VMs (see
 a complete list of functions available in the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code> API documentation). The figure below
+<a class="reference internal" href="../api_developer/classwrench_1_1_cloud_compute_service.html#_CPPv4N6wrench19CloudComputeServiceE" title="wrench::CloudComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code></a> API documentation). The figure below
 shows the state transition diagram of a VM instance:</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/wrench-guide-cloud-state-diagram.png"><img alt="../_images/wrench-guide-cloud-state-diagram.png" src="../_images/wrench-guide-cloud-state-diagram.png" style="width: 338.0px; height: 238.0px;" /></a>
 </figure>
-<p>Here is an example interaction with a <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code>:</p>
+<p>Here is an example interaction with a <a class="reference internal" href="../api_developer/classwrench_1_1_cloud_compute_service.html#_CPPv4N6wrench19CloudComputeServiceE" title="wrench::CloudComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code></a>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="nl">std</span><span class="p">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">wrench</span><span class="o">::</span><span class="n">CloudComputeService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">some_cloud_cs</span><span class="p">;</span><span class="w"></span>
 
 <span class="c1">// Create a VM with 2 cores and 1 GiB of RAM</span>
@@ -143,7 +147,7 @@ completely hidden by the cloud service abstraction. If you want more
 control over how the physical resources are used you likely need a
 <a class="reference internal" href="virtualizedcluster.html#guide-102-virtualizedcluster"><span class="std std-ref">virtualized cluster services</span></a>.</p>
 <p>See the execution controller implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/cloud-bag-of-tasks/TwoTasksAtATimeCloudWMS.cpp</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/cloud-bag-of-tasks/TwoTasksAtATimeCloudWMS.cpp</span></code>
 for a more complete example.</p>
 </section>
 

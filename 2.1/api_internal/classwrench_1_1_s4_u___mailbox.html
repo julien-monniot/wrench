@@ -7,6 +7,7 @@
   <title>wrench::S4U_Mailbox &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,188 @@
            <div itemprop="articleBody">
              
   <section id="wrench-s4u-mailbox">
-<h1>wrench::S4U_Mailbox<a class="headerlink" href="#wrench-s4u-mailbox" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::S4U_Mailbox<a class="headerlink" href="#wrench-s4u-mailbox" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_MailboxE">
+<span id="_CPPv3N6wrench11S4U_MailboxE"></span><span id="_CPPv2N6wrench11S4U_MailboxE"></span><span id="wrench::S4U_Mailbox"></span><span class="target" id="classwrench_1_1_s4_u___mailbox"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">S4U_Mailbox</span></span></span><a class="headerlink" href="#_CPPv4N6wrench11S4U_MailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wrappers around S4U’s communication methods. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox17createMailboxPoolEm">
+<span id="_CPPv3N6wrench11S4U_Mailbox17createMailboxPoolEm"></span><span id="_CPPv2N6wrench11S4U_Mailbox17createMailboxPoolEm"></span><span id="wrench::S4U_Mailbox::createMailboxPool__unsigned-l"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a2bbb03f133188987625bc72bcc880df3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createMailboxPool</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_mailboxes</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox17createMailboxPoolEm" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create the pool of mailboxes to use. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_mailboxes</strong> – numb mailboxes in pool </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox11dputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage">
+<span id="_CPPv3N6wrench11S4U_Mailbox11dputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage"></span><span id="_CPPv2N6wrench11S4U_Mailbox11dputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage"></span><span id="wrench::S4U_Mailbox::dputMessage__simgrid::s4u::MailboxP.SimulationMessageP"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1abbafbd2fc73ddefb21dee13e12c054f3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dputMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span>, <a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">msg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox11dputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Asynchronously send a message to a mailbox in a “fire and forget” fashion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mailbox</strong> – the mailbox </p></li>
+<li><p><strong>msg</strong> – the <a class="reference internal" href="classwrench_1_1_simulation_message.html#classwrench_1_1_simulation_message"><span class="std std-ref">SimulationMessage</span></a> </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox21generateUniqueMailboxERKNSt6stringE">
+<span id="_CPPv3N6wrench11S4U_Mailbox21generateUniqueMailboxERKNSt6stringE"></span><span id="_CPPv2N6wrench11S4U_Mailbox21generateUniqueMailboxERKNSt6stringE"></span><span id="wrench::S4U_Mailbox::generateUniqueMailbox__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a4bf997081b50af08e83561905e05b0fb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">generateUniqueMailbox</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">prefix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox21generateUniqueMailboxERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Generate a unique (non-temporary) mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prefix</strong> – mailbox name prefix </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox28generateUniqueSequenceNumberEv">
+<span id="_CPPv3N6wrench11S4U_Mailbox28generateUniqueSequenceNumberEv"></span><span id="_CPPv2N6wrench11S4U_Mailbox28generateUniqueSequenceNumberEv"></span><span id="wrench::S4U_Mailbox::generateUniqueSequenceNumber"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a71ba39ec19960b3fca334836e19edb9f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">generateUniqueSequenceNumber</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox28generateUniqueSequenceNumberEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Generate a unique sequence number. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a unique sequence number </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxE">
+<span id="_CPPv3N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxE"></span><span id="_CPPv2N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxE"></span><span id="wrench::S4U_Mailbox::getMessage__simgrid::s4u::MailboxP"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1afb03d1008118341f497a99af6ae9e0ab"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Synchronously receive a message from a mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mailbox</strong> – the mailbox </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the message, or nullptr (in which case it’s likely a brutal termination)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxEd">
+<span id="_CPPv3N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxEd"></span><span id="_CPPv2N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxEd"></span><span id="wrench::S4U_Mailbox::getMessage__simgrid::s4u::MailboxP.double"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a98d77f36c5be2f03bf1224826d5f14bb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox10getMessageEPN7simgrid3s4u7MailboxEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Synchronously receive a message from a mailbox, with a timeout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mailbox</strong> – the mailbox </p></li>
+<li><p><strong>timeout</strong> – a timeout value in seconds (&lt;0 means never timeout) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the message, or nullptr (in which case it’s likely a brutal termination)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox19getTemporaryMailboxEv">
+<span id="_CPPv3N6wrench11S4U_Mailbox19getTemporaryMailboxEv"></span><span id="_CPPv2N6wrench11S4U_Mailbox19getTemporaryMailboxEv"></span><span id="wrench::S4U_Mailbox::getTemporaryMailbox"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1ad0fd48c1b12ff800cb4f5414b1b0a758"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getTemporaryMailbox</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox19getTemporaryMailboxEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a temporary mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a temporary mailbox </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox11igetMessageEPN7simgrid3s4u7MailboxE">
+<span id="_CPPv3N6wrench11S4U_Mailbox11igetMessageEPN7simgrid3s4u7MailboxE"></span><span id="_CPPv2N6wrench11S4U_Mailbox11igetMessageEPN7simgrid3s4u7MailboxE"></span><span id="wrench::S4U_Mailbox::igetMessage__simgrid::s4u::MailboxP"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a065877ea4220e305ccabcffef9d6b67f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_s4_u___pending_communication.html#_CPPv4N6wrench24S4U_PendingCommunicationE" title="wrench::S4U_PendingCommunication"><span class="n"><span class="pre">S4U_PendingCommunication</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">igetMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox11igetMessageEPN7simgrid3s4u7MailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Asynchronously receive a message from a mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mailbox</strong> – the mailbox</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a pending communication handle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox11iputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage">
+<span id="_CPPv3N6wrench11S4U_Mailbox11iputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage"></span><span id="_CPPv2N6wrench11S4U_Mailbox11iputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage"></span><span id="wrench::S4U_Mailbox::iputMessage__simgrid::s4u::MailboxP.SimulationMessageP"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a37f193039f3d23c943cabd5cd8d69a1e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_s4_u___pending_communication.html#_CPPv4N6wrench24S4U_PendingCommunicationE" title="wrench::S4U_PendingCommunication"><span class="n"><span class="pre">S4U_PendingCommunication</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iputMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span>, <a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">msg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox11iputMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Asynchronously send a message to a mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mailbox</strong> – the mailbox </p></li>
+<li><p><strong>msg</strong> – the <a class="reference internal" href="classwrench_1_1_simulation_message.html#classwrench_1_1_simulation_message"><span class="std std-ref">SimulationMessage</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a pending communication handle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox10putMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage">
+<span id="_CPPv3N6wrench11S4U_Mailbox10putMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage"></span><span id="_CPPv2N6wrench11S4U_Mailbox10putMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage"></span><span id="wrench::S4U_Mailbox::putMessage__simgrid::s4u::MailboxP.SimulationMessageP"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a683b27b6b074b00fa64fa87fa30d9a06"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">putMessage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span>, <a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">m</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox10putMessageEPN7simgrid3s4u7MailboxEP17SimulationMessage" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Synchronously send a message to a mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mailbox</strong> – the mailbox </p></li>
+<li><p><strong>msg</strong> – the <a class="reference internal" href="classwrench_1_1_simulation_message.html#classwrench_1_1_simulation_message"><span class="std std-ref">SimulationMessage</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox22retireTemporaryMailboxEPN7simgrid3s4u7MailboxE">
+<span id="_CPPv3N6wrench11S4U_Mailbox22retireTemporaryMailboxEPN7simgrid3s4u7MailboxE"></span><span id="_CPPv2N6wrench11S4U_Mailbox22retireTemporaryMailboxEPN7simgrid3s4u7MailboxE"></span><span id="wrench::S4U_Mailbox::retireTemporaryMailbox__simgrid::s4u::MailboxP"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a809e33fe9f9cfe9ca72c1002a50bc760"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">retireTemporaryMailbox</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox22retireTemporaryMailboxEPN7simgrid3s4u7MailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retire a temporary mailbox. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mailbox</strong> – the mailbox to retire </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench11S4U_Mailbox17mailbox_pool_sizeE">
+<span id="_CPPv3N6wrench11S4U_Mailbox17mailbox_pool_sizeE"></span><span id="_CPPv2N6wrench11S4U_Mailbox17mailbox_pool_sizeE"></span><span id="wrench::S4U_Mailbox::mailbox_pool_size__unsigned-l"></span><span class="target" id="classwrench_1_1_s4_u___mailbox_1a2557e1a07d2cacc9ecec13472b5c228d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mailbox_pool_size</span></span></span><a class="headerlink" href="#_CPPv4N6wrench11S4U_Mailbox17mailbox_pool_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The mailbox pool size. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </section>
 
 

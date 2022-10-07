@@ -7,6 +7,7 @@
   <title>Creating a simple storage service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-simple-storage-service">
-<span id="guide-101-simplestorage"></span><h1>Creating a simple storage service<a class="headerlink" href="#creating-a-simple-storage-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-simplestorage"></span><h1>Creating a simple storage service<a class="headerlink" href="#creating-a-simple-storage-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-simplestorage-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-simplestorage-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>A Simple storage service is the simplest possible abstraction for a
 service that can store and provide access to workflow files. It has a
 certain storage capacity, and provides write, read, and delete
@@ -93,18 +97,18 @@ operations on files. In addition, higher-level semantics such as copying
 a file directly from a storage service to another are provided.</p>
 </section>
 <section id="guide-simplestorage-creating">
-<span id="id1"></span><h1>Creating a Simple storage service<a class="headerlink" href="#guide-simplestorage-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating a Simple storage service<a class="headerlink" href="#guide-simplestorage-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, a Simple storage service represents a storage service
-(<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StorageService</span></code>), which is defined by the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorage</span></code> class. An instantiation of a Simple storage
+(<a class="reference internal" href="../api_developer/classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StorageService</span></code></a>), which is defined by the
+<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code></a> class. An instantiation of a Simple storage
 service requires the following parameters:</p>
 <ul class="simple">
 <li><p>The name of a host on which to start the service;</p></li>
 <li><p>A list of mount points (corresponding to disks attached to the host);
 and</p></li>
 <li><p>Maps (<code class="docutils literal notranslate"><span class="pre">std::map</span></code>) of configurable properties
-(<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code>) and configurable message
-payloads (<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code>).</p></li>
+(<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_property.html#_CPPv4N6wrench28SimpleStorageServicePropertyE" title="wrench::SimpleStorageServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code></a>) and configurable message
+payloads (<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_message_payload.html#_CPPv4N6wrench34SimpleStorageServiceMessagePayloadE" title="wrench::SimpleStorageServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code></a>).</p></li>
 </ul>
 <p>The example below creates an instance of a Simple storage service that
 runs on host <code class="docutils literal notranslate"><span class="pre">BigDisk</span></code>, has access to the disks mounted at paths
@@ -120,10 +124,11 @@ free space is configured to be 1KiB:</p>
 <span class="w">                                      </span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p>See the documentation of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code> and
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code> for all possible
+<p>See the documentation of <a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_property.html#_CPPv4N6wrench28SimpleStorageServicePropertyE" title="wrench::SimpleStorageServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceProperty</span></code></a> and
+<a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service_message_payload.html#_CPPv4N6wrench34SimpleStorageServiceMessagePayloadE" title="wrench::SimpleStorageServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageServiceMessagePayload</span></code></a> for all possible
 configuration options.</p>
-<p>Also see the simulators in the <code class="docutils literal notranslate"><span class="pre">examples/basic-examples/*</span></code>
+<p>Also see the simulators in the <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/*</span></code> and
+<code class="docutils literal notranslate"><span class="pre">examples/action_api/*</span></code>
 directories, which all use simple storage services.</p>
 </section>
 

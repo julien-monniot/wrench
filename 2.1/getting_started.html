@@ -7,6 +7,7 @@
   <title>Getting started &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> WRENCH
+            <a href="index.html">
+            <img src="_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -88,7 +92,7 @@
            <div itemprop="articleBody">
              
   <section id="getting-started">
-<span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <p>Once you have installed the WRENCH library, following the instructions
 on the <a class="reference internal" href="installation.html#install"><span class="std std-ref">installation page</span></a>, you are ready to create a
 WRENCH simulator. <strong>Information on what can be simulated and how to do
@@ -96,7 +100,7 @@ it are provided in the</strong> <a class="reference internal" href="wrench_101.h
 <a class="reference internal" href="wrench_102.html#wrench-102-header"><span class="std std-ref">WRENCH 102</span></a> <strong>pages. This page is only about the
 logistics of setting up a simulator project.</strong></p>
 <section id="using-the-wrench-initialization-tool">
-<span id="getting-started-wrench-init"></span><h2>Using the WRENCH initialization tool<a class="headerlink" href="#using-the-wrench-initialization-tool" title="Permalink to this headline"></a></h2>
+<span id="getting-started-wrench-init"></span><h2>Using the WRENCH initialization tool<a class="headerlink" href="#using-the-wrench-initialization-tool" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">wrench-init</span></code> tool is a project generator built with WRENCH, which
 creates a simple project structure as follows:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>project-folder/
@@ -137,7 +141,7 @@ and <code class="docutils literal notranslate"><span class="pre">FindWRENCH.cmak
 the <code class="docutils literal notranslate"><span class="pre">CMakeModules</span></code> directory.</p>
 </section>
 <section id="example-wrench-simulators">
-<span id="getting-started-example"></span><h2>Example WRENCH simulators<a class="headerlink" href="#example-wrench-simulators" title="Permalink to this headline"></a></h2>
+<span id="getting-started-example"></span><h2>Example WRENCH simulators<a class="headerlink" href="#example-wrench-simulators" title="Permalink to this heading"></a></h2>
 <p>The examples in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory provide good starting points
 for developing your own simulators. Examples are provided for the
 generic “action” API as well as for the “workflow” API, and are built
@@ -145,13 +149,13 @@ along with the WRENCH library and tools. See the <code class="docutils literal n
 file for a brief description of all examples. Examples can be built by
 typing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">examples</span></code> in the build directory.</p>
 <p>For instance, the
-<code class="docutils literal notranslate"><span class="pre">examples/action_api/basic-examples/bare-metal-bag-of-actions</span></code> example
+<code class="docutils literal notranslate"><span class="pre">examples/action_api/bare-metal-bag-of-actions</span></code> example
 can be executed as:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ wrench-example-bare-metal-bag-of-actions <span class="m">6</span> two_hosts.xml --log<span class="o">=</span>custom_wms.threshold<span class="o">=</span>info
 </pre></div>
 </div>
 <p>(File <code class="docutils literal notranslate"><span class="pre">two_hosts.xml</span></code> is in the
-<code class="docutils literal notranslate"><span class="pre">examples/action_api/basic-examples/bare-metal-bag-of-actions</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/action_api/bare-metal-bag-of-actions</span></code>
 directory.) You should see some output in the terminal. The output in
 white is produced by the simulator’s main function. The output in green
 is produced by the execution controller implemented with the WRENCH

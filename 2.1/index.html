@@ -7,6 +7,7 @@
   <title>Architecture &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,7 +30,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> WRENCH
+            <a href="#">
+            <img src="_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -112,7 +116,7 @@ services.</p></li>
 platform scenarios for these runtime system implementation.</p></li>
 </ul>
 <section id="architecture">
-<span id="overview-architecture"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline"></a></h1>
+<span id="overview-architecture"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this heading"></a></h1>
 <p>WRENCH is an <em>open-source C++ library</em> for developing simulators. It is
 neither a graphical interface nor a stand-alone simulator. WRENCH
 exposes several high-level simulation abstractions to provide high-level
@@ -139,7 +143,7 @@ abstractions (computing, communicating, storing), provided by
 </figure>
 </section>
 <section id="three-classes-of-users">
-<span id="overview-users"></span><h1>Three Classes of Users<a class="headerlink" href="#three-classes-of-users" title="Permalink to this headline"></a></h1>
+<span id="overview-users"></span><h1>Three Classes of Users<a class="headerlink" href="#three-classes-of-users" title="Permalink to this heading"></a></h1>
 <p>On can distinguish three kinds of WRENCH users:</p>
 <ul class="simple">
 <li><p><strong>Runtime System Users</strong> use WRENCH to simulate application workload
@@ -153,7 +157,7 @@ novel algorithms to be implemented in a runtime system.</p></li>
 implementing new Core Services.</p></li>
 </ul>
 <section id="three-levels-of-api-documentation">
-<span id="overview-users-levels"></span><h2>Three Levels of API Documentation<a class="headerlink" href="#three-levels-of-api-documentation" title="Permalink to this headline"></a></h2>
+<span id="overview-users-levels"></span><h2>Three Levels of API Documentation<a class="headerlink" href="#three-levels-of-api-documentation" title="Permalink to this heading"></a></h2>
 <p>The WRENCH library provides three <em>incremental</em> levels of documentation,
 each targeting an API level:</p>
 <p><strong>User:</strong> This level targets users who want to use WRENCH for simulating
@@ -182,7 +186,7 @@ is the API needed to, for instance, implement new Core Services.</p>
 </section>
 </section>
 <section id="get-in-touch">
-<span id="overview-contact"></span><h1>Get in Touch<a class="headerlink" href="#get-in-touch" title="Permalink to this headline"></a></h1>
+<span id="overview-contact"></span><h1>Get in Touch<a class="headerlink" href="#get-in-touch" title="Permalink to this heading"></a></h1>
 <p>The main channel to reach the WRENCH team is via the support email:
 <a class="reference external" href="mailto:support&#37;&#52;&#48;wrench-project&#46;org?subject=WRENCH%20Support%20Contact:%20Your%20Topic">support<span>&#64;</span>wrench-project<span>&#46;</span>org</a>.</p>
 <div class="line-block">

@@ -7,6 +7,7 @@
   <title>wrench::BandwidthMeterService &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -182,6 +186,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_internal.html">WRENCH Internal API</a></li>
@@ -213,11 +221,65 @@
            <div itemprop="articleBody">
              
   <section id="wrench-bandwidthmeterservice">
-<h1>wrench::BandwidthMeterService<a class="headerlink" href="#wrench-bandwidthmeterservice" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/developer/xml/index.xml</p>
+<h1>wrench::BandwidthMeterService<a class="headerlink" href="#wrench-bandwidthmeterservice" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench21BandwidthMeterServiceE">
+<span id="_CPPv3N6wrench21BandwidthMeterServiceE"></span><span id="_CPPv2N6wrench21BandwidthMeterServiceE"></span><span id="wrench::BandwidthMeterService"></span><span class="target" id="classwrench_1_1_bandwidth_meter_service"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BandwidthMeterService</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classwrench_1_1_service.html#_CPPv4N6wrench7ServiceE" title="wrench::Service"><span class="n"><span class="pre">Service</span></span></a><a class="headerlink" href="#_CPPv4N6wrench21BandwidthMeterServiceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A service that measures and records bandwidth usage on a set of links at regular time intervals. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt3mapINSt6stringEdEE">
+<span id="_CPPv3N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt3mapINSt6stringEdEE"></span><span id="_CPPv2N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt3mapINSt6stringEdEE"></span><span id="wrench::BandwidthMeterService::BandwidthMeterService__ss.std::map:ss.double:CR"></span><span class="target" id="classwrench_1_1_bandwidth_meter_service_1aaf37e8944d58c34c93261663ae0dc5a7"></span><span class="sig-name descname"><span class="n"><span class="pre">BandwidthMeterService</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement_periods</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt3mapINSt6stringEdEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the hostname on which the service should start </p></li>
+<li><p><strong>measurement_periods</strong> – the measurement period for each monitored link </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt6vectorINSt6stringEEEd">
+<span id="_CPPv3N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt6vectorINSt6stringEEEd"></span><span id="_CPPv2N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt6vectorINSt6stringEEEd"></span><span id="wrench::BandwidthMeterService::BandwidthMeterService__ss.std::vector:ss:CR.double"></span><span class="target" id="classwrench_1_1_bandwidth_meter_service_1af32382c5378ec5e1684ea15f90d33a65"></span><span class="sig-name descname"><span class="n"><span class="pre">BandwidthMeterService</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">linknames</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">period</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench21BandwidthMeterService21BandwidthMeterServiceENSt6stringERKNSt6vectorINSt6stringEEEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the name of the host on which this service is running </p></li>
+<li><p><strong>linknames</strong> – the list of metered links, as link ids </p></li>
+<li><p><strong>measurement_period</strong> – the measurement period </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench21BandwidthMeterService4killEv">
+<span id="_CPPv3N6wrench21BandwidthMeterService4killEv"></span><span id="_CPPv2N6wrench21BandwidthMeterService4killEv"></span><span id="wrench::BandwidthMeterService::kill"></span><span class="target" id="classwrench_1_1_bandwidth_meter_service_1af09a60d6da3e3a49d74e2df7d2c4549e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kill</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench21BandwidthMeterService4killEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Kill the bandwidth meter (brutally terminate the daemon) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench21BandwidthMeterService4stopEv">
+<span id="_CPPv3N6wrench21BandwidthMeterService4stopEv"></span><span id="_CPPv2N6wrench21BandwidthMeterService4stopEv"></span><span id="wrench::BandwidthMeterService::stop"></span><span class="target" id="classwrench_1_1_bandwidth_meter_service_1ad8acfecd887f70566f1950ac9949ce13"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench21BandwidthMeterService4stopEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Stop the bandwidth meter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><a class="reference internal" href="classwrench_1_1_execution_exception.html#_CPPv4N6wrench18ExecutionExceptionE" title="wrench::ExecutionException"><span class="n">ExecutionException</span></a></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

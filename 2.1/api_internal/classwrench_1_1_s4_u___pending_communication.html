@@ -7,6 +7,7 @@
   <title>wrench::S4U_PendingCommunication &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,151 @@
            <div itemprop="articleBody">
              
   <section id="wrench-s4u-pendingcommunication">
-<h1>wrench::S4U_PendingCommunication<a class="headerlink" href="#wrench-s4u-pendingcommunication" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::S4U_PendingCommunication<a class="headerlink" href="#wrench-s4u-pendingcommunication" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunicationE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunicationE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunicationE"></span><span id="wrench::S4U_PendingCommunication"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">S4U_PendingCommunication</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunicationE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>This is a simple wrapper class around S4U asynchronous communication checking methods. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication13OperationTypeE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication13OperationTypeE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication13OperationTypeE"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a8724fc176568165de45e8e3007db0de5"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OperationType</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication13OperationTypeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The communication operation’s type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication13OperationType7SENDINGE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication13OperationType7SENDINGE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication13OperationType7SENDINGE"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a8724fc176568165de45e8e3007db0de5a8c73bebe72c78dc8192e024a588912d6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SENDING</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication13OperationType7SENDINGE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication13OperationType9RECEIVINGE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication13OperationType9RECEIVINGE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication13OperationType9RECEIVINGE"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a8724fc176568165de45e8e3007db0de5af308ef8a8a5a97452f81a74360b144f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RECEIVING</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication13OperationType9RECEIVINGE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication24S4U_PendingCommunicationEPN7simgrid3s4u7MailboxE13OperationType">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication24S4U_PendingCommunicationEPN7simgrid3s4u7MailboxE13OperationType"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication24S4U_PendingCommunicationEPN7simgrid3s4u7MailboxE13OperationType"></span><span id="wrench::S4U_PendingCommunication::S4U_PendingCommunication__simgrid::s4u::MailboxP.OperationType"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a1beaa15f3dd3844c2d562c507d41e8e4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">S4U_PendingCommunication</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span>, <a class="reference internal" href="#_CPPv4N6wrench24S4U_PendingCommunication13OperationTypeE" title="wrench::S4U_PendingCommunication::OperationType"><span class="n"><span class="pre">OperationType</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">operation_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication24S4U_PendingCommunicationEPN7simgrid3s4u7MailboxE13OperationType" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mailbox</strong> – the mailbox </p></li>
+<li><p><strong>operation_type</strong> – the operation type </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication4waitEv">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication4waitEv"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication4waitEv"></span><span id="wrench::S4U_PendingCommunication::wait"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1ae50dec7ef82e3a95eb2961591b40c583"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">wait</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication4waitEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for the pending communication to complete. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A (unique pointer to a) simulation message</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication4waitEd">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication4waitEd"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication4waitEd"></span><span id="wrench::S4U_PendingCommunication::wait__double"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1acdba4deda93ec97b8a99533932ce560d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">wait</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication4waitEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for the pending communication to complete with a timeout. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> – a timeout in seconds</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><a class="reference internal" href="../api_developer/classwrench_1_1_network_error.html#_CPPv4N6wrench12NetworkErrorE" title="wrench::NetworkError"><span class="n">NetworkError</span></a><span class="p">&gt;</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A (unique pointer to a) simulation message</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication8comm_ptrE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication8comm_ptrE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication8comm_ptrE"></span><span id="wrench::S4U_PendingCommunication::comm_ptr__simgrid::s4u::CommPtr"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a1a19cb294e5be0f790181f00daf3c62e"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">CommPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">comm_ptr</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication8comm_ptrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The SimGrid communication handle. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication7mailboxE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication7mailboxE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication7mailboxE"></span><span id="wrench::S4U_PendingCommunication::mailbox__simgrid::s4u::MailboxP"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1acd3d226fdb5e7c3f06432029dc5bb701"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mailbox</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication7mailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The mailbox. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication14operation_typeE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication14operation_typeE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication14operation_typeE"></span><span id="wrench::S4U_PendingCommunication::operation_type__OperationType"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1ada3c577b4e190b2eaa1c10e62209cafd"></span><a class="reference internal" href="#_CPPv4N6wrench24S4U_PendingCommunication13OperationTypeE" title="wrench::S4U_PendingCommunication::OperationType"><span class="n"><span class="pre">OperationType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">operation_type</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication14operation_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The operation type. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication18simulation_messageE">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication18simulation_messageE"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication18simulation_messageE"></span><span id="wrench::S4U_PendingCommunication::simulation_message__std::unique_ptr:SimulationMessage:"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1ae72d7e9697f88bef7e84625fbda8a417"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_simulation_message.html#_CPPv4N6wrench17SimulationMessageE" title="wrench::SimulationMessage"><span class="n"><span class="pre">SimulationMessage</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">simulation_message</span></span></span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication18simulation_messageE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The message. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorIP24S4U_PendingCommunicationEEd">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorIP24S4U_PendingCommunicationEEd"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorIP24S4U_PendingCommunicationEEd"></span><span id="wrench::S4U_PendingCommunication::waitForSomethingToHappen__std::vector:S4U_PendingCommunicationP:.double"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a838750ea7f996242d6f30bda27a7a26f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForSomethingToHappen</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench24S4U_PendingCommunicationE" title="wrench::S4U_PendingCommunication"><span class="n"><span class="pre">S4U_PendingCommunication</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pending_comms</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorIP24S4U_PendingCommunicationEEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for any pending communication completion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pending_comms</strong> – a list of pending communications </p></li>
+<li><p><strong>timeout</strong> – timeout value in seconds (-1 means no timeout)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the index of the comm to which something happened (success or failure), or ULONG_MAX if nothing happened before the timeout expired</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorINSt10shared_ptrI24S4U_PendingCommunicationEEEEd">
+<span id="_CPPv3N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorINSt10shared_ptrI24S4U_PendingCommunicationEEEEd"></span><span id="_CPPv2N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorINSt10shared_ptrI24S4U_PendingCommunicationEEEEd"></span><span id="wrench::S4U_PendingCommunication::waitForSomethingToHappen__std::vector:std::shared_ptr:S4U_PendingCommunication::.double"></span><span class="target" id="classwrench_1_1_s4_u___pending_communication_1a2c33fdb2c2a871b1d739f8919358bb01"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForSomethingToHappen</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench24S4U_PendingCommunicationE" title="wrench::S4U_PendingCommunication"><span class="n"><span class="pre">S4U_PendingCommunication</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pending_comms</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench24S4U_PendingCommunication24waitForSomethingToHappenENSt6vectorINSt10shared_ptrI24S4U_PendingCommunicationEEEEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for any pending communication completion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pending_comms</strong> – a list of pending communications </p></li>
+<li><p><strong>timeout</strong> – timeout value in seconds (-1 means no timeout)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the index of the comm to which something happened (success or failure)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </section>
 
 

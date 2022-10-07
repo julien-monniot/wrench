@@ -7,6 +7,7 @@
   <title>wrench::ExecutionController &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -182,6 +186,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_internal.html">WRENCH Internal API</a></li>
@@ -213,11 +221,248 @@
            <div itemprop="articleBody">
              
   <section id="wrench-executioncontroller">
-<h1>wrench::ExecutionController<a class="headerlink" href="#wrench-executioncontroller" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/developer/xml/index.xml</p>
+<h1>wrench::ExecutionController<a class="headerlink" href="#wrench-executioncontroller" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionControllerE">
+<span id="_CPPv3N6wrench19ExecutionControllerE"></span><span id="_CPPv2N6wrench19ExecutionControllerE"></span><span id="wrench::ExecutionController"></span><span class="target" id="classwrench_1_1_execution_controller"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExecutionController</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classwrench_1_1_service.html#_CPPv4N6wrench7ServiceE" title="wrench::Service"><span class="n"><span class="pre">Service</span></span></a><a class="headerlink" href="#_CPPv4N6wrench19ExecutionControllerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An abstraction of an execution controller, i.e., a running process that interacts with other services to accomplish some computational goal. </p>
+<p>Subclassed by <a class="reference internal" href="../api_internal/classwrench_1_1_action_executor.html#classwrench_1_1_action_executor"><span class="std std-ref">wrench::ActionExecutor</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController20createBandwidthMeterERKNSt3mapINSt6stringEdEE">
+<span id="_CPPv3N6wrench19ExecutionController20createBandwidthMeterERKNSt3mapINSt6stringEdEE"></span><span id="_CPPv2N6wrench19ExecutionController20createBandwidthMeterERKNSt3mapINSt6stringEdEE"></span><span id="wrench::ExecutionController::createBandwidthMeter__std::map:ss.double:CR"></span><span class="target" id="classwrench_1_1_execution_controller_1a7a4ab9f44f9c34bdffc821d0374cf11f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_bandwidth_meter_service.html#_CPPv4N6wrench21BandwidthMeterServiceE" title="wrench::BandwidthMeterService"><span class="n"><span class="pre">BandwidthMeterService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createBandwidthMeter</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement_periods</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController20createBandwidthMeterERKNSt3mapINSt6stringEdEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate and start a bandwidth meter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>measurement_periods</strong> – the measurement period for each metered link</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a link meter </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController20createBandwidthMeterERKNSt6vectorINSt6stringEEEd">
+<span id="_CPPv3N6wrench19ExecutionController20createBandwidthMeterERKNSt6vectorINSt6stringEEEd"></span><span id="_CPPv2N6wrench19ExecutionController20createBandwidthMeterERKNSt6vectorINSt6stringEEEd"></span><span id="wrench::ExecutionController::createBandwidthMeter__std::vector:ss:CR.double"></span><span class="target" id="classwrench_1_1_execution_controller_1a41a235abf8bdbad26dc8d0bee2ebee1f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_bandwidth_meter_service.html#_CPPv4N6wrench21BandwidthMeterServiceE" title="wrench::BandwidthMeterService"><span class="n"><span class="pre">BandwidthMeterService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createBandwidthMeter</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">linknames</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">measurement_period</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController20createBandwidthMeterERKNSt6vectorINSt6stringEEEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate and start a bandwidth meter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>linknames</strong> – the list of metered links </p></li>
+<li><p><strong>measurement_period</strong> – the measurement period </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a link meter </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController25createDataMovementManagerEv">
+<span id="_CPPv3N6wrench19ExecutionController25createDataMovementManagerEv"></span><span id="_CPPv2N6wrench19ExecutionController25createDataMovementManagerEv"></span><span id="wrench::ExecutionController::createDataMovementManager"></span><span class="target" id="classwrench_1_1_execution_controller_1afaf1154b030f84079232969f0b3a1f69"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_movement_manager.html#_CPPv4N6wrench19DataMovementManagerE" title="wrench::DataMovementManager"><span class="n"><span class="pre">DataMovementManager</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createDataMovementManager</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController25createDataMovementManagerEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate and start a data movement manager. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a data movement manager </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController17createEnergyMeterERKNSt3mapINSt6stringEdEE">
+<span id="_CPPv3N6wrench19ExecutionController17createEnergyMeterERKNSt3mapINSt6stringEdEE"></span><span id="_CPPv2N6wrench19ExecutionController17createEnergyMeterERKNSt3mapINSt6stringEdEE"></span><span id="wrench::ExecutionController::createEnergyMeter__std::map:ss.double:CR"></span><span class="target" id="classwrench_1_1_execution_controller_1afcca39456b34adf1e364c7d663b8257f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_energy_meter_service.html#_CPPv4N6wrench18EnergyMeterServiceE" title="wrench::EnergyMeterService"><span class="n"><span class="pre">EnergyMeterService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createEnergyMeter</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">measurement_periods</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController17createEnergyMeterERKNSt3mapINSt6stringEdEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate and start an energy meter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>measurement_periods</strong> – the measurement period for each metered host</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>an energy meter </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController17createEnergyMeterERKNSt6vectorINSt6stringEEEd">
+<span id="_CPPv3N6wrench19ExecutionController17createEnergyMeterERKNSt6vectorINSt6stringEEEd"></span><span id="_CPPv2N6wrench19ExecutionController17createEnergyMeterERKNSt6vectorINSt6stringEEEd"></span><span id="wrench::ExecutionController::createEnergyMeter__std::vector:ss:CR.double"></span><span class="target" id="classwrench_1_1_execution_controller_1a939b60d329e7181d7874da7a410ea7a8"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_energy_meter_service.html#_CPPv4N6wrench18EnergyMeterServiceE" title="wrench::EnergyMeterService"><span class="n"><span class="pre">EnergyMeterService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createEnergyMeter</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostnames</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">measurement_period</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController17createEnergyMeterERKNSt6vectorINSt6stringEEEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate and start an energy meter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostnames</strong> – the list of metered hosts, as hostnames </p></li>
+<li><p><strong>measurement_period</strong> – the measurement period </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>an energy meter </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController16createJobManagerEv">
+<span id="_CPPv3N6wrench19ExecutionController16createJobManagerEv"></span><span id="_CPPv2N6wrench19ExecutionController16createJobManagerEv"></span><span id="wrench::ExecutionController::createJobManager"></span><span class="target" id="classwrench_1_1_execution_controller_1a8d9523b660c79f256b148377ca2817b9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_job_manager.html#_CPPv4N6wrench10JobManagerE" title="wrench::JobManager"><span class="n"><span class="pre">JobManager</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createJobManager</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController16createJobManagerEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate and start a job manager. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a job manager </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController33processEventCompoundJobCompletionENSt10shared_ptrI25CompoundJobCompletedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController33processEventCompoundJobCompletionENSt10shared_ptrI25CompoundJobCompletedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController33processEventCompoundJobCompletionENSt10shared_ptrI25CompoundJobCompletedEventEE"></span><span id="wrench::ExecutionController::processEventCompoundJobCompletion__std::shared_ptr:CompoundJobCompletedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1ae2b00372ae12571348ea44cfd15d070b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventCompoundJobCompletion</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_compound_job_completed_event.html#_CPPv4N6wrench25CompoundJobCompletedEventE" title="wrench::CompoundJobCompletedEvent"><span class="n"><span class="pre">CompoundJobCompletedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController33processEventCompoundJobCompletionENSt10shared_ptrI25CompoundJobCompletedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a standard job completion event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_compound_job_completed_event.html#classwrench_1_1_compound_job_completed_event"><span class="std std-ref">CompoundJobCompletedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController30processEventCompoundJobFailureENSt10shared_ptrI22CompoundJobFailedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController30processEventCompoundJobFailureENSt10shared_ptrI22CompoundJobFailedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController30processEventCompoundJobFailureENSt10shared_ptrI22CompoundJobFailedEventEE"></span><span id="wrench::ExecutionController::processEventCompoundJobFailure__std::shared_ptr:CompoundJobFailedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1a276f40cccdc4c93a97a9254eb5a0ec48"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventCompoundJobFailure</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_compound_job_failed_event.html#_CPPv4N6wrench22CompoundJobFailedEventE" title="wrench::CompoundJobFailedEvent"><span class="n"><span class="pre">CompoundJobFailedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController30processEventCompoundJobFailureENSt10shared_ptrI22CompoundJobFailedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a standard job failure event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_compound_job_failed_event.html#classwrench_1_1_compound_job_failed_event"><span class="std std-ref">CompoundJobFailedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController30processEventFileCopyCompletionENSt10shared_ptrI22FileCopyCompletedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController30processEventFileCopyCompletionENSt10shared_ptrI22FileCopyCompletedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController30processEventFileCopyCompletionENSt10shared_ptrI22FileCopyCompletedEventEE"></span><span id="wrench::ExecutionController::processEventFileCopyCompletion__std::shared_ptr:FileCopyCompletedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1a93eaf0d8f49e50a309f6f3bdab8e1fd2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventFileCopyCompletion</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_file_copy_completed_event.html#_CPPv4N6wrench22FileCopyCompletedEventE" title="wrench::FileCopyCompletedEvent"><span class="n"><span class="pre">FileCopyCompletedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController30processEventFileCopyCompletionENSt10shared_ptrI22FileCopyCompletedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a file copy completion event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_file_copy_completed_event.html#classwrench_1_1_file_copy_completed_event"><span class="std std-ref">FileCopyCompletedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController27processEventFileCopyFailureENSt10shared_ptrI19FileCopyFailedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController27processEventFileCopyFailureENSt10shared_ptrI19FileCopyFailedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController27processEventFileCopyFailureENSt10shared_ptrI19FileCopyFailedEventEE"></span><span id="wrench::ExecutionController::processEventFileCopyFailure__std::shared_ptr:FileCopyFailedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1a5729d2784256c67b4d8e6a4a50aea94e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventFileCopyFailure</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_file_copy_failed_event.html#_CPPv4N6wrench19FileCopyFailedEventE" title="wrench::FileCopyFailedEvent"><span class="n"><span class="pre">FileCopyFailedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController27processEventFileCopyFailureENSt10shared_ptrI19FileCopyFailedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a file copy failure event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_file_copy_failed_event.html#classwrench_1_1_file_copy_failed_event"><span class="std std-ref">FileCopyFailedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController30processEventPilotJobExpirationENSt10shared_ptrI20PilotJobExpiredEventEE">
+<span id="_CPPv3N6wrench19ExecutionController30processEventPilotJobExpirationENSt10shared_ptrI20PilotJobExpiredEventEE"></span><span id="_CPPv2N6wrench19ExecutionController30processEventPilotJobExpirationENSt10shared_ptrI20PilotJobExpiredEventEE"></span><span id="wrench::ExecutionController::processEventPilotJobExpiration__std::shared_ptr:PilotJobExpiredEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1a6bde40c8cd06a95616af9f5e6c5d3647"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventPilotJobExpiration</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_pilot_job_expired_event.html#_CPPv4N6wrench20PilotJobExpiredEventE" title="wrench::PilotJobExpiredEvent"><span class="n"><span class="pre">PilotJobExpiredEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController30processEventPilotJobExpirationENSt10shared_ptrI20PilotJobExpiredEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a pilot job expiration event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_pilot_job_expired_event.html#classwrench_1_1_pilot_job_expired_event"><span class="std std-ref">PilotJobExpiredEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController25processEventPilotJobStartENSt10shared_ptrI20PilotJobStartedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController25processEventPilotJobStartENSt10shared_ptrI20PilotJobStartedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController25processEventPilotJobStartENSt10shared_ptrI20PilotJobStartedEventEE"></span><span id="wrench::ExecutionController::processEventPilotJobStart__std::shared_ptr:PilotJobStartedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1a06e09faf8ea0c7ae04d641d6e8ac55a3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventPilotJobStart</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_pilot_job_started_event.html#_CPPv4N6wrench20PilotJobStartedEventE" title="wrench::PilotJobStartedEvent"><span class="n"><span class="pre">PilotJobStartedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController25processEventPilotJobStartENSt10shared_ptrI20PilotJobStartedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a pilot job start event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_pilot_job_started_event.html#classwrench_1_1_pilot_job_started_event"><span class="std std-ref">PilotJobStartedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController33processEventStandardJobCompletionENSt10shared_ptrI25StandardJobCompletedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController33processEventStandardJobCompletionENSt10shared_ptrI25StandardJobCompletedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController33processEventStandardJobCompletionENSt10shared_ptrI25StandardJobCompletedEventEE"></span><span id="wrench::ExecutionController::processEventStandardJobCompletion__std::shared_ptr:StandardJobCompletedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1add6dcc7b978158725de48a603ae8f06f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventStandardJobCompletion</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_standard_job_completed_event.html#_CPPv4N6wrench25StandardJobCompletedEventE" title="wrench::StandardJobCompletedEvent"><span class="n"><span class="pre">StandardJobCompletedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController33processEventStandardJobCompletionENSt10shared_ptrI25StandardJobCompletedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a standard job completion event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_standard_job_completed_event.html#classwrench_1_1_standard_job_completed_event"><span class="std std-ref">StandardJobCompletedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController30processEventStandardJobFailureENSt10shared_ptrI22StandardJobFailedEventEE">
+<span id="_CPPv3N6wrench19ExecutionController30processEventStandardJobFailureENSt10shared_ptrI22StandardJobFailedEventEE"></span><span id="_CPPv2N6wrench19ExecutionController30processEventStandardJobFailureENSt10shared_ptrI22StandardJobFailedEventEE"></span><span id="wrench::ExecutionController::processEventStandardJobFailure__std::shared_ptr:StandardJobFailedEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1a577f7f155398b24d731c7707ba57dbb4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventStandardJobFailure</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_standard_job_failed_event.html#_CPPv4N6wrench22StandardJobFailedEventE" title="wrench::StandardJobFailedEvent"><span class="n"><span class="pre">StandardJobFailedEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController30processEventStandardJobFailureENSt10shared_ptrI22StandardJobFailedEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a standard job failure event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_standard_job_failed_event.html#classwrench_1_1_standard_job_failed_event"><span class="std std-ref">StandardJobFailedEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController17processEventTimerENSt10shared_ptrI10TimerEventEE">
+<span id="_CPPv3N6wrench19ExecutionController17processEventTimerENSt10shared_ptrI10TimerEventEE"></span><span id="_CPPv2N6wrench19ExecutionController17processEventTimerENSt10shared_ptrI10TimerEventEE"></span><span id="wrench::ExecutionController::processEventTimer__std::shared_ptr:TimerEvent:"></span><span class="target" id="classwrench_1_1_execution_controller_1ac74a1a0eed87820fe104a9ffccd13024"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processEventTimer</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_timer_event.html#_CPPv4N6wrench10TimerEventE" title="wrench::TimerEvent"><span class="n"><span class="pre">TimerEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController17processEventTimerENSt10shared_ptrI10TimerEventEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a timer event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – a <a class="reference internal" href="../api_internal/classwrench_1_1_timer_event.html#classwrench_1_1_timer_event"><span class="std std-ref">TimerEvent</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController26waitForAndProcessNextEventEv">
+<span id="_CPPv3N6wrench19ExecutionController26waitForAndProcessNextEventEv"></span><span id="_CPPv2N6wrench19ExecutionController26waitForAndProcessNextEventEv"></span><span id="wrench::ExecutionController::waitForAndProcessNextEvent"></span><span class="target" id="classwrench_1_1_execution_controller_1aa51f50b665722b3da33e26221ba31624"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForAndProcessNextEvent</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController26waitForAndProcessNextEventEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for an execution event and then call the associated function to process that event. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController26waitForAndProcessNextEventEd">
+<span id="_CPPv3N6wrench19ExecutionController26waitForAndProcessNextEventEd"></span><span id="_CPPv2N6wrench19ExecutionController26waitForAndProcessNextEventEd"></span><span id="wrench::ExecutionController::waitForAndProcessNextEvent__double"></span><span class="target" id="classwrench_1_1_execution_controller_1a9426901eaf920bd773c443e43eaa8594"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForAndProcessNextEvent</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController26waitForAndProcessNextEventEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for an execution event and then call the associated function to process that event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> – a timeout value in seconds</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">wrench</span><span class="p">::</span><a class="reference internal" href="classwrench_1_1_execution_exception.html#_CPPv4N6wrench18ExecutionExceptionE" title="wrench::ExecutionException"><span class="n">ExecutionException</span></a></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>false if a timeout occurred (in which case no event was received/processed) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController16waitForNextEventEv">
+<span id="_CPPv3N6wrench19ExecutionController16waitForNextEventEv"></span><span id="_CPPv2N6wrench19ExecutionController16waitForNextEventEv"></span><span id="wrench::ExecutionController::waitForNextEvent"></span><span class="target" id="classwrench_1_1_execution_controller_1abac8a6484ff499ac554e60770276acfb"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_execution_event.html#_CPPv4N6wrench14ExecutionEventE" title="wrench::ExecutionEvent"><span class="n"><span class="pre">ExecutionEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForNextEvent</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController16waitForNextEventEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for an execution event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the event </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench19ExecutionController16waitForNextEventEd">
+<span id="_CPPv3N6wrench19ExecutionController16waitForNextEventEd"></span><span id="_CPPv2N6wrench19ExecutionController16waitForNextEventEd"></span><span id="wrench::ExecutionController::waitForNextEvent__double"></span><span class="target" id="classwrench_1_1_execution_controller_1a3f21c51a382c839e7cb54889da469914"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_execution_event.html#_CPPv4N6wrench14ExecutionEventE" title="wrench::ExecutionEvent"><span class="n"><span class="pre">ExecutionEvent</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">waitForNextEvent</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench19ExecutionController16waitForNextEventEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for an execution event. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> – a timeout value in seconds </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the event </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

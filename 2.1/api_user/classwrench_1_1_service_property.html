@@ -7,6 +7,7 @@
   <title>wrench::ServiceProperty &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -131,6 +135,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_developer.html">WRENCH Developer API</a></li>
@@ -163,11 +171,62 @@
            <div itemprop="articleBody">
              
   <section id="wrench-serviceproperty">
-<h1>wrench::ServiceProperty<a class="headerlink" href="#wrench-serviceproperty" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/user/xml/index.xml</p>
+<h1>wrench::ServiceProperty<a class="headerlink" href="#wrench-serviceproperty" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench15ServicePropertyE">
+<span id="_CPPv3N6wrench15ServicePropertyE"></span><span id="_CPPv2N6wrench15ServicePropertyE"></span><span id="wrench::ServiceProperty"></span><span class="target" id="classwrench_1_1_service_property"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ServiceProperty</span></span></span><br /></dt>
+<dd><p>A class that implements the concept of a service property. </p>
+<p>Subclassed by <a class="reference internal" href="classwrench_1_1_compute_service_property.html#classwrench_1_1_compute_service_property"><span class="std std-ref">wrench::ComputeServiceProperty</span></a>, <a class="reference internal" href="classwrench_1_1_file_registry_service_property.html#classwrench_1_1_file_registry_service_property"><span class="std std-ref">wrench::FileRegistryServiceProperty</span></a>, <a class="reference internal" href="classwrench_1_1_network_proximity_service_property.html#classwrench_1_1_network_proximity_service_property"><span class="std std-ref">wrench::NetworkProximityServiceProperty</span></a>, <a class="reference internal" href="classwrench_1_1_storage_service_property.html#classwrench_1_1_storage_service_property"><span class="std std-ref">wrench::StorageServiceProperty</span></a>, <a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html#classwrench_1_1_x_root_d_1_1_property"><span class="std std-ref">wrench::XRootD::Property</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench15ServiceProperty18addServicePropertyENSt6stringENSt6stringE">
+<span id="_CPPv3N6wrench15ServiceProperty18addServicePropertyENSt6stringENSt6stringE"></span><span id="_CPPv2N6wrench15ServiceProperty18addServicePropertyENSt6stringENSt6stringE"></span><span id="wrench::ServiceProperty::addServiceProperty__ss.ss"></span><span class="target" id="classwrench_1_1_service_property_1af3777988079270344dea1ebb9a28b0e8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">WRENCH_PROPERTY_TYPE</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addServiceProperty</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">classname</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">messagePayload</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>add new message to payload map. DO NOT CALL THIS FUNCTION DIRECTLY, use SET_PROPERTY_NAME and DECLARE_PROPERTY_NAME </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classname</strong> – The class to add the message too </p></li>
+<li><p><strong>serviceProperty</strong> – the name of the service property to add </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a property type </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench15ServiceProperty21translatePropertyTypeE20WRENCH_PROPERTY_TYPE">
+<span id="_CPPv3N6wrench15ServiceProperty21translatePropertyTypeE20WRENCH_PROPERTY_TYPE"></span><span id="_CPPv2N6wrench15ServiceProperty21translatePropertyTypeE20WRENCH_PROPERTY_TYPE"></span><span id="wrench::ServiceProperty::translatePropertyType__WRENCH_PROPERTY_TYPE"></span><span class="target" id="classwrench_1_1_service_property_1a6e6a0a6eeef6d66cc8bf2af975c94aa7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">translatePropertyType</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">WRENCH_PROPERTY_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">serviceProperty</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>translate a property ID to a string key </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>serviceProperty</strong> – the ID of the service Property </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a property type, as a string </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench15ServiceProperty15translateStringENSt6stringE">
+<span id="_CPPv3N6wrench15ServiceProperty15translateStringENSt6stringE"></span><span id="_CPPv2N6wrench15ServiceProperty15translateStringENSt6stringE"></span><span id="wrench::ServiceProperty::translateString__ss"></span><span class="target" id="classwrench_1_1_service_property_1aa25c01207dce76c49045f72c9c05f2f3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">WRENCH_PROPERTY_TYPE</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">translateString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">serviceProperty</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>translate a string key to a property ID </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>serviceProperty</strong> – the name of the service Property to get in classname::serviceProperty form (Note: the classname must be the parent class that defines the property) </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a property type </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

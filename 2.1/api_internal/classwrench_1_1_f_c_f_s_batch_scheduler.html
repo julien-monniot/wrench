@@ -7,6 +7,7 @@
   <title>wrench::FCFSBatchScheduler &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,120 @@
            <div itemprop="articleBody">
              
   <section id="wrench-fcfsbatchscheduler">
-<h1>wrench::FCFSBatchScheduler<a class="headerlink" href="#wrench-fcfsbatchscheduler" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::FCFSBatchScheduler<a class="headerlink" href="#wrench-fcfsbatchscheduler" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchSchedulerE">
+<span id="_CPPv3N6wrench18FCFSBatchSchedulerE"></span><span id="_CPPv2N6wrench18FCFSBatchSchedulerE"></span><span id="wrench::FCFSBatchScheduler"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FCFSBatchScheduler</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classwrench_1_1_homegrown_batch_scheduler.html#_CPPv4N6wrench23HomegrownBatchSchedulerE" title="wrench::HomegrownBatchScheduler"><span class="n"><span class="pre">HomegrownBatchScheduler</span></span></a><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchSchedulerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A class that implements a FCFS batch scheduler. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler18FCFSBatchSchedulerEP19BatchComputeService">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler18FCFSBatchSchedulerEP19BatchComputeService"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler18FCFSBatchSchedulerEP19BatchComputeService"></span><span id="wrench::FCFSBatchScheduler::FCFSBatchScheduler__BatchComputeServiceP"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1aeff58aa2b21aa12ef01a14acb20d0732"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FCFSBatchScheduler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><span class="n"><span class="pre">BatchComputeService</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler18FCFSBatchSchedulerEP19BatchComputeService" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cs</strong> – the batch compute service for which this scheduler is operating </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler21getStartTimeEstimatesENSt3setINSt5tupleINSt6stringEmmdEEEE">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler21getStartTimeEstimatesENSt3setINSt5tupleINSt6stringEmmdEEEE"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler21getStartTimeEstimatesENSt3setINSt5tupleINSt6stringEmmdEEEE"></span><span id="wrench::FCFSBatchScheduler::getStartTimeEstimates__std::set:std::tuple:ss.unsigned-l.unsigned-l.double::"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1a1390aca0a32d5de3dd8862a6f6390460"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getStartTimeEstimates</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">set_of_jobs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler21getStartTimeEstimatesENSt3setINSt5tupleINSt6stringEmmdEEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Method to get start time estimates. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_of_jobs</strong> – the set of job configurations whose start times should be estimated </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>start time estimates </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler21pickNextJobToScheduleEv">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler21pickNextJobToScheduleEv"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler21pickNextJobToScheduleEv"></span><span id="wrench::FCFSBatchScheduler::pickNextJobToSchedule"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1a440221f0e058a1cbc8e303d3fd7f07f8"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_batch_job.html#_CPPv4N6wrench8BatchJobE" title="wrench::BatchJob"><span class="n"><span class="pre">BatchJob</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pickNextJobToSchedule</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler21pickNextJobToScheduleEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Overriden Method to pick the next job to schedule. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="../api_user/classwrench_1_1_batch_compute_service.html#classwrench_1_1_batch_compute_service"><span class="std std-ref">BatchComputeService</span></a> job, or nullptr is none is found </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler20processJobCompletionENSt10shared_ptrI8BatchJobEE">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler20processJobCompletionENSt10shared_ptrI8BatchJobEE"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler20processJobCompletionENSt10shared_ptrI8BatchJobEE"></span><span id="wrench::FCFSBatchScheduler::processJobCompletion__std::shared_ptr:BatchJob:"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1a7b7c635cb609b27d4ebfc01c01cd20ab"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processJobCompletion</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_batch_job.html#_CPPv4N6wrench8BatchJobE" title="wrench::BatchJob"><span class="n"><span class="pre">BatchJob</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">batch_job</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler20processJobCompletionENSt10shared_ptrI8BatchJobEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No-op method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_job</strong> – a <a class="reference internal" href="../api_user/classwrench_1_1_batch_compute_service.html#classwrench_1_1_batch_compute_service"><span class="std std-ref">BatchComputeService</span></a> job </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler17processJobFailureENSt10shared_ptrI8BatchJobEE">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler17processJobFailureENSt10shared_ptrI8BatchJobEE"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler17processJobFailureENSt10shared_ptrI8BatchJobEE"></span><span id="wrench::FCFSBatchScheduler::processJobFailure__std::shared_ptr:BatchJob:"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1a5a4246a90fa2234286a9eac8dff49302"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processJobFailure</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_batch_job.html#_CPPv4N6wrench8BatchJobE" title="wrench::BatchJob"><span class="n"><span class="pre">BatchJob</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">batch_job</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler17processJobFailureENSt10shared_ptrI8BatchJobEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No-op method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_job</strong> – a <a class="reference internal" href="../api_user/classwrench_1_1_batch_compute_service.html#classwrench_1_1_batch_compute_service"><span class="std std-ref">BatchComputeService</span></a> job </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler20processJobSubmissionENSt10shared_ptrI8BatchJobEE">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler20processJobSubmissionENSt10shared_ptrI8BatchJobEE"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler20processJobSubmissionENSt10shared_ptrI8BatchJobEE"></span><span id="wrench::FCFSBatchScheduler::processJobSubmission__std::shared_ptr:BatchJob:"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1a9ebeca750d52ee04ea2661c5a8f89821"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processJobSubmission</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_batch_job.html#_CPPv4N6wrench8BatchJobE" title="wrench::BatchJob"><span class="n"><span class="pre">BatchJob</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">batch_job</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler20processJobSubmissionENSt10shared_ptrI8BatchJobEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No-op method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_job</strong> – a <a class="reference internal" href="../api_user/classwrench_1_1_batch_compute_service.html#classwrench_1_1_batch_compute_service"><span class="std std-ref">BatchComputeService</span></a> job </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler21processJobTerminationENSt10shared_ptrI8BatchJobEE">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler21processJobTerminationENSt10shared_ptrI8BatchJobEE"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler21processJobTerminationENSt10shared_ptrI8BatchJobEE"></span><span id="wrench::FCFSBatchScheduler::processJobTermination__std::shared_ptr:BatchJob:"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1afd6a78641f196fa3eebdc109cc730ee0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processJobTermination</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_batch_job.html#_CPPv4N6wrench8BatchJobE" title="wrench::BatchJob"><span class="n"><span class="pre">BatchJob</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">batch_job</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler21processJobTerminationENSt10shared_ptrI8BatchJobEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No-op method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_job</strong> – a <a class="reference internal" href="../api_user/classwrench_1_1_batch_compute_service.html#classwrench_1_1_batch_compute_service"><span class="std std-ref">BatchComputeService</span></a> job </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler17processQueuedJobsEv">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler17processQueuedJobsEv"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler17processQueuedJobsEv"></span><span id="wrench::FCFSBatchScheduler::processQueuedJobs"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1ab5ab96a562d53a18ec9be53efddb8181"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">processQueuedJobs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler17processQueuedJobsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Method to process queued jobs. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench18FCFSBatchScheduler15scheduleOnHostsEmmd">
+<span id="_CPPv3N6wrench18FCFSBatchScheduler15scheduleOnHostsEmmd"></span><span id="_CPPv2N6wrench18FCFSBatchScheduler15scheduleOnHostsEmmd"></span><span id="wrench::FCFSBatchScheduler::scheduleOnHosts__unsigned-l.unsigned-l.double"></span><span class="target" id="classwrench_1_1_f_c_f_s_batch_scheduler_1aa430e1cd63f23b5cab8b4f8a54286fa6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scheduleOnHosts</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span>, <span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench18FCFSBatchScheduler15scheduleOnHostsEmmd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Override Method to find hosts on which to scheduled a job. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_nodes</strong> – the job’s requested num nodes </p></li>
+<li><p><strong>cores_per_node</strong> – the job’s num cores per node </p></li>
+<li><p><strong>ram_per_node</strong> – the job’s ram per node </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A resource list </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

@@ -7,6 +7,7 @@
   <title>WRENCH 101 &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> WRENCH
+            <a href="index.html">
+            <img src="_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -100,7 +104,7 @@
            <div itemprop="articleBody">
              
   <section id="wrench-101">
-<span id="wrench-101-header"></span><h1>WRENCH 101<a class="headerlink" href="#wrench-101" title="Permalink to this headline"></a></h1>
+<span id="wrench-101-header"></span><h1>WRENCH 101<a class="headerlink" href="#wrench-101" title="Permalink to this heading"></a></h1>
 <p>This page provides high-level and detailed information about what WRENCH
 simulators can simulate and how they do it. Full API details are
 provided in the <a class="reference internal" href="api_user.html#user-api"><span class="std std-ref">User API Reference</span></a>. See the
@@ -108,7 +112,7 @@ relevant pages for instructions on how to <a class="reference internal" href="in
 WRENCH</span></a> and how to <a class="reference internal" href="getting_started.html#getting-started"><span class="std std-ref">setup a simulator
 project</span></a>.</p>
 <section id="ft-view-of-a-wrench-simulator">
-<span id="wrench-101-simulator-10000ft"></span><h2>10,000-ft view of a WRENCH simulator<a class="headerlink" href="#ft-view-of-a-wrench-simulator" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-simulator-10000ft"></span><h2>10,000-ft view of a WRENCH simulator<a class="headerlink" href="#ft-view-of-a-wrench-simulator" title="Permalink to this heading"></a></h2>
 <p>A WRENCH simulator can be as simple as a single <code class="docutils literal notranslate"><span class="pre">main()</span></code> function that
 creates a platform to be simulated (the hardware) and a set of services
 that run on the platform (the software). These services correspond to
@@ -122,15 +126,15 @@ implemented using the <a class="reference internal" href="api_developer.html#dev
 API</span></a>, as discussed in the <a class="reference internal" href="wrench_102.html#wrench-102-header"><span class="std std-ref">WRENCH
 102</span></a> page.</p>
 <p>The simulation is then launched via a single call
-(<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::launch()</span></code>), and returns only once the execution
+(<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation6launchEv" title="wrench::Simulation::launch"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::launch()</span></code></a>), and returns only once the execution
 controller has terminated (after completing or failing to complete
 whatever it wanted to accomplish).</p>
 </section>
 <section id="wrench-101-simulator-1000ft">
-<span id="id1"></span><h2>1,000-ft view of a WRENCH simulator<a class="headerlink" href="#wrench-101-simulator-1000ft" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>1,000-ft view of a WRENCH simulator<a class="headerlink" href="#wrench-101-simulator-1000ft" title="Permalink to this heading"></a></h2>
 <p>In this section, we dive deeper into what it takes to implement a WRENCH
 simulator. <em>To provide context, we refer to the example simulator in
-the</em> <code class="docutils literal notranslate"><span class="pre">examples/basic-examples/action_api/multi-action-multi-job</span></code>
+the</em> <code class="docutils literal notranslate"><span class="pre">examples/action_api/multi-action-multi-job</span></code>
 <em>directory of the WRENCH distribution</em>. This simulator simulates the
 execution of a few jobs, each of which consists of one or more actions,
 on a 4-host platform that runs a couple of compute services and storage
@@ -140,7 +144,7 @@ most of what a WRENCH simulator does, which consists in going through
 the steps below. Note that all simulator codes in the <code class="docutils literal notranslate"><span class="pre">examples</span></code>
 directory contain extensive comments.</p>
 <section id="step-0-include-wrench-h">
-<span id="wrench-101-simulator-1000ft-step-0"></span><h3>Step 0: Include wrench.h<a class="headerlink" href="#step-0-include-wrench-h" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-0"></span><h3>Step 0: Include wrench.h<a class="headerlink" href="#step-0-include-wrench-h" title="Permalink to this heading"></a></h3>
 <p>For ease of use, all WRENCH abstractions in the <a class="reference internal" href="api_user.html#user-api"><span class="std std-ref">WRENCH User
 API</span></a> are available through a single header file:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;wrench.h&gt;</span><span class="cp"></span>
@@ -148,11 +152,11 @@ API</span></a> are available through a single header file:</p>
 </div>
 </section>
 <section id="step-1-create-and-initialize-a-simulation">
-<span id="wrench-101-simulator-1000ft-step-1"></span><h3>Step 1: Create and initialize a simulation<a class="headerlink" href="#step-1-create-and-initialize-a-simulation" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-1"></span><h3>Step 1: Create and initialize a simulation<a class="headerlink" href="#step-1-create-and-initialize-a-simulation" title="Permalink to this heading"></a></h3>
 <p>The state of a WRENCH simulation is defined by the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code> class. A simulator must create an instance of
-this class by calling <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::createSimulation()</span></code> and
-initialize it with the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::init()</span></code> member function.
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation</span></code></a> class. A simulator must create an instance of
+this class by calling <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation16createSimulationEv" title="wrench::Simulation::createSimulation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::createSimulation()</span></code></a> and
+initialize it with the <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation4initEPiPPc" title="wrench::Simulation::init"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::init()</span></code></a> member function.
 The <code class="docutils literal notranslate"><span class="pre">multi-action-multi-job</span></code> simulator does this as follows:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">simulation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wrench</span><span class="o">::</span><span class="n">Simulation</span><span class="o">::</span><span class="n">createSimulation</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
@@ -170,8 +174,8 @@ Another one is <code class="docutils literal notranslate"><span class="pre">--wr
 logs (see below for more details).</p>
 </section>
 <section id="step-2-instantiate-a-simulated-platform">
-<span id="wrench-101-simulator-1000ft-step-2"></span><h3>Step 2: Instantiate a simulated platform<a class="headerlink" href="#step-2-instantiate-a-simulated-platform" title="Permalink to this headline"></a></h3>
-<p>This is done with the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code>
+<span id="wrench-101-simulator-1000ft-step-2"></span><h3>Step 2: Instantiate a simulated platform<a class="headerlink" href="#step-2-instantiate-a-simulated-platform" title="Permalink to this heading"></a></h3>
+<p>This is done with the <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation19instantiatePlatformERKNSt8functionIFvvEEE" title="wrench::Simulation::instantiatePlatform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code></a>
 method. There are two versions of this method. The <strong>first version</strong>
 takes as argument a <span class="xref std std-ref">SimGrid virtual platform description
 file</span>, we defines all
@@ -263,7 +267,7 @@ simulated platform as:</p>
 </pre></div>
 </div>
 <p>The <strong>second version</strong> of the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code> method takes as input a
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation19instantiatePlatformERKNSt8functionIFvvEEE" title="wrench::Simulation::instantiatePlatform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code></a> method takes as input a
 function that creates the platform description programmatically using
 the <span class="xref std std-ref">SimGrid platform description
 API</span>. The example
@@ -272,14 +276,14 @@ in
 shows how the XML platform description in
 <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/bare-metal-bag-of-tasks/two_hosts.xml</span></code>
 can be implemented programmatically. (Note that this example passes a
-functor to <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code> rather than a
+functor to <a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation19instantiatePlatformERKNSt8functionIFvvEEE" title="wrench::Simulation::instantiatePlatform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::instantiatePlatform()</span></code></a> rather than a
 plain lambda.)</p>
 </section>
 <section id="step-3-instantiate-services-on-the-platform">
-<span id="wrench-101-simulator-1000ft-step-3"></span><h3>Step 3: Instantiate services on the platform<a class="headerlink" href="#step-3-instantiate-services-on-the-platform" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-3"></span><h3>Step 3: Instantiate services on the platform<a class="headerlink" href="#step-3-instantiate-services-on-the-platform" title="Permalink to this heading"></a></h3>
 <p>While the previous step defines the hardware platform, this step defines
 what software services run on that hardware. The
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::add()</span></code> member function is used to add services to
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4I0EN6wrench10Simulation3addENSt10shared_ptrI1TEENSt10shared_ptrI1TEE" title="wrench::Simulation::add"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::add()</span></code></a> member function is used to add services to
 the simulation. Each class of service is created with a particular
 constructor, which also specifies host(s) on which the service is to be
 started. Typical kinds of services include compute services, storage
@@ -290,7 +294,7 @@ is a compute service:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">baremetal_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">wrench</span><span class="o">::</span><span class="n">BareMetalComputeService</span><span class="p">(</span><span class="s">&quot;ComputeHost1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;ComputeHost1&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;ComputeHost2&quot;</span><span class="p">}},</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{}));</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BareMetalComputeService</span></code> class implements a simulation of
+<p>The <a class="reference internal" href="api_developer/classwrench_1_1_bare_metal_compute_service.html#_CPPv4N6wrench23BareMetalComputeServiceE" title="wrench::BareMetalComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BareMetalComputeService</span></code></a> class implements a simulation of
 a compute service that greedily runs jobs submitted to it. You can think
 of it as a compute server that simply fork-execs (possibly
 multi-threaded) processes upon request, only ensuring that physical RAM
@@ -309,7 +313,7 @@ below</span></a>).</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">cloud_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">wrench</span><span class="o">::</span><span class="n">CloudComputeService</span><span class="p">(</span><span class="s">&quot;CloudHeadHost&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;CloudHost&quot;</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;/scratch/&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{}));</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code> implements a simulation of a cloud
+<p>The <a class="reference internal" href="api_developer/classwrench_1_1_cloud_compute_service.html#_CPPv4N6wrench19CloudComputeServiceE" title="wrench::CloudComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code></a> implements a simulation of a cloud
 platform on which virtual machine (VM) instances can be created,
 started, used, and shutdown. The service runs on host <code class="docutils literal notranslate"><span class="pre">CloudHeadHost</span></code>
 and has access to the compute resources on host <code class="docutils literal notranslate"><span class="pre">CloudHost</span></code>. Unlike
@@ -321,7 +325,7 @@ properties of the service.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">storage_service_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageService</span><span class="p">(</span><span class="s">&quot;StorageHost1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;/&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimpleStorageServiceProperty</span><span class="o">::</span><span class="n">BUFFER_SIZE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;50000000&quot;</span><span class="p">}},</span><span class="w"> </span><span class="p">{}));</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code> class implements a simulation of a
+<p>The <a class="reference internal" href="api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code></a> class implements a simulation of a
 remotely-accessible storage service on which files can be stored,
 copied, deleted, read, and written. In this particular case, the storage
 service is started on host <code class="docutils literal notranslate"><span class="pre">StorageHost1</span></code>. It uses storage mounted at
@@ -335,11 +339,11 @@ below</span></a>).</p>
 <code class="docutils literal notranslate"><span class="pre">StorageHost2</span></code>.</p>
 </section>
 <section id="step-4-instantiate-at-least-one-execution-controller">
-<span id="wrench-101-simulator-1000ft-step-4"></span><h3>Step 4: Instantiate at least one Execution controller<a class="headerlink" href="#step-4-instantiate-at-least-one-execution-controller" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-4"></span><h3>Step 4: Instantiate at least one Execution controller<a class="headerlink" href="#step-4-instantiate-at-least-one-execution-controller" title="Permalink to this heading"></a></h3>
 <p>At leave on <em>execution controller</em> must be created and added to the
 simulation. This is a special service that is in charge of executing an
 application workload on the platform. It is implemented as a class that
-derives from <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ExecutionController</span></code> and override its
+derives from <a class="reference internal" href="api_developer/classwrench_1_1_execution_controller.html#_CPPv4N6wrench19ExecutionControllerE" title="wrench::ExecutionController"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ExecutionController</span></code></a> and override its
 constructor as well as its <code class="docutils literal notranslate"><span class="pre">main()</span></code> method. This method is
 implementing using the <a class="reference internal" href="api_developer.html#developer-api"><span class="std std-ref">WRENCH Developer
 API</span></a>.</p>
@@ -363,10 +367,10 @@ jobs (see the implementation of
 <code class="docutils literal notranslate"><span class="pre">wrench::TwoTasksAtATimeExecutionController</span></code>). All the examples in the
 <code class="docutils literal notranslate"><span class="pre">examples/action_api</span></code> directory do this in different ways. <em>However</em>,
 many users are interested in <strong>workflow applications</strong>, for this reason,
-WRENCH provides a <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Workflow</span></code> class that has member functions
+WRENCH provides a <a class="reference internal" href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8WorkflowE" title="wrench::Workflow"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Workflow</span></code></a> class that has member functions
 to manually create tasks and files and add them to a workflow. The use
 of this class is shown in all the examples in directory
-<code class="docutils literal notranslate"><span class="pre">examples/workflow_api</span></code>. The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Workflow</span></code> class also provides
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api</span></code>. The <a class="reference internal" href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8WorkflowE" title="wrench::Workflow"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Workflow</span></code></a> class also provides
 member functions to import workflows from workflow description files in
 standard <span class="xref std std-ref">JSON format</span>. Note
 that an execution controller that executes a workflow is often called a
@@ -375,9 +379,9 @@ in the examples in directory <code class="docutils literal notranslate"><span cl
 class names.</p>
 </section>
 <section id="step-5-launch-the-simulation">
-<span id="wrench-101-simulator-1000ft-step-5"></span><h3>Step 5: Launch the simulation<a class="headerlink" href="#step-5-launch-the-simulation" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-5"></span><h3>Step 5: Launch the simulation<a class="headerlink" href="#step-5-launch-the-simulation" title="Permalink to this heading"></a></h3>
 <p>This is the easiest step, and is done by simply calling
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::launch()</span></code>:</p>
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation6launchEv" title="wrench::Simulation::launch"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::launch()</span></code></a>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="p">.</span><span class="n">launch</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
@@ -385,22 +389,22 @@ class names.</p>
 controller terminates.</p>
 </section>
 <section id="step-6-process-simulation-output">
-<span id="wrench-101-simulator-1000ft-step-6"></span><h3>Step 6: Process simulation output<a class="headerlink" href="#step-6-process-simulation-output" title="Permalink to this headline"></a></h3>
+<span id="wrench-101-simulator-1000ft-step-6"></span><h3>Step 6: Process simulation output<a class="headerlink" href="#step-6-process-simulation-output" title="Permalink to this heading"></a></h3>
 <p>The processing of simulation output is up to the user as different users
 are interested in different output. For instance, the examples in
 directory <code class="docutils literal notranslate"><span class="pre">examples/action_api</span></code> merely print some information to the
 terminal. But this information could be collected in data structures,
 output to files, etc. This said, WRENCH provides a
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::getOutput()</span></code> member function that returns an
-instance of class <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code>. Note that there are
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation9getOutputEv" title="wrench::Simulation::getOutput"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::getOutput()</span></code></a> member function that returns an
+instance of class <a class="reference internal" href="api_developer/classwrench_1_1_simulation_output.html#_CPPv4N6wrench16SimulationOutputE" title="wrench::SimulationOutput"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code></a>. Note that there are
 member functions to configure the type and amount of output generated
 (see the <code class="docutils literal notranslate"><span class="pre">wrench::SimulationOutput::enable*Timestamps()</span></code> member
-functions). <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code> has a templated
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput::getTrace()</span></code> member function to retrieve
+functions). <a class="reference internal" href="api_developer/classwrench_1_1_simulation_output.html#_CPPv4N6wrench16SimulationOutputE" title="wrench::SimulationOutput"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code></a> has a templated
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation_output.html#_CPPv4I0EN6wrench16SimulationOutput8getTraceENSt6vectorIP19SimulationTimestampI1TEEEv" title="wrench::SimulationOutput::getTrace"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput::getTrace()</span></code></a> member function to retrieve
 traces for various information types. This is exemplified in several of
 the example simulators in the <code class="docutils literal notranslate"><span class="pre">examples/workflow_api</span></code> directory. Note
 that many of the timestamp types have to do with the execution of
-workflow tasks, as defined using the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Workflow</span></code> class.</p>
+workflow tasks, as defined using the <a class="reference internal" href="api_developer/classwrench_1_1_workflow.html#_CPPv4N6wrench8WorkflowE" title="wrench::Workflow"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Workflow</span></code></a> class.</p>
 <p>Another kind of output is (simulated) energy consumption. WRENCH
 leverages <span class="xref std std-ref">SimGrid’s energy
 plugin</span>,
@@ -408,18 +412,18 @@ which provides accounting for computing time and dissipated energy in
 the simulated platform. SimGrid’s energy plugin requires host <code class="docutils literal notranslate"><span class="pre">pstate</span></code>
 definitions (levels of performance, CPU frequency) in the <span class="xref std std-ref">XML platform
 description file</span>. The
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::getEnergyConsumed()</span></code> member function returns
+<a class="reference internal" href="api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10Simulation17getEnergyConsumedERKNSt6stringE" title="wrench::Simulation::getEnergyConsumed"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Simulation::getEnergyConsumed()</span></code></a> member function returns
 energy consumed by all hosts in the platform. <strong>Important:</strong> The energy
 plugin is NOT enabled by default in WRENCH simulations. To enable it,
 pass the <code class="docutils literal notranslate"><span class="pre">--wrench-energy-simulation</span></code> command line option to the
-simulator. See <code class="docutils literal notranslate"><span class="pre">examples/basic-examples/cloud-bag-of-tasks-energy</span></code> for
+simulator. See <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/cloud-bag-of-tasks-energy</span></code> for
 an example simulator that makes use of this plugin (and an example
 platform description file that defines host power consumption profiles).</p>
 <p>It is also possible to dump all simulation output to a JSON file. This
 is done with the <code class="docutils literal notranslate"><span class="pre">wrench::SimulationOutput::dump*JSON()</span></code> member
 functions. The documentation of each member function details the
 structure of the JSON output, in case you want to parse/process the JSON
-by hand. See the API documentation of the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code>
+by hand. See the API documentation of the <a class="reference internal" href="api_developer/classwrench_1_1_simulation_output.html#_CPPv4N6wrench16SimulationOutputE" title="wrench::SimulationOutput"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code></a>
 class for all details.</p>
 <p>Alternatively, you can run the installed <code class="docutils literal notranslate"><span class="pre">wrench-dashboard</span></code> tool,
 which provides interactive visualization/inspection of the generated
@@ -435,7 +439,7 @@ generation since they are the ones who know what they are interested in.</p>
 </section>
 </section>
 <section id="available-services">
-<span id="wrench-101-simulator-services"></span><h2>Available services<a class="headerlink" href="#available-services" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-simulator-services"></span><h2>Available services<a class="headerlink" href="#available-services" title="Permalink to this heading"></a></h2>
 <p>Below is the list of services available to-date in WRENCH. Click on the
 corresponding links for more information on what these services are and
 on how to create them.</p>
@@ -455,6 +459,7 @@ Platforms</span></a></p></li>
 give access to workflow files:</p>
 <ul>
 <li><p><a class="reference internal" href="wrench_101/simplestorage.html#guide-101-simplestorage"><span class="std std-ref">Simple Storage Service</span></a></p></li>
+<li><p><a class="reference internal" href="wrench_101/xrootd.html#guide-101-xrootd"><span class="std std-ref">XRootD Storage Service</span></a></p></li>
 </ul>
 </li>
 <li><p><strong>File Registry Services</strong>: These services, also known as <em>replica
@@ -488,23 +493,23 @@ in the simulation output:</p>
 </ul>
 </section>
 <section id="customizing-services">
-<span id="wrench-101-customizing-services"></span><h2>Customizing services<a class="headerlink" href="#customizing-services" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-customizing-services"></span><h2>Customizing services<a class="headerlink" href="#customizing-services" title="Permalink to this heading"></a></h2>
 <p>Each service is customizable by passing to its constructor a <em>property
 list</em>, i.e., a key-value map where each key is a property and each value
 is a string. Each service defines a property class. For instance, the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Service</span></code> class has an associated <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceProperty</span></code>
-class, the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ComputeService</span></code> class has an associated
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ComputeServiceProperty</span></code> class, and so on at all levels of the
+<a class="reference internal" href="api_developer/classwrench_1_1_service.html#_CPPv4N6wrench7ServiceE" title="wrench::Service"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::Service</span></code></a> class has an associated <a class="reference internal" href="api_developer/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServicePropertyE" title="wrench::ServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceProperty</span></code></a>
+class, the <a class="reference internal" href="api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ComputeService</span></code></a> class has an associated
+<a class="reference internal" href="api_developer/classwrench_1_1_compute_service_property.html#_CPPv4N6wrench22ComputeServicePropertyE" title="wrench::ComputeServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ComputeServiceProperty</span></code></a> class, and so on at all levels of the
 service class hierarchy.</p>
 <p><strong>The API documentation for these property classes explains what each
 property means, what possible values are, and what default values are.</strong>
 Other properties have more to do with what the service can or should do
 when in operation. For instance, the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeServiceProperty</span></code> class defines a
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeServiceProperty::BATCH_SCHEDULING_ALGORITHM</span></code>
+<a class="reference internal" href="api_developer/classwrench_1_1_batch_compute_service_property.html#_CPPv4N6wrench27BatchComputeServicePropertyE" title="wrench::BatchComputeServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeServiceProperty</span></code></a> class defines a
+<a class="reference internal" href="api_developer/classwrench_1_1_batch_compute_service_property.html#_CPPv4N6wrench27BatchComputeServiceProperty26BATCH_SCHEDULING_ALGORITHME" title="wrench::BatchComputeServiceProperty::BATCH_SCHEDULING_ALGORITHM"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeServiceProperty::BATCH_SCHEDULING_ALGORITHM</span></code></a>
 which specifies what scheduling algorithm a batch service should use for
 prioritizing jobs. All property classes inherit from the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceProperty</span></code> class, and one can explore that hierarchy to
+<a class="reference internal" href="api_developer/classwrench_1_1_service_property.html#_CPPv4N6wrench15ServicePropertyE" title="wrench::ServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceProperty</span></code></a> class, and one can explore that hierarchy to
 discover all possible (and there are many) service customization
 opportunities.</p>
 <p>Finally, each service exchanges messages on the network with other
@@ -512,8 +517,8 @@ services (e.g., an execution controller sends a “do some work for me”
 messages to compute services). The size in bytes, or payload, of all
 messages can be customized similarly to the properties, i.e., by passing
 a key-value map to the service’s constructor. For instance, the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceMessagePayload</span></code> class defines a
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD</span></code> property
+<a class="reference internal" href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayloadE" title="wrench::ServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceMessagePayload</span></code></a> class defines a
+<a class="reference internal" href="api_developer/classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayload27STOP_DAEMON_MESSAGE_PAYLOADE" title="wrench::ServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD</span></code></a> property
 which can be used to customize the size, in bytes, of the control
 message sent to the service daemon (that is the entry point to the
 service) to tell it to terminate. Each service class has a corresponding
@@ -521,7 +526,7 @@ message payload class, and the API documentation for these message
 payload classes details all messages whose payload can be customized.</p>
 </section>
 <section id="customizing-logging">
-<span id="wrench-101-logging"></span><h2>Customizing logging<a class="headerlink" href="#customizing-logging" title="Permalink to this headline"></a></h2>
+<span id="wrench-101-logging"></span><h2>Customizing logging<a class="headerlink" href="#customizing-logging" title="Permalink to this heading"></a></h2>
 <p>When running a WRENCH simulator you may notice that there is no logging
 output. By default logging output is disabled, but it is often useful to
 enable it (remembering that it can slow down the simulation). WRENCH’s

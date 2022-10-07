@@ -7,6 +7,7 @@
   <title>wrench::BareMetalComputeService &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -131,6 +135,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_developer.html">WRENCH Developer API</a></li>
@@ -163,11 +171,88 @@
            <div itemprop="articleBody">
              
   <section id="wrench-baremetalcomputeservice">
-<h1>wrench::BareMetalComputeService<a class="headerlink" href="#wrench-baremetalcomputeservice" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/user/xml/index.xml</p>
+<h1>wrench::BareMetalComputeService<a class="headerlink" href="#wrench-baremetalcomputeservice" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench23BareMetalComputeServiceE">
+<span id="_CPPv3N6wrench23BareMetalComputeServiceE"></span><span id="_CPPv2N6wrench23BareMetalComputeServiceE"></span><span id="wrench::BareMetalComputeService"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BareMetalComputeService</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_compute_service.html#_CPPv4N6wrench14ComputeServiceE" title="wrench::ComputeService"><span class="n"><span class="pre">ComputeService</span></span></a><br /></dt>
+<dd><p>A compute service that manages a set of multi-core compute hosts and provides access to their resources. </p>
+<p>One can think of this as a simple service that allows the user to run jobs and to specify for each job on which host it should run and with how many cores. If no host is specified, the service will pick the least loaded host. If no number of cores is specified, the service will use as many cores as possible. The service will make sure that the RAM capacity of a host is not exceeded by possibly delaying job executions until enough RAM is available. Note that if the submitted jobs require a total number of cores larger than available, say, on a particular host, then these jobs will simply time-share the cores. In other words, this service does not provide space-sharing of hosts/cores (unlike, for instance, a <a class="reference internal" href="classwrench_1_1_batch_compute_service.html#classwrench_1_1_batch_compute_service"><span class="std std-ref">wrench::BatchComputeService</span></a>). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench23BareMetalComputeService23BareMetalComputeServiceERKNSt6stringERKNSt3mapINSt6stringENSt5tupleImdEEEERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE">
+<span id="_CPPv3N6wrench23BareMetalComputeService23BareMetalComputeServiceERKNSt6stringERKNSt3mapINSt6stringENSt5tupleImdEEEERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="_CPPv2N6wrench23BareMetalComputeService23BareMetalComputeServiceERKNSt6stringERKNSt3mapINSt6stringENSt5tupleImdEEEERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="wrench::BareMetalComputeService::BareMetalComputeService__ssCR.std::map:ss.std::tuple:unsigned-l.double::CR.ssCR.WRENCH_PROPERTY_COLLECTION_TYPE.WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_1a2284e21c96cbfee2b9c37d530d4bee85"></span><span class="sig-name descname"><span class="n"><span class="pre">BareMetalComputeService</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">compute_resources</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scratch_space_mount_point</span></span>, <span class="n"><span class="pre">WRENCH_PROPERTY_COLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">property_list</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span>, <span class="n"><span class="pre">WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">messagepayload_list</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the name of the host on which the service should be started </p></li>
+<li><p><strong>compute_resources</strong> – a map of &lt;num_cores, memory_manager_service&gt; tuples, indexed by hostname, which represents the compute resources available to this service.<ul>
+<li><p>use num_cores = <a class="reference internal" href="classwrench_1_1_compute_service.html#classwrench_1_1_compute_service_1a1160f521623440ad4e0e0823e08a7d22"><span class="std std-ref">ComputeService::ALL_CORES</span></a> to use all cores available on the host</p></li>
+<li><p>use memory_manager_service = <a class="reference internal" href="classwrench_1_1_compute_service.html#classwrench_1_1_compute_service_1abc4fe0bad59f544b4b34d0e7d4012d44"><span class="std std-ref">ComputeService::ALL_RAM</span></a> to use all RAM available on the host </p></li>
+</ul>
+</p></li>
+<li><p><strong>scratch_space_mount_point</strong> – the compute service’s scratch space’s mount point (”” means none) </p></li>
+<li><p><strong>property_list</strong> – a property list ({} means “use all defaults”) </p></li>
+<li><p><strong>messagepayload_list</strong> – a message payload list ({} means “use all defaults”) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench23BareMetalComputeService23BareMetalComputeServiceERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE">
+<span id="_CPPv3N6wrench23BareMetalComputeService23BareMetalComputeServiceERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="_CPPv2N6wrench23BareMetalComputeService23BareMetalComputeServiceERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="wrench::BareMetalComputeService::BareMetalComputeService__ssCR.std::vector:ss:CR.ssCR.WRENCH_PROPERTY_COLLECTION_TYPE.WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_1addd76193e634194dabfc4704794e548e"></span><span class="sig-name descname"><span class="n"><span class="pre">BareMetalComputeService</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">compute_hosts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scratch_space_mount_point</span></span>, <span class="n"><span class="pre">WRENCH_PROPERTY_COLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">property_list</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span>, <span class="n"><span class="pre">WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">messagepayload_list</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the name of the host on which the service should be started </p></li>
+<li><p><strong>compute_hosts</strong> – the names of the hosts available as compute resources (the service will use all the cores and all the RAM of each host) </p></li>
+<li><p><strong>scratch_space_mount_point</strong> – the compute service’s scratch space’s mount point (”” means none) </p></li>
+<li><p><strong>property_list</strong> – a property list ({} means “use all defaults”) </p></li>
+<li><p><strong>messagepayload_list</strong> – a message payload list ({} means “use all defaults”) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench23BareMetalComputeService20supportsCompoundJobsEv">
+<span id="_CPPv3N6wrench23BareMetalComputeService20supportsCompoundJobsEv"></span><span id="_CPPv2N6wrench23BareMetalComputeService20supportsCompoundJobsEv"></span><span id="wrench::BareMetalComputeService::supportsCompoundJobs"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_1a2c457e8b54d56a2362344a84e100c57e"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsCompoundJobs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Returns true if the service supports compound jobs. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench23BareMetalComputeService17supportsPilotJobsEv">
+<span id="_CPPv3N6wrench23BareMetalComputeService17supportsPilotJobsEv"></span><span id="_CPPv2N6wrench23BareMetalComputeService17supportsPilotJobsEv"></span><span id="wrench::BareMetalComputeService::supportsPilotJobs"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_1aac966d001e1993608d6a8a1816f844a8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsPilotJobs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Returns true if the service supports pilot jobs. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench23BareMetalComputeService20supportsStandardJobsEv">
+<span id="_CPPv3N6wrench23BareMetalComputeService20supportsStandardJobsEv"></span><span id="_CPPv2N6wrench23BareMetalComputeService20supportsStandardJobsEv"></span><span id="wrench::BareMetalComputeService::supportsStandardJobs"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_1ae70e18546339834081cae8d275f54a8b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supportsStandardJobs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
+<dd><p>Returns true if the service supports standard jobs. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

@@ -7,6 +7,7 @@
   <title>Interacting with a virtualized cluster service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,9 +86,9 @@
            <div itemprop="articleBody">
              
   <section id="interacting-with-a-virtualized-cluster-service">
-<span id="guide-102-virtualizedcluster"></span><h1>Interacting with a virtualized cluster service<a class="headerlink" href="#interacting-with-a-virtualized-cluster-service" title="Permalink to this headline"></a></h1>
-<p>The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeService</span></code> derives the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code> class. One interacts with it in almost
+<span id="guide-102-virtualizedcluster"></span><h1>Interacting with a virtualized cluster service<a class="headerlink" href="#interacting-with-a-virtualized-cluster-service" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="../api_developer/classwrench_1_1_virtualized_cluster_compute_service.html#_CPPv4N6wrench32VirtualizedClusterComputeServiceE" title="wrench::VirtualizedClusterComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeService</span></code></a> derives the
+<a class="reference internal" href="../api_developer/classwrench_1_1_cloud_compute_service.html#_CPPv4N6wrench19CloudComputeServiceE" title="wrench::CloudComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::CloudComputeService</span></code></a> class. One interacts with it in almost
 the same way as one <a class="reference internal" href="cloud.html#guide-102-cloud"><span class="std std-ref">interacts with a cloud
 servicde</span></a>. The one difference between a
 virtualized cluster service and a cloud service is that the former
@@ -129,7 +133,7 @@ which VM instances are created and (live) migrated:</p>
 <a class="reference internal" href="cloud.html#guide-102-cloud"><span class="std std-ref">interacting with a cloud service page</span></a> for
 an example in which jobs are submitted to the VM instances.</p>
 <p>See the execution controller implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/virtualized-cluster-bag-of-tasks/TwoTasksAtATimeVirtualizedClusterWMS.cpp</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/virtualized-cluster-bag-of-tasks/TwoTasksAtATimeVirtualizedClusterWMS.cpp</span></code>
 for a more complete example.</p>
 </section>
 

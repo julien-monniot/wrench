@@ -7,6 +7,7 @@
   <title>wrench::S4U_Simulation &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,833 @@
            <div itemprop="articleBody">
              
   <section id="wrench-s4u-simulation">
-<h1>wrench::S4U_Simulation<a class="headerlink" href="#wrench-s4u-simulation" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::S4U_Simulation<a class="headerlink" href="#wrench-s4u-simulation" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_SimulationE">
+<span id="_CPPv3N6wrench14S4U_SimulationE"></span><span id="_CPPv2N6wrench14S4U_SimulationE"></span><span id="wrench::S4U_Simulation"></span><span class="target" id="classwrench_1_1_s4_u___simulation"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">S4U_Simulation</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14S4U_SimulationE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wrappers around S4U’s basic simulation methods. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation19checkLinkBandwidthsEv">
+<span id="_CPPv3N6wrench14S4U_Simulation19checkLinkBandwidthsEv"></span><span id="_CPPv2N6wrench14S4U_Simulation19checkLinkBandwidthsEv"></span><span id="wrench::S4U_Simulation::checkLinkBandwidths"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a0b9699f60c25973230b0800531cd4e75"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">checkLinkBandwidths</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation19checkLinkBandwidthsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Method to check that all link bandwidths are &gt;0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation10initializeEPiPPc">
+<span id="_CPPv3N6wrench14S4U_Simulation10initializeEPiPPc"></span><span id="_CPPv2N6wrench14S4U_Simulation10initializeEPiPPc"></span><span id="wrench::S4U_Simulation::initialize__iP.cPP"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a70b123a78f90e8e1f432111c3ce93929"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">initialize</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation10initializeEPiPPc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the Simgrid simulation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argc</strong> – the C-style argument counts </p></li>
+<li><p><strong>argv</strong> – the C-style argument list </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench14S4U_Simulation13isInitializedEv">
+<span id="_CPPv3NK6wrench14S4U_Simulation13isInitializedEv"></span><span id="_CPPv2NK6wrench14S4U_Simulation13isInitializedEv"></span><span id="wrench::S4U_Simulation::isInitializedC"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a33eea1016dd9710b9ade2cb1296e3212"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isInitialized</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench14S4U_Simulation13isInitializedEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns true if <a class="reference internal" href="#classwrench_1_1_s4_u___simulation_1a70b123a78f90e8e1f432111c3ce93929"><span class="std std-ref">S4U_Simulation::initialize()</span></a> has been called successfully previously. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench14S4U_Simulation15isPlatformSetupEv">
+<span id="_CPPv3NK6wrench14S4U_Simulation15isPlatformSetupEv"></span><span id="_CPPv2NK6wrench14S4U_Simulation15isPlatformSetupEv"></span><span id="wrench::S4U_Simulation::isPlatformSetupC"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a5ae009d1f13c5585974904182aac670d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPlatformSetup</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench14S4U_Simulation15isPlatformSetupEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns true if <a class="reference internal" href="#classwrench_1_1_s4_u___simulation_1ae01b4aea09ee442f01c7208b21896a50"><span class="std std-ref">S4U_Simulation::setupPlatform()</span></a> has been called successfully previously. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation13runSimulationEv">
+<span id="_CPPv3N6wrench14S4U_Simulation13runSimulationEv"></span><span id="_CPPv2N6wrench14S4U_Simulation13runSimulationEv"></span><span id="wrench::S4U_Simulation::runSimulation"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a7658128602b3a342bc0daecff9459f36"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">runSimulation</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation13runSimulationEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start the simulation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation13setupPlatformERKNSt8functionIFvvEEE">
+<span id="_CPPv3N6wrench14S4U_Simulation13setupPlatformERKNSt8functionIFvvEEE"></span><span id="_CPPv2N6wrench14S4U_Simulation13setupPlatformERKNSt8functionIFvvEEE"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a8d91e3c1aa6b9d7dededeae95be12fae"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setupPlatform</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">creation_function</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation13setupPlatformERKNSt8functionIFvvEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the simulated platform. Must only be called once. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>creation_function</strong> – void() function to create the platform</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation13setupPlatformERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation13setupPlatformERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation13setupPlatformERKNSt6stringE"></span><span id="wrench::S4U_Simulation::setupPlatform__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ae01b4aea09ee442f01c7208b21896a50"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setupPlatform</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation13setupPlatformERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the simulated platform. Must only be called once. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – the path to an XML platform description file</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench14S4U_Simulation8shutdownEv">
+<span id="_CPPv3NK6wrench14S4U_Simulation8shutdownEv"></span><span id="_CPPv2NK6wrench14S4U_Simulation8shutdownEv"></span><span id="wrench::S4U_Simulation::shutdownC"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a92cff49dcecc0552720f080e782f9da3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shutdown</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench14S4U_Simulation8shutdownEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Shutdown the simulation. </p>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation7computeEd">
+<span id="_CPPv3N6wrench14S4U_Simulation7computeEd"></span><span id="_CPPv2N6wrench14S4U_Simulation7computeEd"></span><span id="wrench::S4U_Simulation::compute__double"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a3be8d3823b30b2b7ebb27771a8baa0cd"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">compute</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation7computeEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulates a computation on host on which the calling actor is running. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flops</strong> – the number of flops </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation22compute_multi_threadedEmddd">
+<span id="_CPPv3N6wrench14S4U_Simulation22compute_multi_threadedEmddd"></span><span id="_CPPv2N6wrench14S4U_Simulation22compute_multi_threadedEmddd"></span><span id="wrench::S4U_Simulation::compute_multi_threaded__unsigned-l.double.double.double"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a54ad2f4b3cb19bf67d5ab41be109d6ec"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">compute_multi_threaded</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_threads</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">thread_creation_overhead</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sequential_work</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">parallel_per_thread_work</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation22compute_multi_threadedEmddd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulates a multi-threaded computation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_threads</strong> – the number of threads </p></li>
+<li><p><strong>thread_creation_overhead</strong> – the thread creation overhead in seconds </p></li>
+<li><p><strong>sequential_work</strong> – the sequential work (in flops) </p></li>
+<li><p><strong>parallel_per_thread_work</strong> – the parallel per thread work (in flops) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15computeZeroFlopEv">
+<span id="_CPPv3N6wrench14S4U_Simulation15computeZeroFlopEv"></span><span id="_CPPv2N6wrench14S4U_Simulation15computeZeroFlopEv"></span><span id="wrench::S4U_Simulation::computeZeroFlop"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a5c4aa7aa025722d5f5b8bae6338066f0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">computeZeroFlop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15computeZeroFlopEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Compute zero flop, which take zero time but will block if the host’s pstate has a zero flop/sec speed, until the host’s pstate is changed to a pstate with non-zero flop/sec speed. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation13createNewDiskERKNSt6stringERKNSt6stringEdddRKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation13createNewDiskERKNSt6stringERKNSt6stringEdddRKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation13createNewDiskERKNSt6stringERKNSt6stringEdddRKNSt6stringE"></span><span id="wrench::S4U_Simulation::createNewDisk__ssCR.ssCR.double.double.double.ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a973f720028bc74f3cec04d63ade5e99e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">createNewDisk</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">disk_id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">read_bandwidth_in_bytes_per_sec</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">write_bandwidth_in_bytes_per_sec</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">capacity_in_bytes</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mount_point</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation13createNewDiskERKNSt6stringERKNSt6stringEdddRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Method to create, programmatically, a new disk. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the name of the host to which the disk should be attached </p></li>
+<li><p><strong>disk_id</strong> – the nae of the disk </p></li>
+<li><p><strong>read_bandwidth_in_bytes_per_sec</strong> – the disk’s read bandwidth in byte/sec </p></li>
+<li><p><strong>write_bandwidth_in_bytes_per_sec</strong> – the disk’s write bandwidth in byte/sec </p></li>
+<li><p><strong>capacity_in_bytes</strong> – the disk’s capacity in bytes </p></li>
+<li><p><strong>mount_point</strong> – the disk’s mount point (most people use “/”) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation22get_host_or_vm_by_nameERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation22get_host_or_vm_by_nameERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation22get_host_or_vm_by_nameERKNSt6stringE"></span><span id="wrench::S4U_Simulation::get_host_or_vm_by_name__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a93c80658b0848f40d902c88eabca09c2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Host</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_host_or_vm_by_name</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation22get_host_or_vm_by_nameERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenient s4u wrapper to retrieve a Host (which can be a VM) based on a name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the host/vm name </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a SimGrid host </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation30get_host_or_vm_by_name_or_nullERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation30get_host_or_vm_by_name_or_nullERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation30get_host_or_vm_by_name_or_nullERKNSt6stringE"></span><span id="wrench::S4U_Simulation::get_host_or_vm_by_name_or_null__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a546085df4499f241ae5f8106aa649ff9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Host</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_host_or_vm_by_name_or_null</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation30get_host_or_vm_by_name_or_nullERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenient s4u wrapper to retrieve a Host (which can be a VM) based on a name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the host/vm name or null if none </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a SimGrid host </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation22getAllClusterIDsByZoneEv">
+<span id="_CPPv3N6wrench14S4U_Simulation22getAllClusterIDsByZoneEv"></span><span id="_CPPv2N6wrench14S4U_Simulation22getAllClusterIDsByZoneEv"></span><span id="wrench::S4U_Simulation::getAllClusterIDsByZone"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ad084d3704e94105edd28316a43da73c0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAllClusterIDsByZone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation22getAllClusterIDsByZoneEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of ids of all ClusterZone in the platform within each zone (&lt;cluster&gt; XML tag in the platform XML description) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a map of zone ids and the list of cluster ids </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15getAllHostnamesEv">
+<span id="_CPPv3N6wrench14S4U_Simulation15getAllHostnamesEv"></span><span id="_CPPv2N6wrench14S4U_Simulation15getAllHostnamesEv"></span><span id="wrench::S4U_Simulation::getAllHostnames"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a72770be3bff81efae817e322b8b228d6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAllHostnames</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15getAllHostnamesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of physical hostnames. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a vector of hostnames </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation24getAllHostnamesByClusterEv">
+<span id="_CPPv3N6wrench14S4U_Simulation24getAllHostnamesByClusterEv"></span><span id="_CPPv2N6wrench14S4U_Simulation24getAllHostnamesByClusterEv"></span><span id="wrench::S4U_Simulation::getAllHostnamesByCluster"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a9f45613070010a4d280b1a37af4c5061"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAllHostnamesByCluster</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation24getAllHostnamesByClusterEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of hostnames in each ClusterZone in the platform (&lt;cluster&gt; XML tag in the platform XML description) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a map of all cluster ids and lists of hostnames </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation21getAllHostnamesByZoneEv">
+<span id="_CPPv3N6wrench14S4U_Simulation21getAllHostnamesByZoneEv"></span><span id="_CPPv2N6wrench14S4U_Simulation21getAllHostnamesByZoneEv"></span><span id="wrench::S4U_Simulation::getAllHostnamesByZone"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1abd163070a943b2975836269429dcac1f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAllHostnamesByZone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation21getAllHostnamesByZoneEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of hostnames in each NetZone (&lt;zone&gt; and &lt;cluster&gt; tags in the platform XML description). Note that this method does not recurse into sub-zones, so it only returns the hosts that are declared directly under the &lt;zone&gt; and or &lt;cluster&gt; tags. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a map of all zone ids and lists of hostnames </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15getAllLinknamesEv">
+<span id="_CPPv3N6wrench14S4U_Simulation15getAllLinknamesEv"></span><span id="_CPPv2N6wrench14S4U_Simulation15getAllLinknamesEv"></span><span id="wrench::S4U_Simulation::getAllLinknames"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a3cb2a0e327c4da9cd6f0109df4e9724e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAllLinknames</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15getAllLinknamesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of link names. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a vector of link names </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation22getAllSubZoneIDsByZoneEv">
+<span id="_CPPv3N6wrench14S4U_Simulation22getAllSubZoneIDsByZoneEv"></span><span id="_CPPv2N6wrench14S4U_Simulation22getAllSubZoneIDsByZoneEv"></span><span id="wrench::S4U_Simulation::getAllSubZoneIDsByZone"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a818fd2b158e1575eb68b44d4989e9b5a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAllSubZoneIDsByZone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation22getAllSubZoneIDsByZoneEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of ids of all (sub-)zones in the platform within each zone (&lt;zone&gt; XML tag in the platform XML description) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a map of zone ids and the list of (sub-)zone ids </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation8getClockEv">
+<span id="_CPPv3N6wrench14S4U_Simulation8getClockEv"></span><span id="_CPPv2N6wrench14S4U_Simulation8getClockEv"></span><span id="wrench::S4U_Simulation::getClock"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1aa6e86b42e87be87991c1e5bdf1a90a55"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getClock</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation8getClockEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current simulation date. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the simulation clock </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation18getClusterPropertyERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation18getClusterPropertyERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation18getClusterPropertyERKNSt6stringERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getClusterProperty__ssCR.ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a15f4546e0f2c09bcf34a9b49087ffd3b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getClusterProperty</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cluster_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">property_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation18getClusterPropertyERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the property associated to a cluster specified in the platform file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_id</strong> – the cluster id </p></li>
+<li><p><strong>property_name</strong> – the property name </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a string relating to the property specified in the platform file </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation16getCurrentPstateERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation16getCurrentPstateERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation16getCurrentPstateERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getCurrentPstate__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ac2af5b56e85a34a72c131349e7db595f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCurrentPstate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation16getCurrentPstateERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current power state of a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The index of the current pstate of the host (as specified in the platform xml description file) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15getDiskCapacityERKNSt6stringENSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation15getDiskCapacityERKNSt6stringENSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation15getDiskCapacityERKNSt6stringENSt6stringE"></span><span id="wrench::S4U_Simulation::getDiskCapacity__ssCR.ss"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a8ed5b1535ebfe37bcee2f0aaf7fe0d50"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDiskCapacity</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mount_point</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15getDiskCapacityERKNSt6stringENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the capacity of a disk attached to some host for a given mount point. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the host’s name </p></li>
+<li><p><strong>mount_point</strong> – the mount point (e.g., “/home”) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the capacity of the disk / mount point</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation8getDisksERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation8getDisksERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation8getDisksERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getDisks__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a6c1923d3487f8f965c09cb3d66c293c4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDisks</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation8getDisksERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets set of disks, i.e., mount points, available at a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host’s name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a vector of mount points</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation23getEnergyConsumedByHostERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation23getEnergyConsumedByHostERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation23getEnergyConsumedByHostERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getEnergyConsumedByHost__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a88c0d6933d98a0c3330f62139ac9f6d5"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getEnergyConsumedByHost</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation23getEnergyConsumedByHostERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the energy consumed by the host up to now. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the energy consumed by the host in Joules </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11getFlopRateEv">
+<span id="_CPPv3N6wrench14S4U_Simulation11getFlopRateEv"></span><span id="_CPPv2N6wrench14S4U_Simulation11getFlopRateEv"></span><span id="wrench::S4U_Simulation::getFlopRate"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a37ddab7be97c813bcf5e02bd512cd519"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getFlopRate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11getFlopRateEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the flop rate of the current host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the flop rate in floating point operations per second</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15getHostFlopRateERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation15getHostFlopRateERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation15getHostFlopRateERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getHostFlopRate__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1add748d71abc06f9e0ab71511b662fad1"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getHostFlopRate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15getHostFlopRateERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the flop rate of a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the flop rate in floating point operations per second</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation21getHostMemoryCapacityERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation21getHostMemoryCapacityERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation21getHostMemoryCapacityERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getHostMemoryCapacity__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a66727ced2dd88bb5b67e526a68dd06e7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getHostMemoryCapacity</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation21getHostMemoryCapacityERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the memory_manager_service capacity of a host given a hostname. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a memory_manager_service capacity in bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11getHostNameEv">
+<span id="_CPPv3N6wrench14S4U_Simulation11getHostNameEv"></span><span id="_CPPv2N6wrench14S4U_Simulation11getHostNameEv"></span><span id="wrench::S4U_Simulation::getHostName"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1aa79d6550a2d924c37f6f58533d15518e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getHostName</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11getHostNameEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the hostname on which the calling actor is running. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the hostname as a string </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15getHostNumCoresERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation15getHostNumCoresERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation15getHostNumCoresERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getHostNumCores__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a22a6c81c69e302de1b4e314d2adc4725"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getHostNumCores</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15getHostNumCoresERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of cores of a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the number of cores of the host</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15getHostPropertyERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation15getHostPropertyERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation15getHostPropertyERKNSt6stringERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getHostProperty__ssCR.ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a8498a603a1486a5b54acbcb2d7ef62b4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getHostProperty</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">property_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15getHostPropertyERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the property associated to a host specified in the platform file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the host name </p></li>
+<li><p><strong>property_name</strong> – the property name </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a string relating to the property specified in the platform file </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation16getLinkBandwidthERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation16getLinkBandwidthERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation16getLinkBandwidthERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getLinkBandwidth__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ab2dc3668f70672ca8e0a2c79e580bb95"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getLinkBandwidth</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation16getLinkBandwidthERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a link’s bandwidth. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the link’s name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a bandwidth in Bps </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation12getLinkUsageERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation12getLinkUsageERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation12getLinkUsageERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getLinkUsage__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a08e0f90fac67fe1e15089b7eebce8a9d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getLinkUsage</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation12getLinkUsageERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a link’s bandwidth usage. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the link’s name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a bandwidth usage in Bps </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation16getListOfPstatesERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation16getListOfPstatesERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation16getListOfPstatesERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getListOfPstates__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a9b077f7a49a17ff009891dce42910b48"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getListOfPstates</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation16getListOfPstatesERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of power states available for a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of power states available for the host (as specified in the platform xml description file) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation22getMaxPowerConsumptionERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation22getMaxPowerConsumptionERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation22getMaxPowerConsumptionERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getMaxPowerConsumption__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a386ca90dcf205eb01fd145f837dbe153"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMaxPowerConsumption</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation22getMaxPowerConsumptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the maximum power consumption (i.e., 100% load) for a host at its current pstate. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The power consumption for this host if 100% used (as specified in the platform xml description file) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation17getMemoryCapacityEv">
+<span id="_CPPv3N6wrench14S4U_Simulation17getMemoryCapacityEv"></span><span id="_CPPv2N6wrench14S4U_Simulation17getMemoryCapacityEv"></span><span id="wrench::S4U_Simulation::getMemoryCapacity"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a3336a395e2463b4fcfd921d9fec190f9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMemoryCapacity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation17getMemoryCapacityEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the memory_manager_service capacity of the current host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a memory_manager_service capacity in bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation22getMinPowerConsumptionERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation22getMinPowerConsumptionERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation22getMinPowerConsumptionERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getMinPowerConsumption__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a833e019cc24b6e8d99446211d4061b13"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMinPowerConsumption</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation22getMinPowerConsumptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the minimum power consumption (i.e., idling) for a host at its current pstate. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The power consumption for this host if idle (as specified in the platform xml description file) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation18getNumberofPstatesERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation18getNumberofPstatesERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation18getNumberofPstatesERKNSt6stringE"></span><span id="wrench::S4U_Simulation::getNumberofPstates__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ae3ad786868ba97b98e4414c521eefabf"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNumberofPstates</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation18getNumberofPstatesERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the total number of power states of a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the host name </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of power states available for the host (as specified in the platform xml description file) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11getNumCoresEv">
+<span id="_CPPv3N6wrench14S4U_Simulation11getNumCoresEv"></span><span id="_CPPv2N6wrench14S4U_Simulation11getNumCoresEv"></span><span id="wrench::S4U_Simulation::getNumCores"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a48fcfc20b7dee2b2e5febc8b71d90ddb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNumCores</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11getNumCoresEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of cores of the current host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of cores </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation8getRouteERNSt6stringERNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation8getRouteERNSt6stringERNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation8getRouteERNSt6stringERNSt6stringE"></span><span id="wrench::S4U_Simulation::getRoute__ssR.ssR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a7d052eb6cd62512369464146a09679b8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getRoute</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">src_host</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dst_host</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation8getRouteERNSt6stringERNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the list of link names on the route between two hosts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_host</strong> – src hostname </p></li>
+<li><p><strong>dst_host</strong> – dst hostname </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a vector of link names </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation10hostExistsERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation10hostExistsERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation10hostExistsERKNSt6stringE"></span><span id="wrench::S4U_Simulation::hostExists__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1adaed0ea36e9e87db890ad6166efe8331"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hostExists</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation10hostExistsERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determines whether a host exists for a given hostname (does not include VMs) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation17hostHasMountPointERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation17hostHasMountPointERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation17hostHasMountPointERKNSt6stringERKNSt6stringE"></span><span id="wrench::S4U_Simulation::hostHasMountPoint__ssCR.ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ad211cf5c5fe4470f66765433f5933310"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hostHasMountPoint</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mount_point</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation17hostHasMountPointERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determines whether a mount point is defined at a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the host’s name </p></li>
+<li><p><strong>mount_point</strong> – the mount point </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the host has a disk attached to the specified mount point, false otherwise </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation8isHostOnERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation8isHostOnERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation8isHostOnERKNSt6stringE"></span><span id="wrench::S4U_Simulation::isHostOn__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1abca2b66dc6946c67f48f2592ff98d9f8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isHostOn</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation8isHostOnERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns whether a host is on or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation8isLinkOnERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation8isLinkOnERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation8isLinkOnERKNSt6stringE"></span><span id="wrench::S4U_Simulation::isLinkOn__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a5444fdb666afc9d0574ab4fe4e1d3e00"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isLinkOn</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">link_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation8isLinkOnERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns whether a link is on or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>link_name</strong> – the name of the link </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation10linkExistsERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation10linkExistsERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation10linkExistsERKNSt6stringE"></span><span id="wrench::S4U_Simulation::linkExists__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1aaed29eea02b7a7f4f1b49dd6594c311c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linkExists</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">link_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation10linkExistsERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determines whether a link exists for a given link_name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>link_name</strong> – the name of the link </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation12readFromDiskEdRKNSt6stringENSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation12readFromDiskEdRKNSt6stringENSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation12readFromDiskEdRKNSt6stringENSt6stringE"></span><span id="wrench::S4U_Simulation::readFromDisk__double.ssCR.ss"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a41ebff149aa1b8428d6e883b2ce2a160"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">readFromDisk</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_bytes</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mount_point</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation12readFromDiskEdRKNSt6stringENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulates a disk read. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_bytes</strong> – number of bytes to read </p></li>
+<li><p><strong>hostname</strong> – name of host to which disk is attached </p></li>
+<li><p><strong>mount_point</strong> – mount point </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation38readFromDiskAndWriteToDiskConcurrentlyEddRKNSt6stringERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation38readFromDiskAndWriteToDiskConcurrentlyEddRKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation38readFromDiskAndWriteToDiskConcurrentlyEddRKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="wrench::S4U_Simulation::readFromDiskAndWriteToDiskConcurrently__double.double.ssCR.ssCR.ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a7cc2915a35df3154206ff601cf919c8e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">readFromDiskAndWriteToDiskConcurrently</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_bytes_to_read</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_bytes_to_write</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">read_mount_point</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">write_mount_point</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation38readFromDiskAndWriteToDiskConcurrentlyEddRKNSt6stringERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read from a local disk and write to a local disk concurrently. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_bytes_to_read</strong> – number of bytes to read </p></li>
+<li><p><strong>num_bytes_to_write</strong> – number of bytes to write </p></li>
+<li><p><strong>hostname</strong> – the host at which the disks are located </p></li>
+<li><p><strong>read_mount_point</strong> – the mountpoint to read from </p></li>
+<li><p><strong>write_mount_point</strong> – the mountpoint to write to </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation15setHostPropertyERKNSt6stringERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation15setHostPropertyERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation15setHostPropertyERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="wrench::S4U_Simulation::setHostProperty__ssCR.ssCR.ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ac55ba6f3da6cd75db2eb562ccd21c8cd"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setHostProperty</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">property_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">property_value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation15setHostPropertyERKNSt6stringERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set a property associated to a host specified in the platform file (does not include VMs) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the host name </p></li>
+<li><p><strong>property_name</strong> – the property name </p></li>
+<li><p><strong>property_value</strong> – the property value </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation9setPstateERKNSt6stringEm">
+<span id="_CPPv3N6wrench14S4U_Simulation9setPstateERKNSt6stringEm"></span><span id="_CPPv2N6wrench14S4U_Simulation9setPstateERKNSt6stringEm"></span><span id="wrench::S4U_Simulation::setPstate__ssCR.unsigned-l"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a761dbf1987cf5a4a70d1ecfcf79d2c92"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setPstate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pstate</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation9setPstateERKNSt6stringEm" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the power state of the host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the host name </p></li>
+<li><p><strong>pstate</strong> – the power state index (the power state index is specified in the platform xml description file) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation5sleepEd">
+<span id="_CPPv3N6wrench14S4U_Simulation5sleepEd"></span><span id="_CPPv2N6wrench14S4U_Simulation5sleepEd"></span><span id="wrench::S4U_Simulation::sleep__double"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1af93ef50da20f860de80212a3cff1cfdb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sleep</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation5sleepEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulates a sleep. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>duration</strong> – the number of seconds to sleep </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11turnOffHostERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation11turnOffHostERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation11turnOffHostERKNSt6stringE"></span><span id="wrench::S4U_Simulation::turnOffHost__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a5b753372d9bdae4471b1c436e71ae513"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">turnOffHost</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11turnOffHostERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Turn off a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host to turn off</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11turnOffLinkERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation11turnOffLinkERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation11turnOffLinkERKNSt6stringE"></span><span id="wrench::S4U_Simulation::turnOffLink__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a5b5435c04018bb40bbdfb43e9b2a12b8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">turnOffLink</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">link_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11turnOffLinkERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Turn off a link. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>link_name</strong> – the name of the link to turn off</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation10turnOnHostERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation10turnOnHostERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation10turnOnHostERKNSt6stringE"></span><span id="wrench::S4U_Simulation::turnOnHost__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a76b18d5555dff59b758cd05adf252e66"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">turnOnHost</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation10turnOnHostERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Turn on a host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostname</strong> – the name of the host to turn on</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation10turnOnLinkERKNSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation10turnOnLinkERKNSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation10turnOnLinkERKNSt6stringE"></span><span id="wrench::S4U_Simulation::turnOnLink__ssCR"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1acb8a137d82ba696cbd8e52d1be23e428"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">turnOnLink</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">link_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation10turnOnLinkERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Turn on a link. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>link_name</strong> – the name of the link to turn on</p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11writeToDiskEdRKNSt6stringENSt6stringE">
+<span id="_CPPv3N6wrench14S4U_Simulation11writeToDiskEdRKNSt6stringENSt6stringE"></span><span id="_CPPv2N6wrench14S4U_Simulation11writeToDiskEdRKNSt6stringENSt6stringE"></span><span id="wrench::S4U_Simulation::writeToDisk__double.ssCR.ss"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a97434e63b024552fddcb47e44996a9eb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writeToDisk</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_bytes</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mount_point</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11writeToDiskEdRKNSt6stringENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulates a disk write. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_bytes</strong> – number of bytes to write </p></li>
+<li><p><strong>hostname</strong> – name of host to which disk is attached </p></li>
+<li><p><strong>mount_point</strong> – mount point </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation5yieldEv">
+<span id="_CPPv3N6wrench14S4U_Simulation5yieldEv"></span><span id="_CPPv2N6wrench14S4U_Simulation5yieldEv"></span><span id="wrench::S4U_Simulation::yield"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1a93a08ad9f982f32cb0cdee442c0878ad"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yield</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation5yieldEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulates a yield. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14S4U_Simulation11DEFAULT_RAME">
+<span id="_CPPv3N6wrench14S4U_Simulation11DEFAULT_RAME"></span><span id="_CPPv2N6wrench14S4U_Simulation11DEFAULT_RAME"></span><span id="wrench::S4U_Simulation::DEFAULT_RAM__double"></span><span class="target" id="classwrench_1_1_s4_u___simulation_1ab7554f579ef153b756b134c3adbdcf1a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEFAULT_RAM</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">1024.0</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024.0</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024.0</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024.0</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024.0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N6wrench14S4U_Simulation11DEFAULT_RAME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The ram capacity of a physical host whenever not specified in the platform description file. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </section>
 
 

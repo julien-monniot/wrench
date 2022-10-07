@@ -7,6 +7,7 @@
   <title>wrench::BareMetalComputeServiceProperty &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -131,6 +135,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_developer.html">WRENCH Developer API</a></li>
@@ -163,11 +171,34 @@
            <div itemprop="articleBody">
              
   <section id="wrench-baremetalcomputeserviceproperty">
-<h1>wrench::BareMetalComputeServiceProperty<a class="headerlink" href="#wrench-baremetalcomputeserviceproperty" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/user/xml/index.xml</p>
+<h1>wrench::BareMetalComputeServiceProperty<a class="headerlink" href="#wrench-baremetalcomputeserviceproperty" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench31BareMetalComputeServicePropertyE">
+<span id="_CPPv3N6wrench31BareMetalComputeServicePropertyE"></span><span id="_CPPv2N6wrench31BareMetalComputeServicePropertyE"></span><span id="wrench::BareMetalComputeServiceProperty"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_property"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BareMetalComputeServiceProperty</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_compute_service_property.html#_CPPv4N6wrench22ComputeServicePropertyE" title="wrench::ComputeServiceProperty"><span class="n"><span class="pre">ComputeServiceProperty</span></span></a><br /></dt>
+<dd><p>Configurable properties for a bare_metal_standard_jobs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench31BareMetalComputeServiceProperty39FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASHE">
+<span id="_CPPv3N6wrench31BareMetalComputeServiceProperty39FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASHE"></span><span id="_CPPv2N6wrench31BareMetalComputeServiceProperty39FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASHE"></span><span id="wrench::BareMetalComputeServiceProperty::FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASH__ssC"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_property_1a271dd7485d3ec6d6a98c698bcda5234c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASH</span></span></span><br /></dt>
+<dd><p>If true, fail action after an executor crash, otherwise re-ready it and try again. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench31BareMetalComputeServiceProperty41TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWNE">
+<span id="_CPPv3N6wrench31BareMetalComputeServiceProperty41TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWNE"></span><span id="_CPPv2N6wrench31BareMetalComputeServiceProperty41TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWNE"></span><span id="wrench::BareMetalComputeServiceProperty::TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWN__ssC"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_property_1a906dfcf7e533b13e20fa087c9eaddfa6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWN</span></span></span><br /></dt>
+<dd><p>If true, service will terminate whenever all resources are down. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench31BareMetalComputeServiceProperty23THREAD_STARTUP_OVERHEADE">
+<span id="_CPPv3N6wrench31BareMetalComputeServiceProperty23THREAD_STARTUP_OVERHEADE"></span><span id="_CPPv2N6wrench31BareMetalComputeServiceProperty23THREAD_STARTUP_OVERHEADE"></span><span id="wrench::BareMetalComputeServiceProperty::THREAD_STARTUP_OVERHEAD__ssC"></span><span class="target" id="classwrench_1_1_bare_metal_compute_service_property_1a63dfaa7ebb4dc18d236c58384f14dd25"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">THREAD_STARTUP_OVERHEAD</span></span></span><br /></dt>
+<dd><p>The overhead to start a thread (default value: “0”, default unit: seconds): Examples: “5”, “5s”, “5000ms”, etc. </p>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

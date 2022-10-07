@@ -7,6 +7,7 @@
   <title>wrench::ActionExecutor &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,141 @@
            <div itemprop="articleBody">
              
   <section id="wrench-actionexecutor">
-<h1>wrench::ActionExecutor<a class="headerlink" href="#wrench-actionexecutor" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::ActionExecutor<a class="headerlink" href="#wrench-actionexecutor" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutorE">
+<span id="_CPPv3N6wrench14ActionExecutorE"></span><span id="_CPPv2N6wrench14ActionExecutorE"></span><span id="wrench::ActionExecutor"></span><span class="target" id="classwrench_1_1_action_executor"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ActionExecutor</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_execution_controller.html#_CPPv4N6wrench19ExecutionControllerE" title="wrench::ExecutionController"><span class="n"><span class="pre">ExecutionController</span></span></a><br /></dt>
+<dd><p>An service that performs an <a class="reference internal" href="classwrench_1_1_action.html#classwrench_1_1_action"><span class="std std-ref">Action</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor14ActionExecutorENSt6stringEmddbPN7simgrid3s4u7MailboxENSt10shared_ptrI6ActionEENSt10shared_ptrI22ActionExecutionServiceEE">
+<span id="_CPPv3N6wrench14ActionExecutor14ActionExecutorENSt6stringEmddbPN7simgrid3s4u7MailboxENSt10shared_ptrI6ActionEENSt10shared_ptrI22ActionExecutionServiceEE"></span><span id="_CPPv2N6wrench14ActionExecutor14ActionExecutorENSt6stringEmddbPN7simgrid3s4u7MailboxENSt10shared_ptrI6ActionEENSt10shared_ptrI22ActionExecutionServiceEE"></span><span id="wrench::ActionExecutor::ActionExecutor__ss.unsigned-l.double.double.b.simgrid::s4u::MailboxP.std::shared_ptr:Action:.std::shared_ptr:ActionExecutionService:"></span><span class="target" id="classwrench_1_1_action_executor_1a4e6f1bd13056b57e873edd552b0dcc96"></span><span class="sig-name descname"><span class="n"><span class="pre">ActionExecutor</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_cores</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ram_footprint</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">thread_creation_overhead</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">simulate_computation_as_sleep</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">callback_mailbox</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_action.html#_CPPv4N6wrench6ActionE" title="wrench::Action"><span class="n"><span class="pre">Action</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">action</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_action_execution_service.html#_CPPv4N6wrench22ActionExecutionServiceE" title="wrench::ActionExecutionService"><span class="n"><span class="pre">ActionExecutionService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">action_execution_service</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14ActionExecutor14ActionExecutorENSt6stringEmddbPN7simgrid3s4u7MailboxENSt10shared_ptrI6ActionEENSt10shared_ptrI22ActionExecutionServiceEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – the name of the host on which the action executor will run </p></li>
+<li><p><strong>num_cores</strong> – the number of cores </p></li>
+<li><p><strong>ram_footprint</strong> – the RAM footprint </p></li>
+<li><p><strong>thread_creation_overhead</strong> – the thread creation overhead in seconds </p></li>
+<li><p><strong>simulate_computation_as_sleep</strong> – whether to simulate computation as sleep </p></li>
+<li><p><strong>callback_mailbox</strong> – the callback mailbox to which a “action done” or “action failed” message will be sent </p></li>
+<li><p><strong>action</strong> – the action to perform </p></li>
+<li><p><strong>action_execution_service</strong> – the parent action execution service </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor7cleanupEbi">
+<span id="_CPPv3N6wrench14ActionExecutor7cleanupEbi"></span><span id="_CPPv2N6wrench14ActionExecutor7cleanupEbi"></span><span id="wrench::ActionExecutor::cleanup__b.i"></span><span class="target" id="classwrench_1_1_action_executor_1aa75a757b32e67015fd5ef3310a2b7ec6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cleanup</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">has_returned_from_main</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">return_value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench14ActionExecutor7cleanupEbi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cleanup method that implements the cleanup basics. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>has_returned_from_main</strong> – true if main has returned </p></li>
+<li><p><strong>return_value</strong> – main’s return value </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor9getActionEv">
+<span id="_CPPv3N6wrench14ActionExecutor9getActionEv"></span><span id="_CPPv2N6wrench14ActionExecutor9getActionEv"></span><span id="wrench::ActionExecutor::getAction"></span><span class="target" id="classwrench_1_1_action_executor_1a212e735ec754caa27e4a6986f744c6a9"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_action.html#_CPPv4N6wrench6ActionE" title="wrench::Action"><span class="n"><span class="pre">Action</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAction</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Returns the executor’s action. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the action </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench14ActionExecutor25getActionExecutionServiceEv">
+<span id="_CPPv3NK6wrench14ActionExecutor25getActionExecutionServiceEv"></span><span id="_CPPv2NK6wrench14ActionExecutor25getActionExecutionServiceEv"></span><span id="wrench::ActionExecutor::getActionExecutionServiceC"></span><span class="target" id="classwrench_1_1_action_executor_1ab61af39fedad0ab9dcb752798ed35c48"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_action_execution_service.html#_CPPv4N6wrench22ActionExecutionServiceE" title="wrench::ActionExecutionService"><span class="n"><span class="pre">ActionExecutionService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getActionExecutionService</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench14ActionExecutor25getActionExecutionServiceEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the action execution service that started this action executor (or nullptr if stand-alone action executor) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>an action execution service </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench14ActionExecutor18getMemoryAllocatedEv">
+<span id="_CPPv3NK6wrench14ActionExecutor18getMemoryAllocatedEv"></span><span id="_CPPv2NK6wrench14ActionExecutor18getMemoryAllocatedEv"></span><span id="wrench::ActionExecutor::getMemoryAllocatedC"></span><span class="target" id="classwrench_1_1_action_executor_1a0d000e11ed59cc916816281100fd49f5"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMemoryAllocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<dd><p>Return the action executor’s allocated RAM. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench14ActionExecutor20getNumCoresAllocatedEv">
+<span id="_CPPv3NK6wrench14ActionExecutor20getNumCoresAllocatedEv"></span><span id="_CPPv2NK6wrench14ActionExecutor20getNumCoresAllocatedEv"></span><span id="wrench::ActionExecutor::getNumCoresAllocatedC"></span><span class="target" id="classwrench_1_1_action_executor_1ac55c51ca2948e6f6a4bd0ea5e646818e"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNumCoresAllocated</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<dd><p>Return the action executor’s allocated nuber of cores. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of cores </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor29getSimulateComputationAsSleepEv">
+<span id="_CPPv3N6wrench14ActionExecutor29getSimulateComputationAsSleepEv"></span><span id="_CPPv2N6wrench14ActionExecutor29getSimulateComputationAsSleepEv"></span><span id="wrench::ActionExecutor::getSimulateComputationAsSleep"></span><span class="target" id="classwrench_1_1_action_executor_1a5a1d58f5f6fabf9886ee28e34552d01b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getSimulateComputationAsSleep</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14ActionExecutor29getSimulateComputationAsSleepEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns whether computation should be simulated as sleep. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true or false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor25getThreadCreationOverheadEv">
+<span id="_CPPv3N6wrench14ActionExecutor25getThreadCreationOverheadEv"></span><span id="_CPPv2N6wrench14ActionExecutor25getThreadCreationOverheadEv"></span><span id="wrench::ActionExecutor::getThreadCreationOverhead"></span><span class="target" id="classwrench_1_1_action_executor_1a68f441d593666784770fb5119fd80f68"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getThreadCreationOverhead</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Return the executor’s thread creation overhead. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>an overhead (in seconds) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor4killEb">
+<span id="_CPPv3N6wrench14ActionExecutor4killEb"></span><span id="_CPPv2N6wrench14ActionExecutor4killEb"></span><span id="wrench::ActionExecutor::kill__b"></span><span class="target" id="classwrench_1_1_action_executor_1a498981d8967025090cd8c2b76430441c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kill</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">job_termination</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14ActionExecutor4killEb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Kill the worker thread. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>job_termination</strong> – if the reason for being killed is that the job was terminated by the submitter (as opposed to being terminated because the above service was also terminated). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14ActionExecutor4mainEv">
+<span id="_CPPv3N6wrench14ActionExecutor4mainEv"></span><span id="_CPPv2N6wrench14ActionExecutor4mainEv"></span><span id="wrench::ActionExecutor::main"></span><span class="target" id="classwrench_1_1_action_executor_1a08c5f7e35e9514828de06e922318cedb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench14ActionExecutor4mainEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Main method of the action executor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>1 if a failure timestamp should be generated, 0 otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

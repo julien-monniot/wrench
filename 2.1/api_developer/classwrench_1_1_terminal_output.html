@@ -7,6 +7,7 @@
   <title>wrench::TerminalOutput &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -182,6 +186,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_internal.html">WRENCH Internal API</a></li>
@@ -213,11 +221,85 @@
            <div itemprop="articleBody">
              
   <section id="wrench-terminaloutput">
-<h1>wrench::TerminalOutput<a class="headerlink" href="#wrench-terminaloutput" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/developer/xml/index.xml</p>
+<h1>wrench::TerminalOutput<a class="headerlink" href="#wrench-terminaloutput" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutputE">
+<span id="_CPPv3N6wrench14TerminalOutputE"></span><span id="_CPPv2N6wrench14TerminalOutputE"></span><span id="wrench::TerminalOutput"></span><span class="target" id="classwrench_1_1_terminal_output"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TerminalOutput</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutputE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color-enabling wrappers around Simgrid’s XBT_INFO, XBT_DEBUG, XBT_WARN logging macros. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5ColorE">
+<span id="_CPPv3N6wrench14TerminalOutput5ColorE"></span><span id="_CPPv2N6wrench14TerminalOutput5ColorE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Color</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5ColorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Terminal output color enum. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color11COLOR_BLACKE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color11COLOR_BLACKE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color11COLOR_BLACKE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0a685e549985c21b52315120ecdbdedbd3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_BLACK</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color11COLOR_BLACKE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Black text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color9COLOR_REDE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color9COLOR_REDE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color9COLOR_REDE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0aeaae512b70dc3fd7199ee0610e06b365"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_RED</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color9COLOR_REDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Red text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color11COLOR_GREENE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color11COLOR_GREENE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color11COLOR_GREENE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0a7fd5b987f631b43b631941d0955a9949"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_GREEN</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color11COLOR_GREENE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Green text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color12COLOR_YELLOWE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color12COLOR_YELLOWE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color12COLOR_YELLOWE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0aec7f1f1d23a5f370415d086d38980b43"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_YELLOW</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color12COLOR_YELLOWE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Yellow text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color10COLOR_BLUEE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color10COLOR_BLUEE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color10COLOR_BLUEE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0a0fede0fa90e0ca54f914b8d897470709"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_BLUE</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color10COLOR_BLUEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Blue text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color13COLOR_MAGENTAE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color13COLOR_MAGENTAE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color13COLOR_MAGENTAE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0a792bd57a9fd44e1a9754b55c6df686a6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_MAGENTA</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color13COLOR_MAGENTAE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Magenta text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color10COLOR_CYANE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color10COLOR_CYANE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color10COLOR_CYANE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0aed9315672be90ad25a40e8f39a6313c4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_CYAN</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color10COLOR_CYANE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cyan text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput5Color11COLOR_WHITEE">
+<span id="_CPPv3N6wrench14TerminalOutput5Color11COLOR_WHITEE"></span><span id="_CPPv2N6wrench14TerminalOutput5Color11COLOR_WHITEE"></span><span class="target" id="classwrench_1_1_terminal_output_1a793daa5c24c3613b398f801a75bfa1e0a745c6187163532ca681a89e925dbce69"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLOR_WHITE</span></span></span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput5Color11COLOR_WHITEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>White text. </p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench14TerminalOutput26setThisProcessLoggingColorE5Color">
+<span id="_CPPv3N6wrench14TerminalOutput26setThisProcessLoggingColorE5Color"></span><span id="_CPPv2N6wrench14TerminalOutput26setThisProcessLoggingColorE5Color"></span><span id="wrench::TerminalOutput::setThisProcessLoggingColor__Color"></span><span class="target" id="classwrench_1_1_terminal_output_1a07c9d9aaefaf7d79fc2cafaa92162813"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setThisProcessLoggingColor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6wrench14TerminalOutput5ColorE" title="wrench::TerminalOutput::Color"><span class="n"><span class="pre">Color</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">color</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench14TerminalOutput26setThisProcessLoggingColorE5Color" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the color of log messages printed to the terminal. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>color</strong> – a terminal output color </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </section>
 
 

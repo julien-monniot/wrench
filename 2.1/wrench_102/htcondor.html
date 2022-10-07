@@ -7,6 +7,7 @@
   <title>Interacting with a HTCondor compute service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,21 +86,21 @@
            <div itemprop="articleBody">
              
   <section id="interacting-with-a-htcondor-compute-service">
-<span id="guide-102-htcondor"></span><h1>Interacting with a HTCondor compute service<a class="headerlink" href="#interacting-with-a-htcondor-compute-service" title="Permalink to this headline"></a></h1>
-<p>A <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code> instance is essentially a front-end
+<span id="guide-102-htcondor"></span><h1>Interacting with a HTCondor compute service<a class="headerlink" href="#interacting-with-a-htcondor-compute-service" title="Permalink to this heading"></a></h1>
+<p>A <a class="reference internal" href="../api_developer/classwrench_1_1_h_t_condor_compute_service.html#_CPPv4N6wrench22HTCondorComputeServiceE" title="wrench::HTCondorComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code></a> instance is essentially a front-end
 to several “child” compute services. As such, one can submit jobs to it,
 just like one would do to any compute service, but it then “decides” to
 which service these jobs will be delegated. In fact, an execution
 controller can even add new child compute services to be used by
 HTCondor dynamically. Which child service is used is dictated/influenced
 by service-specific arguments passed or not passed to the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code> method.</p>
+<a class="reference internal" href="../api_developer/classwrench_1_1_job_manager.html#_CPPv4N6wrench10JobManager9submitJobERKNSt10shared_ptrI11CompoundJobEERKNSt10shared_ptrI14ComputeServiceEENSt3mapINSt6stringENSt6stringEEE" title="wrench::JobManager::submitJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code></a> method.</p>
 <p>The examples code fragments below showcase the creation of a
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code> instance and its use by an execution
+<a class="reference internal" href="../api_developer/classwrench_1_1_h_t_condor_compute_service.html#_CPPv4N6wrench22HTCondorComputeServiceE" title="wrench::HTCondorComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code></a> instance and its use by an execution
 controller. Let’s start with the creation (in main). Note that arguments
 to service constructors are omitted for brevity (see the execution
 controller implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/condor-grid-example/CondorWMS.cp</span></code> for a complete and working
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/condor-grid-example/CondorWMS.cp</span></code> for a complete and working
 example).</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// One BareMetalComputeService instance</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">wrench</span><span class="o">::</span><span class="n">BareMetalComputeService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">some_baremetal_cs</span><span class="p">;</span><span class="w"></span>
@@ -135,11 +139,11 @@ services to the HTCondor service:</p>
 <p>So, at this point, HTCondor has access to 3 bare-metal compute services
 (2 of which are running inside VMs), and 2 batch compute services.</p>
 <p>Let’s consider an execution controller that will submit
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StandardJob</span></code> instances to HTCondor. These jobs can be of two
+<a class="reference internal" href="../api_developer/classwrench_1_1_standard_job.html#_CPPv4N6wrench11StandardJobE" title="wrench::StandardJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StandardJob</span></code></a> instances to HTCondor. These jobs can be of two
 kinds or, in HTCondor parlance, belong to one of two universes: <strong>grid</strong>
 jobs and <strong>non-grid</strong> jobs. By default a job is considered to be in the
 non-grid universe. But if the service-specific arguments passed to
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code> include a “universe”:“grid”
+<a class="reference internal" href="../api_developer/classwrench_1_1_job_manager.html#_CPPv4N6wrench10JobManager9submitJobERKNSt10shared_ptrI11CompoundJobEERKNSt10shared_ptrI14ComputeServiceEENSt3mapINSt6stringENSt6stringEEE" title="wrench::JobManager::submitJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code></a> include a “universe”:“grid”
 key:value pair, then the submitted job is in the grid universe. HTCondor
 handles both kinds of jobs differently:</p>
 <ul class="simple">
@@ -177,17 +181,17 @@ optional if there is a single child batch compute service).</p></li>
 </pre></div>
 </div>
 <p>The above covers the essentials. See the API documnetation for more
-options, and the code in the <code class="docutils literal notranslate"><span class="pre">examples/condor-grid-example/</span></code> directory
+options, and the code in the <code class="docutils literal notranslate"><span class="pre">examples/workflow_api/condor-grid-example/</span></code> directory
 for working/usable code.</p>
 </section>
 <section id="anatomy-of-the-htcondor-service">
-<span id="guide-htcondor-anatomy"></span><h1>Anatomy of the HTCondor Service<a class="headerlink" href="#anatomy-of-the-htcondor-service" title="Permalink to this headline"></a></h1>
+<span id="guide-htcondor-anatomy"></span><h1>Anatomy of the HTCondor Service<a class="headerlink" href="#anatomy-of-the-htcondor-service" title="Permalink to this heading"></a></h1>
 <p>The in-simulation implementation of HTCondor in WRENCH is simplified in
 terms of its functionality and design when compared to the actual
-implementation of HTCondor. The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code>
+implementation of HTCondor. The <a class="reference internal" href="../api_developer/classwrench_1_1_h_t_condor_compute_service.html#_CPPv4N6wrench22HTCondorComputeServiceE" title="wrench::HTCondorComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorComputeService</span></code></a>
 spawns two additional services during execution,
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorCentralManagerService</span></code> and
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorNegotiatorService</span></code>, both of which loosely correspond
+<a class="reference internal" href="../api_internal/classwrench_1_1_h_t_condor_central_manager_service.html#_CPPv4N6wrench29HTCondorCentralManagerServiceE" title="wrench::HTCondorCentralManagerService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorCentralManagerService</span></code></a> and
+<a class="reference internal" href="../api_internal/classwrench_1_1_h_t_condor_negotiator_service.html#_CPPv4N6wrench25HTCondorNegotiatorServiceE" title="wrench::HTCondorNegotiatorService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::HTCondorNegotiatorService</span></code></a>, both of which loosely correspond
 to actual HTCondor daemons (<code class="docutils literal notranslate"><span class="pre">collector</span></code>, <code class="docutils literal notranslate"><span class="pre">negotiator</span></code>, <code class="docutils literal notranslate"><span class="pre">schedd</span></code>).
 Their use is fully automated and transparent to the WRENCH developer.</p>
 </section>

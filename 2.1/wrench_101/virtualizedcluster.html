@@ -7,6 +7,7 @@
   <title>Creating a virtualized cluster compute service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="creating-a-virtualized-cluster-compute-service">
-<span id="guide-101-virtualizedcluster"></span><h1>Creating a virtualized cluster compute service<a class="headerlink" href="#creating-a-virtualized-cluster-compute-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-virtualizedcluster"></span><h1>Creating a virtualized cluster compute service<a class="headerlink" href="#creating-a-virtualized-cluster-compute-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-virtualizedcluster-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-virtualizedcluster-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>A virtualized cluster service is an abstraction of a compute service
 that corresponds to a platform of physical resources on which Virtual
 Machine (VM) instances can be created. A virtualized cluster service is
@@ -96,7 +100,7 @@ to instantiate a VM on a particular physical host, and to migrate a VM
 between two physical hosts.</p>
 </section>
 <section id="guide-virtualizedcluster-creating">
-<span id="id1"></span><h1>Creating a virtualized cluster compute service<a class="headerlink" href="#guide-virtualizedcluster-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating a virtualized cluster compute service<a class="headerlink" href="#guide-virtualizedcluster-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, a virtualized cluster service is defined by the
 wrench::VirtualizedClusterComputeService class. An instantiation of a
 virtualized cluster service requires the following parameters:</p>
@@ -108,9 +112,9 @@ host is available to the virtualized cluster service);</p></li>
 scratch space, i.e., storage local to the virtualized cluster service
 (used to store workflow files, as needed, during job executions); and</p></li>
 <li><p>Maps (<code class="docutils literal notranslate"><span class="pre">std::map</span></code>) of configurable properties
-(<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceProperty</span></code>) and
+(<a class="reference internal" href="../api_developer/classwrench_1_1_virtualized_cluster_compute_service_property.html#_CPPv4N6wrench40VirtualizedClusterComputeServicePropertyE" title="wrench::VirtualizedClusterComputeServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceProperty</span></code></a>) and
 configurable message payloads
-(<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceMessagePayload</span></code>).</p></li>
+(<a class="reference internal" href="../api_developer/classwrench_1_1_virtualized_cluster_compute_service_message_payload.html#_CPPv4N6wrench46VirtualizedClusterComputeServiceMessagePayloadE" title="wrench::VirtualizedClusterComputeServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceMessagePayload</span></code></a>).</p></li>
 </ul>
 <p>The example below creates an instance of a virtualized cluster service
 that runs on host <code class="docutils literal notranslate"><span class="pre">vc_gateway</span></code>, provides access to 4 execution hosts,
@@ -129,11 +133,11 @@ description requests is configured to be 1KiB:</p>
 </pre></div>
 </div>
 <p>See the documentation of
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceProperty</span></code> and
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceMessagePayload</span></code> for all
+<a class="reference internal" href="../api_developer/classwrench_1_1_virtualized_cluster_compute_service_property.html#_CPPv4N6wrench40VirtualizedClusterComputeServicePropertyE" title="wrench::VirtualizedClusterComputeServiceProperty"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceProperty</span></code></a> and
+<a class="reference internal" href="../api_developer/classwrench_1_1_virtualized_cluster_compute_service_message_payload.html#_CPPv4N6wrench46VirtualizedClusterComputeServiceMessagePayloadE" title="wrench::VirtualizedClusterComputeServiceMessagePayload"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::VirtualizedClusterComputeServiceMessagePayload</span></code></a> for all
 possible configuration options.</p>
 <p>Also see the simulators in the
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/virtualized-cluster-*/</span></code> directories, which
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/virtualized-cluster-*/</span></code> directories, which
 use virtualized cluster services.</p>
 </section>
 

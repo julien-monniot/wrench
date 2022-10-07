@@ -7,6 +7,7 @@
   <title>Creating an energy-meter service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,18 +86,18 @@
            <div itemprop="articleBody">
              
   <section id="creating-an-energy-meter-service">
-<span id="guide-101-energymeter"></span><h1>Creating an energy-meter service<a class="headerlink" href="#creating-an-energy-meter-service" title="Permalink to this headline"></a></h1>
+<span id="guide-101-energymeter"></span><h1>Creating an energy-meter service<a class="headerlink" href="#creating-an-energy-meter-service" title="Permalink to this heading"></a></h1>
 </section>
 <section id="overview">
-<span id="guide-energymeter-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<span id="guide-energymeter-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>An energy-meter service simply measures, at regular intervals, the
 energy consumed by one or more hosts, making measurement traces
 available as part of the simulation output.</p>
 </section>
 <section id="guide-energymeter-creating">
-<span id="id1"></span><h1>Creating an energy-meter service<a class="headerlink" href="#guide-energymeter-creating" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Creating an energy-meter service<a class="headerlink" href="#guide-energymeter-creating" title="Permalink to this heading"></a></h1>
 <p>In WRENCH, an energy-meter service is defined by the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::EnergyMeterService</span></code> class, an instantiation of which requires
+<a class="reference internal" href="../api_developer/classwrench_1_1_energy_meter_service.html#_CPPv4N6wrench18EnergyMeterServiceE" title="wrench::EnergyMeterService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::EnergyMeterService</span></code></a> class, an instantiation of which requires
 the following parameters:</p>
 <ul class="simple">
 <li><p>The name of a host on which to start the service;</p></li>
@@ -112,7 +116,7 @@ accessed as follows:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">energy_consumption_timestamps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulation</span><span class="o">-&gt;</span><span class="n">getOutput</span><span class="p">().</span><span class="n">getTrace</span><span class="o">&lt;</span><span class="n">wrench</span><span class="o">::</span><span class="n">SimulationTimestampEnergyConsumption</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
-<p>See the documentation of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code> for more details.</p>
+<p>See the documentation of <a class="reference internal" href="../api_developer/classwrench_1_1_simulation_output.html#_CPPv4N6wrench16SimulationOutputE" title="wrench::SimulationOutput"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimulationOutput</span></code></a> for more details.</p>
 </section>
 
 

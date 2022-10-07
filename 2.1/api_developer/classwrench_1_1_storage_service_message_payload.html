@@ -7,6 +7,7 @@
   <title>wrench::StorageServiceMessagePayload &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -182,6 +186,10 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_wf_commons_workflow_parser.html">wrench::WfCommonsWorkflowParser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow.html">wrench::Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api_internal.html">WRENCH Internal API</a></li>
@@ -213,11 +221,101 @@
            <div itemprop="articleBody">
              
   <section id="wrench-storageservicemessagepayload">
-<h1>wrench::StorageServiceMessagePayload<a class="headerlink" href="#wrench-storageservicemessagepayload" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/developer/xml/index.xml</p>
+<h1>wrench::StorageServiceMessagePayload<a class="headerlink" href="#wrench-storageservicemessagepayload" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayloadE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayloadE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayloadE"></span><span id="wrench::StorageServiceMessagePayload"></span><span class="target" id="classwrench_1_1_storage_service_message_payload"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StorageServiceMessagePayload</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classwrench_1_1_service_message_payload.html#_CPPv4N6wrench21ServiceMessagePayloadE" title="wrench::ServiceMessagePayload"><span class="n"><span class="pre">ServiceMessagePayload</span></span></a><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayloadE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configurable message payloads for a <a class="reference internal" href="../api_user/classwrench_1_1_storage_service.html#classwrench_1_1_storage_service"><span class="std std-ref">StorageService</span></a>. </p>
+<p>Subclassed by <a class="reference internal" href="../api_user/classwrench_1_1_simple_storage_service_message_payload.html#classwrench_1_1_simple_storage_service_message_payload"><span class="std std-ref">wrench::SimpleStorageServiceMessagePayload</span></a>, <a class="reference internal" href="../api_user/classwrench_1_1_x_root_d_1_1_message_payload.html#classwrench_1_1_x_root_d_1_1_message_payload"><span class="std std-ref">wrench::XRootD::MessagePayload</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload32FILE_COPY_ANSWER_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload32FILE_COPY_ANSWER_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload32FILE_COPY_ANSWER_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a5adc626683a5ca4e144d3c9fba1e87a2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_COPY_ANSWER_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload32FILE_COPY_ANSWER_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to answer a file copy request. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload33FILE_COPY_REQUEST_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload33FILE_COPY_REQUEST_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload33FILE_COPY_REQUEST_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1ab018eb2b5b436d924ae82701f188fa55"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_COPY_REQUEST_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload33FILE_COPY_REQUEST_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent to the daemon to request a file copy. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload34FILE_DELETE_ANSWER_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload34FILE_DELETE_ANSWER_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload34FILE_DELETE_ANSWER_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a59d243acab77dbbd1879d4f1bd5e94a8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_DELETE_ANSWER_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload34FILE_DELETE_ANSWER_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to answer a file deletion request. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload35FILE_DELETE_REQUEST_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload35FILE_DELETE_REQUEST_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload35FILE_DELETE_REQUEST_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_DELETE_REQUEST_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1ac7a4513d5bd196e1aa345ade9d4863f7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_DELETE_REQUEST_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload35FILE_DELETE_REQUEST_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent to the daemon to request a file deletion. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload34FILE_LOOKUP_ANSWER_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload34FILE_LOOKUP_ANSWER_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload34FILE_LOOKUP_ANSWER_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a6275d2b1258e3b4f2e32debb397b8176"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload34FILE_LOOKUP_ANSWER_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to answer a file lookup request. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload35FILE_LOOKUP_REQUEST_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload35FILE_LOOKUP_REQUEST_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload35FILE_LOOKUP_REQUEST_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_LOOKUP_REQUEST_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1aa97372689faf8b722d2ae64d2b0975ff"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_LOOKUP_REQUEST_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload35FILE_LOOKUP_REQUEST_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent to the daemon to request a file lookup. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload30FILE_NOT_FOUND_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload30FILE_NOT_FOUND_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload30FILE_NOT_FOUND_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_NOT_FOUND_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a6cd1f30e820f59c97b82d8be2de399be"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_NOT_FOUND_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload30FILE_NOT_FOUND_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to say “file not found”. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload32FILE_READ_ANSWER_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload32FILE_READ_ANSWER_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload32FILE_READ_ANSWER_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1ab9de3121513714e1724166d5d636542b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_READ_ANSWER_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload32FILE_READ_ANSWER_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to answer a file read request. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload33FILE_READ_REQUEST_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload33FILE_READ_REQUEST_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload33FILE_READ_REQUEST_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a4fc26817876223430c969576c538fe86"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_READ_REQUEST_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload33FILE_READ_REQUEST_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent to the daemon to request a file read. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload33FILE_WRITE_ANSWER_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload33FILE_WRITE_ANSWER_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload33FILE_WRITE_ANSWER_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a2007d31b5840026e12de2f6231246273"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_WRITE_ANSWER_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload33FILE_WRITE_ANSWER_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to answer a file write request. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload34FILE_WRITE_REQUEST_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload34FILE_WRITE_REQUEST_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload34FILE_WRITE_REQUEST_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a55476bfa112255240bea1619ec660302"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FILE_WRITE_REQUEST_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload34FILE_WRITE_REQUEST_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent to the daemon to request a file write. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload33FREE_SPACE_ANSWER_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload33FREE_SPACE_ANSWER_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload33FREE_SPACE_ANSWER_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FREE_SPACE_ANSWER_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a00fa84710c6e868ff41ab593562e16c6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FREE_SPACE_ANSWER_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload33FREE_SPACE_ANSWER_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to answer free space information request. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload34FREE_SPACE_REQUEST_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload34FREE_SPACE_REQUEST_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload34FREE_SPACE_REQUEST_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1a681e602d270caf31ca9173de0bd09ac8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FREE_SPACE_REQUEST_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload34FREE_SPACE_REQUEST_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent to the daemon to request its free space information. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench28StorageServiceMessagePayload40NOT_ENOUGH_STORAGE_SPACE_MESSAGE_PAYLOADE">
+<span id="_CPPv3N6wrench28StorageServiceMessagePayload40NOT_ENOUGH_STORAGE_SPACE_MESSAGE_PAYLOADE"></span><span id="_CPPv2N6wrench28StorageServiceMessagePayload40NOT_ENOUGH_STORAGE_SPACE_MESSAGE_PAYLOADE"></span><span id="wrench::StorageServiceMessagePayload::NOT_ENOUGH_STORAGE_SPACE_MESSAGE_PAYLOAD__ssC"></span><span class="target" id="classwrench_1_1_storage_service_message_payload_1ae0d8ee8f07c557944f77e8363ec8334a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NOT_ENOUGH_STORAGE_SPACE_MESSAGE_PAYLOAD</span></span></span><a class="headerlink" href="#_CPPv4N6wrench28StorageServiceMessagePayload40NOT_ENOUGH_STORAGE_SPACE_MESSAGE_PAYLOADE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of bytes in the control message sent by the daemon to say “not enough space”. </p>
+</dd></dl>
+
 </div>
+</dd></dl>
+
 </section>
 
 

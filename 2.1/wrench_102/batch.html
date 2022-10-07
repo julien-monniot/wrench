@@ -7,6 +7,7 @@
   <title>Interacting with a batch compute service &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,7 +29,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -82,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="interacting-with-a-batch-compute-service">
-<span id="guide-102-batch"></span><h1>Interacting with a batch compute service<a class="headerlink" href="#interacting-with-a-batch-compute-service" title="Permalink to this headline"></a></h1>
-<p>A job, either <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StandardJob</span></code> or <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::PilotJob</span></code>, can be
-submitted to a <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code> by a call to the
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code> method. However, it is <strong>required</strong>
+<span id="guide-102-batch"></span><h1>Interacting with a batch compute service<a class="headerlink" href="#interacting-with-a-batch-compute-service" title="Permalink to this heading"></a></h1>
+<p>A job, either <a class="reference internal" href="../api_developer/classwrench_1_1_standard_job.html#_CPPv4N6wrench11StandardJobE" title="wrench::StandardJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::StandardJob</span></code></a> or <a class="reference internal" href="../api_developer/classwrench_1_1_pilot_job.html#_CPPv4N6wrench8PilotJobE" title="wrench::PilotJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::PilotJob</span></code></a>, can be
+submitted to a <a class="reference internal" href="../api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a> by a call to the
+<a class="reference internal" href="../api_developer/classwrench_1_1_job_manager.html#_CPPv4N6wrench10JobManager9submitJobERKNSt10shared_ptrI11CompoundJobEERKNSt10shared_ptrI14ComputeServiceEENSt3mapINSt6stringENSt6stringEEE" title="wrench::JobManager::submitJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code></a> method. However, it is <strong>required</strong>
 to pass to it a service-specific argument. This argument is a
 <code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">std::string&gt;</span></code> of key-value pairs, and must have
 the following three elements:</p>
@@ -128,10 +132,10 @@ provided to the <span class="xref std std-ref">Slurm</span> batch scheduler.</p>
 </pre></div>
 </div>
 <p>If the service-specific arguments are invalid (e.g., number of nodes too
-large), <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code> method throws a
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ExecutionException</span></code>.</p>
+large), <a class="reference internal" href="../api_developer/classwrench_1_1_job_manager.html#_CPPv4N6wrench10JobManager9submitJobERKNSt10shared_ptrI11CompoundJobEERKNSt10shared_ptrI14ComputeServiceEENSt3mapINSt6stringENSt6stringEEE" title="wrench::JobManager::submitJob"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::JobManager::submitJob()</span></code></a> method throws a
+<a class="reference internal" href="../api_developer/classwrench_1_1_execution_exception.html#_CPPv4N6wrench18ExecutionExceptionE" title="wrench::ExecutionException"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::ExecutionException</span></code></a>.</p>
 <p>See the execution controller implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/batch-bag-of-tasks/TwoTasksAtATimeBatchWMS.cpp</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/batch-bag-of-tasks/TwoTasksAtATimeBatchWMS.cpp</span></code>
 for a more complete example.</p>
 <p>A batch compute service also supports pilot jobs. Once started, a pilot
 job exposes a temporary (only running until its containing pilot job
@@ -157,7 +161,7 @@ expires) bare-metal compute service. Here is a simple code excerpt:</p>
 <p>While the pilot job is running, <a class="reference internal" href="baremetal.html#guide-102-baremetal"><span class="std std-ref">standard jobs can be submitted to its
 bare-metal service</span></a>.</p>
 <p>See the execution controller implementation in
-<code class="docutils literal notranslate"><span class="pre">examples/basic-examples/basic-examples/batch-pilot-job/PilotJobWMS.cpp</span></code>
+<code class="docutils literal notranslate"><span class="pre">examples/workflow_api/basic-examples/batch-pilot-job/PilotJobWMS.cpp</span></code>
 for a more complete example.</p>
 </section>
 

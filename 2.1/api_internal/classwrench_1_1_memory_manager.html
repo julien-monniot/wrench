@@ -7,6 +7,7 @@
   <title>wrench::MemoryManager &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> WRENCH
+            <a href="../index.html">
+            <img src="../_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -121,7 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message.html">wrench::ComputeServiceMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_message_payload.html">wrench::ComputeServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_expired_message.html">wrench::ComputeServicePilotJobExpiredMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_failed_message.html">wrench::ComputeServicePilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_pilot_job_started_message.html">wrench::ComputeServicePilotJobStartedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_property.html">wrench::ComputeServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_compute_service_resource_information_answer_message.html">wrench::ComputeServiceResourceInformationAnswerMessage</a></li>
@@ -202,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_completed_message.html">wrench::JobManagerCompoundJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_compound_job_failed_message.html">wrench::JobManagerCompoundJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_message.html">wrench::JobManagerMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_pilot_job_failed_message.html">wrench::JobManagerPilotJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_completed_message.html">wrench::JobManagerStandardJobCompletedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_standard_job_failed_message.html">wrench::JobManagerStandardJobFailedMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_job_manager_wakeup_message.html">wrench::JobManagerWakeupMessage</a></li>
@@ -247,7 +249,6 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_stop_daemon_message.html">wrench::ServiceStopDaemonMessage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_t_t_l_expired_message.html">wrench::ServiceTTLExpiredMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
@@ -329,6 +330,18 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workflow_task.html">wrench::WorkflowTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer.html">wrench::WorkloadTraceFileReplayer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_workload_trace_file_replayer_event_receiver.html">wrench::WorkloadTraceFileReplayerEventReceiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_continue_search_message.html">wrench::XRootD::AdvancedContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_advanced_ripple_delete.html">wrench::XRootD::AdvancedRippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_cache.html">wrench::XRootD::Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_continue_search_message.html">wrench::XRootD::ContinueSearchMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_deployment.html">wrench::XRootD::Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_file_not_found_alarm.html">wrench::XRootD::FileNotFoundAlarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message.html">wrench::XRootD::Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_message_payload.html">wrench::XRootD::MessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_node.html">wrench::XRootD::Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_property.html">wrench::XRootD::Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_ripple_delete.html">wrench::XRootD::RippleDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_x_root_d_1_1_update_cache_message.html">wrench::XRootD::UpdateCacheMessage</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +372,339 @@
            <div itemprop="articleBody">
              
   <section id="wrench-memorymanager">
-<h1>wrench::MemoryManager<a class="headerlink" href="#wrench-memorymanager" title="Permalink to this headline"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find file: /home/wrench/wrench/docs/2.0-dev/internal/xml/index.xml</p>
+<h1>wrench::MemoryManager<a class="headerlink" href="#wrench-memorymanager" title="Permalink to this heading"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManagerE">
+<span id="_CPPv3N6wrench13MemoryManagerE"></span><span id="_CPPv2N6wrench13MemoryManagerE"></span><span id="wrench::MemoryManager"></span><span class="target" id="classwrench_1_1_memory_manager"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MemoryManager</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_service.html#_CPPv4N6wrench7ServiceE" title="wrench::Service"><span class="n"><span class="pre">Service</span></span></a><a class="headerlink" href="#_CPPv4N6wrench13MemoryManagerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A class that implemnets a <a class="reference internal" href="#classwrench_1_1_memory_manager"><span class="std std-ref">MemoryManager</span></a> service to simulate Linux in-memory page caching for I/O operations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager10addToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb">
+<span id="_CPPv3N6wrench13MemoryManager10addToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb"></span><span id="_CPPv2N6wrench13MemoryManager10addToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb"></span><span id="wrench::MemoryManager::addToCache__ss.std::shared_ptr:FileLocation:.double.b"></span><span class="target" id="classwrench_1_1_memory_manager_1a76c2ca24b7bcdfb93f9c2aa37d656bac"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addToCache</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">location</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_dirty</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager10addToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add a file to cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – file name </p></li>
+<li><p><strong>location</strong> – file location </p></li>
+<li><p><strong>amount</strong> – number of bytes </p></li>
+<li><p><strong>is_dirty</strong> – true or false </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager5evictEdNSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager5evictEdNSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager5evictEdNSt6stringE"></span><span id="wrench::MemoryManager::evict__double.ss"></span><span class="target" id="classwrench_1_1_memory_manager_1aaa802a6b855b154847fce12eeffa61ce"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evict</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">excluded_filename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager5evictEdNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Evicted clean data from page cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amount</strong> – the requested amount of data to be evicted </p></li>
+<li><p><strong>excluded_filename</strong> – name of file that cannot be evicted </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>evicted amount </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager10export_logENSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager10export_logENSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager10export_logENSt6stringE"></span><span id="wrench::MemoryManager::export_log__ss"></span><span class="target" id="classwrench_1_1_memory_manager_1a8cf5938cbe18397a0bd070d3ce52303e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">export_log</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager10export_logENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Export the log to a file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – file path </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager5flushEdRKNSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager5flushEdRKNSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager5flushEdRKNSt6stringE"></span><span id="wrench::MemoryManager::flush__double.ssCR"></span><span class="target" id="classwrench_1_1_memory_manager_1a3ede2602e34cb0a7b1c30b4ecc39fbaa"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flush</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">excluded_filename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager5flushEdRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flush dirty data from cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amount</strong> – request amount to be flushed </p></li>
+<li><p><strong>excluded_filename</strong> – name of file to exclude </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>flushed amount </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager18getAvailableMemoryEv">
+<span id="_CPPv3N6wrench13MemoryManager18getAvailableMemoryEv"></span><span id="_CPPv2N6wrench13MemoryManager18getAvailableMemoryEv"></span><span id="wrench::MemoryManager::getAvailableMemory"></span><span class="target" id="classwrench_1_1_memory_manager_1af4bc70fa5e6ae3b3830db0803850d97c"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAvailableMemory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager18getAvailableMemoryEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get currently available cache memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager15getCachedAmountENSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager15getCachedAmountENSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager15getCachedAmountENSt6stringE"></span><span id="wrench::MemoryManager::getCachedAmount__ss"></span><span class="target" id="classwrench_1_1_memory_manager_1a95ba410d531c8d025605c951e4cae6de"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCachedAmount</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager15getCachedAmountENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get amount of cached data of a file in cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – name of the file </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the amount of cached data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager15getCachedBlocksENSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager15getCachedBlocksENSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager15getCachedBlocksENSt6stringE"></span><span id="wrench::MemoryManager::getCachedBlocks__ss"></span><span class="target" id="classwrench_1_1_memory_manager_1a93fbf3e7cff435b380940368baa6877b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_block.html#_CPPv4N6wrench5BlockE" title="wrench::Block"><span class="n"><span class="pre">Block</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCachedBlocks</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager15getCachedBlocksENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get list of cached blocks of a file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – : name of the file </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a vector of cached blocks of the file </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench13MemoryManager8getDirtyEv">
+<span id="_CPPv3NK6wrench13MemoryManager8getDirtyEv"></span><span id="_CPPv2NK6wrench13MemoryManager8getDirtyEv"></span><span id="wrench::MemoryManager::getDirtyC"></span><span class="target" id="classwrench_1_1_memory_manager_1a03fcc47db0766440bd34e9ceb42d9a12"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDirty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench13MemoryManager8getDirtyEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get number of dirty bytes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench13MemoryManager13getDirtyRatioEv">
+<span id="_CPPv3NK6wrench13MemoryManager13getDirtyRatioEv"></span><span id="_CPPv2NK6wrench13MemoryManager13getDirtyRatioEv"></span><span id="wrench::MemoryManager::getDirtyRatioC"></span><span class="target" id="classwrench_1_1_memory_manager_1af6c57991b18a45f97a634d06c083055c"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDirtyRatio</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench13MemoryManager13getDirtyRatioEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the dirty ratio. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the dirty ratio </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager18getEvictableMemoryEv">
+<span id="_CPPv3N6wrench13MemoryManager18getEvictableMemoryEv"></span><span id="_CPPv2N6wrench13MemoryManager18getEvictableMemoryEv"></span><span id="wrench::MemoryManager::getEvictableMemory"></span><span class="target" id="classwrench_1_1_memory_manager_1a5bc5f357f9442a1c5cdcc69b11aa707c"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getEvictableMemory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager18getEvictableMemoryEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get current evictable memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench13MemoryManager13getFreeMemoryEv">
+<span id="_CPPv3NK6wrench13MemoryManager13getFreeMemoryEv"></span><span id="_CPPv2NK6wrench13MemoryManager13getFreeMemoryEv"></span><span id="wrench::MemoryManager::getFreeMemoryC"></span><span class="target" id="classwrench_1_1_memory_manager_1a37fab69c1f6730ea7f891e9bdc7e7977"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getFreeMemory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench13MemoryManager13getFreeMemoryEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the amount of free memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench13MemoryManager9getMemoryEv">
+<span id="_CPPv3NK6wrench13MemoryManager9getMemoryEv"></span><span id="_CPPv2NK6wrench13MemoryManager9getMemoryEv"></span><span id="wrench::MemoryManager::getMemoryC"></span><span class="target" id="classwrench_1_1_memory_manager_1ad0d1ebf89f6b2fdc44d22f0731daeee3"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getMemory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench13MemoryManager9getMemoryEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the memory disk. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the disk that acts as the memory cache </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench13MemoryManager20getTotalCachedAmountEv">
+<span id="_CPPv3NK6wrench13MemoryManager20getTotalCachedAmountEv"></span><span id="_CPPv2NK6wrench13MemoryManager20getTotalCachedAmountEv"></span><span id="wrench::MemoryManager::getTotalCachedAmountC"></span><span class="target" id="classwrench_1_1_memory_manager_1a04d620715cfc39b3786f74d92b9f5f10"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTotalCachedAmount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench13MemoryManager20getTotalCachedAmountEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get total number of cached bytes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager14getTotalMemoryEv">
+<span id="_CPPv3N6wrench13MemoryManager14getTotalMemoryEv"></span><span id="_CPPv2N6wrench13MemoryManager14getTotalMemoryEv"></span><span id="wrench::MemoryManager::getTotalMemory"></span><span class="target" id="classwrench_1_1_memory_manager_1a084a10d93348ac2fe2af118fbe814e56"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTotalMemory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager14getTotalMemoryEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get total available cache memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager4killEv">
+<span id="_CPPv3N6wrench13MemoryManager4killEv"></span><span id="_CPPv2N6wrench13MemoryManager4killEv"></span><span id="wrench::MemoryManager::kill"></span><span class="target" id="classwrench_1_1_memory_manager_1aafb293d6f6c8fb6d422b89401e36d7e0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kill</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager4killEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Immediately terminate periodical flushing. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager3logEv">
+<span id="_CPPv3N6wrench13MemoryManager3logEv"></span><span id="_CPPv2N6wrench13MemoryManager3logEv"></span><span id="wrench::MemoryManager::log"></span><span class="target" id="classwrench_1_1_memory_manager_1a4c729a7a655e2827d0f6e03dacbc0727"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager3logEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Append to the log. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager18readChunkFromCacheENSt6stringEd">
+<span id="_CPPv3N6wrench13MemoryManager18readChunkFromCacheENSt6stringEd"></span><span id="_CPPv2N6wrench13MemoryManager18readChunkFromCacheENSt6stringEd"></span><span id="wrench::MemoryManager::readChunkFromCache__ss.double"></span><span class="target" id="classwrench_1_1_memory_manager_1a636bed6fc43fd37f60be7e02d56d594f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">readChunkFromCache</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager18readChunkFromCacheENSt6stringEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulate a read from cache, re-access and update cached file data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – name of the file read </p></li>
+<li><p><strong>amount</strong> – number of bytes </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager11readToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb">
+<span id="_CPPv3N6wrench13MemoryManager11readToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb"></span><span id="_CPPv2N6wrench13MemoryManager11readToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb"></span><span id="wrench::MemoryManager::readToCache__ss.std::shared_ptr:FileLocation:.double.b"></span><span class="target" id="classwrench_1_1_memory_manager_1a01a95e8be38b5826ad183b311a4fb77c"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">IoPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">readToCache</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">location</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">async</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager11readToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read data from disk to cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – file name </p></li>
+<li><p><strong>location</strong> – file location </p></li>
+<li><p><strong>amount</strong> – number of bytes </p></li>
+<li><p><strong>async</strong> – tue if operation is asynchronous </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a simgrid pointer to a pending I/O operation, or nullptr </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager13releaseMemoryEd">
+<span id="_CPPv3N6wrench13MemoryManager13releaseMemoryEd"></span><span id="_CPPv2N6wrench13MemoryManager13releaseMemoryEd"></span><span id="wrench::MemoryManager::releaseMemory__double"></span><span class="target" id="classwrench_1_1_memory_manager_1a2cfc5f60b23b8bdc4b69da31dffb262f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">releaseMemory</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">released_amt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager13releaseMemoryEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>released_amt</strong> – number of bytes to release </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager13setDirtyRatioEd">
+<span id="_CPPv3N6wrench13MemoryManager13setDirtyRatioEd"></span><span id="_CPPv2N6wrench13MemoryManager13setDirtyRatioEd"></span><span id="wrench::MemoryManager::setDirtyRatio__double"></span><span class="target" id="classwrench_1_1_memory_manager_1a2db043a1d0c2f40a29bdb9f86225b972"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setDirtyRatio</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dirty_ratio</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager13setDirtyRatioEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the dirty ratio. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dirty_ratio</strong> – the dirty ratio </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager9setMemoryEPN7simgrid3s4u4DiskE">
+<span id="_CPPv3N6wrench13MemoryManager9setMemoryEPN7simgrid3s4u4DiskE"></span><span id="_CPPv2N6wrench13MemoryManager9setMemoryEPN7simgrid3s4u4DiskE"></span><span id="wrench::MemoryManager::setMemory__simgrid::s4u::DiskP"></span><span class="target" id="classwrench_1_1_memory_manager_1aaa2b28cb85cdf7c69d14e5cd52f673b9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setMemory</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">memory</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager9setMemoryEPN7simgrid3s4u4DiskE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the memory disk. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>memory</strong> – a disk that acts as the memory cache </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager18useAnonymousMemoryEd">
+<span id="_CPPv3N6wrench13MemoryManager18useAnonymousMemoryEd"></span><span id="_CPPv2N6wrench13MemoryManager18useAnonymousMemoryEd"></span><span id="wrench::MemoryManager::useAnonymousMemory__double"></span><span class="target" id="classwrench_1_1_memory_manager_1a24a8589e50c0f365f7212555011161ae"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">useAnonymousMemory</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">used_amt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager18useAnonymousMemoryEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update the amount of used memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>used_amt</strong> – number of bytes </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager16writebackToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb">
+<span id="_CPPv3N6wrench13MemoryManager16writebackToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb"></span><span id="_CPPv2N6wrench13MemoryManager16writebackToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb"></span><span id="wrench::MemoryManager::writebackToCache__ss.std::shared_ptr:FileLocation:.double.b"></span><span class="target" id="classwrench_1_1_memory_manager_1ac6bbfc327d09f6e0b22d52666dd4b926"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">writebackToCache</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">filename</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">location</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">amount</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_dirty</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager16writebackToCacheENSt6stringENSt10shared_ptrI12FileLocationEEdb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Simulate a file write to cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – name of the file written </p></li>
+<li><p><strong>location</strong> – file location </p></li>
+<li><p><strong>amount</strong> – amount of data written </p></li>
+<li><p><strong>is_dirty</strong> – true or false </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager7getDiskENSt6stringENSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager7getDiskENSt6stringENSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager7getDiskENSt6stringENSt6stringE"></span><span id="wrench::MemoryManager::getDisk__ss.ss"></span><span class="target" id="classwrench_1_1_memory_manager_1a85b30ea8b7de8195772db19164d6653a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getDisk</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mountpoint</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager7getDiskENSt6stringENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve the disk where the file is stored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mountpoint</strong> – mountpoint on the disk where the file is stored </p></li>
+<li><p><strong>hostname</strong> – host at which the file is stored </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench13MemoryManager12initAndStartEP10SimulationPN7simgrid3s4u4DiskEdiiNSt6stringE">
+<span id="_CPPv3N6wrench13MemoryManager12initAndStartEP10SimulationPN7simgrid3s4u4DiskEdiiNSt6stringE"></span><span id="_CPPv2N6wrench13MemoryManager12initAndStartEP10SimulationPN7simgrid3s4u4DiskEdiiNSt6stringE"></span><span id="wrench::MemoryManager::initAndStart__SimulationP.simgrid::s4u::DiskP.double.i.i.ss"></span><span class="target" id="classwrench_1_1_memory_manager_1a97dac2ca69c26e37bcaf4264f4b02a0c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench13MemoryManagerE" title="wrench::MemoryManager"><span class="n"><span class="pre">MemoryManager</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">initAndStart</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api_developer/classwrench_1_1_simulation.html#_CPPv4N6wrench10SimulationE" title="wrench::Simulation"><span class="n"><span class="pre">Simulation</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">simulation</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">memory</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dirty_ratio</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">interval</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">expired_time</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hostname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench13MemoryManager12initAndStartEP10SimulationPN7simgrid3s4u4DiskEdiiNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize and start the memory_manager_service manager. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simulation</strong> – </p></li>
+<li><p><strong>memory</strong> – disk model used to simulate memory_manager_service </p></li>
+<li><p><strong>dirty_ratio</strong> – dirty_ratio parameter as in the Linux kernel </p></li>
+<li><p><strong>interval</strong> – the interval that periodical flushing awakes in milliseconds </p></li>
+<li><p><strong>expired_time</strong> – the expired time of dirty data to be flushed in milliseconds </p></li>
+<li><p><strong>hostname</strong> – name of the host on which periodical flushing starts </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </section>
 
 

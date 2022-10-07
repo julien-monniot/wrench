@@ -7,6 +7,7 @@
   <title>Simulation 101 &mdash; WRENCH 2.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -15,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,7 +31,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> WRENCH
+            <a href="index.html">
+            <img src="_static/wrench-dark-theme-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 2.1
@@ -92,13 +96,13 @@
            <div itemprop="articleBody">
              
   <section id="simulation-101">
-<span id="id1"></span><h1>Simulation 101<a class="headerlink" href="#simulation-101" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Simulation 101<a class="headerlink" href="#simulation-101" title="Permalink to this heading"></a></h1>
 <p>This page provides a gentle introduction to the simulation of parallel
 and distributed executions, as enabled by WRENCH. This content is
 intended for users who have never implemented (or even thought of
 implementing) a simulator.</p>
 <section id="simulation-overview">
-<h2>Simulation Overview<a class="headerlink" href="#simulation-overview" title="Permalink to this headline"></a></h2>
+<h2>Simulation Overview<a class="headerlink" href="#simulation-overview" title="Permalink to this heading"></a></h2>
 <p>A simulator is a software artifact that mimics the behavior of some
 system of interest. In the context of the WRENCH project, the systems of
 interest are parallel and distributed platforms on which various
@@ -112,7 +116,7 @@ different kinds of runtime systems running on hardware or virtualized
 resources connected over a wide-area network.</p>
 </section>
 <section id="simulated-platform">
-<h2>Simulated Platform<a class="headerlink" href="#simulated-platform" title="Permalink to this headline"></a></h2>
+<h2>Simulated Platform<a class="headerlink" href="#simulated-platform" title="Permalink to this heading"></a></h2>
 <p>A simulated platform consists of a set of computers, or, <strong>hosts</strong>.
 These hosts can have various characteristics (e.g., number of cores,
 clock rate). Each host can have one or more <strong>disks</strong> attached to it, on
@@ -132,7 +136,7 @@ described in an XML file or programmatically (see more details on the
 <a class="reference internal" href="wrench_101.html#wrench-101-header"><span class="std std-ref">WRENCH 101</span></a> page).</p>
 </section>
 <section id="simulated-processes">
-<h2>Simulated Processes<a class="headerlink" href="#simulated-processes" title="Permalink to this headline"></a></h2>
+<h2>Simulated Processes<a class="headerlink" href="#simulated-processes" title="Permalink to this heading"></a></h2>
 <p>The execution of processes (i.e., running programs) can be simulated on
 the hosts of the simulated platform. These processes can execute
 arbitrary (C++) code and also place calls to WRENCH to simulate usage of
@@ -155,7 +159,7 @@ implement a simulator of a complex system at such a low level. This is
 where WRENCH comes in.</p>
 </section>
 <section id="simulated-services">
-<h2>Simulated Services<a class="headerlink" href="#simulated-services" title="Permalink to this headline"></a></h2>
+<h2>Simulated Services<a class="headerlink" href="#simulated-services" title="Permalink to this heading"></a></h2>
 <p>WRENCH comes with a large set of already-implemented <strong>services</strong>. A
 service is a set of one or more running simulated processes that
 simulate a software runtime system that is commonly useful and used for
@@ -177,13 +181,13 @@ processes (a.k.a. daemons) running on the cluster, implements
 sophisticated algorithms to decide which job should run next, makes sure
 jobs do not run on the same cores, etc. WRENCH provides an
 already-implemented compute service called a
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code> that does all this for you,
+<a class="reference internal" href="api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a> that does all this for you,
 under the cover.</p>
 <p>For example, the well-known batch scheduler
 <span class="xref std std-ref">Slurm</span> uses several daemons to schedule
 and manage jobs(e.g., the process <strong>slurmd</strong> runs on each compute node
 and one <strong>slurmctld</strong> daemon controls everything). In this example, an
-instance of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code> could represent
+instance of <a class="reference internal" href="api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a> could represent
 one Slurm cluster with one <strong>slurmctld</strong> process and
 multiple <strong>slurmd</strong> processes.</p>
 <p>A storage service is a runtime system to which you can say “here is some
@@ -193,18 +197,18 @@ real world consists of several processes (e.g., to handle bounded
 numbers of concurrent reads/writes from different clients) and can use
 non-trivial algorithms (e.g., for overlapping network communication and
 disk accesses). Here again, WRENCH comes with an already-implemented
-storage service called <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code> that does all
+storage service called <a class="reference internal" href="api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code></a> that does all
 this for you and comes with a straightforward, high-level API.
 Note that a storage service does not provide by default capabilities
 traditionally offered by parallel file systems such as
 <span class="xref std std-ref">Lustre</span>
 (i.e., no stripping among storage nodes, no dedicated metadata servers).
 If you want to model such storage back-end, you can do it by extending
-the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code>.</p>
+the <a class="reference internal" href="api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::SimpleStorageService</span></code></a>.</p>
 <p>Each service in WRENCH comes with configurable <em>properties</em>, that are
 well-documented and can be used to specify particular features and/or
 behaviors (e.g., a specific scheduling algorithm for a
-given <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code>).
+given <a class="reference internal" href="api_developer/classwrench_1_1_batch_compute_service.html#_CPPv4N6wrench19BatchComputeServiceE" title="wrench::BatchComputeService"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::BatchComputeService</span></code></a>).
 Each service also comes with <em>configurable message payloads</em>,
 which specify the size in bytes of the control messages that underlying
 processes exchange with each other to implement the service’s
@@ -225,7 +229,7 @@ step as they control the weight of many important actions (for example,
 how much overhead when reading a file from a storage service?).</p>
 </section>
 <section id="simulated-controller">
-<h2>Simulated Controller<a class="headerlink" href="#simulated-controller" title="Permalink to this headline"></a></h2>
+<h2>Simulated Controller<a class="headerlink" href="#simulated-controller" title="Permalink to this heading"></a></h2>
 <p>As you recall, the goal of a WRENCH simulator is to simulate the
 execution of some application workload. And so far, we have not said much
 about this workload or about how one goes about simulating its
@@ -248,7 +252,7 @@ until you get to the <a class="reference internal" href="wrench_102.html#wrench-
 exclusively about the controller.</p>
 </section>
 <section id="what-s-next">
-<h2>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline"></a></h2>
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this heading"></a></h2>
 <p>At this point, you should be able to jump into <a class="reference internal" href="wrench_101.html#wrench-101-header"><span class="std std-ref">WRENCH 101</span></a>!</p>
 </section>
 </section>
