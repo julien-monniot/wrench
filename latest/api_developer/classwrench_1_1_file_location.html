@@ -237,7 +237,7 @@
 <dd class="field-odd"><p><strong>other</strong> – a file location</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>true if both locations are equivalent </p>
+<dd class="field-even"><p>true if both locations are equivalent (always returns false if at least one location is SCRATCH) </p>
 </dd>
 </dl>
 </dd></dl>
@@ -248,7 +248,18 @@
 <dd><p>Get the location’s path at mount point. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>a path </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation7getFileEv">
+<span id="_CPPv3N6wrench12FileLocation7getFileEv"></span><span id="_CPPv2N6wrench12FileLocation7getFileEv"></span><span id="wrench::FileLocation::getFile"></span><span class="target" id="classwrench_1_1_file_location_1a9cc1fde9dc5fa0c8623dad26503d6c98"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getFile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation7getFileEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the location’s file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a file </p>
 </dd>
 </dl>
 </dd></dl>
@@ -259,7 +270,7 @@
 <dd><p>Get the location’s full absolute path. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>a path </p>
 </dd>
 </dl>
 </dd></dl>
@@ -298,6 +309,17 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6wrench12FileLocation9isScratchEv">
+<span id="_CPPv3NK6wrench12FileLocation9isScratchEv"></span><span id="_CPPv2NK6wrench12FileLocation9isScratchEv"></span><span id="wrench::FileLocation::isScratchC"></span><span class="target" id="classwrench_1_1_file_location_1a7233530f0a7e189a51ac21760b3e1519"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isScratch</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6wrench12FileLocation9isScratchEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the location’s scratch-ness. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true if the location is SCRATCH </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8toStringEv">
 <span id="_CPPv3N6wrench12FileLocation8toStringEv"></span><span id="_CPPv2N6wrench12FileLocation8toStringEv"></span><span id="wrench::FileLocation::toString"></span><span class="target" id="classwrench_1_1_file_location_1a22a5978a7fb370ab65171e2d8710f2a6"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toString</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8toStringEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Give a &lt;ss1 name&gt;:&lt;mount point&gt;:&lt;dir&gt;” string for the location. </p>
@@ -323,37 +345,21 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>true if both locations are equivalent </p>
+<dd class="field-even"><p>true if both locations are equivalent (always returns false if at least one location is SCRATCH) </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEE">
-<span id="_CPPv3N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEE"></span><span id="_CPPv2N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEE"></span><span id="wrench::FileLocation::LOCATION__std::shared_ptr:StorageService:"></span><span class="target" id="classwrench_1_1_file_location_1ae62041d1dd72974f5edbb96fa9b73cb1"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ss</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>File location specifier for a storage service’s (single) mount point root. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ss</strong> – a storage service (that has a single mount point) </p>
-</dd>
-<dt class="field-even">Throws</dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>a file location specification</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEE">
-<span id="_CPPv3N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEE"></span><span id="_CPPv2N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEE"></span><span id="wrench::FileLocation::LOCATION__std::shared_ptr:StorageService:.std::shared_ptr:StorageService:"></span><span class="target" id="classwrench_1_1_file_location_1acd393bdcc68b18285016d1cf6576f81a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ss</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">server_ss</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>File location specifier for a storage service’s (single) mount point root Used in case of NFS with page cache. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEERKNSt10shared_ptrI8DataFileEE">
+<span id="_CPPv3N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEERKNSt10shared_ptrI8DataFileEE"></span><span id="_CPPv2N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEERKNSt10shared_ptrI8DataFileEE"></span><span id="wrench::FileLocation::LOCATION__std::shared_ptr:StorageService:CR.std::shared_ptr:DataFile:CR"></span><span class="target" id="classwrench_1_1_file_location_1af36d8c8242c19777460b3e03c5c5a536"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ss</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEERKNSt10shared_ptrI8DataFileEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Static location that denotes a compute service’s scratch space. </p>
+<p>File location specifier for a storage service’s (single) mount point root.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ss</strong> – storage service on the client (whose the page cache that data is written to) </p></li>
-<li><p><strong>server_ss</strong> – a server storage service in NFS that stores the file on disk </p></li>
+<li><p><strong>ss</strong> – a storage service (that has a single mount point) </p></li>
+<li><p><strong>file</strong> – a file </p></li>
 </ul>
 </dd>
 <dt class="field-even">Throws</dt>
@@ -366,14 +372,36 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt6stringE">
-<span id="_CPPv3N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt6stringE"></span><span id="_CPPv2N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt6stringE"></span><span id="wrench::FileLocation::LOCATION__std::shared_ptr:StorageService:.ss"></span><span class="target" id="classwrench_1_1_file_location_1a56dbb551725884b7456d058eb1b54b1c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ss</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">absolute_path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8LOCATIONENSt10shared_ptrI14StorageServiceEENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI8DataFileEE">
+<span id="_CPPv3N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI8DataFileEE"></span><span id="_CPPv2N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI8DataFileEE"></span><span id="wrench::FileLocation::LOCATION__std::shared_ptr:StorageService:CR.std::shared_ptr:StorageService:.std::shared_ptr:DataFile:"></span><span class="target" id="classwrench_1_1_file_location_1a1440e8c0a2eb9181392d57d17efc3278"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ss</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">server_ss</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt10shared_ptrI14StorageServiceEENSt10shared_ptrI8DataFileEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>File location specifier for a storage service’s (single) mount point root Used in case of NFS with page cache. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ss</strong> – storage service on the client (whose the page cache that data is written to) </p></li>
+<li><p><strong>server_ss</strong> – a server storage service in NFS that stores the file on disk </p></li>
+<li><p><strong>file</strong> – a file </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a file location specification</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt6stringERKNSt10shared_ptrI8DataFileEE">
+<span id="_CPPv3N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt6stringERKNSt10shared_ptrI8DataFileEE"></span><span id="_CPPv2N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt6stringERKNSt10shared_ptrI8DataFileEE"></span><span id="wrench::FileLocation::LOCATION__std::shared_ptr:StorageService:CR.ss.std::shared_ptr:DataFile:CR"></span><span class="target" id="classwrench_1_1_file_location_1a0b4c5b21a8002eef890a5a728d55e82b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ss</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">absolute_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation8LOCATIONERKNSt10shared_ptrI14StorageServiceEENSt6stringERKNSt10shared_ptrI8DataFileEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>File location specifier given an absolute path at a storage service. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ss</strong> – a storage service or ComputeService::SCRATCH </p></li>
+<li><p><strong>ss</strong> – a storage service </p></li>
 <li><p><strong>absolute_path</strong> – an absolute path at the storage service to a directory (that may contain files) </p></li>
+<li><p><strong>file</strong> – a file </p></li>
 </ul>
 </dd>
 <dt class="field-even">Throws</dt>
@@ -411,18 +439,26 @@
 <dd class="field-odd"><p><strong>path</strong> – an absolute path </p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>a sanitized path </p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation7SCRATCHE">
-<span id="_CPPv3N6wrench12FileLocation7SCRATCHE"></span><span id="_CPPv2N6wrench12FileLocation7SCRATCHE"></span><span id="wrench::FileLocation::SCRATCH__std::shared_ptr:FileLocation:"></span><span class="target" id="classwrench_1_1_file_location_1a7dd382c599ef44a68528be08985c1145"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SCRATCH</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">new</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">nullptr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation7SCRATCHE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Static location that denotes a compute service’s scratch space. </p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench12FileLocation7SCRATCHERKNSt10shared_ptrI8DataFileEE">
+<span id="_CPPv3N6wrench12FileLocation7SCRATCHERKNSt10shared_ptrI8DataFileEE"></span><span id="_CPPv2N6wrench12FileLocation7SCRATCHERKNSt10shared_ptrI8DataFileEE"></span><span id="wrench::FileLocation::SCRATCH__std::shared_ptr:DataFile:CR"></span><span class="target" id="classwrench_1_1_file_location_1a1d3f90a85a659c353347a491d6c8713d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SCRATCH</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classwrench_1_1_data_file.html#_CPPv4N6wrench8DataFileE" title="wrench::DataFile"><span class="n"><span class="pre">DataFile</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench12FileLocation7SCRATCHERKNSt10shared_ptrI8DataFileEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>File location specifier for a scratch storage. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> – a file </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">invalid_argument</span></span></span> – </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a file location specification</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
