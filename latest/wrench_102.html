@@ -95,8 +95,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>WRENCH 102</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">WRENCH 102</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/wrench_102.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -332,12 +332,12 @@ std::shared_ptr&lt;wrench::StorageService&gt; some_storage_service<span class="p
 
 <span class="o">[</span>...<span class="o">]</span>
 
-file_registry-&gt;addEntry<span class="o">(</span>some_file, wrench::FileLocation::LOCATION<span class="o">(</span>some_storage_service<span class="o">))</span><span class="p">;</span>
-file_registry-&gt;removeEntry<span class="o">(</span>some_file, wrench::FileLocatio::LOCATION<span class="o">(</span>some_storage_service<span class="o">))</span><span class="p">;</span>
+file_registry-&gt;addEntry<span class="o">(</span>wrench::FileLocation::LOCATION<span class="o">(</span>some_storage_service, some_file<span class="o">))</span><span class="p">;</span>
+file_registry-&gt;removeEntry<span class="o">(</span>wrench::FileLocatio::LOCATION<span class="o">(</span>some_storage_service, some_file<span class="o">))</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">wrench::FileLocation</span></code></a> class is a convenient abstraction for a
-file copy available at some storage service (with optionally a directory
+file that is available at some storage service (with optionally a directory
 path at that service).</p>
 <p>Retrieving all entries for a given file is done as follows:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">wrench</span><span class="o">::</span><span class="n">FileRegistryService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">file_registry</span><span class="p">;</span><span class="w"></span>

@@ -91,7 +91,9 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_bufferized.html">wrench::SimpleStorageServiceBufferized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_message_payload.html">wrench::SimpleStorageServiceMessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_non_bufferized.html">wrench::SimpleStorageServiceNonBufferized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_property.html">wrench::SimpleStorageServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simulation.html">wrench::Simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simulation_output.html">wrench::SimulationOutput</a></li>
@@ -158,9 +160,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_user.html">WRENCH User API</a> &raquo;</li>
-      <li>wrench::StorageServiceProperty</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../api_user.html">WRENCH User API</a></li>
+      <li class="breadcrumb-item active">wrench::StorageServiceProperty</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api_user/classwrench_1_1_storage_service_property.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -184,11 +186,11 @@
 <span id="_CPPv3N6wrench22StorageServiceProperty11BUFFER_SIZEE"></span><span id="_CPPv2N6wrench22StorageServiceProperty11BUFFER_SIZEE"></span><span id="wrench::StorageServiceProperty::BUFFER_SIZE__ssC"></span><span class="target" id="classwrench_1_1_storage_service_property_1a4a15fb8290bd904973c923a6e7d7ca39"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BUFFER_SIZE</span></span></span><br /></dt>
 <dd><p>Buffer size used when copying/communicating data: </p>
 <p><ul class="simple">
-<li><p>“infinity”: full buffering (read/write and forward model)</p></li>
-<li><p>”0”: an ideal fluid model</p></li>
 <li><p>any integral value in between: an actual buffer size (the smaller the buffer size, the slower the simulation)</p></li>
-<li><p>Default value: “1048576” (1 MiB)</p></li>
-<li><p>Example values: “42”, “42B”, “56MB”, “100KiB”, etc. </p></li>
+<li><p>”infinity”: read/write and forward model</p></li>
+<li><p>”0”: an ideal fluid model (very fast simulation)</p></li>
+<li><p>Default value: “0” (fluid)</p></li>
+<li><p>Example values: “0”, “infinity”, “42”, “10000000”, “42B”, “56MB”, “100KiB”, etc. </p></li>
 </ul>
 </p>
 </dd></dl>

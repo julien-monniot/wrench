@@ -361,9 +361,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_internal.html">WRENCH Internal API</a> &raquo;</li>
-      <li>wrench::SimpleStorageServiceNonBufferized</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../api_internal.html">WRENCH Internal API</a></li>
+      <li class="breadcrumb-item active">wrench::SimpleStorageServiceNonBufferized</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api_internal/classwrench_1_1_simple_storage_service_non_bufferized.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -379,34 +379,92 @@
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferizedE">
 <span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferizedE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferizedE"></span><span id="wrench::SimpleStorageServiceNonBufferized"></span><span class="target" id="classwrench_1_1_simple_storage_service_non_bufferized"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimpleStorageServiceNonBufferized</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_simple_storage_service.html#_CPPv4N6wrench20SimpleStorageServiceE" title="wrench::SimpleStorageService"><span class="n"><span class="pre">SimpleStorageService</span></span></a><br /></dt>
 <dd><p>The non-bufferized (i.e., BUFFER_SIZE == 0) implementation. </p>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11TransactionE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11TransactionE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11TransactionE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transaction</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11TransactionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Internal structure to describe transaction. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized7cleanupEbi">
-<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized7cleanupEbi"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized7cleanupEbi"></span><span id="wrench::SimpleStorageServiceNonBufferized::cleanup__b.i"></span><span class="target" id="classwrench_1_1_simple_storage_service_non_bufferized_1aabff9cd5c43207e338c3eac3dea5786a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cleanup</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">has_returned_from_main</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">return_value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized7cleanupEbi" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Cleanup method. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction11TransactionENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskEPN7simgrid3s4u7MailboxEd">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction11TransactionENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskEPN7simgrid3s4u7MailboxEd"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction11TransactionENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskEPN7simgrid3s4u7MailboxEd"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::Transaction__std::shared_ptr:FileLocation:.simgrid::s4u::HostP.simgrid::s4u::DiskP.std::shared_ptr:FileLocation:.simgrid::s4u::HostP.simgrid::s4u::DiskP.simgrid::s4u::MailboxP.double"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1ac47063a89a5a965d3822b0bfae5d2835"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transaction</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_location</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Host</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_host</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_disk</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_location</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Host</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_host</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_disk</span></span>, <span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mailbox</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">transfer_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction11TransactionENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskENSt10shared_ptrI12FileLocationEEPN7simgrid3s4u4HostEPN7simgrid3s4u4DiskEPN7simgrid3s4u7MailboxEd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>has_returned_from_main</strong> – whether main() returned </p></li>
-<li><p><strong>return_value</strong> – the return value (if main() returned) </p></li>
+<li><p><strong>src_location</strong> – source location </p></li>
+<li><p><strong>src_host</strong> – source host </p></li>
+<li><p><strong>src_disk</strong> – source disk </p></li>
+<li><p><strong>dst_location</strong> – destination location </p></li>
+<li><p><strong>dst_host</strong> – destination host </p></li>
+<li><p><strong>dst_disk</strong> – destination disk </p></li>
+<li><p><strong>mailbox</strong> – mailbox to report to </p></li>
+<li><p><strong>transfer_size</strong> – transfer size </p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized7getLoadEv">
-<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized7getLoadEv"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized7getLoadEv"></span><span id="wrench::SimpleStorageServiceNonBufferized::getLoad"></span><span class="target" id="classwrench_1_1_simple_storage_service_non_bufferized_1af708e94995a1f8a3436bfded35fa3bc0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getLoad</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized7getLoadEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Get the load (number of concurrent reads) on the storage service. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the load on the service </p>
-</dd>
-</dl>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_diskE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_diskE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_diskE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::dst_disk__simgrid::s4u::DiskP"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1a7f31531a5cd9ab1975133f230e381142"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dst_disk</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_diskE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>destination disk </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_hostE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_hostE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_hostE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::dst_host__simgrid::s4u::HostP"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1a2b17107b2be2b59bb967c3cd5f4e19aa"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Host</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dst_host</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8dst_hostE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>destination host </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction12dst_locationE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction12dst_locationE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction12dst_locationE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::dst_location__std::shared_ptr:FileLocation:"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1a4fd4253601097de0c75f4d4c72625021"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_location</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction12dst_locationE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>destination location </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction7mailboxE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction7mailboxE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction7mailboxE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::mailbox__simgrid::s4u::MailboxP"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1a9e8b2928d845d56d77db8e99145e610d"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mailbox</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mailbox</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction7mailboxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>mailbox to report to </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_diskE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_diskE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_diskE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::src_disk__simgrid::s4u::DiskP"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1a704f57aa8651559f25d0eecd236cf655"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">src_disk</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_diskE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>source disk </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_hostE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_hostE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_hostE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::src_host__simgrid::s4u::HostP"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1afbcd02b60b509a07d41d2b8b5572fa0c"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Host</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">src_host</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction8src_hostE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>source host </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction12src_locationE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction12src_locationE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction12src_locationE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::src_location__std::shared_ptr:FileLocation:"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1a0cc0d9ecd95388c4b75879c3377de28c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../api_developer/classwrench_1_1_file_location.html#_CPPv4N6wrench12FileLocationE" title="wrench::FileLocation"><span class="n"><span class="pre">FileLocation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_location</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction12src_locationE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>source location </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction6streamE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction6streamE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction6streamE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::stream__simgrid::s4u::IoPtr"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1abf430bc93e258bd7bbb565b1de22022a"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">IoPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stream</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction6streamE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SG IO op. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction13transfer_sizeE">
+<span id="_CPPv3N6wrench33SimpleStorageServiceNonBufferized11Transaction13transfer_sizeE"></span><span id="_CPPv2N6wrench33SimpleStorageServiceNonBufferized11Transaction13transfer_sizeE"></span><span id="wrench::SimpleStorageServiceNonBufferized::Transaction::transfer_size__double"></span><span class="target" id="structwrench_1_1_simple_storage_service_non_bufferized_1_1_transaction_1ad9946d1ecb5bffddac9aed5129d582c0"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">transfer_size</span></span></span><a class="headerlink" href="#_CPPv4N6wrench33SimpleStorageServiceNonBufferized11Transaction13transfer_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>transfer size </p>
 </dd></dl>
 
 </div>
+</dd></dl>
+
 </dd></dl>
 
 </section>

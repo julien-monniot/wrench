@@ -252,7 +252,9 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector.html">wrench::ServiceTerminationDetector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_termination_detector_message.html">wrench::ServiceTerminationDetectorMessage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service.html">wrench::SimpleStorageService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_bufferized.html">wrench::SimpleStorageServiceBufferized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_message_payload.html">wrench::SimpleStorageServiceMessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_non_bufferized.html">wrench::SimpleStorageServiceNonBufferized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_property.html">wrench::SimpleStorageServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simulation.html">wrench::Simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simulation_message.html">wrench::SimulationMessage</a></li>
@@ -359,9 +361,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_internal.html">WRENCH Internal API</a> &raquo;</li>
-      <li>wrench::LogicalFileSystem</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../api_internal.html">WRENCH Internal API</a></li>
+      <li class="breadcrumb-item active">wrench::LogicalFileSystem</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api_internal/classwrench_1_1_logical_file_system.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -418,6 +420,16 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>true if the directory exists </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6wrench17LogicalFileSystem7getDiskEv">
+<span id="_CPPv3N6wrench17LogicalFileSystem7getDiskEv"></span><span id="_CPPv2N6wrench17LogicalFileSystem7getDiskEv"></span><span id="wrench::LogicalFileSystem::getDisk"></span><span class="target" id="classwrench_1_1_logical_file_system_1a8db8e8d469c6bcff8ed7e6e110237e90"></span><span class="n"><span class="pre">simgrid</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">s4u</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Disk</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getDisk</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench17LogicalFileSystem7getDiskEv" title="Permalink to this definition"></a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The SimGrid disk on which this file system is mounted </p>
 </dd>
 </dl>
 </dd></dl>

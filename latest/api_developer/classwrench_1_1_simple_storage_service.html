@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wrench::SimpleStorageServiceMessagePayload" href="classwrench_1_1_simple_storage_service_message_payload.html" />
+    <link rel="next" title="wrench::SimpleStorageServiceBufferized" href="classwrench_1_1_simple_storage_service_bufferized.html" />
     <link rel="prev" title="wrench::ServiceProperty" href="classwrench_1_1_service_property.html" /> 
 </head>
 
@@ -134,7 +134,9 @@
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_message_payload.html">wrench::ServiceMessagePayload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_service_property.html">wrench::ServiceProperty</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">wrench::SimpleStorageService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_bufferized.html">wrench::SimpleStorageServiceBufferized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_message_payload.html">wrench::SimpleStorageServiceMessagePayload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_non_bufferized.html">wrench::SimpleStorageServiceNonBufferized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simple_storage_service_property.html">wrench::SimpleStorageServiceProperty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simulation.html">wrench::Simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classwrench_1_1_simulation_output.html">wrench::SimulationOutput</a></li>
@@ -208,9 +210,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_developer.html">WRENCH Developer API</a> &raquo;</li>
-      <li>wrench::SimpleStorageService</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../api_developer.html">WRENCH Developer API</a></li>
+      <li class="breadcrumb-item active">wrench::SimpleStorageService</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api_developer/classwrench_1_1_simple_storage_service.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -226,25 +228,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N6wrench20SimpleStorageServiceE">
 <span id="_CPPv3N6wrench20SimpleStorageServiceE"></span><span id="_CPPv2N6wrench20SimpleStorageServiceE"></span><span id="wrench::SimpleStorageService"></span><span class="target" id="classwrench_1_1_simple_storage_service"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimpleStorageService</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">wrench</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classwrench_1_1_storage_service.html#_CPPv4N6wrench14StorageServiceE" title="wrench::StorageService"><span class="n"><span class="pre">StorageService</span></span></a><a class="headerlink" href="#_CPPv4N6wrench20SimpleStorageServiceE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>A storage service that provides direct access to some storage resources (e.g., one or more disks). An important (configurable) property of the storage service is <a class="reference internal" href="../api_user/classwrench_1_1_storage_service_property.html#classwrench_1_1_storage_service_property_1a4a15fb8290bd904973c923a6e7d7ca39"><span class="std std-ref">SimpleStorageServiceProperty::BUFFER_SIZE</span></a> (see documentation thereof), which defines the buffer size that the storage service uses. Specifically, when the storage service receives/sends data from/to the network, it does so in a loop over data “chunks”, with pipelined network and disk I/O operations. The smaller the buffer size the more “fluid” the model, but the more time-consuming the simulation. A large buffer size, however, may lead to less realistic simulations. At the extreme, an infinite buffer size would correspond to fully sequential executions (first a network receive/send, and then a disk write/read). Setting the buffer size to “0” corresponds to a fully fluid model in which individual data chunk operations are not simulated, thus achieving both accuracy (unless one specifically wishes to study the effects of buffering) and quick simulation times. For now, setting the buffer size to “0” is not implemented. The default buffer size is 10 MiB (note that the user can always declare a disk with arbitrary bandwidth in the platform description XML). </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6wrench20SimpleStorageService20SimpleStorageServiceERKNSt6stringENSt3setINSt6stringEEE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE">
-<span id="_CPPv3N6wrench20SimpleStorageService20SimpleStorageServiceERKNSt6stringENSt3setINSt6stringEEE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="_CPPv2N6wrench20SimpleStorageService20SimpleStorageServiceERKNSt6stringENSt3setINSt6stringEEE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span id="wrench::SimpleStorageService::SimpleStorageService__ssCR.std::set:ss:.WRENCH_PROPERTY_COLLECTION_TYPE.WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE"></span><span class="target" id="classwrench_1_1_simple_storage_service_1a610e301594e36384de0898254307cde1"></span><span class="sig-name descname"><span class="n"><span class="pre">SimpleStorageService</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hostname</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mount_points</span></span>, <span class="n"><span class="pre">WRENCH_PROPERTY_COLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">property_list</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span>, <span class="n"><span class="pre">WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">messagepayload_list</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6wrench20SimpleStorageService20SimpleStorageServiceERKNSt6stringENSt3setINSt6stringEEE31WRENCH_PROPERTY_COLLECTION_TYPE37WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Public constructor. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>hostname</strong> – the name of the host on which to start the service </p></li>
-<li><p><strong>mount_points</strong> – the set of mount points </p></li>
-<li><p><strong>property_list</strong> – a property list ({} means “use all defaults”) </p></li>
-<li><p><strong>messagepayload_list</strong> – a message payload list ({} means “use all defaults”) </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
+<p>Subclassed by <a class="reference internal" href="../api_user/classwrench_1_1_simple_storage_service_bufferized.html#classwrench_1_1_simple_storage_service_bufferized"><span class="std std-ref">wrench::SimpleStorageServiceBufferized</span></a>, <a class="reference internal" href="../api_user/classwrench_1_1_simple_storage_service_non_bufferized.html#classwrench_1_1_simple_storage_service_non_bufferized"><span class="std std-ref">wrench::SimpleStorageServiceNonBufferized</span></a></p>
 </dd></dl>
 
 </section>
@@ -254,7 +238,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="classwrench_1_1_service_property.html" class="btn btn-neutral float-left" title="wrench::ServiceProperty" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="classwrench_1_1_simple_storage_service_message_payload.html" class="btn btn-neutral float-right" title="wrench::SimpleStorageServiceMessagePayload" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classwrench_1_1_simple_storage_service_bufferized.html" class="btn btn-neutral float-right" title="wrench::SimpleStorageServiceBufferized" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
