@@ -78,6 +78,8 @@ namespace wrench {
         friend class Simulation;
 
         int main() override;
+
+        bool processNextMessage(SimulationMessage *message);
         
         std::set<std::shared_ptr<StorageService>> storage_services = {};
     };

@@ -5,7 +5,7 @@
 #include <wrench/logging/TerminalOutput.h>
 
 WRENCH_LOG_CATEGORY(wrench_core_compound_storage_system,
-                    "Log category for Simple Storage Service Non Bufferized");
+                    "Log category for Compound Storage Service Non Bufferized");
 
 namespace wrench {  
     
@@ -25,9 +25,9 @@ namespace wrench {
                 const std::string &suffix) : StorageService(hostname, 
                     { LogicalFileSystem::DEV_NULL }, 
                     "compound_storage" + suffix)
-    {
-
-    }
+        {
+            this->storage_services = storage_services;
+        }
 
 
     /**
@@ -43,20 +43,19 @@ namespace wrench {
         WRENCH_INFO("%s", message.c_str());
 
         // Init file system. There is always only one built-in LogicalFilesystem, with a DEV_NULL mount point.
-        this->file_systems[0]->init();
+        for (auto const& fs: this->file_systems) { fs.second->init(); };
 
         for (const auto &ss: this->storage_services) {
             message = " - " + ss->process_name + " on " + ss->getHostname();
             WRENCH_INFO("%s", message.c_str());
         }
 
-        /* Main loop
+        /** Main loop **/
         bool comm_ptr_has_been_posted = false;
         simgrid::s4u::CommPtr comm_ptr;
         std::unique_ptr<SimulationMessage> simulation_message;
         while (true) {
-            
-            // Shameless copy-paste from SimpleStorageService... is it really needed?
+
             S4U_Simulation::computeZeroFlop();
 
             // Create an async recv if needed
@@ -70,16 +69,59 @@ namespace wrench {
                 comm_ptr_has_been_posted = true;
             }
 
-        }
-        
+            // Create all activities to wait on (only emplace the communicator)
+            std::vector<simgrid::s4u::ActivityPtr> pending_activities;
+            pending_activities.emplace_back(comm_ptr);
+            /* // We don't have running transactions in this service, other than 
+               // comms
+            for (auto const &transaction: this->running_transactions) {
+                pending_activities.emplace_back(transaction->stream);
+            }
+            */
 
-        // alternate, simpler main loop?
-        while (this->processNextMessage()) {
-            dispatchReadyActions();
+            // Wait one activity (communication in this case) to complete
+            int finished_activity_index;
+            try {
+                finished_activity_index = (int) simgrid::s4u::Activity::wait_any(pending_activities);
+            } catch (simgrid::NetworkFailureException &e) {
+                // the comm failed
+                comm_ptr_has_been_posted = false;
+                continue;// oh well
+            } catch (std::exception &e) {
+                continue;
+            }
+
+            // It's a communication
+            if (finished_activity_index == 0) {
+                comm_ptr_has_been_posted = false;
+                if (not processNextMessage(simulation_message.get())) break;
+            } else if (finished_activity_index == -1) {
+                throw std::runtime_error("wait_any() returned -1. Not sure what to do with this. ");
+            }
         }
-        */
+
+        WRENCH_INFO("Compound Storage Service %s on host %s cleanly terminating!",
+                    this->getName().c_str(),
+                    S4U_Simulation::getHostName().c_str());
 
         return 0;
+    }
+
+    /**
+     * @brief Process a received control message
+     *
+     * @return false if the daemon should terminate
+     */
+    bool CompoundStorageService::processNextMessage(SimulationMessage *message) {
+
+        WRENCH_INFO("Got a [%s] message", message->getName().c_str());
+
+        if (auto msg = dynamic_cast<ServiceStopDaemonMessage *>(message)) {
+            return processStopDaemonRequest(msg->ack_mailbox);
+        } else {
+            throw std::runtime_error(
+                    "SimpleStorageServiceNonBufferized::processNextMessage(): Unexpected [" + message->getName() + "] message");
+        }
     }
 
     /**
