@@ -51,8 +51,10 @@ namespace wrench {
 
         std::shared_ptr<DataFile> getFile();
         std::shared_ptr<StorageService> getStorageService();
+        std::shared_ptr<StorageService> updateStorageService(std::shared_ptr<StorageService> ss);
         std::shared_ptr<StorageService> getServerStorageService();
         std::string getMountPoint();
+        std::string updateMountPoint(std::string mount_point);
         std::string getAbsolutePathAtMountPoint();
         std::string getFullAbsolutePath();
         bool isScratch() const;

@@ -53,6 +53,8 @@ namespace wrench {
         // Mandatory override from virtual function in StorageService
         double getLoad() override;
 
+        std::set<std::shared_ptr<StorageService>>& getAllServices();
+
     protected:
         CompoundStorageService(const std::string &hostname, 
                                std::set<std::shared_ptr<StorageService>> storage_services,

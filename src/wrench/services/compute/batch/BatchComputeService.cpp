@@ -350,6 +350,8 @@ namespace wrench {
                     "BatchComputeService::submitCompoundJob(): service-specific arguments should have non-zero values");
         }
 
+        WRENCH_INFO("Creating batch job from compound job %s", job->getName().c_str());
+
         // Create a Batch Job
         unsigned long jobid = wrench::BatchComputeService::generateUniqueJobID();
         auto batch_job = std::shared_ptr<BatchJob>(new BatchJob(job, jobid, time_asked_for_in_minutes,

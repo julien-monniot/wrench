@@ -48,6 +48,11 @@ namespace wrench {
         for (const auto &ss: this->storage_services) {
             message = " - " + ss->process_name + " on " + ss->getHostname();
             WRENCH_INFO("%s", message.c_str());
+            // For more info, see directly the logs from the SimpleStorageServices themselves.
+            for (const auto &mnt: ss->getMountPoints()) {
+                message = "   - " + mnt;
+                WRENCH_INFO("%s", message.c_str());
+            }
         }
 
         /** Main loop **/
@@ -133,6 +138,17 @@ namespace wrench {
         throw std::runtime_error("CompoundStorageService::getLoad(): Not implemented. "
                                  "Call getLoad() on internal storage service(s) instead");
     }
+
+
+    /**
+     * @brief Return the set of all services accessible through this CompoundStorageService
+     * 
+     * @return The set of known StorageServices.
+    */
+    std::set<std::shared_ptr<StorageService>>& CompoundStorageService::getAllServices() {
+        return this->storage_services;
+    }
+
 
     /**
      * @brief Get a file's last write date at a location (in zero simulated time)
