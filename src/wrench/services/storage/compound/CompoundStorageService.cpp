@@ -23,10 +23,19 @@ namespace wrench {
                 WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                 WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
                 const std::string &suffix) : StorageService(hostname, 
-                    { LogicalFileSystem::DEV_NULL }, 
                     "compound_storage" + suffix)
         {
+
+            this->setProperties(this->default_property_values, std::move(property_list));
+            this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
+            this->validateProperties();
             this->storage_services = storage_services;
+            this->file_systems[LogicalFileSystem::DEV_NULL] = LogicalFileSystem::createLogicalFileSystem(
+                        this->getHostname(), 
+                        this, 
+                        LogicalFileSystem::DEV_NULL, 
+                        this->getPropertyValueAsString(wrench::StorageServiceProperty::CACHING_BEHAVIOR)
+            );
         }
 
 
@@ -147,6 +156,15 @@ namespace wrench {
     */
     std::set<std::shared_ptr<StorageService>>& CompoundStorageService::getAllServices() {
         return this->storage_services;
+    }
+
+
+    /**
+     * @brief Helper method to validate property values
+     * throw std::invalid_argument
+     */
+    void CompoundStorageService::validateProperties() {
+        this->getPropertyValueAsString(CompoundStorageServiceProperty::STORAGE_SELECTION_METHOD);
     }
 
 

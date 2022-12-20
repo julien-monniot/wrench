@@ -64,6 +64,7 @@ namespace wrench {
 
         WRENCH_PROPERTY_COLLECTION_TYPE default_property_values = {
                 {CompoundStorageServiceProperty::STORAGE_SELECTION_METHOD, "external"},
+                {CompoundStorageServiceProperty::CACHING_BEHAVIOR, "NONE"},
         };
 
         /** @brief Default message payload values */
@@ -84,6 +85,8 @@ namespace wrench {
         bool processNextMessage(SimulationMessage *message);
         
         std::set<std::shared_ptr<StorageService>> storage_services = {};
+
+        void validateProperties();
     };
 
 };// namespace wrench
