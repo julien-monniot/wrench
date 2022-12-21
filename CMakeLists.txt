@@ -259,6 +259,8 @@ set(SOURCE_FILES
         include/wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_core_level/ConservativeBackfillingBatchSchedulerCoreLevel.h
         src/wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_core_level/CoreAvailabilityTimeLine.cpp
         include/wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_core_level/CoreAvailabilityTimeLine.h
+        src/wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_storage/ConservativeBackfillingBatchSchedulerStorage.cpp
+        include/wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_storage/ConservativeBackfillingBatchSchedulerStorage.h
         src/wrench/services/compute/batch/batch_schedulers/homegrown/fcfs/FCFSBatchScheduler.cpp
         include/wrench/services/compute/batch/batch_schedulers/homegrown/fcfs/FCFSBatchScheduler.h
         src/wrench/services/compute/batch/workload_helper_classes/TraceFileLoader.cpp

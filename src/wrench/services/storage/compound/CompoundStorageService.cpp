@@ -5,7 +5,7 @@
 #include <wrench/logging/TerminalOutput.h>
 
 WRENCH_LOG_CATEGORY(wrench_core_compound_storage_system,
-                    "Log category for Compound Storage Service Non Bufferized");
+                    "Log category for Compound Storage Service");
 
 namespace wrench {  
     
@@ -29,6 +29,7 @@ namespace wrench {
             this->setProperties(this->default_property_values, std::move(property_list));
             this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
             this->validateProperties();
+
             this->storage_services = storage_services;
             this->file_systems[LogicalFileSystem::DEV_NULL] = LogicalFileSystem::createLogicalFileSystem(
                         this->getHostname(), 

@@ -142,6 +142,7 @@ namespace wrench {
         friend class FCFSBatchScheduler;
         friend class ConservativeBackfillingBatchScheduler;
         friend class ConservativeBackfillingBatchSchedulerCoreLevel;
+        friend class ConservativeBackfillingBatchSchedulerStorage;
 
         friend class BatschedBatchScheduler;
 
@@ -212,7 +213,7 @@ namespace wrench {
         std::set<std::string> queue_ordering_options = {"fcfs", "lcfs", "desc_bounded_slowdown", "desc_slowdown",
                                                         "asc_size", "desc_size", "asc_walltime", "desc_walltime"};
 #else
-        std::set<std::string> scheduling_algorithms = {"fcfs", "conservative_bf", "conservative_bf_core_level"};
+        std::set<std::string> scheduling_algorithms = {"fcfs", "conservative_bf", "conservative_bf_core_level", "conservative_bf_storage"};
 
         //Batch queue ordering options
         std::set<std::string> queue_ordering_options = {};
