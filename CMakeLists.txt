@@ -433,6 +433,7 @@ set(TEST_FILES
         test/services/helper_services/AlarmTest.cpp
         test/services/storage_services/XRootDStorageService/XRootDStorageServiceBasicFunctionalTest.cpp
         test/services/storage_services/XRootDStorageService/XRootDStorageServiceFullFunctionalTest.cpp
+        test/services/storage_services/CompoundStorageService/CompoundStorageServiceFunctionalTest.cpp
         test/wms/WMSTest.cpp
         test/wms/MultipleWMSTest.cpp
         test/services/compute_services/virtualized_cluster/VirtualizedClusterServiceTest.cpp

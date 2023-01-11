@@ -216,7 +216,7 @@ namespace wrench {
      * @brief Update storage service
      * @return The updated storage service
      */
-    std::shared_ptr<StorageService> FileLocation::updateStorageService(std::shared_ptr<StorageService> storage_service) {
+    std::shared_ptr<StorageService> FileLocation::setStorageService(std::shared_ptr<StorageService> storage_service) {
         this->storage_service = std::move(storage_service);
         return this->storage_service;
     }
@@ -252,7 +252,7 @@ namespace wrench {
         return this->mount_point;
     }
 
-    std::string FileLocation::updateMountPoint(std::string mount_point) {
+    std::string FileLocation::setMountPoint(std::string mount_point) {
         if (this->is_scratch) {
             throw std::invalid_argument("FileLocation::getMountPoint(): No mount point for a SCRATCH location");
         }

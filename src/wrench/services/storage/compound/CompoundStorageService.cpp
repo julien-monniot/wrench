@@ -1,5 +1,7 @@
 #include <wrench/services/storage/compound/CompoundStorageService.h>
 #include <wrench/services/ServiceMessage.h>
+#include "wrench/services/storage/StorageServiceMessage.h"
+#include <wrench/services/storage/StorageServiceMessagePayload.h>
 #include <wrench/simgrid_S4U_util/S4U_Mailbox.h>
 #include <wrench/exceptions/ExecutionException.h>
 #include <wrench/logging/TerminalOutput.h>
@@ -29,6 +31,15 @@ namespace wrench {
             this->setProperties(this->default_property_values, std::move(property_list));
             this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
             this->validateProperties();
+
+            if (storage_services.empty()) {
+                throw std::invalid_argument("Got an empty list of SimpleStorageServices for CompoundStorageService."
+                "Must specify at least one valid SimpleStorageService");
+            }
+
+            if (std::any_of(storage_services.begin(), storage_services.end(), [](const auto& elem){ return elem == NULL; })) {
+                throw std::invalid_argument("One of the SimpleStorageServices provided is not initialized");
+            }
 
             this->storage_services = storage_services;
             this->file_systems[LogicalFileSystem::DEV_NULL] = LogicalFileSystem::createLogicalFileSystem(
@@ -145,8 +156,75 @@ namespace wrench {
      * @return the load on the service (currently throws)
      */
     double CompoundStorageService::getLoad() {
-        throw std::runtime_error("CompoundStorageService::getLoad(): Not implemented. "
+        throw std::logic_error("CompoundStorageService::getLoad(): Not implemented. "
                                  "Call getLoad() on internal storage service(s) instead");
+    }
+
+    /**
+     * @brief Get the total space across all internal services known by the CompoundStorageService
+     * 
+     * @return A map of service name and total capacity of all disks for each service.
+     */
+    std::map<std::string, double> CompoundStorageService::getTotalSpace() {
+
+        std::map<std::string, double> to_return;
+        for (const auto & service : this->storage_services) {
+            auto service_name = service->getName();
+            auto service_capacity = service->getTotalSpace();
+            to_return[service_name] = std::accumulate(service_capacity.begin(), service_capacity.end(), 0, 
+                                                        [](const std::size_t previous, const auto& element){ return previous + element.second;});
+        }
+        return to_return;
+    }
+
+    /**
+     * @brief Synchronously asks the storage services inside the compound storage service 
+     *        for their free space at all of their mount points
+     * 
+     * @return The free space in bytes of each mount point, as a map
+     *
+     * @throw ExecutionException
+     *
+     * @throw std::runtime_error
+     *
+     */
+    std::map<std::string, double> CompoundStorageService::getFreeSpace() {
+
+        std::map<std::string, double> to_return = {}; 
+        std::map<std::string, simgrid::s4u::Mailbox*> mailboxes = {};
+
+        for (const auto & service : this->storage_services) {
+            assertServiceIsUp();
+
+            // Send a message to the daemon
+            auto answer_mailbox = S4U_Daemon::getRunningActorRecvMailbox();
+            mailboxes[service->getName()] = mailbox;
+            S4U_Mailbox::putMessage(this->mailbox, new StorageServiceFreeSpaceRequestMessage(
+                                                        answer_mailbox,
+                                                        this->getMessagePayloadValue(
+                                                        StorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD)));
+        }
+
+        for (auto & answer : mailboxes) {
+            // Wait for a reply
+            std::unique_ptr<SimulationMessage> message = nullptr;
+            message = S4U_Mailbox::getMessage(answer.second, this->network_timeout);
+
+            if (auto msg = dynamic_cast<StorageServiceFreeSpaceAnswerMessage *>(message.get())) {
+                to_return[answer.first] = std::accumulate(msg->free_space.begin(), msg->free_space.end(), 0, 
+                                                          [](const std::size_t previous, const auto& element){return previous + element.second;}
+                );
+            } else {
+                throw std::runtime_error("CompoundStorageService::getFreeSpace(): Unexpected [" + message->getName() + "] message");
+            }
+        }
+
+        return to_return;
+
+    }
+
+    void CompoundStorageService::setScratch() {
+        throw std::logic_error("CompoundStorageService can't be setup as a scratch space, it is only an abstraction layer.");
     }
 
 
@@ -165,7 +243,10 @@ namespace wrench {
      * throw std::invalid_argument
      */
     void CompoundStorageService::validateProperties() {
-        this->getPropertyValueAsString(CompoundStorageServiceProperty::STORAGE_SELECTION_METHOD);
+        auto value = this->getPropertyValueAsString(CompoundStorageServiceProperty::STORAGE_SELECTION_METHOD);
+        if (value != "external") {
+            throw std::invalid_argument("CompoundStorageService::validateProperties Only 'external' storage selection method is currently allowed");
+        }
     }
 
 
@@ -178,7 +259,7 @@ namespace wrench {
      *
      */
     double CompoundStorageService::getFileLastWriteDate(const std::shared_ptr<FileLocation> &location) {
-        throw std::runtime_error("CompoundStorageService::getFileLastWriteDate(): CompoundStorageService"
+        throw std::logic_error("CompoundStorageService::getFileLastWriteDate(): CompoundStorageService"
                                  " doesn't have a LogicalFileSystem. Call on internal storage service(s) instead");
     }
 

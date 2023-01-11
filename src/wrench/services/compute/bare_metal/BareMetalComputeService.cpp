@@ -228,7 +228,7 @@ namespace wrench {
                         WRENCH_WARN("BareMetalComputeService::submitCompoundJob() No storage service found in CompoundStorageService");
                     } else {
                         // just use the first storage service
-                        auto new_ss = file_location->updateStorageService(*(simple_storage_services.begin()));
+                        auto new_ss = file_location->setStorageService(*(simple_storage_services.begin()));
 
 
                         // One or many disks
@@ -237,11 +237,11 @@ namespace wrench {
                             for(auto pt: mt_pts) {
                                 WRENCH_INFO("%s", pt.c_str());
                             }
-                            file_location->updateMountPoint(*(mt_pts.begin()));
+                            file_location->setMountPoint(*(mt_pts.begin()));
                         } else {
                             auto mt_pt = new_ss->getMountPoint();
                             WRENCH_INFO("%s", mt_pt.c_str());
-                            file_location->updateMountPoint(mt_pt);
+                            file_location->setMountPoint(mt_pt);
                         }
                         
                         WRENCH_INFO("%s", file_location->getAbsolutePathAtMountPoint().c_str());

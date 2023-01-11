@@ -238,7 +238,7 @@ int main(int argc, char **argv) {
     }
 
     /* Dump it all to a JSON file */
-    simulation->getOutput().dumpUnifiedJSON(workflow, "/tmp/wrench.json");
+    simulation->getOutput().dumpDiskOperationsJSON("/tmp/wrench.json", true);
 
     return 0;
 }

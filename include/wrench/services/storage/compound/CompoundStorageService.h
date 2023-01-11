@@ -53,6 +53,13 @@ namespace wrench {
         // Mandatory override from virtual function in StorageService
         double getLoad() override;
 
+        // Hides StorageService's implementation.
+        std::map<std::string, double> getTotalSpace();
+
+        std::map<std::string, double> getFreeSpace();
+        
+        void setScratch();
+
         std::set<std::shared_ptr<StorageService>>& getAllServices();
 
     protected:
@@ -71,6 +78,7 @@ namespace wrench {
         WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE default_messagepayload_values = {
                 {CompoundStorageServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD, 1024},
                 {CompoundStorageServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD, 1024},
+                {CompoundStorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD, 1024},
         };
 
         static unsigned long getNewUniqueNumber();
@@ -87,6 +95,7 @@ namespace wrench {
         std::set<std::shared_ptr<StorageService>> storage_services = {};
 
         void validateProperties();
+
     };
 
 };// namespace wrench
