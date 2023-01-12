@@ -78,7 +78,17 @@ namespace wrench {
         WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE default_messagepayload_values = {
                 {CompoundStorageServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD, 1024},
                 {CompoundStorageServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD, 1024},
-                {CompoundStorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD, 1024},
+                {CompoundStorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_DELETE_REQUEST_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_LOOKUP_REQUEST_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD, 0},
         };
 
         static unsigned long getNewUniqueNumber();
@@ -91,6 +101,24 @@ namespace wrench {
         int main() override;
 
         bool processNextMessage(SimulationMessage *message);
+
+        bool processFileDeleteRequest(const std::shared_ptr<FileLocation> &location,
+                                      simgrid::s4u::Mailbox *answer_mailbox);
+        bool processFileLookupRequest(const std::shared_ptr<FileLocation> &location,
+                                      simgrid::s4u::Mailbox *answer_mailbox);
+
+        bool processFileCopyRequest(
+                const std::shared_ptr<FileLocation> &src,
+                const std::shared_ptr<FileLocation> &dst,
+                simgrid::s4u::Mailbox *answer_mailbox);
+
+        bool processFileWriteRequest(const std::shared_ptr<FileLocation> &location,
+                                     simgrid::s4u::Mailbox *answer_mailbox, simgrid::s4u::Host *requesting_host,
+                                     double buffer_size);
+
+        bool processFileReadRequest(const std::shared_ptr<FileLocation> &location,
+                               double num_bytes_to_read, simgrid::s4u::Mailbox *answer_mailbox,
+                               simgrid::s4u::Host *requesting_host);
         
         std::set<std::shared_ptr<StorageService>> storage_services = {};
 

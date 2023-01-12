@@ -3,6 +3,7 @@
 #include "wrench/services/storage/StorageServiceMessage.h"
 #include <wrench/services/storage/StorageServiceMessagePayload.h>
 #include <wrench/simgrid_S4U_util/S4U_Mailbox.h>
+#include <wrench/failure_causes/FunctionalityNotAvailable.h>
 #include <wrench/exceptions/ExecutionException.h>
 #include <wrench/logging/TerminalOutput.h>
 
@@ -144,11 +145,132 @@ namespace wrench {
 
         if (auto msg = dynamic_cast<ServiceStopDaemonMessage *>(message)) {
             return processStopDaemonRequest(msg->ack_mailbox);
+
+        } else if (auto msg = dynamic_cast<StorageServiceFileDeleteRequestMessage *>(message)) {
+            return processFileDeleteRequest(msg->location, msg->answer_mailbox);
+
+        } else if (auto msg = dynamic_cast<StorageServiceFileLookupRequestMessage *>(message)) {
+            return processFileLookupRequest(msg->location, msg->answer_mailbox);
+
+        } else if (auto msg = dynamic_cast<StorageServiceFileWriteRequestMessage *>(message)) {
+            return processFileWriteRequest(msg->location, msg->answer_mailbox,
+                                           msg->requesting_host, msg->buffer_size);
+
+        } else if (auto msg = dynamic_cast<StorageServiceFileReadRequestMessage *>(message)) {
+            return processFileReadRequest(msg->location,
+                                          msg->num_bytes_to_read, msg->answer_mailbox, msg->requesting_host);
+
+        } else if (auto msg = dynamic_cast<StorageServiceFileCopyRequestMessage *>(message)) {
+            return processFileCopyRequest(msg->src, msg->dst, msg->answer_mailbox);
+
         } else {
             throw std::runtime_error(
-                    "SimpleStorageServiceNonBufferized::processNextMessage(): Unexpected [" + message->getName() + "] message");
+                    "CompoundStorageService::processNextMessage(): Unexpected [" + message->getName() + "] message." + 
+                    "This is only an abstraction layer and it can't be used as an actual storage service");
         }
     }
+
+    bool CompoundStorageService::processFileDeleteRequest(const std::shared_ptr<FileLocation> &location, simgrid::s4u::Mailbox *answer_mailbox) {
+
+        try {        
+            S4U_Mailbox::dputMessage(
+                answer_mailbox,
+                new StorageServiceFileDeleteAnswerMessage(
+                        nullptr,
+                        this->getSharedPtr<CompoundStorageService>(),
+                        false,
+                        std::shared_ptr<FailureCause>(new FunctionalityNotAvailable(
+                            this->getSharedPtr<CompoundStorageService>(), "FileDelete")
+                        ),
+                        this->getMessagePayloadValue(
+                                CompoundStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD)));
+        } catch (wrench::ExecutionException &e) {}
+
+        return true;
+    }
+    
+    bool CompoundStorageService::processFileLookupRequest(const std::shared_ptr<FileLocation> &location, simgrid::s4u::Mailbox *answer_mailbox) {
+        
+        try {   
+            S4U_Mailbox::dputMessage(
+                answer_mailbox,
+                new StorageServiceFileLookupAnswerMessage(
+                        nullptr, false,
+                        this->getMessagePayloadValue(
+                            CompoundStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD)));
+        } catch (wrench::ExecutionException &e) {}
+
+        return true;
+    }
+
+    bool CompoundStorageService::processFileCopyRequest(
+                const std::shared_ptr<FileLocation> &src,
+                const std::shared_ptr<FileLocation> &dst,
+                simgrid::s4u::Mailbox *answer_mailbox) {
+
+        try {
+            S4U_Mailbox::putMessage(
+                    answer_mailbox,
+                    new StorageServiceFileCopyAnswerMessage(
+                            src,
+                            dst,
+                            nullptr, 
+                            false,
+                            false,
+                            std::shared_ptr<FailureCause>(new FunctionalityNotAvailable(
+                                this->getSharedPtr<CompoundStorageService>(), "FileCopy")
+                            ),
+                            this->getMessagePayloadValue(
+                                    CompoundStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD))
+                    );
+        } catch (ExecutionException &e) {}
+
+        return true;
+    }
+
+    bool CompoundStorageService::processFileWriteRequest(const std::shared_ptr<FileLocation> &location,
+                                     simgrid::s4u::Mailbox *answer_mailbox, simgrid::s4u::Host *requesting_host,
+                                     double buffer_size) {
+
+        try {
+            S4U_Mailbox::dputMessage(
+                answer_mailbox,
+                new StorageServiceFileWriteAnswerMessage(
+                        location,
+                        false,
+                        std::shared_ptr<FailureCause>(new FunctionalityNotAvailable(
+                            this->getSharedPtr<CompoundStorageService>(), "FileWrite")
+                        ),
+                        nullptr,
+                        this->getMessagePayloadValue(
+                                CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD)));
+        } catch (wrench::ExecutionException &e) {}
+
+        return true;
+    }
+
+    bool CompoundStorageService::processFileReadRequest(const std::shared_ptr<FileLocation> &location,
+                               double num_bytes_to_read, simgrid::s4u::Mailbox *answer_mailbox,
+                               simgrid::s4u::Host *requesting_host) {
+        
+        try {
+            S4U_Mailbox::dputMessage(
+                    answer_mailbox,
+                    new StorageServiceFileReadAnswerMessage(
+                            location,
+                            false,
+                            std::shared_ptr<FailureCause>(
+                                new FunctionalityNotAvailable(this->getSharedPtr<CompoundStorageService>(), "FileRead")
+                            ),
+                            0,
+                            this->getMessagePayloadValue(
+                                    CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD))
+            );
+        } catch (wrench::ExecutionException &e) {}
+
+        return true;
+    }
+
 
     /**
      * @brief Get the load (number of concurrent reads) on the storage service
@@ -194,33 +316,16 @@ namespace wrench {
         std::map<std::string, simgrid::s4u::Mailbox*> mailboxes = {};
 
         for (const auto & service : this->storage_services) {
-            assertServiceIsUp();
+            
+            auto free_space = service->getFreeSpace();
 
-            // Send a message to the daemon
-            auto answer_mailbox = S4U_Daemon::getRunningActorRecvMailbox();
-            mailboxes[service->getName()] = mailbox;
-            S4U_Mailbox::putMessage(this->mailbox, new StorageServiceFreeSpaceRequestMessage(
-                                                        answer_mailbox,
-                                                        this->getMessagePayloadValue(
-                                                        StorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD)));
-        }
-
-        for (auto & answer : mailboxes) {
-            // Wait for a reply
-            std::unique_ptr<SimulationMessage> message = nullptr;
-            message = S4U_Mailbox::getMessage(answer.second, this->network_timeout);
-
-            if (auto msg = dynamic_cast<StorageServiceFreeSpaceAnswerMessage *>(message.get())) {
-                to_return[answer.first] = std::accumulate(msg->free_space.begin(), msg->free_space.end(), 0, 
+            to_return[service->getName()] = std::accumulate(free_space.begin(), free_space.end(), 0, 
                                                           [](const std::size_t previous, const auto& element){return previous + element.second;}
-                );
-            } else {
-                throw std::runtime_error("CompoundStorageService::getFreeSpace(): Unexpected [" + message->getName() + "] message");
-            }
+            );
+
         }
 
         return to_return;
-
     }
 
     void CompoundStorageService::setScratch() {

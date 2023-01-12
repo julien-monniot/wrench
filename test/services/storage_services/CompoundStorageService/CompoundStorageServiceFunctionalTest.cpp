@@ -84,6 +84,10 @@ protected:
                           "       </host>"
                           "       <host id=\"CompoundStorageHost\" speed=\"1f\">"
                           "       </host>"
+                          "       <link id=\"Link1\" bandwidth=\"50MBps\" latency=\"150us\"/> "
+                          "       <link id=\"Link2\" bandwidth=\"50MBps\" latency=\"150us\"/> "
+                          "       <route src=\"CompoundStorageHost\" dst=\"SimpleStorageHost0\"><link_ctn id=\"Link1\"/></route> "
+                          "       <route src=\"CompoundStorageHost\" dst=\"SimpleStorageHost1\"><link_ctn id=\"Link2\"/></route> "
                           "   </zone> "
                           "</platform>";
         FILE *platform_file = fopen(platform_file_path.c_str(), "w");
@@ -111,7 +115,6 @@ private:
 
     int main() {
 
-
         // Retrieve internal SimpleStorageServices
         auto simple_storage_services = test->compound_storage_service->getAllServices();
         if (simple_storage_services.size() != 2) {
@@ -119,24 +122,20 @@ private:
                     "There should be two SimpleStorageServices available from the CompoundStorage. Found " + std::to_string(simple_storage_services.size()) + " instead");
         }
 
-
-    /*  NOT BEHAVING THE WAY I THOUGH IT WOULD...
-
-        // Verify that total space is correct
-        auto capacity = test->compound_storage_service->getTotalSpace();
-        auto expected_capacity = std::map<std::string, double>({{"SimpleStorageHost0", 100.0}, {"SimpleStorageHost1", 610.0}});
-        if (capacity != expected_capacity) {
-            throw std::runtime_error("Total Space available to CompoundStorageService is incorrect");
-        }
- 
-    
         // Verify synchronous request for current free space (currently same as capacity, as no file has been placed on internal services)
+        auto expected_capacity = std::map<std::string, double>(
+            {{test->simple_storage_service_100->getName(), 100.0}, {test->simple_storage_service_510->getName(), 610.0}}
+        );
         auto free_space = test->compound_storage_service->getFreeSpace();
         if (free_space != expected_capacity) {
             throw std::runtime_error("Total free space available to CompoundStorageService is incorrect");
         }
 
-    */
+        // Verify that total space is correct
+        auto capacity = test->compound_storage_service->getTotalSpace();
+        if (capacity != expected_capacity) {
+            throw std::runtime_error("Total Space available to CompoundStorageService is incorrect");
+        }
 
         // Verify that compound storage service mount point is simply DEV_NULL
         auto mount_point = test->compound_storage_service->getMountPoint();
@@ -148,18 +147,16 @@ private:
         try {
             test->compound_storage_service->getLoad();
             throw std::runtime_error("CompoundStorageService doesn't have a getLoad() implemented");
-        } catch (std::logic_error &e) {
-        }
+        } catch (std::logic_error &e) {}
 
         {
             auto file_1_loc = wrench::FileLocation::LOCATION(test->compound_storage_service, test->file_1);
             try {
                 test->compound_storage_service->getFileLastWriteDate(file_1_loc);
-              throw std::runtime_error("CompoundStorageService doesn't have a getFileLastWriteDate() implemented");
-          } catch (std::logic_error &e) {}
+                throw std::runtime_error("CompoundStorageService doesn't have a getFileLastWriteDate() implemented");
+            } catch (std::logic_error &e) {}
         }
 
-    
         if (test->compound_storage_service->isScratch() == true) {
             throw std::runtime_error("CompoundStorageService should never have isScratch == true");
         }
@@ -169,9 +166,36 @@ private:
             throw std::runtime_error("CompoundStorageService can't be setup as a scratch space");
         } catch (std::logic_error &e) {}
    
+
+        // Test multiple messages that should raise a logic error when sent to a CompoundStorageService    
         
-        auto file_1_loc = wrench::FileLocation::LOCATION(test->compound_storage_service, test->file_1);
+        auto file_1_loc_src = wrench::FileLocation::LOCATION(test->compound_storage_service, test->file_1);
+        auto file_1_loc_dst = wrench::FileLocation::LOCATION(test->simple_storage_service_100, test->file_1);
+     
+        try {
+            wrench::StorageService::copyFile(file_1_loc_src, file_1_loc_dst);
+            throw std::runtime_error("Should not be able to copy file with a CompoundStorageService as src or dst");
+        } catch (wrench::ExecutionException &) {}
+        
+        try {
+            wrench::StorageService::deleteFile(file_1_loc_src);
+            throw std::runtime_error("Should not be able to delete file from a CompoundStorageService");
+        } catch (wrench::ExecutionException &) {}
     
+        try {
+            wrench::StorageService::readFile(file_1_loc_src);
+            throw std::runtime_error("Should not be able to read file from a CompoundStorageService");
+        } catch (wrench::ExecutionException &) {}
+
+        try {
+            wrench::StorageService::writeFile(file_1_loc_src);
+            throw std::runtime_error("Should not be able to write file on a CompoundStorageService");
+        } catch (wrench::ExecutionException &) {}
+
+        
+        if (wrench::StorageService::lookupFile(file_1_loc_src))
+            throw std::runtime_error("Should not be able to lookup file from a CompoundStorageService");
+       
         /*
         
         // Do a bogus lookup
