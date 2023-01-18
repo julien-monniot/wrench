@@ -10,9 +10,13 @@
 #ifndef WRENCH_CONSERVATIVEBACKFILLINGBATCHSCHEDULERSTORAGE_H
 #define WRENCH_CONSERVATIVEBACKFILLINGBATCHSCHEDULERSTORAGE_H
 
+#include <memory>
+
 #include "wrench/services/compute/batch/BatchComputeService.h"
 #include "wrench/services/compute/batch/batch_schedulers/homegrown/HomegrownBatchScheduler.h"
 #include <wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf/NodeAvailabilityTimeLine.h>
+#include <wrench/services/storage/compound/CompoundStorageService.h>
+
 
 namespace wrench {
 
@@ -44,6 +48,11 @@ namespace wrench {
 
     private:
         std::unique_ptr<NodeAvailabilityTimeLine> schedule;
+
+        void setConcreteStorage(std::shared_ptr<wrench::Action> action) const;
+
+        void selectSimpleStorage(wrench::CompoundStorageService* compound_storage, std::shared_ptr<wrench::FileLocation> location, double size) const;
+
     };
 
 

@@ -278,6 +278,7 @@ namespace wrench {
      * @return the load on the service (currently throws)
      */
     double CompoundStorageService::getLoad() {
+        WRENCH_WARN("CompoundStorageService::getLoad Not implemented");
         throw std::logic_error("CompoundStorageService::getLoad(): Not implemented. "
                                  "Call getLoad() on internal storage service(s) instead");
     }
@@ -289,6 +290,7 @@ namespace wrench {
      */
     std::map<std::string, double> CompoundStorageService::getTotalSpace() {
 
+        WRENCH_INFO("CompoundStorageService::getTotalSpace");
         std::map<std::string, double> to_return;
         for (const auto & service : this->storage_services) {
             auto service_name = service->getName();
@@ -312,6 +314,8 @@ namespace wrench {
      */
     std::map<std::string, double> CompoundStorageService::getFreeSpace() {
 
+        WRENCH_INFO("CompoundStorageService::getFreeSpace Forwarding request to internal services");
+
         std::map<std::string, double> to_return = {}; 
         std::map<std::string, simgrid::s4u::Mailbox*> mailboxes = {};
 
@@ -329,6 +333,7 @@ namespace wrench {
     }
 
     void CompoundStorageService::setScratch() {
+        WRENCH_WARN("CompoundStorageService::setScratch Forbidden");
         throw std::logic_error("CompoundStorageService can't be setup as a scratch space, it is only an abstraction layer.");
     }
 
@@ -339,6 +344,7 @@ namespace wrench {
      * @return The set of known StorageServices.
     */
     std::set<std::shared_ptr<StorageService>>& CompoundStorageService::getAllServices() {
+        WRENCH_INFO("CompoundStorageService::getAllServices");
         return this->storage_services;
     }
 
@@ -350,6 +356,7 @@ namespace wrench {
     void CompoundStorageService::validateProperties() {
         auto value = this->getPropertyValueAsString(CompoundStorageServiceProperty::STORAGE_SELECTION_METHOD);
         if (value != "external") {
+            WRENCH_INFO("CompoundStorageService::validateProperties Incorrect property for STORAGE_SELECTION_METHOD");
             throw std::invalid_argument("CompoundStorageService::validateProperties Only 'external' storage selection method is currently allowed");
         }
     }
@@ -364,6 +371,7 @@ namespace wrench {
      *
      */
     double CompoundStorageService::getFileLastWriteDate(const std::shared_ptr<FileLocation> &location) {
+        WRENCH_INFO("CompoundStorageService::getFileLastWriteDate Not implemented, call internal services instead");
         throw std::logic_error("CompoundStorageService::getFileLastWriteDate(): CompoundStorageService"
                                  " doesn't have a LogicalFileSystem. Call on internal storage service(s) instead");
     }

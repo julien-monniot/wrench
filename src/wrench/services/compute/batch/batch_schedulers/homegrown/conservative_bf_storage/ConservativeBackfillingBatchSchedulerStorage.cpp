@@ -7,15 +7,17 @@
  * (at your option) any later version.
  */
 
+#include "wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_storage/ConservativeBackfillingBatchSchedulerStorage.h"
+
 #include <wrench/logging/TerminalOutput.h>
 #include <wrench/simulation/Simulation.h>
 #include <wrench/action/FileReadAction.h>
 #include <wrench/action/FileWriteAction.h>
+#include <wrench/action/FileCopyAction.h>
 #include <wrench/services/storage/compound/CompoundStorageService.h>
-
-#include <memory>
-
-#include "wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_storage/ConservativeBackfillingBatchSchedulerStorage.h"
+#include <wrench/services/storage/simple/SimpleStorageService.h>
+#include <wrench/exceptions/ExecutionException.h>
+#include <wrench/failure_causes/FatalFailure.h>
 
 //#define  PRINT_SCHEDULE 1
 
@@ -38,6 +40,13 @@ namespace wrench {
     void ConservativeBackfillingBatchSchedulerStorage::processJobSubmission(std::shared_ptr<BatchJob> batch_job) {
         WRENCH_INFO("Scheduling a new BatchComputeService job, %lu, that needs %lu nodes",
                     batch_job->getJobID(), batch_job->getRequestedNumNodes());
+
+        WRENCH_INFO("BatchComputeService::processQueuedJobs() - Starting to introspect actions");
+        // Update any storage location that refers to a CompoundStorageService in read/write/copy actions
+        for (auto& action: batch_job->getCompoundJob()->getActions()) {
+            this->setConcreteStorage(action);
+        }
+        WRENCH_INFO("BatchComputeService::processQueuedJobs() - Finished introspecting actions");
 
         // Update the time origin
         this->schedule->setTimeOrigin((u_int32_t) Simulation::getCurrentSimulatedDate());
@@ -85,56 +94,6 @@ namespace wrench {
 
             // Get the workflow job associated to the picked BatchComputeService job
             std::shared_ptr<CompoundJob> compound_job = batch_job->getCompoundJob();
-
-            // SNIPPET TO AUTOMATICALLY CHOOSE A CONCRETE STORAGE SERVICE FOR EACH
-            // READ OR WRITE ACTION ON A COMPOUND STORAGE SERVICE
-            for (const auto& action: compound_job->getActions()) {
-
-                if (auto io_action = dynamic_cast<FileReadAction*>(action.get())) {
-
-                    for(auto& file_location: io_action->getFileLocations()) {
-                        auto storage_service = file_location->getStorageService();
-                        if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
-                            WRENCH_INFO("BatchComputeService::processQueuedJobs() Found CompoundStorageService in FileReadAction");
-                        }
-                    }
-
-                } else if (auto io_action = dynamic_cast<FileWriteAction*>(action.get())) {
-
-                    WRENCH_INFO("BatchComputeService::processQueuedJobs() One of the action is a file read or write");
-
-                    auto file_location = io_action->getFileLocation();
-                    auto storage_service = file_location->getStorageService();
-                    if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
-                        WRENCH_INFO("BatchComputeService::processQueuedJobs() Found CompoundStorageService in FileWriteAction");
-
-                        auto simple_storage_services = compound_storage_service->getAllServices();
-                        if (simple_storage_services.empty()) {
-                            WRENCH_WARN("BatchComputeService::processQueuedJobs() No storage service found in CompoundStorageService");
-                        } else {
-                            // just use the first storage service
-                            auto new_ss = file_location->setStorageService(*(simple_storage_services.begin()));
-                            WRENCH_INFO("BatchComputeService::processQueuedJobs() Now using ss: %s", new_ss->getName().c_str());
-
-                            // One or many disks
-                            if (new_ss->hasMultipleMountPoints()) {
-                                auto mt_pts = new_ss->getMountPoints();
-                                file_location->setMountPoint(*(mt_pts.begin()));
-                            } else {
-                                auto mt_pt = new_ss->getMountPoint();
-                                file_location->setMountPoint(mt_pt);
-                            }
-                            
-                            WRENCH_INFO("Absolute path at mount point: %s", file_location->getAbsolutePathAtMountPoint().c_str());
-                            WRENCH_INFO("New mount point: %s", file_location->getMountPoint().c_str());
-                            WRENCH_INFO("New full path: %s", file_location->getFullAbsolutePath().c_str());
-
-                        }
-
-                    }
-                }
-            }
-            WRENCH_INFO("BatchComputeService::processQueuedJobs() - Finished introspecting actions");
 
             // Find on which resources to actually run the job
             unsigned long cores_per_node_asked_for = batch_job->getRequestedCoresPerNode();
@@ -359,5 +318,88 @@ namespace wrench {
         }
         return to_return;
     }
+
+    void ConservativeBackfillingBatchSchedulerStorage::setConcreteStorage(std::shared_ptr<wrench::Action> action) const {
+
+        if (auto io_action = dynamic_cast<FileReadAction*>(action.get())) {
+
+            // FileRead actions may have multiple embedded locations
+            for(auto& file_location: io_action->getFileLocations()) {
+                auto storage_service = file_location->getStorageService();
+                if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
+                    WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileReadAction");
+                    this->selectSimpleStorage(compound_storage_service, file_location, io_action->getFile()->getSize());
+                }
+            }
+
+        } else if (auto io_action = dynamic_cast<FileWriteAction*>(action.get())) {
+
+            auto file_location = io_action->getFileLocation();
+            auto storage_service = file_location->getStorageService();
+            if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
+                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileWriteAction");
+                this->selectSimpleStorage(compound_storage_service, file_location, io_action->getFile()->getSize());
+            }
+
+        } else if (auto io_action = dynamic_cast<FileCopyAction*>(action.get())) {
+
+            auto src_location = io_action->getSourceFileLocation();
+            auto src_storage = src_location->getStorageService();
+
+            auto dst_location = io_action->getSourceFileLocation();
+            auto dst_storage = dst_location->getStorageService();
+
+            if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(src_storage.get())) {
+                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileCopyAction (src)");
+                this->selectSimpleStorage(compound_storage_service, src_location, io_action->getFile()->getSize());
+            }
+
+            if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(dst_storage.get())) {
+                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileCopyAction (dst)");
+                this->selectSimpleStorage(compound_storage_service, dst_location, io_action->getFile()->getSize());
+            }
+
+        }
+    }
+
+    void ConservativeBackfillingBatchSchedulerStorage::selectSimpleStorage(wrench::CompoundStorageService* compound_storage, std::shared_ptr<wrench::FileLocation> location, double size) const {
+
+        WRENCH_INFO("ConservativeBackfillingStorage::selectSimpleStorage() Looking for replacement storage service");
+
+        auto simple_storage_services = compound_storage->getAllServices();
+        if (simple_storage_services.empty()) {
+            WRENCH_WARN("ConservativeBackfillingStorage::selectSimpleStorage() No storage service found in CompoundStorageService");
+            // throw ExecutionException(std::make_shared<FatalFailure>("The selected CompoundStorageService doesn't have any storage service"));
+        }
+    
+        // Just use the first storage service for now, we don't have an actual algorithm
+        std::string new_mount_point;
+        std::shared_ptr<SimpleStorageService> new_ss;
+        for (const auto& ss: simple_storage_services) {
+            auto free_space = ss->getFreeSpace();
+            for (const auto& mount : free_space) {
+                if (mount.second >= size) {
+                    new_mount_point = mount.first;
+                    new_ss = std::dynamic_pointer_cast<SimpleStorageService>(ss);
+                    break;
+                }
+            }
+        }
+
+        if (!new_ss) {
+            WRENCH_WARN("ConservativeBackfillingStorage::selectSimpleStorage() Not enough space on any mount point of any service");
+            // throw ExecutionException(std::make_shared<FatalFailure>("Not enough space on any mount point of any service"));
+        }
+
+        new_ss = std::dynamic_pointer_cast<SimpleStorageService>(location->setStorageService(new_ss));
+        location->setMountPoint(new_mount_point);
+        WRENCH_INFO("ConservativeBackfillingStorage::selectSimpleStorage() Now using ss: %s, with mount point %s", new_ss->getName().c_str(), new_mount_point.c_str());
+
+        // WRENCH_INFO("Absolute path at mount point: %s", location->getAbsolutePathAtMountPoint().c_str());
+        // WRENCH_INFO("New mount point: %s", location->getMountPoint().c_str());
+        // WRENCH_INFO("New full path: %s", location->getFullAbsolutePath().c_str());
+
+    }
+
 
 }// namespace wrench
