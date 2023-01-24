@@ -21,7 +21,12 @@ namespace wrench {
     class CompoundStorageServiceProperty : public StorageServiceProperty {
 
     public:
-        /** @brief Method for selecting concrete storage for each file submitted to the CompoundStorageService **/
+        /** @brief Property that defines how the underlying storage is selected:
+         *         So far the only option is to have an external process that 
+         *         update actions in job (property value: "external"), with the
+         *         CompoundStorageService being passive. A future option would be
+         *         to have the CSS take the decision upon receiving an IO request.
+         */
         DECLARE_PROPERTY_NAME(STORAGE_SELECTION_METHOD);
     };
 

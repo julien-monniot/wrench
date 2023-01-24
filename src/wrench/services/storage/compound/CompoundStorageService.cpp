@@ -26,8 +26,7 @@ namespace wrench {
                 WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                 WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
                 const std::string &suffix) : StorageService(hostname, 
-                    "compound_storage" + suffix)
-        {
+                    "compound_storage" + suffix) {
 
             this->setProperties(this->default_property_values, std::move(property_list));
             this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
@@ -99,21 +98,14 @@ namespace wrench {
             // Create all activities to wait on (only emplace the communicator)
             std::vector<simgrid::s4u::ActivityPtr> pending_activities;
             pending_activities.emplace_back(comm_ptr);
-            /* // We don't have running transactions in this service, other than 
-               // comms
-            for (auto const &transaction: this->running_transactions) {
-                pending_activities.emplace_back(transaction->stream);
-            }
-            */
 
             // Wait one activity (communication in this case) to complete
             int finished_activity_index;
             try {
                 finished_activity_index = (int) simgrid::s4u::Activity::wait_any(pending_activities);
             } catch (simgrid::NetworkFailureException &e) {
-                // the comm failed
                 comm_ptr_has_been_posted = false;
-                continue;// oh well
+                continue;
             } catch (std::exception &e) {
                 continue;
             }
@@ -337,7 +329,6 @@ namespace wrench {
         throw std::logic_error("CompoundStorageService can't be setup as a scratch space, it is only an abstraction layer.");
     }
 
-
     /**
      * @brief Return the set of all services accessible through this CompoundStorageService
      * 
@@ -360,7 +351,6 @@ namespace wrench {
             throw std::invalid_argument("CompoundStorageService::validateProperties Only 'external' storage selection method is currently allowed");
         }
     }
-
 
     /**
      * @brief Get a file's last write date at a location (in zero simulated time)
