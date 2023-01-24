@@ -21,6 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Remove existing links
+        run: |
           rm '/usr/local/bin/2to3'
           rm '/usr/local/bin/2to3-3.11'
       - name: Update brew
@@ -33,9 +34,9 @@ jobs:
       - name: Install googletest
         run: |
           brew install googletest
-      - name: Install Python
-        run: |
-          brew install python
+#      - name: Install Python
+#        run: |
+#          brew install python
       - name: Install boost
         run: |
           brew install boost
