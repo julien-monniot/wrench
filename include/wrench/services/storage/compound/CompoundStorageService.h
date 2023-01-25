@@ -19,12 +19,13 @@
 
 namespace wrench {
 
-    // More like a placeholder, will be replaced by user provided lambda / std::function
-    std::shared_ptr<FileLocation> designateStorageService(
-        const std::shared_ptr<FileLocation> temp_location, 
-        const std::set<std::shared_ptr<StorageService>> resources
-    );
+    using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(const std::shared_ptr<FileLocation>&, const std::set<std::shared_ptr<StorageService>>&)>;
 
+    // More like a placeholder, will be replaced by user provided lambda / std::function
+    std::shared_ptr<FileLocation> defaultStorageServiceSelection(
+        const std::shared_ptr<FileLocation>& temp_location, 
+        const std::set<std::shared_ptr<StorageService>>& resources
+    );
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -48,6 +49,11 @@ namespace wrench {
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {}); 
 
+        CompoundStorageService(const std::string &hostname,
+                               std::set<std::shared_ptr<StorageService>> storage_services,
+                               StorageSelectionStrategyCallback storage_selection,
+                               WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
+                               WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {});
  
         double getFileLastWriteDate(const std::shared_ptr<FileLocation> &location) override;
 
@@ -71,6 +77,7 @@ namespace wrench {
 
         CompoundStorageService(const std::string &hostname, 
                                std::set<std::shared_ptr<StorageService>> storage_services,
+                               StorageSelectionStrategyCallback storage_selection,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
                                const std::string &suffix);
@@ -133,6 +140,8 @@ namespace wrench {
         std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>> file_location_mapping = {};
 
         void validateProperties();
+
+        StorageSelectionStrategyCallback storage_selection;
 
     };
 

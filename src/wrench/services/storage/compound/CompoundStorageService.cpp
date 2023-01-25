@@ -12,17 +12,50 @@ WRENCH_LOG_CATEGORY(wrench_core_compound_storage_system,
 
 namespace wrench { 
 
+
+    std::shared_ptr<FileLocation> defaultStorageServiceSelection(const std::shared_ptr<FileLocation>& location, const std::set<std::shared_ptr<StorageService>>& resources) {
+    
+        auto capacity_req = location->getFile()->getSize();
+        
+        std::shared_ptr<FileLocation> designated_location = nullptr;
+
+        for(const auto& storage_service : resources) {
+
+            auto free_space = storage_service->getFreeSpace();
+            for (const auto& free_space_entry : free_space) {
+                if (free_space_entry.second >= capacity_req) {
+                    designated_location = FileLocation::LOCATION(storage_service, free_space_entry.first, location->getFile());
+                    break;
+                }
+            }
+        }
+
+        return designated_location;
+    }
+
+
     CompoundStorageService::CompoundStorageService(const std::string &hostname,
                                                    std::set<std::shared_ptr<StorageService>> storage_services,
                                                    WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                                                    WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) :
-            CompoundStorageService(hostname, storage_services, property_list, messagepayload_list, 
+            CompoundStorageService(hostname, storage_services, defaultStorageServiceSelection, 
+                                   property_list, messagepayload_list, "_" + std::to_string(getNewUniqueNumber())) {};
+
+
+    CompoundStorageService::CompoundStorageService(const std::string &hostname,
+                                                   std::set<std::shared_ptr<StorageService>> storage_services,
+                                                   StorageSelectionStrategyCallback storage_selection,
+                                                   WRENCH_PROPERTY_COLLECTION_TYPE property_list,
+                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) :
+            CompoundStorageService(hostname, storage_services, storage_selection, property_list, messagepayload_list, 
                                    "_" + std::to_string(getNewUniqueNumber())) {};
+
 
 
     CompoundStorageService::CompoundStorageService(
                 const std::string &hostname, 
                 std::set<std::shared_ptr<StorageService>> storage_services,
+                StorageSelectionStrategyCallback storage_selection,
                 WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                 WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
                 const std::string &suffix) : StorageService(hostname, 
@@ -45,6 +78,7 @@ namespace wrench {
             // and this allows it to receive message requests for copy (otherwise, src storage service might receive it)
             this->buffer_size = 0;
             this->storage_services = storage_services;
+            this->storage_selection = storage_selection;
             this->file_systems[LogicalFileSystem::DEV_NULL] = LogicalFileSystem::createLogicalFileSystem(
                 this->getHostname(), 
                 this, 
@@ -202,7 +236,7 @@ namespace wrench {
         }
 
         WRENCH_INFO("lookupOrDesignateStorageService:: File %s not already known by CSS", location->getFile()->getID().c_str());
-        auto designatedLocation = designateStorageService(location, this->storage_services);
+        auto designatedLocation = this->storage_selection(location, this->storage_services);
         WRENCH_INFO("lookupOrDesignateStorageService:: Registering file %s on storage service %s, at path %s", 
                     designatedLocation->getFile()->getID().c_str(),
                     designatedLocation->getStorageService()->getName().c_str(),
@@ -216,27 +250,6 @@ namespace wrench {
         );
 
         return designatedLocation;
-
-    }
-
-    std::shared_ptr<FileLocation> designateStorageService(const std::shared_ptr<FileLocation> location, const std::set<std::shared_ptr<StorageService>> resources) {
-        
-        auto capacity_req = location->getFile()->getSize();
-        
-        std::shared_ptr<FileLocation> designated_location = nullptr;
-
-        for(const auto& storage_service : resources) {
-
-            auto free_space = storage_service->getFreeSpace();
-            for (const auto& free_space_entry : free_space) {
-                if (free_space_entry.second >= capacity_req) {
-                    designated_location = FileLocation::LOCATION(storage_service, free_space_entry.first, location->getFile());
-                    break;
-                }
-            }
-        }
-
-        return designated_location;
 
     }
 
