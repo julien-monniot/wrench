@@ -3,15 +3,15 @@
 #include "wrench/services/storage/StorageServiceMessage.h"
 #include <wrench/services/storage/StorageServiceMessagePayload.h>
 #include <wrench/simgrid_S4U_util/S4U_Mailbox.h>
-#include <wrench/failure_causes/FunctionalityNotAvailable.h>
+#include <wrench/failure_causes/FileNotFound.h>
 #include <wrench/exceptions/ExecutionException.h>
 #include <wrench/logging/TerminalOutput.h>
 
 WRENCH_LOG_CATEGORY(wrench_core_compound_storage_system,
                     "Log category for Compound Storage Service");
 
-namespace wrench {  
-    
+namespace wrench { 
+
     CompoundStorageService::CompoundStorageService(const std::string &hostname,
                                                    std::set<std::shared_ptr<StorageService>> storage_services,
                                                    WRENCH_PROPERTY_COLLECTION_TYPE property_list,
@@ -41,12 +41,15 @@ namespace wrench {
                 throw std::invalid_argument("One of the SimpleStorageServices provided is not initialized");
             }
 
+            // CSS should be non-bufferized, as it actually doesn't copy / transfer anything
+            // and this allows it to receive message requests for copy (otherwise, src storage service might receive it)
+            this->buffer_size = 0;
             this->storage_services = storage_services;
             this->file_systems[LogicalFileSystem::DEV_NULL] = LogicalFileSystem::createLogicalFileSystem(
-                        this->getHostname(), 
-                        this, 
-                        LogicalFileSystem::DEV_NULL, 
-                        this->getPropertyValueAsString(wrench::StorageServiceProperty::CACHING_BEHAVIOR)
+                this->getHostname(), 
+                this, 
+                LogicalFileSystem::DEV_NULL, 
+                this->getPropertyValueAsString(wrench::StorageServiceProperty::CACHING_BEHAVIOR)
             );
         }
 
@@ -139,21 +142,19 @@ namespace wrench {
             return processStopDaemonRequest(msg->ack_mailbox);
 
         } else if (auto msg = dynamic_cast<StorageServiceFileDeleteRequestMessage *>(message)) {
-            return processFileDeleteRequest(msg->location, msg->answer_mailbox);
+            return processFileDeleteRequest(msg);
 
         } else if (auto msg = dynamic_cast<StorageServiceFileLookupRequestMessage *>(message)) {
-            return processFileLookupRequest(msg->location, msg->answer_mailbox);
+            return processFileLookupRequest(msg);
 
         } else if (auto msg = dynamic_cast<StorageServiceFileWriteRequestMessage *>(message)) {
-            return processFileWriteRequest(msg->location, msg->answer_mailbox,
-                                           msg->requesting_host, msg->buffer_size);
+            return processFileWriteRequest(msg);
 
         } else if (auto msg = dynamic_cast<StorageServiceFileReadRequestMessage *>(message)) {
-            return processFileReadRequest(msg->location,
-                                          msg->num_bytes_to_read, msg->answer_mailbox, msg->requesting_host);
+            return processFileReadRequest(msg);
 
         } else if (auto msg = dynamic_cast<StorageServiceFileCopyRequestMessage *>(message)) {
-            return processFileCopyRequest(msg->src, msg->dst, msg->answer_mailbox);
+            return processFileCopyRequest(msg);
 
         } else {
             throw std::runtime_error(
@@ -162,103 +163,298 @@ namespace wrench {
         }
     }
 
-    bool CompoundStorageService::processFileDeleteRequest(const std::shared_ptr<FileLocation> &location, simgrid::s4u::Mailbox *answer_mailbox) {
+    std::shared_ptr<FileLocation> CompoundStorageService::lookupFileLocation(const std::shared_ptr<FileLocation> &location) {
 
-        try {        
-            S4U_Mailbox::dputMessage(
-                answer_mailbox,
-                new StorageServiceFileDeleteAnswerMessage(
-                        nullptr,
-                        this->getSharedPtr<CompoundStorageService>(),
-                        false,
-                        std::shared_ptr<FailureCause>(new FunctionalityNotAvailable(
-                            this->getSharedPtr<CompoundStorageService>(), "FileDelete")
-                        ),
-                        this->getMessagePayloadValue(
-                                CompoundStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD)));
-        } catch (wrench::ExecutionException &e) {}
+        WRENCH_INFO("lookupFileLocation:: For file %s", location->getFile()->getID().c_str());
+
+        if (this->file_location_mapping.find(location->getFile()) == this->file_location_mapping.end()) {
+            WRENCH_INFO("lookupFileLocation:: file %s NOT found", location->getFile()->getID().c_str());
+            return nullptr;
+        } else {
+            WRENCH_INFO("lookupFileLocation:: file %s found, on storage service %s", 
+                        location->getFile()->getID().c_str(), 
+                        location->getStorageService()->getName().c_str()
+            );
+            return this->file_location_mapping[location->getFile()];
+        }
+
+    }
+
+    void CompoundStorageService::registerFileLocation(const std::shared_ptr<FileLocation> location, const std::shared_ptr<StorageService> ss, const std::string& absolute_path) {
+
+        WRENCH_INFO("registerFileLocation:: For file %s on storage service %s, at path %s", 
+                    location->getFile()->getID().c_str(),
+                    ss->getName().c_str(),
+                    absolute_path.c_str()            
+        );
+        // Supposing (and it better be true) that DataFiles are unique throught a given simulation run, even among various jobs.
+        this->file_location_mapping[location->getFile()] = FileLocation::LOCATION(ss, absolute_path, location->getFile());
+
+    }
+
+    std::shared_ptr<FileLocation> CompoundStorageService::lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location) {
+
+        auto concrete_file_location = this->lookupFileLocation(location);
+
+        if (concrete_file_location) {
+            WRENCH_INFO("lookupOrDesignateStorageService:: File %s already known by CSS", location->getFile()->getID().c_str());
+            return concrete_file_location;
+        }
+
+        WRENCH_INFO("lookupOrDesignateStorageService:: File %s not already known by CSS", location->getFile()->getID().c_str());
+        auto designatedLocation = designateStorageService(location, this->storage_services);
+        WRENCH_INFO("lookupOrDesignateStorageService:: Registering file %s on storage service %s, at path %s", 
+                    designatedLocation->getFile()->getID().c_str(),
+                    designatedLocation->getStorageService()->getName().c_str(),
+                    designatedLocation->getFullAbsolutePath().c_str()    
+        );
+        // Supposing (and it better be true) that DataFiles are unique throught a given simulation run, even among various jobs.
+        this->file_location_mapping[designatedLocation->getFile()] = FileLocation::LOCATION(
+            designatedLocation->getStorageService(), 
+            designatedLocation->getFullAbsolutePath(), 
+            designatedLocation->getFile()
+        );
+
+        return designatedLocation;
+
+    }
+
+    std::shared_ptr<FileLocation> designateStorageService(const std::shared_ptr<FileLocation> location, const std::set<std::shared_ptr<StorageService>> resources) {
+        
+        auto capacity_req = location->getFile()->getSize();
+        
+        std::shared_ptr<FileLocation> designated_location = nullptr;
+
+        for(const auto& storage_service : resources) {
+
+            auto free_space = storage_service->getFreeSpace();
+            for (const auto& free_space_entry : free_space) {
+                if (free_space_entry.second >= capacity_req) {
+                    designated_location = FileLocation::LOCATION(storage_service, free_space_entry.first, location->getFile());
+                    break;
+                }
+            }
+        }
+
+        return designated_location;
+
+    }
+
+    bool CompoundStorageService::processFileDeleteRequest(StorageServiceFileDeleteRequestMessage *msg) {
+
+        auto designated_location = this->lookupFileLocation(msg->location);
+        if (!designated_location) {
+            
+            try {        
+                S4U_Mailbox::dputMessage(
+                    msg->answer_mailbox,
+                    new StorageServiceFileDeleteAnswerMessage(
+                            nullptr,
+                            this->getSharedPtr<CompoundStorageService>(),
+                            false,
+                            std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
+                            this->getMessagePayloadValue(
+                                    CompoundStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD)));
+            } catch (wrench::ExecutionException &e) {}
+        
+            return true;
+        }
+
+        S4U_Mailbox::putMessage(
+            designated_location->getStorageService()->mailbox,
+            new StorageServiceFileDeleteRequestMessage(
+                msg->answer_mailbox,
+                designated_location,
+                designated_location->getStorageService()->getMessagePayloadValue(
+                        StorageServiceMessagePayload::FILE_DELETE_REQUEST_MESSAGE_PAYLOAD)
+                )
+            );
 
         return true;
     }
     
-    bool CompoundStorageService::processFileLookupRequest(const std::shared_ptr<FileLocation> &location, simgrid::s4u::Mailbox *answer_mailbox) {
+    bool CompoundStorageService::processFileLookupRequest(StorageServiceFileLookupRequestMessage* msg) {
         
-        try {   
-            S4U_Mailbox::dputMessage(
-                answer_mailbox,
-                new StorageServiceFileLookupAnswerMessage(
+        auto designated_location = this->lookupFileLocation(msg->location);
+        if (!designated_location) {
+            
+            // Abort because we don't know the file (it should have been written or copied somewhere before the lookup happens)
+            try {
+                S4U_Mailbox::dputMessage(
+                    msg->answer_mailbox,
+                    new StorageServiceFileLookupAnswerMessage(
                         nullptr, false,
                         this->getMessagePayloadValue(
                             CompoundStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD)));
-        } catch (wrench::ExecutionException &e) {}
+            } catch (wrench::ExecutionException &e) {}
+            
+            return true;
+        }
+
+        // The file is known, we can forward the request to the underlying designated StorageService
+        S4U_Mailbox::putMessage(
+            designated_location->getStorageService()->mailbox,
+            new StorageServiceFileLookupRequestMessage(
+                msg->answer_mailbox,
+                FileLocation::LOCATION(
+                    designated_location->getStorageService(), 
+                    designated_location->getFullAbsolutePath(), 
+                    designated_location->getFile()
+                ),
+                designated_location->getStorageService()->getMessagePayloadValue(
+                    StorageServiceMessagePayload::FILE_LOOKUP_REQUEST_MESSAGE_PAYLOAD))
+        );
 
         return true;
+
     }
 
-    bool CompoundStorageService::processFileCopyRequest(
-                const std::shared_ptr<FileLocation> &src,
+    bool CompoundStorageService::processFileCopyRequest(StorageServiceFileCopyRequestMessage *msg) {
+                /*const std::shared_ptr<FileLocation> &src,
                 const std::shared_ptr<FileLocation> &dst,
-                simgrid::s4u::Mailbox *answer_mailbox) {
+                simgrid::s4u::Mailbox *answer_mailbox) {*/
 
-        try {
-            S4U_Mailbox::putMessage(
-                    answer_mailbox,
+        // Check that source file location DOES NOT reference a CSS. If so, abort.
+        if (std::dynamic_pointer_cast<CompoundStorageService>(msg->src->getStorageService())) {
+           
+            try {
+                S4U_Mailbox::putMessage(
+                    msg->answer_mailbox,
                     new StorageServiceFileCopyAnswerMessage(
-                            src,
-                            dst,
-                            nullptr, 
-                            false,
-                            false,
-                            std::shared_ptr<FailureCause>(new FunctionalityNotAvailable(
-                                this->getSharedPtr<CompoundStorageService>(), "FileCopy")
-                            ),
-                            this->getMessagePayloadValue(
-                                    CompoundStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD))
-                    );
-        } catch (ExecutionException &e) {}
-
-        return true;
-    }
-
-    bool CompoundStorageService::processFileWriteRequest(const std::shared_ptr<FileLocation> &location,
-                                     simgrid::s4u::Mailbox *answer_mailbox, simgrid::s4u::Host *requesting_host,
-                                     double buffer_size) {
-
-        try {
-            S4U_Mailbox::dputMessage(
-                answer_mailbox,
-                new StorageServiceFileWriteAnswerMessage(
-                        location,
+                        msg->src,
+                        msg->dst,
+                        nullptr, 
                         false,
-                        std::shared_ptr<FailureCause>(new FunctionalityNotAvailable(
-                            this->getSharedPtr<CompoundStorageService>(), "FileWrite")
-                        ),
-                        nullptr,
+                        false,
+                        std::shared_ptr<FailureCause>(new FileNotFound(msg->src)),
                         this->getMessagePayloadValue(
-                                CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD)));
-        } catch (wrench::ExecutionException &e) {}
+                            CompoundStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD))
+                    );
+            } catch (ExecutionException &e) {}
+
+            return true;
+        }
+
+        // Lookup  dest file locally, or find suitable storage service to host it.
+        auto designated_location = this->lookupOrDesignateStorageService(msg->dst);
+        if (!designated_location) {
+            // abort and send answer directly from CSS
+            try {
+                S4U_Mailbox::putMessage(
+                    msg->answer_mailbox,
+                    new StorageServiceFileCopyAnswerMessage(
+                        msg->src,
+                        msg->dst,
+                        nullptr, 
+                        false,
+                        false,
+                        std::shared_ptr<FailureCause>(new FileNotFound(msg->src)),
+                        this->getMessagePayloadValue(
+                            CompoundStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD))
+                    );
+            } catch (ExecutionException &e) {}
+
+            return true;
+        }
+        
+        S4U_Mailbox::putMessage(
+            designated_location->getStorageService()->mailbox,
+            new StorageServiceFileCopyRequestMessage(
+                    msg->answer_mailbox,
+                    msg->src,
+                    FileLocation::LOCATION(
+                        designated_location->getStorageService(), 
+                        designated_location->getFullAbsolutePath(), 
+                        designated_location->getFile()
+                    ),
+                    nullptr,
+                    designated_location->getStorageService()->getMessagePayloadValue(
+                            StorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD)
+            )
+        );
 
         return true;
     }
 
-    bool CompoundStorageService::processFileReadRequest(const std::shared_ptr<FileLocation> &location,
-                               double num_bytes_to_read, simgrid::s4u::Mailbox *answer_mailbox,
-                               simgrid::s4u::Host *requesting_host) {
-        
-        try {
-            S4U_Mailbox::dputMessage(
-                    answer_mailbox,
-                    new StorageServiceFileReadAnswerMessage(
-                            location,
+    bool CompoundStorageService::processFileWriteRequest(StorageServiceFileWriteRequestMessage* msg) {
+
+        auto designated_location = this->lookupOrDesignateStorageService(msg->location);
+        if (!designated_location) {
+            // abort and send answer directly from CSS
+            try {
+                S4U_Mailbox::dputMessage(
+                    msg->answer_mailbox,
+                    new StorageServiceFileWriteAnswerMessage(
+                            msg->location,
                             false,
-                            std::shared_ptr<FailureCause>(
-                                new FunctionalityNotAvailable(this->getSharedPtr<CompoundStorageService>(), "FileRead")
-                            ),
-                            0,
+                            std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
+                            nullptr,
                             this->getMessagePayloadValue(
-                                    CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD))
-            );
-        } catch (wrench::ExecutionException &e) {}
+                                    CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD)));
+            } catch (wrench::ExecutionException &e) {}
+            
+            return true;
+        }
+
+        // The file is known or added to the local mapping, we can forward the request to the underlying designated StorageService
+        S4U_Mailbox::putMessage(
+            designated_location->getStorageService()->mailbox,
+            new StorageServiceFileWriteRequestMessage(
+                msg->answer_mailbox,
+                msg->requesting_host,
+                wrench::FileLocation::LOCATION(
+                    designated_location->getStorageService(), 
+                    designated_location->getFullAbsolutePath(), 
+                    designated_location->getFile()
+                ),
+                msg->buffer_size,
+                this->getMessagePayloadValue(
+                    StorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD)
+            )
+        );
+
+        return true;
+    }
+
+    bool CompoundStorageService::processFileReadRequest(StorageServiceFileReadRequestMessage* msg) {        
+        
+        auto designated_location = this->lookupFileLocation(msg->location);
+        if (!designated_location) {
+
+            try {
+                S4U_Mailbox::dputMessage(
+                    msg->answer_mailbox,
+                    new StorageServiceFileReadAnswerMessage(
+                        msg->location,
+                        false,
+                        std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
+                        0,
+                        this->getMessagePayloadValue(
+                            CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD))
+                );
+            } catch (wrench::ExecutionException &e) {}
+
+            return true;
+
+        }
+
+        // The file is known, we can forward the request to the underlying designated StorageService
+        S4U_Mailbox::putMessage(
+            designated_location->getStorageService()->mailbox,
+            new StorageServiceFileReadRequestMessage(
+                msg->answer_mailbox,
+                msg->requesting_host,
+                msg->mailbox_to_receive_the_file_content,
+                FileLocation::LOCATION(
+                    designated_location->getStorageService(),
+                    designated_location->getFullAbsolutePath(), 
+                    designated_location->getFile()
+                ),
+                msg->num_bytes_to_read,
+                designated_location->getStorageService()->getMessagePayloadValue(
+                        StorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD)
+            )
+        );
 
         return true;
     }
@@ -351,7 +547,6 @@ namespace wrench {
             throw std::invalid_argument("CompoundStorageService::validateProperties Only 'external' storage selection method is currently allowed");
         }
     }
-
     /**
      * @brief Get a file's last write date at a location (in zero simulated time)
      *

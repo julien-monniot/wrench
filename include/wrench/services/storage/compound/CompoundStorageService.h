@@ -11,12 +11,20 @@
 #define WRENCH_COMPOUNDSTORAGESERVICE_H
 
 #include "wrench/services/storage/StorageService.h"
+#include "wrench/services/storage/StorageServiceMessage.h"
 #include "wrench/services/memory/MemoryManager.h"
 #include "wrench/simgrid_S4U_util/S4U_PendingCommunication.h"
 #include "wrench/services/storage/compound/CompoundStorageServiceProperty.h"
 #include "wrench/services/storage/compound/CompoundStorageServiceMessagePayload.h"
 
 namespace wrench {
+
+    // More like a placeholder, will be replaced by user provided lambda / std::function
+    std::shared_ptr<FileLocation> designateStorageService(
+        const std::shared_ptr<FileLocation> temp_location, 
+        const std::set<std::shared_ptr<StorageService>> resources
+    );
+
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -102,27 +110,27 @@ namespace wrench {
 
         int main() override;
 
+        std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
+
+        void registerFileLocation(const std::shared_ptr<FileLocation> location, const std::shared_ptr<StorageService> ss, const std::string& path);
+
+        std::shared_ptr<FileLocation> lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location);
+
         bool processNextMessage(SimulationMessage *message);
 
-        bool processFileDeleteRequest(const std::shared_ptr<FileLocation> &location,
-                                      simgrid::s4u::Mailbox *answer_mailbox);
-        bool processFileLookupRequest(const std::shared_ptr<FileLocation> &location,
-                                      simgrid::s4u::Mailbox *answer_mailbox);
+        bool processFileDeleteRequest(StorageServiceFileDeleteRequestMessage *msg);
 
-        bool processFileCopyRequest(
-                const std::shared_ptr<FileLocation> &src,
-                const std::shared_ptr<FileLocation> &dst,
-                simgrid::s4u::Mailbox *answer_mailbox);
+        bool processFileLookupRequest(StorageServiceFileLookupRequestMessage* msg);
 
-        bool processFileWriteRequest(const std::shared_ptr<FileLocation> &location,
-                                     simgrid::s4u::Mailbox *answer_mailbox, simgrid::s4u::Host *requesting_host,
-                                     double buffer_size);
+        bool processFileCopyRequest(StorageServiceFileCopyRequestMessage* msg);
 
-        bool processFileReadRequest(const std::shared_ptr<FileLocation> &location,
-                               double num_bytes_to_read, simgrid::s4u::Mailbox *answer_mailbox,
-                               simgrid::s4u::Host *requesting_host);
+        bool processFileWriteRequest(StorageServiceFileWriteRequestMessage* msg);
+
+        bool processFileReadRequest(StorageServiceFileReadRequestMessage* msg);
         
         std::set<std::shared_ptr<StorageService>> storage_services = {};
+
+        std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>> file_location_mapping = {};
 
         void validateProperties();
 
