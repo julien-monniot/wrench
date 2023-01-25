@@ -21,12 +21,6 @@ namespace wrench {
 
     using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(const std::shared_ptr<FileLocation>&, const std::set<std::shared_ptr<StorageService>>&)>;
 
-    // More like a placeholder, will be replaced by user provided lambda / std::function
-    std::shared_ptr<FileLocation> defaultStorageServiceSelection(
-        const std::shared_ptr<FileLocation>& temp_location, 
-        const std::set<std::shared_ptr<StorageService>>& resources
-    );
-
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
      *        SimpleStorageServices). It does not provide direct access to any storage resource.
@@ -118,8 +112,6 @@ namespace wrench {
         int main() override;
 
         std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
-
-        void registerFileLocation(const std::shared_ptr<FileLocation> location, const std::shared_ptr<StorageService> ss, const std::string& path);
 
         std::shared_ptr<FileLocation> lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location);
 
