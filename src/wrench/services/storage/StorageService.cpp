@@ -12,6 +12,7 @@
 #include <wrench/exceptions/ExecutionException.h>
 #include <wrench/logging/TerminalOutput.h>
 #include <wrench/services/storage/StorageService.h>
+#include <wrench/services/storage/compound/CompoundStorageService.h>
 #include <wrench/services/compute/cloud/CloudComputeService.h>
 #include "wrench/services/storage/StorageServiceMessage.h"
 #include <wrench/services/storage/StorageServiceMessagePayload.h>
@@ -219,6 +220,8 @@ namespace wrench {
 
         assertServiceIsUp();
 
+        WRENCH_INFO("writeFile: Preparing initial write request");
+
         // Send a  message to the daemon
         auto answer_mailbox = S4U_Daemon::getRunningActorRecvMailbox();
 
@@ -234,15 +237,19 @@ namespace wrench {
         // Wait for a reply
         std::shared_ptr<SimulationMessage> message;
 
+        WRENCH_INFO("writeFile: Waiting for answer message");
         message = S4U_Mailbox::getMessage(answer_mailbox, this->network_timeout);
+        WRENCH_INFO("writeFile: Answer message received");
 
         if (auto msg = dynamic_cast<StorageServiceFileWriteAnswerMessage *>(message.get())) {
+            WRENCH_INFO("writeFile: msg successfully cast to AnswerMessage");
             // If not a success, throw an exception
             if (not msg->success) {
                 throw ExecutionException(msg->failure_cause);
             }
 
             if (this->buffer_size < 1) {
+                WRENCH_INFO("writeFile: if buffer_size < 1");
                 // just wait for the final ack (no timeout!)
                 message = S4U_Mailbox::getMessage(answer_mailbox);
                 if (not dynamic_cast<StorageServiceAckMessage *>(message.get())) {
@@ -251,6 +258,7 @@ namespace wrench {
                 }
 
             } else {
+                WRENCH_INFO("writeFile: else");
                 // Bufferized
                 double remaining = file->getSize();
                 while (remaining - this->buffer_size > DBL_EPSILON) {
@@ -406,8 +414,10 @@ namespace wrench {
 
         assertServiceIsUp(storage_service);
 
+        auto storage_ptr = storage_service.get();
+
         simgrid::s4u::Mailbox *chunk_receiving_mailbox;
-        if (storage_service->buffer_size == 0) {
+        if ((storage_service->buffer_size == 0) and !(std::dynamic_pointer_cast<CompoundStorageService>(storage_service))) {
             chunk_receiving_mailbox = nullptr;
         } else {
             chunk_receiving_mailbox = S4U_Mailbox::getTemporaryMailbox();
@@ -455,6 +465,9 @@ namespace wrench {
                     throw std::runtime_error("StorageService::readFile(): Received an unexpected [" +
                                              message->getName() + "] message!");
                 }
+
+                // A tmp mailbox might have been created because of CompoundStorageService case
+                if (chunk_receiving_mailbox) S4U_Mailbox::retireTemporaryMailbox(chunk_receiving_mailbox);
 
             } else {
                 // Otherwise, retrieve the file chunks until the last one is received
@@ -650,9 +663,9 @@ namespace wrench {
         //        }
 
         simgrid::s4u::Mailbox *mailbox_to_contact;
-        if (dst_is_non_bufferized) {
+        if (dst_is_non_bufferized and !(std::dynamic_pointer_cast<CompoundStorageService>(src_location->getStorageService()))) {
             mailbox_to_contact = dst_location->getStorageService()->mailbox;
-        } else if (src_is_non_bufferized) {
+        } else if (src_is_non_bufferized and !(std::dynamic_pointer_cast<CompoundStorageService>(dst_location->getStorageService()))) {
             mailbox_to_contact = src_location->getStorageService()->mailbox;
         } else {
             mailbox_to_contact = dst_location->getStorageService()->mailbox;

@@ -200,6 +200,7 @@ namespace wrench {
         } else if ((this->src_mailbox) and (this->dst_location) and
                    (this->dst_location->getStorageService() == this->parent)) {
             /** Receiving a file from the network **/
+            WRENCH_INFO("main: Going to receive file from network (write op)");
             try {
                 receiveFileFromNetwork(this->file, this->src_mailbox, this->dst_location);
             } catch (ExecutionException &e) {
@@ -270,6 +271,7 @@ namespace wrench {
             bool done = false;
 
             // Receive the first chunk
+            WRENCH_INFO("receiveFileFromNetwork: Starting to receive first chunk for file %s", f->getID().c_str());
             auto msg = S4U_Mailbox::getMessage(mailbox);
             if (auto file_content_chunk_msg = dynamic_cast<StorageServiceFileContentChunkMessage *>(msg.get())) {
                 done = file_content_chunk_msg->last_chunk;
@@ -277,12 +279,14 @@ namespace wrench {
                 throw std::runtime_error("FileTransferThread::receiveFileFromNetwork() : Received an unexpected [" +
                                          msg->getName() + "] message!");
             }
+            WRENCH_INFO("receiveFileFromNetwork: First chunk for file %s RECEIVED", f->getID().c_str());
 
             try {
                 if (Simulation::isPageCachingEnabled()) {
                     simulation->getMemoryManagerByHost(location->getStorageService()->hostname)->log();
                 }
 
+                WRENCH_INFO("receiveFileFromNetwork: Starting to receive more chunks for file %s", f->getID().c_str());
                 // Receive chunks and write them to disk
                 while (not done) {
                     // Issue the receive
@@ -353,6 +357,14 @@ namespace wrench {
                                                     const std::shared_ptr<FileLocation> &location,
                                                     double num_bytes,
                                                     simgrid::s4u::Mailbox *mailbox) {
+
+        WRENCH_INFO("sendLocalFileToNetwork: With file %s, sent from %s", f->getID().c_str(), location->getStorageService()->getName().c_str());
+        if (mailbox) {
+            WRENCH_INFO("sendLocalFileToNetwork: using mailbox %s", mailbox->get_cname());
+        } else {
+            WRENCH_INFO("sendLocalFileToNetwork: no mail box provided");
+        }                                      
+
         /** Ideal Fluid model buffer size */
         if (this->buffer_size < DBL_EPSILON) {
             throw std::runtime_error(

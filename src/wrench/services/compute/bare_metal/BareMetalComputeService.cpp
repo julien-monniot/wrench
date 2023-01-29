@@ -200,63 +200,6 @@ namespace wrench {
 
         WRENCH_INFO("BareMetalComputeService::submitCompoundJob()");
 
-
-        // SNIPPET TO AUTOMATICALLY CHOOSE A CONCRETE STORAGE SERVICE FOR EACH
-        // READ OR WRITE ACTION ON A COMPOUND STORAGE SERVICE
-        for (const auto& action: job->getActions()) {
-
-            if (auto io_action = dynamic_cast<FileReadAction*>(action.get())) {
-
-                for(auto& file_location: io_action->getFileLocations()) {
-                    auto storage_service = file_location->getStorageService();
-                    if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
-                        WRENCH_INFO("BareMetalComputeService::submitCompoundJob() Found CompoundStorageService in FileReadAction");
-                    }
-                }
-
-            } else if (auto io_action = dynamic_cast<FileWriteAction*>(action.get())) {
-
-                WRENCH_INFO("BareMetalComputeService::submitCompoundJob() One of the action is a file read or write");
-
-                auto file_location = io_action->getFileLocation();
-                auto storage_service = file_location->getStorageService();
-                if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
-                    WRENCH_INFO("BareMetalComputeService::submitCompoundJob() Found CompoundStorageService in FileWriteAction");
-
-                    auto simple_storage_services = compound_storage_service->getAllServices();
-                    if (simple_storage_services.empty()) {
-                        WRENCH_WARN("BareMetalComputeService::submitCompoundJob() No storage service found in CompoundStorageService");
-                    } else {
-                        // just use the first storage service
-                        auto new_ss = file_location->setStorageService(*(simple_storage_services.begin()));
-
-
-                        // One or many disks
-                        if (new_ss->hasMultipleMountPoints()) {
-                            auto mt_pts = new_ss->getMountPoints();
-                            for(auto pt: mt_pts) {
-                                WRENCH_INFO("%s", pt.c_str());
-                            }
-                            file_location->setMountPoint(*(mt_pts.begin()));
-                        } else {
-                            auto mt_pt = new_ss->getMountPoint();
-                            WRENCH_INFO("%s", mt_pt.c_str());
-                            file_location->setMountPoint(mt_pt);
-                        }
-                        
-                        WRENCH_INFO("%s", file_location->getAbsolutePathAtMountPoint().c_str());
-                        WRENCH_INFO("%s", file_location->getMountPoint().c_str());
-                        WRENCH_INFO("%s", file_location->getFullAbsolutePath().c_str());
-
-                    }
-
-                }
-            }
-        
-        }
-        WRENCH_INFO("BareMetalComputeService::submitCompoundJob() FInished introspecting actions");
-
-
         auto answer_mailbox = S4U_Daemon::getRunningActorRecvMailbox();
 
         //  send a "run a standard job" message to the daemon's mailbox_name

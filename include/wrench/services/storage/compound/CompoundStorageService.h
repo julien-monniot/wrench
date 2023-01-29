@@ -19,7 +19,7 @@
 
 namespace wrench {
 
-    using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(const std::shared_ptr<FileLocation>&, const std::set<std::shared_ptr<StorageService>>&)>;
+    using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(const std::shared_ptr<DataFile>&, const std::set<std::shared_ptr<StorageService>>&)>;
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -111,7 +111,11 @@ namespace wrench {
 
         int main() override;
 
+        std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<DataFile> &file);
+
         std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
+
+        std::shared_ptr<FileLocation> lookupOrDesignateStorageService(const std::shared_ptr<DataFile> concrete_file_location);
 
         std::shared_ptr<FileLocation> lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location);
 
@@ -122,6 +126,8 @@ namespace wrench {
         bool processFileLookupRequest(StorageServiceFileLookupRequestMessage* msg);
 
         bool processFileCopyRequest(StorageServiceFileCopyRequestMessage* msg);
+
+        void writeFile(const std::shared_ptr<DataFile> &file, const std::string &path) override;
 
         bool processFileWriteRequest(StorageServiceFileWriteRequestMessage* msg);
 
