@@ -19,7 +19,11 @@
 
 namespace wrench {
 
-    using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(const std::shared_ptr<DataFile>&, const std::set<std::shared_ptr<StorageService>>&)>;
+    using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(
+        const std::shared_ptr<DataFile>&, 
+        const std::set<std::shared_ptr<StorageService>>&, 
+        const std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>>&
+    )>;
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -67,6 +71,10 @@ namespace wrench {
          */
         std::set<std::shared_ptr<StorageService>>& getAllServices();
 
+        std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<DataFile> &file);
+
+        std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
+
     protected:
 
         CompoundStorageService(const std::string &hostname, 
@@ -110,10 +118,6 @@ namespace wrench {
         friend class Simulation;
 
         int main() override;
-
-        std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<DataFile> &file);
-
-        std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
 
         std::shared_ptr<FileLocation> lookupOrDesignateStorageService(const std::shared_ptr<DataFile> concrete_file_location);
 

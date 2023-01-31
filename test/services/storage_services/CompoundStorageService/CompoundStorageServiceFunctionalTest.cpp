@@ -181,7 +181,11 @@ private:
             test->compound_storage_service->setScratch();
             throw std::runtime_error("CompoundStorageService can't be setup as a scratch space");
         } catch (std::logic_error &e) {}
-   
+
+        if (test->compound_storage_service->isBufferized()) {
+            throw std::runtime_error("CompoundStorageService shouldn't be bufferized");
+        }
+        
 
         // Test multiple messages that should answer with a failure cause, and in turn generate an ExecutionException
         // on caller's side    
@@ -192,30 +196,27 @@ private:
             wrench::StorageService::copyFile(file_1_loc_css, file_1_loc_ss);
             throw std::runtime_error("File doesn't exist yet on CSS, copy with CSS as src should be impossible");
         } catch (wrench::ExecutionException &) {}
-
-        /*
+        
         try {
             wrench::StorageService::copyFile(file_1_loc_ss, file_1_loc_css);
-            //throw std::runtime_error("Should not be able to copy file with a CompoundStorageService w/o msg");
-        } catch (std::invalid_argument &) {}
-        */
-
+            throw std::runtime_error("Default CSS can't allocate a file on its own (missing StorageSelectionCallback)"
+                                     " Copy should not be possible");
+        } catch (wrench::ExecutionException &) {}
+        
         try {
             wrench::StorageService::deleteFile(file_1_loc_css);
             throw std::runtime_error("Should not be able to delete file from a CompoundStorageService w/o msg");
         } catch (wrench::ExecutionException &) {}
 
-
         try {
             wrench::StorageService::readFile(file_1_loc_css);
-            throw std::runtime_error("Should not be able to read file from a CompoundStorageService w/o msg");
+            throw std::runtime_error("Should not be able to read file from a CompoundStorageService if it has not been written/copied to it first");
         } catch (wrench::ExecutionException &) {}
-
 
         try {
             wrench::StorageService::writeFile(file_1_loc_css);
             throw std::runtime_error("Should not be able to write file on a CompoundStorageService because no selection callback was provided");
-        } catch (std::runtime_error &) {}
+        } catch (wrench::StorageServiceNotEnoughSpace &) {}
 
         // This one simply answers that the file was not found
         if (wrench::StorageService::lookupFile(file_1_loc_css))
@@ -346,6 +347,16 @@ private:
         job1->addActionDependency(fileReadAction, fileWriteAction);
         actions.push_back(fileWriteAction);
 
+        auto fileCopyAction2 = job1->addFileCopyAction(
+            "copyBack", 
+            wrench::FileLocation::LOCATION(test->compound_storage_service, test->file_500),
+            wrench::FileLocation::LOCATION(test->simple_storage_service_1000, "/disk1000/results/", test->file_500)
+        );
+        job1->addActionDependency(fileWriteAction, fileCopyAction2);
+    
+        auto fileDeleteAction = job1->addFileDeleteAction("fileDelete", wrench::FileLocation::LOCATION(test->compound_storage_service, test->file_100));
+        job1->addActionDependency(fileCopyAction2, fileDeleteAction);
+
         job_manager->submitJob(job1, test->compute_service, {});
     
         std::shared_ptr<wrench::ExecutionEvent> event = this->waitForNextEvent();
@@ -355,15 +366,26 @@ private:
 
         if (job1->getState() != wrench::CompoundJob::State::COMPLETED) {
             throw std::runtime_error("Unexpected job state: " + job1->getStateAsString());
-        }
-        
+        }        
         
         for (auto const &a : actions) {
             if (a->getState() != wrench::Action::State::COMPLETED) {
                 throw std::runtime_error("One of the actions did not complete");
             }
         }
+
+        // lookup a deleted file
+        if (wrench::StorageService::lookupFile(wrench::FileLocation::LOCATION(test->compound_storage_service, test->file_100))) {
+            throw runtime_error("A file supposed to be deleted (on CSS) was not.");
+        }
         
+        auto file_500_designated_loc = test->compound_storage_service->lookupFileLocation(test->file_500);
+        if (!file_500_designated_loc) {
+            throw std::runtime_error("Should have been able to lookup file_500 through CSS");
+        } else if (file_500_designated_loc->getFullAbsolutePath() != "/disk510/"){
+            throw std::runtime_error("file_500 copy through CSS is not where it should be");
+        }
+
         return 0;
     }
 };
@@ -374,7 +396,10 @@ TEST_F(CompoundStorageServiceFunctionalTest, BasicMsgFunctionality) {
 
 
 /* For testing purpose, dummy StorageSelectionStrategyCallback */
-std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(const std::shared_ptr<wrench::DataFile>& file, const std::set<std::shared_ptr<wrench::StorageService>>& resources) {
+std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
+    const std::shared_ptr<wrench::DataFile>& file, 
+    const std::set<std::shared_ptr<wrench::StorageService>>& resources,
+    const std::map<std::shared_ptr<wrench::DataFile>, std::shared_ptr<wrench::FileLocation>>& mapping) {
 
     auto capacity_req = file->getSize();
     

@@ -20,7 +20,10 @@ namespace wrench {
      *         trigger any request message processing function in CompoundStorageServer to answer negatively.
      *         
     */
-    std::shared_ptr<FileLocation> nullptrStorageServiceSelection(const std::shared_ptr<DataFile>& file, const std::set<std::shared_ptr<StorageService>>& resources) {
+    std::shared_ptr<FileLocation> nullptrStorageServiceSelection(
+        const std::shared_ptr<DataFile>& file, 
+        const std::set<std::shared_ptr<StorageService>>& resources,
+        const std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>>& mapping) {
         return nullptr;
     }
 
@@ -233,7 +236,7 @@ namespace wrench {
         }
 
         WRENCH_DEBUG("lookupOrDesignateStorageService: File %s NOT already known by CSS", concrete_file_location->getID().c_str());
-        auto designatedLocation = this->storage_selection(concrete_file_location, this->storage_services);
+        auto designatedLocation = this->storage_selection(concrete_file_location, this->storage_services, this->file_location_mapping);
 
         if (!designatedLocation) {
             WRENCH_DEBUG("lookupOrDesignateStorageService: File %s could not be placed on any ss", concrete_file_location->getID().c_str());
@@ -333,9 +336,20 @@ namespace wrench {
 
     bool CompoundStorageService::processFileCopyRequest(StorageServiceFileCopyRequestMessage *msg) {
 
-        // Check that source file location DOES NOT reference a CSS. If so, abort.
-        if (std::dynamic_pointer_cast<CompoundStorageService>(msg->src->getStorageService()) 
-            and !(this->lookupFileLocation(msg->src->getFile()))) {
+        auto final_src = msg->src;
+        auto final_dst = msg->dst;
+
+        // If source location references a CSS, it must already be known to the CSS
+        if (std::dynamic_pointer_cast<CompoundStorageService>(msg->src->getStorageService())) {
+            final_src = this->lookupFileLocation(msg->src->getFile()); 
+        }
+        // If destination location references a CSS, it must already exist OR we must be able to allocate it
+        if (std::dynamic_pointer_cast<CompoundStorageService>(msg->dst->getStorageService())) {
+            final_dst = this->lookupOrDesignateStorageService(msg->dst);
+        }
+
+        // Error case - src
+        if (!final_src) {
            
             WRENCH_WARN("processFileCopyRequest: Source %s is a CompoundStorageService and file doesn't exist yet.", 
                         msg->src->getStorageService()->getName().c_str());
@@ -363,9 +377,8 @@ namespace wrench {
             return true;
         }
 
-        // Lookup  dest file locally, or find suitable storage service to host it.
-        auto designated_location = this->lookupOrDesignateStorageService(msg->dst);
-        if (!designated_location) {
+        // Error case - dst
+        if (!final_dst) {
 
             WRENCH_WARN("processFileCopyRequest: Destination file %s not found or not enough space left",
                         msg->dst->getFile()->getID().c_str());
@@ -388,17 +401,13 @@ namespace wrench {
         }
         
         S4U_Mailbox::putMessage(
-            designated_location->getStorageService()->mailbox,
+            final_dst->getStorageService()->mailbox,
             new StorageServiceFileCopyRequestMessage(
                     msg->answer_mailbox,
-                    msg->src,
-                    FileLocation::LOCATION(
-                        designated_location->getStorageService(), 
-                        designated_location->getFullAbsolutePath(), 
-                        designated_location->getFile()
-                    ),
+                    final_src,
+                    final_dst,
                     nullptr,
-                    designated_location->getStorageService()->getMessagePayloadValue(
+                    final_dst->getStorageService()->getMessagePayloadValue(
                             StorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD)
             )
         );
@@ -422,7 +431,7 @@ namespace wrench {
 
         auto designated_location = this->lookupOrDesignateStorageService(file);
         if (!designated_location) {
-            throw std::runtime_error("CompoundStorageService::writeFile: unable to accomodate write request.");
+            throw StorageServiceNotEnoughSpace(file, this->getSharedPtr<CompoundStorageService>());
         }
 
         assertServiceIsUp();
