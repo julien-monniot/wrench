@@ -80,6 +80,7 @@ namespace wrench {
         CompoundStorageService(const std::string &hostname, 
                                std::set<std::shared_ptr<StorageService>> storage_services,
                                StorageSelectionStrategyCallback storage_selection,
+                               bool storage_selection_user_provided,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
                                const std::string &suffix);
@@ -141,9 +142,9 @@ namespace wrench {
 
         std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>> file_location_mapping = {};
 
-        void validateProperties();
-
         StorageSelectionStrategyCallback storage_selection;
+
+        bool isStorageSelectionUserProvided;
 
     };
 
