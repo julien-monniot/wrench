@@ -115,6 +115,8 @@ namespace wrench {
 
         bool processStopDaemonRequest(simgrid::s4u::Mailbox *ack_mailbox);
 
+        virtual bool hasFile(const std::shared_ptr<DataFile> &file, const std::string &path) override;
+
     private:
         friend class Simulation;
 

@@ -799,6 +799,21 @@ namespace wrench {
 
     }
 
+    bool CompoundStorageService::hasFile(const std::shared_ptr<DataFile> &file, const std::string &path) {
+        auto file_location = this->lookupFileLocation(file);
+        if (!file_location) {
+            WRENCH_DEBUG("hasFile: File %s not found", file->getID().c_str());
+            return false;
+        }
+        if (file_location->getAbsolutePathAtMountPoint() != path) {
+            WRENCH_DEBUG("hasFile: File %s found, but path %s doesn't match internal path %s", 
+                file->getID().c_str(), path.c_str(), file_location->getAbsolutePathAtMountPoint().c_str());
+            return false;
+        }
+
+        return true;
+    }
+
     /**
     * @brief Generate a unique number
     *
