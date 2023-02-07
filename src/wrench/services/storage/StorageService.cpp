@@ -463,9 +463,6 @@ namespace wrench {
                                              message->getName() + "] message!");
                 }
 
-                // A tmp mailbox might have been created because of CompoundStorageService case
-                if (chunk_receiving_mailbox) S4U_Mailbox::retireTemporaryMailbox(chunk_receiving_mailbox);
-
             } else {
                 // Otherwise, retrieve the file chunks until the last one is received
                 while (true) {

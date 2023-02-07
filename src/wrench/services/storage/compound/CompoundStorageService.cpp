@@ -660,6 +660,7 @@ namespace wrench {
                         msg->location,
                         false,
                         std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
+                        nullptr,
                         0,
                         this->getMessagePayloadValue(
                             CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD))
@@ -681,7 +682,6 @@ namespace wrench {
             new StorageServiceFileReadRequestMessage(
                 msg->answer_mailbox,
                 msg->requesting_host,
-                msg->mailbox_to_receive_the_file_content,
                 designated_location,
                 msg->num_bytes_to_read,
                 designated_location->getStorageService()->getMessagePayloadValue(
