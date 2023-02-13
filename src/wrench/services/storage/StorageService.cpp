@@ -183,15 +183,14 @@ namespace wrench {
     /**
      * @brief Synchronously write a file to the storage service
      *
-     * @param location: the file location
+     * @param file: the file
+     * @param path: path to file
      *
      * @throw ExecutionException
      */
-    void StorageService::writeFile(const std::shared_ptr<FileLocation> &location) {
-        if (location == nullptr) {
-            throw std::invalid_argument("StorageService::writeFile(): Invalid nullptr arguments");
-        }
-        location->getStorageService()->writeFile(location->getFile(), location->getFullAbsolutePath());
+    void StorageService::writeFile(const std::shared_ptr<DataFile> &file, const std::string &path) {
+
+        writeFile(FileLocation::LOCATION(getSharedPtr<StorageService>(), path, file));
     }
 
     /**
@@ -205,41 +204,43 @@ namespace wrench {
         this->writeFile(file, this->getMountPoint());
     }
 
+
     /**
      * @brief Synchronously write a file to the storage service
      *
-     * @param file: the file
-     * @param path: path to file
+     * @param location: the file location
      *
      * @throw ExecutionException
      */
-    void StorageService::writeFile(const std::shared_ptr<DataFile> &file, const std::string &path) {
+    void StorageService::writeFile(const std::shared_ptr<FileLocation> &location) {
+        auto file = location->getFile();
+        auto path = location->getFullAbsolutePath();
+        auto that = location->getStorageService();
+        auto buffer_size = that->buffer_size;// best guess at buffer-size, but can be updated later
         if (file == nullptr) {
             throw std::invalid_argument("StorageService::writeFile(): Invalid arguments");
         }
 
-        assertServiceIsUp();
+        that->assertServiceIsUp();
 
         WRENCH_INFO("writeFile: Preparing initial write request");
 
         // Send a  message to the daemon
         auto answer_mailbox = S4U_Daemon::getRunningActorRecvMailbox();
 
-        S4U_Mailbox::putMessage(this->mailbox,
+        S4U_Mailbox::putMessage(that->mailbox,
                                 new StorageServiceFileWriteRequestMessage(
                                         answer_mailbox,
                                         simgrid::s4u::this_actor::get_host(),
-                                        wrench::FileLocation::LOCATION(this->getSharedPtr<StorageService>(), path, file),
-                                        this->buffer_size,
-                                        this->getMessagePayloadValue(
+                                        location,
+                                        buffer_size,
+                                        that->getMessagePayloadValue(
                                                 StorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD)));
 
         // Wait for a reply
         std::shared_ptr<SimulationMessage> message;
 
-        WRENCH_INFO("writeFile: Waiting for answer message");
-        message = S4U_Mailbox::getMessage(answer_mailbox, this->network_timeout);
-        WRENCH_INFO("writeFile: Answer message received");
+        message = S4U_Mailbox::getMessage(answer_mailbox, that->network_timeout);
 
         if (auto msg = dynamic_cast<StorageServiceFileWriteAnswerMessage *>(message.get())) {
             WRENCH_INFO("writeFile: msg successfully cast to AnswerMessage");
@@ -248,8 +249,10 @@ namespace wrench {
                 throw ExecutionException(msg->failure_cause);
             }
 
-            if (this->buffer_size < 1) {
-                WRENCH_INFO("writeFile: if buffer_size < 1");
+            // Update buffer size according to which storage service actually answered.
+            auto buffer_size = msg->location->getStorageService()->buffer_size;
+
+            if (buffer_size < 1) {
                 // just wait for the final ack (no timeout!)
                 message = S4U_Mailbox::getMessage(answer_mailbox);
                 if (not dynamic_cast<StorageServiceAckMessage *>(message.get())) {
@@ -261,17 +264,17 @@ namespace wrench {
                 WRENCH_INFO("writeFile: else");
                 // Bufferized
                 double remaining = file->getSize();
-                while (remaining - this->buffer_size > DBL_EPSILON) {
+                while (remaining - buffer_size > DBL_EPSILON) {
                     S4U_Mailbox::putMessage(msg->data_write_mailbox,
                                             new StorageServiceFileContentChunkMessage(
-                                                    file, this->buffer_size, false));
-                    remaining -= this->buffer_size;
+                                                    file, buffer_size, false));
+                    remaining -= buffer_size;
                 }
                 S4U_Mailbox::putMessage(msg->data_write_mailbox, new StorageServiceFileContentChunkMessage(
                                                                          file, remaining, true));
 
                 //Waiting for the final ack
-                message = S4U_Mailbox::getMessage(answer_mailbox, this->network_timeout);
+                message = S4U_Mailbox::getMessage(answer_mailbox, that->network_timeout);
                 if (not dynamic_cast<StorageServiceAckMessage *>(message.get())) {
                     throw std::runtime_error("StorageService::writeFile(): Received an unexpected [" +
                                              message->getName() + "] message instead of final ack!");
@@ -293,10 +296,6 @@ namespace wrench {
      * @brief Synchronously asks the storage service for its capacity at all its
      *        mount points
      * @return The free space in bytes of each mount point, as a map
-     *
-     * @throw ExecutionException
-     *
-     * @throw std::runtime_error
      *
      */
     std::map<std::string, double> StorageService::getFreeSpace() {
@@ -571,16 +570,11 @@ namespace wrench {
     }
 
     /**
-<<<<<<< HEAD
      * @brief Synchronously delete a file at a location
      *
      * @param location: the file location
      * @param file_registry_service: a file registry service that should be updated once the
      *         file deletion has (successfully) completed (none if nullptr)
-     *
-     * @throw ExecutionException
-     * @throw std::runtime_error
-     * @throw std::invalid_argument
      */
     void StorageService::deleteFile(const std::shared_ptr<FileLocation> &location,
                                     const std::shared_ptr<FileRegistryService> &file_registry_service) {
@@ -860,7 +854,9 @@ namespace wrench {
     /**
      * @brief Determines whether the storage service has the file. This doesn't simulate anything and is merely a zero-simulated-time data structure lookup.
      * If you want to simulate the overhead of querying the StorageService, instead use lookupFile().
+     *
      * @param file a file
+     *
      * @return true if the file is present, false otherwise
      */
     bool StorageService::hasFile(const shared_ptr<DataFile> &file) {

@@ -11,7 +11,6 @@
 
 namespace wrench {
 
-    
     SET_PROPERTY_NAME(CompoundStorageServiceProperty, STORAGE_SELECTION_METHOD);
 
 };

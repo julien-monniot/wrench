@@ -20,10 +20,9 @@
 namespace wrench {
 
     using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(
-        const std::shared_ptr<DataFile>&, 
-        const std::set<std::shared_ptr<StorageService>>&, 
-        const std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>>&
-    )>;
+            const std::shared_ptr<DataFile> &,
+            const std::set<std::shared_ptr<StorageService>> &,
+            const std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>> &)>;
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -39,20 +38,17 @@ namespace wrench {
      *        said request to one of the underlying storage services).
      */
     class CompoundStorageService : public StorageService {
-    
     public:
-
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
-                               WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {}); 
+                               WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {});
 
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
                                StorageSelectionStrategyCallback storage_selection,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {});
- 
         double getFileLastWriteDate(const std::shared_ptr<FileLocation> &location) override;
 
         double getLoad() override;
@@ -62,22 +58,20 @@ namespace wrench {
 
         // Overload StorageService's implementation.
         std::map<std::string, double> getFreeSpace();
-        
         // Overload StorageService's implementation.
         void setScratch();
 
         /**
          * @brief Method to return the collection of known StorageServices
          */
-        std::set<std::shared_ptr<StorageService>>& getAllServices();
+        std::set<std::shared_ptr<StorageService>> &getAllServices();
 
         std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<DataFile> &file);
 
         std::shared_ptr<FileLocation> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
 
     protected:
-
-        CompoundStorageService(const std::string &hostname, 
+        CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
                                StorageSelectionStrategyCallback storage_selection,
                                bool storage_selection_user_provided,
@@ -115,7 +109,7 @@ namespace wrench {
 
         bool processStopDaemonRequest(simgrid::s4u::Mailbox *ack_mailbox);
 
-        virtual bool hasFile(const std::shared_ptr<DataFile> &file, const std::string &path) override;
+        bool hasFile(const std::shared_ptr<DataFile> &file, const std::string &path) override;
 
     private:
         friend class Simulation;
@@ -130,16 +124,14 @@ namespace wrench {
 
         bool processFileDeleteRequest(StorageServiceFileDeleteRequestMessage *msg);
 
-        bool processFileLookupRequest(StorageServiceFileLookupRequestMessage* msg);
+        bool processFileLookupRequest(StorageServiceFileLookupRequestMessage *msg);
 
-        bool processFileCopyRequest(StorageServiceFileCopyRequestMessage* msg);
+        bool processFileCopyRequest(StorageServiceFileCopyRequestMessage *msg);
 
-        void writeFile(const std::shared_ptr<DataFile> &file, const std::string &path) override;
+        bool processFileWriteRequest(StorageServiceFileWriteRequestMessage *msg);
 
-        bool processFileWriteRequest(StorageServiceFileWriteRequestMessage* msg);
+        bool processFileReadRequest(StorageServiceFileReadRequestMessage *msg);
 
-        bool processFileReadRequest(StorageServiceFileReadRequestMessage* msg);
-        
         std::set<std::shared_ptr<StorageService>> storage_services = {};
 
         std::map<std::shared_ptr<DataFile>, std::shared_ptr<FileLocation>> file_location_mapping = {};
@@ -147,9 +139,8 @@ namespace wrench {
         StorageSelectionStrategyCallback storage_selection;
 
         bool isStorageSelectionUserProvided;
-
     };
 
 };// namespace wrench
 
-#endif //WRENCH_COMPOUNDSTORAGESERVICE_H
+#endif//WRENCH_COMPOUNDSTORAGESERVICE_H

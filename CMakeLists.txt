@@ -199,6 +199,8 @@ set(HEADER_FILES
         include/wrench/services/storage/xrootd/SearchStack.h
         include/wrench/services/storage/xrootd/Cache.h
         include/wrench/services/storage/xrootd/XRootDProperty.h
+        include/wrench/services/storage/proxy/StorageServiceProxy.h
+        include/wrench/services/storage/proxy/StorageServiceProxyProperty.h
         )
 
 # source files
@@ -377,6 +379,8 @@ set(SOURCE_FILES
         src/wrench/services/storage/xrootd/XRootDMessagePayload.cpp
         src/wrench/services/storage/xrootd/XRootDMessage.cpp
         src/wrench/services/storage/xrootd/XRootDProperty.cpp
+        src/wrench/services/storage/proxy/StorageServiceProxy.cpp
+        src/wrench/services/storage/proxy/StorageServiceProxyProperty.cpp
         )
 
 # test files
@@ -493,6 +497,7 @@ set(TEST_FILES
         test/simulated_failures/failure_test_util/ResourceRandomRepeatSwitcher.h
         test/simulation/S4U_MailboxTest.cpp
         test/misc/UnitParserTest.cpp
+        test/services/storage_services/StorageServiceProxy/StorageServiceProxyBasicTest.cpp
         )
 
 
