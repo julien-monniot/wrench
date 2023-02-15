@@ -292,6 +292,7 @@ namespace wrench {
      * @return true if this process should keep running
      */
     bool CompoundStorageService::processFileDeleteRequest(StorageServiceFileDeleteRequestMessage *msg) {
+
         auto designated_location = this->lookupFileLocation(msg->location);
         if (!designated_location) {
             WRENCH_WARN("processFileDeleteRequest: Unable to find file %s",
@@ -310,6 +311,9 @@ namespace wrench {
 
             return true;
         }
+
+        // Update local registry
+        this->file_location_mapping.erase(msg->location->getFile());
 
         S4U_Mailbox::putMessage(
                 designated_location->getStorageService()->mailbox,

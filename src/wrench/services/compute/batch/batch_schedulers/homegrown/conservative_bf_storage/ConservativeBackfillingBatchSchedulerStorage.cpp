@@ -17,7 +17,9 @@
 #include <wrench/services/storage/compound/CompoundStorageService.h>
 #include <wrench/services/storage/simple/SimpleStorageService.h>
 #include <wrench/exceptions/ExecutionException.h>
-#include <wrench/failure_causes/FatalFailure.h>
+#include <wrench/failure_causes/StorageServiceNotEnoughSpace.h>
+
+#include <cstdlib>
 
 //#define  PRINT_SCHEDULE 1
 
@@ -41,7 +43,7 @@ namespace wrench {
         WRENCH_INFO("Scheduling a new BatchComputeService job, %lu, that needs %lu nodes",
                     batch_job->getJobID(), batch_job->getRequestedNumNodes());
 
-        WRENCH_INFO("BatchComputeService::processQueuedJobs() - Starting to introspect actions");
+        WRENCH_INFO("BatchComputeService::processQueuedJobs() - Starting to introspect actions for job %lu", batch_job->getJobID());
         // Update any storage location that refers to a CompoundStorageService in read/write/copy actions
         for (auto& action: batch_job->getCompoundJob()->getActions()) {
             this->setConcreteStorage(action);
@@ -321,13 +323,16 @@ namespace wrench {
 
     void ConservativeBackfillingBatchSchedulerStorage::setConcreteStorage(std::shared_ptr<wrench::Action> action) const {
 
+        WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Intropecting action : %s for job %s", 
+            action->getName().c_str(), action->getJob()->getName().c_str());
+
         if (auto io_action = dynamic_cast<FileReadAction*>(action.get())) {
 
             // FileRead actions may have multiple embedded locations
             for(auto& file_location: io_action->getFileLocations()) {
                 auto storage_service = file_location->getStorageService();
                 if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
-                    WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileReadAction");
+                    WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in %s", io_action->getName().c_str());
                     this->selectSimpleStorage(compound_storage_service, file_location, io_action->getFile()->getSize());
                 }
             }
@@ -337,26 +342,28 @@ namespace wrench {
             auto file_location = io_action->getFileLocation();
             auto storage_service = file_location->getStorageService();
             if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(storage_service.get())) {
-                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileWriteAction");
+                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in %s", io_action->getName().c_str());
                 this->selectSimpleStorage(compound_storage_service, file_location, io_action->getFile()->getSize());
             }
 
         } else if (auto io_action = dynamic_cast<FileCopyAction*>(action.get())) {
-
+        
             auto src_location = io_action->getSourceFileLocation();
             auto src_storage = src_location->getStorageService();
+            WRENCH_INFO("setConcreteStorage() : Src copy host = %s", src_storage->getHostname().c_str());
 
-            auto dst_location = io_action->getSourceFileLocation();
+            auto dst_location = io_action->getDestinationFileLocation();
             auto dst_storage = dst_location->getStorageService();
+            WRENCH_INFO("setConcreteStorage() : Dst copy host = %s", dst_storage->getHostname().c_str());
 
             if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(src_storage.get())) {
-                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileCopyAction (src)");
-                this->selectSimpleStorage(compound_storage_service, src_location, io_action->getFile()->getSize());
+                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in %s (src)", io_action->getName().c_str());
+                this->selectSimpleStorage(compound_storage_service, src_location, src_location->getFile()->getSize());
             }
 
             if (auto compound_storage_service = dynamic_cast<CompoundStorageService*>(dst_storage.get())) {
-                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in FileCopyAction (dst)");
-                this->selectSimpleStorage(compound_storage_service, dst_location, io_action->getFile()->getSize());
+                WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Found CompoundStorageService in %s (dst)", io_action->getName().c_str());
+                this->selectSimpleStorage(compound_storage_service, dst_location, dst_location->getFile()->getSize());
             }
 
         }
@@ -375,20 +382,28 @@ namespace wrench {
         // Just use the first storage service for now, we don't have an actual algorithm
         std::string new_mount_point;
         std::shared_ptr<SimpleStorageService> new_ss;
-        for (const auto& ss: simple_storage_services) {
+        
+        auto next = simple_storage_services.begin();
+        while (!new_ss) {
+            const auto ss = *(next);
             auto free_space = ss->getFreeSpace();
             for (const auto& mount : free_space) {
-                if (mount.second >= size) {
+                if ((mount.second >= size) and ((rand() % 100) > 70)) {
                     new_mount_point = mount.first;
                     new_ss = std::dynamic_pointer_cast<SimpleStorageService>(ss);
                     break;
                 }
             }
+            next++;
+            if (next == simple_storage_services.end()) {
+                next = simple_storage_services.begin();
+            }
         }
+        
 
         if (!new_ss) {
             WRENCH_WARN("ConservativeBackfillingStorage::selectSimpleStorage() Not enough space on any mount point of any service");
-            // throw ExecutionException(std::make_shared<FatalFailure>("Not enough space on any mount point of any service"));
+            throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(location->getFile(), location->getStorageService()));
         }
 
         new_ss = std::dynamic_pointer_cast<SimpleStorageService>(location->setStorageService(new_ss));
