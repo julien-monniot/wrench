@@ -469,6 +469,13 @@ namespace wrench {
         return true;
     }
 
+    struct FileParts {
+        std::shared_ptr<DataFile> original_file;
+        simgrid::s4u::Mailbox* original_mailbox;
+        simgrid::s4u::Mailbox* temporary_mailbox;
+        std::vector<std::shared_ptr<DataFile>> parts;
+    };
+
     /**
      * @brief Handle (and intercept) a file write request. 
      *        Note: Currently it's not reachable, because we also override a writeFile,
@@ -478,37 +485,108 @@ namespace wrench {
      * @return true if this process should keep running
      */
     bool CompoundStorageService::processFileWriteRequest(StorageServiceFileWriteRequestMessage *msg) {
-        auto designated_location = this->lookupOrDesignateStorageService(msg->location);
-        if (!designated_location) {
-            WRENCH_WARN("processFileWriteRequest: Destination file %s not found or not enough space left",
-                        msg->location->getFile()->getID().c_str());
-            try {
-                S4U_Mailbox::dputMessage(
-                        msg->answer_mailbox,
-                        new StorageServiceFileWriteAnswerMessage(
-                                msg->location,
-                                false,
-                                std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
-                                nullptr,
+
+        auto file_size = msg->location->getFile()->getSize();
+
+        if (file_size <= this->chunk_size) {
+
+            auto designated_location = this->lookupOrDesignateStorageService(msg->location);
+            if (!designated_location) {
+                WRENCH_WARN("processFileWriteRequest: Destination file %s not found or not enough space left",
+                            msg->location->getFile()->getID().c_str());
+                try {
+                    S4U_Mailbox::dputMessage(
+                            msg->answer_mailbox,
+                            new StorageServiceFileWriteAnswerMessage(
+                                    msg->location,
+                                    false,
+                                    std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
+                                    nullptr,
+                                    this->getMessagePayloadValue(
+                                            CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD)));
+                } catch (wrench::ExecutionException &e) {}
+
+                return true;
+            }
+
+            // The file is known or added to the local mapping, we can forward the request to the underlying designated StorageService
+            S4U_Mailbox::putMessage(
+                    designated_location->getStorageService()->mailbox,
+                    new StorageServiceFileWriteRequestMessage(
+                            msg->answer_mailbox,
+                            msg->requesting_host,
+                            designated_location,
+                            0,
+                            this->getMessagePayloadValue(
+                                    StorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD)));
+
+            return true;
+
+        } else { // Need to split file in multiple sub files
+
+            std::map<std::string, FileParts> file_parts = {};
+        
+            auto file_name = msg->location->getFile()->getID();
+
+            file_parts[file_name] = FileParts();
+            file_parts[file_name].original_file = msg->location->getFile();
+            file_parts[file_name].original_mailbox = msg->answer_mailbox;
+            file_parts[file_name].temporary_mailbox = S4U_Mailbox::getTemporaryMailbox();
+         
+            auto part_id = 0;
+
+            while (file_size - this->chunk_size > DBL_EPSILON) {
+                file_parts[file_name].parts.push_back(Simulation::addFile(file_name + "_" + std::to_string(part_id), this->chunk_size));    
+                file_size -= this->chunk_size;
+                part_id++;
+            }
+            file_parts[file_name].parts.push_back(Simulation::addFile("", file_size));
+
+            auto designated_locations = this->lookupOrDesignateStorageServices(file_parts[file_name].parts);
+            if (designated_locations.empty()) {
+                WRENCH_WARN("processFileWriteRequest: Destination file %s not found or not enough space left",
+                            msg->location->getFile()->getID().c_str());
+                try {
+                    S4U_Mailbox::dputMessage(
+                            msg->answer_mailbox,
+                            new StorageServiceFileWriteAnswerMessage(
+                                    msg->location,
+                                    false,
+                                    std::shared_ptr<FailureCause>(new FileNotFound(msg->location)),
+                                    nullptr,
+                                    this->getMessagePayloadValue(
+                                            CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD)));
+                } catch (wrench::ExecutionException &e) {}
+                return true;
+            }
+
+            // Send messages
+            for (const auto& location : designated_locations) {
+
+                // The file is known or added to the local mapping, we can forward the request to the underlying designated StorageService
+                S4U_Mailbox::putMessage(
+                        location->getStorageService()->mailbox,
+                        new StorageServiceFileWriteRequestMessage(
+                                file_parts[file_name].temporary_mailbox,
+                                msg->requesting_host,       // ???? Do we replace it or not ?
+                                location,
+                                0,
                                 this->getMessagePayloadValue(
-                                        CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD)));
-            } catch (wrench::ExecutionException &e) {}
+                                        StorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD)));
+
+            }
+        
+            std::vector<std::unique_ptr<SimulationMessage>> answers;
+            while 
+   
+                try {
+                    message = S4U_Mailbox::getMessage(answer_mailbox, storage_service->network_timeout);
+                } catch (ExecutionException &e) {
+                    throw;
+                }
 
             return true;
         }
-
-        // The file is known or added to the local mapping, we can forward the request to the underlying designated StorageService
-        S4U_Mailbox::putMessage(
-                designated_location->getStorageService()->mailbox,
-                new StorageServiceFileWriteRequestMessage(
-                        msg->answer_mailbox,
-                        msg->requesting_host,
-                        designated_location,
-                        0,
-                        this->getMessagePayloadValue(
-                                StorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD)));
-
-        return true;
     }
 
     /**

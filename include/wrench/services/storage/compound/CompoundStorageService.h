@@ -139,6 +139,8 @@ namespace wrench {
         StorageSelectionStrategyCallback storage_selection;
 
         bool isStorageSelectionUserProvided;
+
+        double chunk_size = 2000;   // bytes
     };
 
 };// namespace wrench

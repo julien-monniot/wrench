@@ -103,6 +103,7 @@ namespace wrench {
 
         // Check Platform homogeneity
         double num_cores_available = (double) (Simulation::getHostNumCores(*(compute_hosts.begin())));
+        WRENCH_INFO("NUM CORES AVAILABLE per host %f", num_cores_available);
         double speed = Simulation::getHostFlopRate(*(compute_hosts.begin()));
         double ram_available = Simulation::getHostMemoryCapacity(*(compute_hosts.begin()));
 
@@ -138,6 +139,8 @@ namespace wrench {
 
         this->num_cores_per_node = this->nodes_to_cores_map.begin()->second;
         this->total_num_of_nodes = compute_hosts.size();
+        WRENCH_INFO("NUM_CORES_PER_NODE = %lu", this->num_cores_per_node);
+        WRENCH_INFO("NUM OF NODES = %lu", this->total_num_of_nodes);
 
         // Check that the workload file is valid
         std::string workload_file = this->getPropertyValueAsString(

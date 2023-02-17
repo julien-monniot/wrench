@@ -384,7 +384,8 @@ namespace wrench {
         std::shared_ptr<SimpleStorageService> new_ss;
         
         auto next = simple_storage_services.begin();
-        while (!new_ss) {
+        auto iteration_break = simple_storage_services.size() * 2;  // loop breaker in case we can't allocate the necessary storage
+        while (!new_ss or (iteration_break != 0)) {
             const auto ss = *(next);
             auto free_space = ss->getFreeSpace();
             for (const auto& mount : free_space) {
@@ -398,6 +399,7 @@ namespace wrench {
             if (next == simple_storage_services.end()) {
                 next = simple_storage_services.begin();
             }
+            iteration_break--;
         }
         
 
