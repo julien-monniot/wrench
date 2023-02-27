@@ -121,18 +121,9 @@ namespace wrench {
                                 HTCondorCentralManagerServiceMessagePayload::SUBMIT_COMPOUND_JOB_REQUEST_MESSAGE_PAYLOAD)));
 
         // Get the answer
-        std::unique_ptr<SimulationMessage> message = nullptr;
-        message = S4U_Mailbox::getMessage(answer_mailbox);
-
-        if (auto msg = dynamic_cast<ComputeServiceSubmitCompoundJobAnswerMessage *>(message.get())) {
-            // If no success, throw an exception
-            if (not msg->success) {
-                throw ExecutionException(msg->failure_cause);
-            }
-        } else {
-            throw std::runtime_error(
-                    "HTCondorCentralManagerService::submitCompoundJob(): Received an unexpected [" + message->getName() +
-                    "] message!");
+        auto msg = S4U_Mailbox::getMessage<ComputeServiceSubmitCompoundJobAnswerMessage>(answer_mailbox, "HTCondorCentralManagerService::submitCompoundJob(): Received an");
+        if (not msg->success) {
+            throw ExecutionException(msg->failure_cause);
         }
     }
 
@@ -197,7 +188,7 @@ namespace wrench {
 
         WRENCH_INFO("HTCondor Central Manager got a [%s] message", message->getName().c_str());
 
-        if (auto msg = dynamic_cast<ServiceStopDaemonMessage *>(message.get())) {
+        if (auto msg = std::dynamic_pointer_cast<ServiceStopDaemonMessage>(message)) {
             this->terminate();
             // This is Synchronous
             try {
@@ -211,27 +202,15 @@ namespace wrench {
             }
             return false;
 
-        } else if (dynamic_cast<CentralManagerWakeUpMessage *>(message.get())) {
+        } else if (std::dynamic_pointer_cast<CentralManagerWakeUpMessage>(message)) {
             // Do nothing
             return true;
 
-        } else if (auto msg = dynamic_cast<ComputeServiceSubmitCompoundJobRequestMessage *>(message.get())) {
+        } else if (auto msg = std::dynamic_pointer_cast<ComputeServiceSubmitCompoundJobRequestMessage>(message)) {
             processSubmitCompoundJob(msg->answer_mailbox, msg->job, msg->service_specific_args);
             return true;
 
-            //        } else if (auto msg = dynamic_cast<ComputeServiceSubmitPilotJobRequestMessage *>(message.get())) {
-            //            processSubmitPilotJob(msg->answer_mailbox, msg->job, msg->service_specific_args);
-            //            return true;
-            //
-            //        } else if (auto msg = dynamic_cast<ComputeServicePilotJobStartedMessage *>(message.get())) {
-            //            processPilotJobStarted(msg->job);
-            //            return true;
-            //
-            //        } else if (auto msg = dynamic_cast<ComputeServicePilotJobExpiredMessage *>(message.get())) {
-            //            processPilotJobCompletion(msg->job);
-            //            return true;
-            //
-        } else if (auto msg = dynamic_cast<ComputeServiceCompoundJobDoneMessage *>(message.get())) {
+        } else if (auto msg = std::dynamic_pointer_cast<ComputeServiceCompoundJobDoneMessage>(message)) {
             if (HTCondorComputeService::isJobGridUniverse(msg->job)) {
                 S4U_Simulation::sleep(this->grid_post_overhead);
             } else {
@@ -240,7 +219,7 @@ namespace wrench {
             processCompoundJobCompletion(msg->job);
             return true;
 
-        } else if (auto msg = dynamic_cast<ComputeServiceCompoundJobFailedMessage *>(message.get())) {
+        } else if (auto msg = std::dynamic_pointer_cast<ComputeServiceCompoundJobFailedMessage>(message)) {
             if (HTCondorComputeService::isJobGridUniverse(msg->job)) {
                 S4U_Simulation::sleep(this->grid_post_overhead);
             } else {
@@ -249,7 +228,7 @@ namespace wrench {
             processCompoundJobFailure(msg->job);
             return true;
 
-        } else if (auto msg = dynamic_cast<NegotiatorCompletionMessage *>(message.get())) {
+        } else if (auto msg = std::dynamic_pointer_cast<NegotiatorCompletionMessage>(message)) {
             processNegotiatorCompletion(msg->scheduled_jobs);
             return true;
 

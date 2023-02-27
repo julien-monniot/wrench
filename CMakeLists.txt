@@ -3,12 +3,17 @@ message(STATUS "Cmake version ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CM
 
 project(wrench CXX)
 
+# Disable annoying warnings
+add_definitions("-DBOOST_ALLOW_DEPRECATED_HEADERS")
+#add_definitions("-DBOOST_BIND_GLOBAL_PLACEHOLDERS")
+
 # Make Release the default build type
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-add_definitions("-Wall -Wno-unused-variable -Wno-unused-private-field")
+add_definitions("-Wall -Wno-unused-variable -Wno-unused-private-field -Wno-unused-local-typedefs" )
+
 if (ENABLE_BATSCHED)
     add_definitions(-DENABLE_BATSCHED)
 endif ()
@@ -26,7 +31,7 @@ find_package(SimGrid REQUIRED)
 
 find_package(nlohmann_json)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 # build the version number
 set(WRENCH_VERSION_MAJOR "2")
@@ -122,8 +127,8 @@ set(HEADER_FILES
         include/wrench/services/storage/compound/CompoundStorageServiceProperty.h
         include/wrench/services/storage/compound/CompoundStorageServiceMessagePayload.h
         include/wrench/services/storage/storage_helpers/FileLocation.h
-        include/wrench/services/memory/Block.h
-        include/wrench/services/memory/MemoryManager.h
+#        include/wrench/services/memory/Block.h
+#        include/wrench/services/memory/MemoryManager.h
         include/wrench/simgrid_S4U_util/S4U_Daemon.h
         include/wrench/simgrid_S4U_util/S4U_Mailbox.h
         include/wrench/simgrid_S4U_util/S4U_PendingCommunication.h
@@ -314,8 +319,6 @@ set(SOURCE_FILES
         src/wrench/services/storage/storage_helper_classes/LogicalFileSystem.cpp
         src/wrench/services/storage/storage_helper_classes/LogicalFileSystemNoCaching.cpp
         src/wrench/services/storage/storage_helper_classes/LogicalFileSystemLRUCaching.cpp
-        src/wrench/services/memory/Block.cpp
-        src/wrench/services/memory/MemoryManager.cpp
         src/wrench/simgrid_S4U_util/S4U_Daemon.cpp
         src/wrench/simgrid_S4U_util/S4U_DaemonActor.cpp
         include/wrench/simgrid_S4U_util/S4U_DaemonActor.h
@@ -395,7 +398,7 @@ set(TEST_FILES
         test/workflow/WorkflowTaskTest.cpp
         test/workflow/WorkflowParallelModelTest.cpp
         test/workflow/WorkflowLoadFromJSONTest.cpp
-        test/services/memory_manager_service/MemoryManagerTest.cpp
+#        test/services/memory_manager_service/MemoryManagerTest.cpp
         test/services/compute_services/bare_metal_compound_jobs/BareMetalComputeServiceOneActionTests.cpp
         test/services/compute_services/bare_metal_compound_jobs/BareMetalComputeServiceMultiActionTests.cpp
         test/services/compute_services/bare_metal_compound_jobs/BareMetalComputeServiceMultiJobTests.cpp
@@ -498,6 +501,7 @@ set(TEST_FILES
         test/simulation/S4U_MailboxTest.cpp
         test/misc/UnitParserTest.cpp
         test/services/storage_services/StorageServiceProxy/StorageServiceProxyBasicTest.cpp
+        test/services/storage_services/StorageServiceProxy/StorageServiceProxySequentialTest.cpp
         )
 
 

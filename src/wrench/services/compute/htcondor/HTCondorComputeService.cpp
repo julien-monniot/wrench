@@ -144,18 +144,12 @@ namespace wrench {
                                 HTCondorComputeServiceMessagePayload::SUBMIT_COMPOUND_JOB_REQUEST_MESSAGE_PAYLOAD)));
 
         // Get the answer
-        std::unique_ptr<SimulationMessage> message = nullptr;
-        message = S4U_Mailbox::getMessage(answer_mailbox);
-
-        if (auto msg = dynamic_cast<ComputeServiceSubmitCompoundJobAnswerMessage *>(message.get())) {
-            // If no success, throw an exception
-            if (not msg->success) {
-                throw ExecutionException(msg->failure_cause);
-            }
-        } else {
-            throw std::runtime_error(
-                    "HTCondorComputeService::submitCompoundJob(): Received an unexpected [" + message->getName() +
-                    "] message!");
+        auto msg = S4U_Mailbox::getMessage<ComputeServiceSubmitCompoundJobAnswerMessage>(
+                answer_mailbox,
+                "HTCondorComputeService::submitCompoundJob(): Received an");
+        // If no success, throw an exception
+        if (not msg->success) {
+            throw ExecutionException(msg->failure_cause);
         }
     }
 
@@ -203,6 +197,8 @@ namespace wrench {
         this->central_manager->setSimulation(this->simulation);
         this->central_manager->start(this->central_manager, true, false);// Daemonized, no auto-restart
 
+        // Start the Scratch Storage Service
+        this->startScratchStorageService();
 
         // main loop
         while (this->processNextMessage()) {
@@ -237,7 +233,7 @@ namespace wrench {
 
         WRENCH_DEBUG("Got a [%s] message", message->getName().c_str());
 
-        if (auto msg = dynamic_cast<ServiceStopDaemonMessage *>(message.get())) {
+        if (auto msg = std::dynamic_pointer_cast<ServiceStopDaemonMessage>(message)) {
             this->terminate();
             // This is Synchronous
             try {
@@ -249,7 +245,7 @@ namespace wrench {
             }
             return false;
 
-        } else if (auto msg = dynamic_cast<ComputeServiceSubmitCompoundJobRequestMessage *>(message.get())) {
+        } else if (auto msg = std::dynamic_pointer_cast<ComputeServiceSubmitCompoundJobRequestMessage>(message)) {
             processSubmitCompoundJob(msg->answer_mailbox, msg->job, msg->service_specific_args);
             return true;
 
@@ -316,45 +312,6 @@ namespace wrench {
                         this->getSharedPtr<HTCondorComputeService>(),
                         true, nullptr, this->getMessagePayloadValue(HTCondorComputeServiceMessagePayload::SUBMIT_COMPOUND_JOB_ANSWER_MESSAGE_PAYLOAD)));
     }
-
-    ///**
-    // * @brief Process a submit pilot job request
-    // *
-    // * @param answer_mailbox: the mailbox to which the answer message should be sent
-    // * @param job: the job
-    // * @param service_specific_args: service specific arguments
-    // *
-    // * @throw std::runtime_error
-    // */
-    //    void HTCondorComputeService::processSubmitPilotJob(const std::string &answer_mailbox, std::shared_ptr<PilotJob> job,
-    //                                                       const std::map<std::string, std::string> &service_specific_args) {
-    //
-    //        WRENCH_INFO("Asked to run a pilot job");
-    //
-    //        // Check that the job can run on some child service
-    //        if (not this->central_manager->jobCanRunSomewhere(job, service_specific_args)) {
-    //            S4U_Mailbox::dputMessage(
-    //                    answer_mailbox,
-    //                    new ComputeServiceSubmitPilotJobAnswerMessage(
-    //                            job, this->getSharedPtr<HTCondorComputeService>(), false, std::shared_ptr<FailureCause>(
-    //                                    new NotEnoughResources(job, this->getSharedPtr<HTCondorComputeService>())),
-    //                            this->getMessagePayloadValue(
-    //                                    HTCondorComputeServiceMessagePayload::SUBMIT_STANDARD_JOB_ANSWER_MESSAGE_PAYLOAD)));
-    //            return;
-    //        }
-    //
-    //        // Submit the job to the central manager
-    //        this->central_manager->submitPilotJob(job, service_specific_args);
-    //
-    //        // send positive answer
-    //        S4U_Mailbox::dputMessage(
-    //                answer_mailbox,
-    //                new ComputeServiceSubmitPilotJobAnswerMessage(
-    //                        job, this->getSharedPtr<HTCondorComputeService>(), true, nullptr, this->getMessagePayloadValue(
-    //                                HTCondorComputeServiceMessagePayload::SUBMIT_PILOT_JOB_ANSWER_MESSAGE_PAYLOAD)));
-    //        return;
-    //    }
-
 
     /**
       * @brief Process a host available resource request

@@ -38,22 +38,50 @@ namespace wrench {
 
 
     class WorkflowTask;
+    /**
+     * @brief Helper method that avoids calling WRENCH_DEBUG from a .h file and do the logging for the templated getMessage() method.  
+     * It also has the added bonus of checking for inheritance
+     *
+     * @param mailbox: the mailbox so we can get its name
+     * @param type: a pointer to the message so we have its type
+     * @param id: an integer id
+     *
+     */
+    void S4U_Mailbox::templateWaitingLog(const simgrid::s4u::Mailbox *mailbox, std::string type, unsigned long long id) {
+
+        WRENCH_DEBUG("Waiting for message of type <%s> from mailbox_name '%s'.  Request ID: %llu", type.c_str(), mailbox->get_cname(), id);
+    }
+
+    /**
+     * @brief Helper method that avoids calling WRENCH_DEBUG from a .h file and do the logging for the templated getMessage() method.  
+     * It also has the added bonus of checking for inheritance.
+     *
+     * @param mailbox: the mailbox so we can get its name
+     * @param type: a pointer to the message so we have its type
+     * @param id: an integer id
+     *
+     */
+    void S4U_Mailbox::templateWaitingLogUpdate(const simgrid::s4u::Mailbox *mailbox, std::string type, unsigned long long id) {
+
+        WRENCH_DEBUG("Received a message of type <%s> from mailbox_name '%s'.  Request ID: %llu", type.c_str(), mailbox->get_cname(), id);
+    }
 
     /**
      * @brief Synchronously receive a message from a mailbox
      *
      * @param mailbox: the mailbox
+     * @param log: should the log message be printed
      * @return the message, or nullptr (in which case it's likely a brutal termination)
      *
      * @throw std::shared_ptr<NetworkError>
      *
      */
-    std::unique_ptr<SimulationMessage> S4U_Mailbox::getMessage(simgrid::s4u::Mailbox *mailbox) {
+    std::unique_ptr<SimulationMessage> S4U_Mailbox::getMessage(simgrid::s4u::Mailbox *mailbox, bool log) {
         if (mailbox == S4U_Mailbox::NULL_MAILBOX) {
             throw std::runtime_error("S4U_Mailbox::getMessage(): Cannot be called with NULL_MAILBOX");
         }
 
-        WRENCH_DEBUG("Getting a message from mailbox_name '%s'", mailbox->get_cname());
+        if (log) WRENCH_DEBUG("Getting a message from mailbox_name '%s'", mailbox->get_cname());
         //        auto mailbox = simgrid::s4u::Mailbox::by_name(mailbox_name);
         SimulationMessage *msg;
         try {
@@ -77,11 +105,12 @@ namespace wrench {
      *
      * @param mailbox: the mailbox
      * @param timeout:  a timeout value in seconds (<0 means never timeout)
+     * @param log: should the log message be printed
      * @return the message, or nullptr (in which case it's likely a brutal termination)
      *
      * @throw std::shared_ptr<NetworkError>
      */
-    std::unique_ptr<SimulationMessage> S4U_Mailbox::getMessage(simgrid::s4u::Mailbox *mailbox, double timeout) {
+    std::unique_ptr<SimulationMessage> S4U_Mailbox::getMessage(simgrid::s4u::Mailbox *mailbox, double timeout, bool log) {
         if (mailbox == S4U_Mailbox::NULL_MAILBOX) {
             throw std::runtime_error("S4U_Mailbox::getMessage(): Cannot be called with NULL_MAILBOX");
         }
@@ -90,7 +119,7 @@ namespace wrench {
             return S4U_Mailbox::getMessage(mailbox);
         }
 
-        WRENCH_DEBUG("Getting a message from mailbox_name '%s' with timeout %lf sec", mailbox->get_cname(), timeout);
+        if (log) WRENCH_DEBUG("Getting a message from mailbox_name '%s' with timeout %lf sec", mailbox->get_cname(), timeout);
         //        auto mailbox = simgrid::s4u::Mailbox::by_name(mailbox_name);
         //        void *data = nullptr;
         wrench::SimulationMessage *msg;
@@ -344,6 +373,5 @@ namespace wrench {
     simgrid::s4u::Mailbox *S4U_Mailbox::generateUniqueMailbox(const std::string &prefix) {
         return simgrid::s4u::Mailbox::by_name(prefix + std::to_string(S4U_Mailbox::generateUniqueSequenceNumber()));
     }
-
-
+    unsigned long long S4U_Mailbox::messageCounter = 0;
 }// namespace wrench
