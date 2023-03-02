@@ -439,7 +439,8 @@ TEST_F(CompoundStorageServiceFunctionalTest, BasicInterceptFunctionality) {
 std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
         const std::shared_ptr<wrench::DataFile> &file,
         const std::set<std::shared_ptr<wrench::StorageService>> &resources,
-        const std::map<std::shared_ptr<wrench::DataFile>, std::shared_ptr<wrench::FileLocation>> &mapping) {
+        const std::map<std::shared_ptr<wrench::DataFile>, std::shared_ptr<wrench::FileLocation>> &mapping,
+        const std::vector<std::shared_ptr<wrench::FileLocation>>& previous_allocations) {
 
     auto capacity_req = file->getSize();
 

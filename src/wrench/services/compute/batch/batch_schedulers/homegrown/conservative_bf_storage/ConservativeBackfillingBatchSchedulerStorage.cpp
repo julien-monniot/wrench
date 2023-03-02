@@ -323,6 +323,8 @@ namespace wrench {
 
     void ConservativeBackfillingBatchSchedulerStorage::setConcreteStorage(std::shared_ptr<wrench::Action> action) const {
 
+        /*
+
         WRENCH_INFO("ConservativeBackfillingStorage::setConcreteStorage() Intropecting action : %s for job %s", 
             action->getName().c_str(), action->getJob()->getName().c_str());
 
@@ -367,12 +369,15 @@ namespace wrench {
             }
 
         }
+
+        */
     }
 
     void ConservativeBackfillingBatchSchedulerStorage::selectSimpleStorage(wrench::CompoundStorageService* compound_storage, std::shared_ptr<wrench::FileLocation> location, double size) const {
 
         WRENCH_INFO("ConservativeBackfillingStorage::selectSimpleStorage() Looking for replacement storage service");
 
+        /*
         auto simple_storage_services = compound_storage->getAllServices();
         if (simple_storage_services.empty()) {
             WRENCH_WARN("ConservativeBackfillingStorage::selectSimpleStorage() No storage service found in CompoundStorageService");
@@ -413,7 +418,7 @@ namespace wrench {
         // WRENCH_INFO("Absolute path at mount point: %s", location->getAbsolutePathAtMountPoint().c_str());
         // WRENCH_INFO("New mount point: %s", location->getMountPoint().c_str());
         // WRENCH_INFO("New full path: %s", location->getFullAbsolutePath().c_str());
-
+        */
     }
 
 

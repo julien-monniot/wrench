@@ -21,13 +21,14 @@ namespace wrench {
     class DataFile {
 
     public:
+        DataFile(std::string id, double size);  // used to be protected...
         double getSize() const;
         void setSize(double size);
         std::string getID() const;
 
     protected:
         friend class Simulation;
-        DataFile(std::string id, double size);
+        
 
         /** @brief File id/name **/
         std::string id;
