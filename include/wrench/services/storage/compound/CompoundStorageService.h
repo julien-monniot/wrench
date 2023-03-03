@@ -176,11 +176,12 @@ namespace wrench {
         void copyFileIamDestination(const std::shared_ptr<FileLocation> &src_location,
                              const std::shared_ptr<FileLocation> &dst_location);
 
-
+        // Publicly accessible traces... (TODO: cleanup access to traces)
         std::map<std::string, AllocationTrace> read_traces = {};
         std::map<std::string, AllocationTrace> write_traces = {};
         std::map<std::string, AllocationTrace> copy_traces = {};
         std::map<std::string, AllocationTrace> delete_traces = {};
+        std::vector<std::pair<double, std::map<std::shared_ptr<StorageService>, double>>> internal_storage_use = {};
 
         /***********************/
         /** \endcond           */
@@ -264,6 +265,8 @@ namespace wrench {
         bool isStorageSelectionUserProvided;
 
         double max_chunk_size = 0;
+
+        void traceInternalStorageUse();
     };
 
 };// namespace wrench
