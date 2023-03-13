@@ -38,6 +38,11 @@ namespace wrench {
         std::vector<std::shared_ptr<FileLocation>> internal_locations;
     };
 
+    struct DiskUsage {
+        double free_space;
+        double load;
+    };
+
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -181,7 +186,7 @@ namespace wrench {
         std::map<std::string, AllocationTrace> write_traces = {};
         std::map<std::string, AllocationTrace> copy_traces = {};
         std::map<std::string, AllocationTrace> delete_traces = {};
-        std::vector<std::pair<double, std::map<std::shared_ptr<StorageService>, double>>> internal_storage_use = {};
+        std::vector<std::pair<double, std::map<std::shared_ptr<StorageService>, DiskUsage>>> internal_storage_use = {};
 
         /***********************/
         /** \endcond           */

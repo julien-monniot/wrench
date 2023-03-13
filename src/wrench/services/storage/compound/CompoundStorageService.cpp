@@ -601,22 +601,37 @@ namespace wrench {
         auto total_parts = src_parts.size(); // = dst_parts.size() 
         while(copy_idx < total_parts) {
             WRENCH_DEBUG("CSS::copyFileIamDestination(): Running StorageService::copyFile for part %i", copy_idx);
+            WRENCH_DEBUG("CSS::copyFileIamDestination(): Source = %s with size %f at path %s on  %s%s", 
+                         src_parts[copy_idx]->getFile()->getID().c_str(),
+                         src_parts[copy_idx]->getFile()->getSize(),
+                         src_parts[copy_idx]->getPath().c_str(),
+                         src_parts[copy_idx]->getStorageService()->getHostname().c_str(),
+                         src_parts[copy_idx]->getStorageService()->getBaseRootPath().c_str());
+            WRENCH_DEBUG("CSS::copyFileIamDestination(): Dest = %s with size %f at path %s on  %s%s", 
+                         dst_parts[copy_idx]->getFile()->getID().c_str(),
+                         dst_parts[copy_idx]->getFile()->getSize(),
+                         dst_parts[copy_idx]->getPath().c_str(),
+                         dst_parts[copy_idx]->getStorageService()->getHostname().c_str(),
+                         dst_parts[copy_idx]->getStorageService()->getBaseRootPath().c_str());
             StorageService::copyFile(src_parts[copy_idx], dst_parts[copy_idx]);
             copy_idx++;
         }
 
-        // Once copy is done, remove links
-        for (const auto& dst_part : dst_parts) {
-            auto part_size = dst_part->getFile()->getSize();
-            dst_part->getFile()->setSize(0); // make our datafile a link once again
-            StorageService::deleteFileAtLocation(
-                FileLocation::LOCATION(
-                        src_location->getStorageService(), 
-                        src_location->getPath(), 
-                        dst_part->getFile())
-            );
-            dst_part->getFile()->setSize(part_size);
+        WRENCH_DEBUG("CSS::copyFileIamDestination(): Copy/ies started");
+
+        // Once copy is done, remove links (only if source file was stripped)
+        if (total_parts > 1) {
+            for (const auto& src_part : src_parts) {
+                WRENCH_DEBUG("CSS::copyFileIamDestination(): ");
+                auto part_size = src_part->getFile()->getSize();
+                src_part->getFile()->setSize(0); // make our datafile a link once again
+                WRENCH_DEBUG("CSS::copyFileIamDestination(): Deleting part %s", src_part->getFile()->getID().c_str());
+                StorageService::deleteFileAtLocation(src_part);
+                src_part->getFile()->setSize(part_size);
+            }
         }
+
+        WRENCH_DEBUG("CSS::copyFileIamDestination(): Source parts deleted (if needed)");
 
         // Collect traces
         wrench::AllocationTrace trace;
@@ -991,10 +1006,13 @@ namespace wrench {
 
     void CompoundStorageService::traceInternalStorageUse() {
         auto ts = S4U_Simulation::getClock();
-        std::map<std::shared_ptr<StorageService>, double> trace;
+        std::map<std::shared_ptr<StorageService>, DiskUsage> trace;
 
         for (const auto& sss : this->storage_services) {
-            trace[sss] = sss->traceTotalFreeSpace();
+            DiskUsage disk_usage;
+            disk_usage.load = sss->getLoad();                   // number of concurrent reads
+            disk_usage.free_space = sss->traceTotalFreeSpace();
+            trace[sss] = disk_usage;
         }
 
         this->internal_storage_use.push_back(std::make_pair(ts, trace));
