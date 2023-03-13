@@ -155,12 +155,7 @@ std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
             designated_location = wrench::FileLocation::LOCATION(storage_service, file);// TODO: MAJOR CHANGE
             break;
         }
-        //        for (const auto &free_space_entry : free_space) {
-        //            if (free_space_entry.second >= capacity_req) {
-        //                designated_location = wrench::FileLocation::LOCATION(storage_service, free_space_entry.first, file);
-        //                break;
-        //            }
-        //        }
+
     }
 
     return designated_location;
@@ -220,7 +215,6 @@ private:
         std::shared_ptr<wrench::ExecutionEvent> event = this->waitForNextEvent();
 
         if (not std::dynamic_pointer_cast<wrench::CompoundJobCompletedEvent>(event)) {
-            std::cout << "JOB FAILED." << std::endl;
             throw std::runtime_error("Unexpected workflow execution event: " + event->toString());
         }
 
@@ -228,15 +222,38 @@ private:
             throw std::runtime_error("Unexpected job state: " + job->getStateAsString());
         }
 
-        // Check that file copy worked
+        // Check that all file copies worked as intended
         auto read_file_copy_1 = test->compound_storage_service->lookupFileLocation(test->file_100);
-        if (read_file_copy_1.empty()) {
-            throw std::runtime_error("Should have been able to lookup file_10 through CSS");
+        if (read_file_copy_1.size() != 1) {
+            throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
         }
-        for (const auto& part : read_file_copy_1) {
-            std::cout << part->getFile()->getID() << std::endl;
-            std::cout << part->getStorageService()->getHostname() << std::endl; 
+        if (read_file_copy_1[0]->getStorageService()->getBaseRootPath() != "/disk510/") {
+            throw std::runtime_error("file_100 should be on /disk510/");
         }
+
+        auto read_file_copy_2 = test->compound_storage_service->lookupFileLocation(test->file_500);
+        if (read_file_copy_2.size() != 2) {
+            throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
+        }
+        for (auto part : read_file_copy_2) {
+            auto file_location = wrench::FileLocation::LOCATION(test->simple_storage_service_external, part->getFile());
+            if (test->simple_storage_service_external->hasFile(file_location)){
+                throw std::runtime_error("Src file part from stripping shouldn't be on source anymore");
+            }
+        }
+        if (read_file_copy_2[0]->getStorageService()->getBaseRootPath() != "/disk510/") {
+            throw std::runtime_error("file_500_part_0 should be on /disk510/");
+        }
+        if (read_file_copy_2[1]->getStorageService()->getBaseRootPath() != "/disk1000/") {
+            throw std::runtime_error("file_500_part_1 should be on /disk1000/");
+        }
+
+        auto external_free_space = test->simple_storage_service_external->getTotalFreeSpace();
+        if (external_free_space != 400) {
+            throw std::runtime_error("Residual data on external free space not cleaned up after stropped copy");
+        }
+        
+
 
         return 0;
     }
@@ -253,10 +270,10 @@ void CompoundStorageServiceFunctionalTest::do_CopyToCSS_test() {
     // Create and initialize a simulation
     auto simulation = wrench::Simulation::createSimulation();
 
-    xbt_log_control_set("wrench_core_storage_service.thres:debug");
-    xbt_log_control_set("wrench_core_file_transfer_thread.thres:info");
-    xbt_log_control_set("wrench_core_compound_storage_system.thresh:debug");
-    xbt_log_control_set("wrench_core_file_transfer_thread.thres:info");
+    // xbt_log_control_set("wrench_core_storage_service.thres:debug");
+    // xbt_log_control_set("wrench_core_file_transfer_thread.thres:info");
+    // xbt_log_control_set("wrench_core_compound_storage_system.thresh:debug");
+    // xbt_log_control_set("wrench_core_file_transfer_thread.thres:info");
 
     int argc = 1;
     char **argv = (char **) calloc(argc, sizeof(char *));
