@@ -312,21 +312,17 @@ namespace wrench {
         std::vector<std::shared_ptr<FileLocation>> designated_locations = {};
         for (const auto& part : parts) {
             WRENCH_DEBUG("CSS::lookupOrDesignateStorageService(): File %s NOT already known by CSS", part->getID().c_str());
-            designated_locations.push_back(this->storage_selection(part, this->storage_services, this->file_location_mapping, designated_locations));
+            auto new_loc = this->storage_selection(part, this->storage_services, this->file_location_mapping, designated_locations);
+            if (new_loc) {
+                designated_locations.push_back(new_loc);
+            } else {
+                WRENCH_DEBUG("CSS::lookupOrDesignateStorageService(): File %s (or parts) could not be placed on any ss", file->getID().c_str());
+                throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(file, this->getSharedPtr<CompoundStorageService>()));
+            }
+            
         }
 
-        if (std::any_of(designated_locations.begin(), designated_locations.end(), [](const auto &elem) { return elem == nullptr; })) {
-            WRENCH_DEBUG("CSS::lookupOrDesignateStorageService(): File %s (or parts) could not be placed on any ss", file->getID().c_str());
-            throw std::runtime_error("CSS::lookupOrDesignateStorageService(): File (or parts of file) could not be placed on any ss");
-        } else {
-            /*WRENCH_DEBUG("lookupOrDesignateStorageService: Registering file %s on storage service %s, at path %s",
-                         designatedLocation->getFile()->getID().c_str(),
-                         designatedLocation->getStorageService()->getName().c_str(),
-                         designatedLocation->getPath().c_str());
-            */
-            // Supposing (and it better be true) that DataFiles are unique throught a given simulation run, even among various jobs.
-            this->file_location_mapping[file] = designated_locations;
-        }
+        this->file_location_mapping[file] = designated_locations;
 
         return designated_locations;
     }
@@ -370,7 +366,7 @@ namespace wrench {
 
         auto designated_locations = this->lookupFileLocation(location);
         if ( designated_locations.empty() ) {
-            throw std::invalid_argument("CSS::deleteFile(): File is not known by CSS");
+            throw ExecutionException(std::make_shared<FileNotFound>(location));
         }
 
         // Send a message to the storage service's daemon
@@ -430,14 +426,16 @@ namespace wrench {
             throw std::invalid_argument("CSS::lookupFile(): Invalid nullptr arguments");
         }
 
-        if (not this->lookupFile(location)) {
-            throw std::invalid_argument("CSS::lookupFile(): File is not known");
+        auto file_parts = this->lookupFileLocation(location);
+        if (file_parts.empty()) {
+            WRENCH_WARN("File lookup failed because CSS doesn't know of file");
+            return false;
         }
 
         bool available = true;
 
         // Send a message to the storage service's daemon
-        for (const auto& loc : this->file_location_mapping[location->getFile()]) {
+        for (const auto& loc : file_parts) {
         
             assertServiceIsUp(loc->getStorageService());
 
@@ -512,7 +510,7 @@ namespace wrench {
         // Find source file or parts of source file from within internal sss of the CSS (source file must be known)
         src_parts = this->lookupFileLocation(src_location);
         if (src_parts.empty()) {
-            throw std::invalid_argument("CSS::copyFileIamSource : File is not known by CSS");
+            throw ExecutionException(std::make_shared<FileNotFound>(src_location));
         }
 
         WRENCH_DEBUG("CSS::copyFileIamSource(): Source file has %zu known part(s)", src_parts.size());
@@ -769,7 +767,7 @@ namespace wrench {
 
         auto designated_locations = this->lookupFileLocation(location);
         if (designated_locations.empty()) {
-            throw std::invalid_argument("CSS::readFile : File is not known by CSS");
+            throw ExecutionException(std::make_shared<FileNotFound>(location));
         }
         
         // Contact every SSS
