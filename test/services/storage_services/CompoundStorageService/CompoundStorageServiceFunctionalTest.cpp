@@ -129,7 +129,7 @@ protected:
 /* For testing purpose, dummy StorageSelectionStrategyCallback */
 std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
         const std::shared_ptr<wrench::DataFile> &file,
-        const std::set<std::shared_ptr<wrench::StorageService>> &resources,
+        const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
         const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
         const std::vector<std::shared_ptr<wrench::FileLocation>>& previous_allocations) {
 
@@ -146,18 +146,20 @@ std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
 
     std::shared_ptr<wrench::FileLocation> designated_location = nullptr;
 
-    for (const auto &storage_service: resources) {
+    for (const auto &storage_server: resources) {
+        
+        for (const auto &service : storage_server.second) {
+        
+            auto free_space = service->getTotalFreeSpace();
+            if (temp_used_space.find(service) != temp_used_space.end()) {
+                free_space -= temp_used_space[service];
+            }
 
-        auto free_space = storage_service->getTotalFreeSpace();
-        if (temp_used_space.find(storage_service) != temp_used_space.end()) {
-            free_space -= temp_used_space[storage_service];
+            if (free_space >= capacity_req) {
+                designated_location = wrench::FileLocation::LOCATION(service, file); // TODO: MAJOR CHANGE
+                break;
+            }
         }
-
-        if (free_space >= capacity_req) {
-            designated_location = wrench::FileLocation::LOCATION(storage_service, file); // TODO: MAJOR CHANGE
-            break;
-        }
-
     }
 
     return designated_location;

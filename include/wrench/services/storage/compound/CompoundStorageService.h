@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2017-2020. The WRENCH Team.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- */
-
 #ifndef WRENCH_COMPOUNDSTORAGESERVICE_H
 #define WRENCH_COMPOUNDSTORAGESERVICE_H
 
@@ -16,6 +7,8 @@
 #include "wrench/simgrid_S4U_util/S4U_PendingCommunication.h"
 #include "wrench/services/storage/compound/CompoundStorageServiceProperty.h"
 #include "wrench/services/storage/compound/CompoundStorageServiceMessagePayload.h"
+#include "wrench/services/storage/compound/CompoundStorageServiceMessage.h"
+
 
 namespace wrench {
 
@@ -24,7 +17,7 @@ namespace wrench {
      */
     using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(
             const std::shared_ptr<DataFile> &,
-            const std::set<std::shared_ptr<StorageService>> &,
+            const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &,
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &,
             const std::vector<std::shared_ptr<FileLocation>>& previous_allocations)>;
 
@@ -148,7 +141,7 @@ namespace wrench {
         /**
          * @brief Method to return the collection of known StorageServices
          */
-        std::set<std::shared_ptr<StorageService>> &getAllServices();
+        std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &getAllServices();
 
         std::vector<std::shared_ptr<FileLocation>> lookupFileLocation(const std::shared_ptr<DataFile> &file);
 
@@ -228,6 +221,7 @@ namespace wrench {
                 {CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD, 0},
                 {CompoundStorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD, 0},
                 {CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD, 0},
+                {CompoundStorageServiceMessagePayload::STORAGE_SELECTION_PAYLOAD, 1024}
         };
 
         static unsigned long getNewUniqueNumber();
@@ -247,6 +241,8 @@ namespace wrench {
 
         std::vector<std::shared_ptr<FileLocation>> lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location);
 
+        bool processStorageSelectionMessage(const CompoundStorageAllocationRequestMessage* msg);
+
         bool processNextMessage(SimulationMessage *message);
 
         /*
@@ -261,7 +257,7 @@ namespace wrench {
         bool processFileReadRequest(StorageServiceFileReadRequestMessage *msg);
         */
 
-        std::set<std::shared_ptr<StorageService>> storage_services = {};
+        std::map<std::string, std::vector<std::shared_ptr<StorageService>>> storage_services = {};
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
 
