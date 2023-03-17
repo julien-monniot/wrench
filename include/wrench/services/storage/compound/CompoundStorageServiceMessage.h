@@ -53,7 +53,31 @@ namespace wrench {
     public:
         CompoundStorageAllocationAnswerMessage(std::vector<std::shared_ptr<FileLocation>> locations, double payload);
 
-        /** @brief The amount of free space in bytes */
+        /** @brief Known or newly allocated FileLocations for requested file */
+        std::vector<std::shared_ptr<FileLocation>> locations;
+    };
+
+    /**
+     * @brief A message sent to a CompoundStorageService to request a storage allocation for a file
+     */
+    class CompoundStorageLookupRequestMessage : public CompoundStorageServiceMessage {
+    public:
+        CompoundStorageLookupRequestMessage(simgrid::s4u::Mailbox *answer_mailbox, std::shared_ptr<DataFile> file, double payload);
+
+        /** @brief Mailbox to which the answer message should be sent */
+        simgrid::s4u::Mailbox *answer_mailbox;
+        /** @brief The path */
+        std::shared_ptr<DataFile> file;
+    };
+
+    /**
+     * @brief A message sent by a StorageService in answer to a storage selection request
+     */
+    class CompoundStorageLookupAnswerMessage : public CompoundStorageServiceMessage {
+    public:
+        CompoundStorageLookupAnswerMessage(std::vector<std::shared_ptr<FileLocation>> locations, double payload);
+
+        /** @brief Known FileLocations for requested file */
         std::vector<std::shared_ptr<FileLocation>> locations;
     };
 

@@ -143,7 +143,7 @@ namespace wrench {
          */
         std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &getAllServices();
 
-        std::vector<std::shared_ptr<FileLocation>> lookupFileLocation(const std::shared_ptr<DataFile> &file);
+        std::vector<std::shared_ptr<FileLocation>> lookupFileLocation(const std::shared_ptr<DataFile> &file, simgrid::s4u::Mailbox *answer_mailbox);
 
         std::vector<std::shared_ptr<FileLocation>> lookupFileLocation(const std::shared_ptr<FileLocation> &location);
 
@@ -237,11 +237,13 @@ namespace wrench {
 
         int main() override;
 
-        std::vector<std::shared_ptr<FileLocation>> lookupOrDesignateStorageService(const std::shared_ptr<DataFile> concrete_file_location);
+        std::vector<std::shared_ptr<FileLocation>> lookupOrDesignateStorageService(const std::shared_ptr<DataFile> concrete_file_location, simgrid::s4u::Mailbox *answer_mailbox);
 
         std::vector<std::shared_ptr<FileLocation>> lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location);
 
         bool processStorageSelectionMessage(const CompoundStorageAllocationRequestMessage* msg);
+
+        bool processStorageLookupMessage(const CompoundStorageLookupRequestMessage* msg);
 
         bool processNextMessage(SimulationMessage *message);
 

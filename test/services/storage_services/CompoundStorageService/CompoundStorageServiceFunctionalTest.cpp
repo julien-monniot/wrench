@@ -126,42 +126,70 @@ protected:
 };
 
 
-/* For testing purpose, dummy StorageSelectionStrategyCallback */
+/* For testing purpose, dummy rr StorageSelectionStrategyCallback */
 std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
         const std::shared_ptr<wrench::DataFile> &file,
         const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
         const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
         const std::vector<std::shared_ptr<wrench::FileLocation>>& previous_allocations) {
 
+    // Init round-robin
+    static auto last_selected_server = resources.begin()->first;
+    static auto internal_disk_selection = 0;
+    // static auto call_count = 0;
+    // std::cout << "# Call count 1: "<< std::to_string(call_count) << std::endl;
     auto capacity_req = file->getSize();
-
-    std::map<std::shared_ptr<wrench::StorageService>, double> temp_used_space = {};
-    for (const auto & alloc : previous_allocations) {
-        if (temp_used_space.find(alloc->getStorageService()) != temp_used_space.end()) {
-            temp_used_space[alloc->getStorageService()] += alloc->getFile()->getSize();
-        } else {
-            temp_used_space[alloc->getStorageService()] = alloc->getFile()->getSize();
-        }
-    }
-
     std::shared_ptr<wrench::FileLocation> designated_location = nullptr;
+    // std::cout << "Calling on the rrStorageSelectionStrategy for file " << file->getID() << " (" << std::to_string(file->getSize()) << "B)" << std::endl;
+    auto current = resources.find(last_selected_server);
+    auto current_disk_selection = internal_disk_selection;
+    // std::cout << "Last selected server " << last_selected_server << std::endl;
+    // std::cout << "Starting from server " << current->first << std::endl;
+    // std::cout << "Internal disk selection " << std::to_string(internal_disk_selection) << std::endl;
 
-    for (const auto &storage_server: resources) {
-        
-        for (const auto &service : storage_server.second) {
-        
-            auto free_space = service->getTotalFreeSpace();
-            if (temp_used_space.find(service) != temp_used_space.end()) {
-                free_space -= temp_used_space[service];
-            }
+    auto continue_disk_loop = true;
 
-            if (free_space >= capacity_req) {
-                designated_location = wrench::FileLocation::LOCATION(service, file); // TODO: MAJOR CHANGE
-                break;
+    do {
+
+        // std::cout << "Considering disk index " << std::to_string(current_disk_selection) << std::endl;
+        auto nb_of_local_disks = current->second.size();
+        auto storage_service = current->second[current_disk_selection % nb_of_local_disks];
+        // std::cout << "- Looking at storage service " << storage_service->getName() << std::endl;
+
+        auto free_space = storage_service->getTotalFreeSpace();
+        // std::cout << "- It has " << free_space << "B of free space" << std::endl;
+
+        if (free_space >= capacity_req) {
+            designated_location = wrench::FileLocation::LOCATION(std::shared_ptr<wrench::StorageService>(storage_service), file);
+            // std::cout << "Chose server " << current->first << storage_service->getBaseRootPath() << std::endl;
+            // Update for next function call
+            std::advance(current, 1);
+            if (current == resources.end()) {
+                current = resources.begin();
+                current_disk_selection++;
             }
+            last_selected_server = current->first;
+            internal_disk_selection = current_disk_selection;
+            // std::cout << "Next first server will be " << last_selected_server << std::endl;
+            break;
         }
-    }
 
+        std::advance(current, 1);
+        if (current == resources.end()) {
+            current = resources.begin();
+            current_disk_selection++;
+        }
+        if (current_disk_selection > (internal_disk_selection + nb_of_local_disks + 1)) {
+            // std::cout << "Stopping continue_disk_loop" << std::endl;
+            continue_disk_loop = false;
+        }
+        // std::cout << "Next server will be " << current->first << std::endl;
+    } while ((current->first != last_selected_server) or (continue_disk_loop));
+
+    // call_count++;
+    // std::cout << "# Call count 2: "<< std::to_string(call_count) << std::endl;
+
+    // std::cout << "smartStorageSelectionStrategy has done its work." << std::endl;
     return designated_location;
 }
 
@@ -227,15 +255,16 @@ private:
         }
 
         // Check that all file copies worked as intended
-        auto read_file_copy_1 = test->compound_storage_service->lookupFileLocation(test->file_100);
+        auto tmp_mailbox = wrench::S4U_Mailbox::getTemporaryMailbox();
+        auto read_file_copy_1 = test->compound_storage_service->lookupFileLocation(test->file_100, tmp_mailbox);
         if (read_file_copy_1.size() != 1) {
-            throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
+            throw std::runtime_error("Lookup returned an incorrect number of parts for file_100 on CSS");
         }
         if (read_file_copy_1[0]->getStorageService()->getBaseRootPath() != "/disk510/") {
             throw std::runtime_error("file_100 should be on /disk510/");
         }
 
-        auto read_file_copy_2 = test->compound_storage_service->lookupFileLocation(test->file_500);
+        auto read_file_copy_2 = test->compound_storage_service->lookupFileLocation(test->file_500, tmp_mailbox);
         if (read_file_copy_2.size() != 2) {
             throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
         }
@@ -245,11 +274,11 @@ private:
                 throw std::runtime_error("Src file part from stripping shouldn't be on source anymore");
             }
         }
-        if (read_file_copy_2[0]->getStorageService()->getBaseRootPath() != "/disk510/") {
-            throw std::runtime_error("file_500_part_0 should be on /disk510/");
+        if (read_file_copy_2[0]->getStorageService()->getBaseRootPath() != "/disk1000/") {
+            throw std::runtime_error("file_500_part_0 should be on /disk1000/");
         }
-        if (read_file_copy_2[1]->getStorageService()->getBaseRootPath() != "/disk1000/") {
-            throw std::runtime_error("file_500_part_1 should be on /disk1000/");
+        if (read_file_copy_2[1]->getStorageService()->getBaseRootPath() != "/disk510/") {
+            throw std::runtime_error("file_500_part_1 should be on /disk510/");
         }
 
         auto external_free_space = test->simple_storage_service_external->getTotalFreeSpace();
@@ -257,6 +286,8 @@ private:
             throw std::runtime_error("Residual data on external free space not cleaned up after stropped copy");
         }
     
+        wrench::S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
+
         return 0;
     }
 
@@ -369,8 +400,9 @@ private:
             throw std::runtime_error("Unexpected job state: " + job->getStateAsString());
         }
 
+        auto tmp_mailbox = wrench::S4U_Mailbox::getTemporaryMailbox();
         // Check that all file copies worked as intended
-        auto write_file_lookup_1 = test->compound_storage_service->lookupFileLocation(test->file_100);
+        auto write_file_lookup_1 = test->compound_storage_service->lookupFileLocation(test->file_100, tmp_mailbox);
         if (write_file_lookup_1.size() != 1) {
             throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
         }
@@ -378,16 +410,18 @@ private:
             throw std::runtime_error("file_100 should be on /disk510/");
         }
 
-        auto write_file_lookup_2 = test->compound_storage_service->lookupFileLocation(test->file_500);
+        auto write_file_lookup_2 = test->compound_storage_service->lookupFileLocation(test->file_500, tmp_mailbox);
         if (write_file_lookup_2.size() != 2) {
             throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
         }
-        if (write_file_lookup_2[0]->getStorageService()->getBaseRootPath() != "/disk510/") {
-            throw std::runtime_error("file_500_part_0 should be on /disk510/");
+        if (write_file_lookup_2[0]->getStorageService()->getBaseRootPath() != "/disk1000/") {
+            throw std::runtime_error("file_500_part_0 should be on /disk1000/");
         }
-        if (write_file_lookup_2[1]->getStorageService()->getBaseRootPath() != "/disk1000/") {
-            throw std::runtime_error("file_500_part_1 should be on /disk1000/");
+        if (write_file_lookup_2[1]->getStorageService()->getBaseRootPath() != "/disk510/") {
+            throw std::runtime_error("file_500_part_1 should be on /disk510/");
         }
+
+        wrench::S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
 
         return 0;
     }
@@ -509,7 +543,10 @@ private:
         }
 
         // Check that all file copies worked as intended
-        auto write_file_lookup_1 = test->compound_storage_service->lookupFileLocation(test->file_100);
+        
+        auto tmp_mailbox = wrench::S4U_Mailbox::getTemporaryMailbox();
+
+        auto write_file_lookup_1 = test->compound_storage_service->lookupFileLocation(test->file_100, tmp_mailbox);
         if (write_file_lookup_1.size() != 1) {
             throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
         }
@@ -528,16 +565,18 @@ private:
             throw std::runtime_error("External storage doesn't have the expected free space (should be 400)");
         }
 
-        auto write_file_lookup_2 = test->compound_storage_service->lookupFileLocation(test->file_500);
+        auto write_file_lookup_2 = test->compound_storage_service->lookupFileLocation(test->file_500, tmp_mailbox);
         if (write_file_lookup_2.size() != 2) {
             throw std::runtime_error("Lookup returned an incorrect number of parts for file_500 on CSS");
         }
-        if (write_file_lookup_2[0]->getStorageService()->getBaseRootPath() != "/disk510/") {
-            throw std::runtime_error("file_500_part_0 should be on /disk510/");
+        if (write_file_lookup_2[0]->getStorageService()->getBaseRootPath() != "/disk1000/") {
+            throw std::runtime_error("file_500_part_0 should be on /disk1000/");
         }
-        if (write_file_lookup_2[1]->getStorageService()->getBaseRootPath() != "/disk1000/") {
-            throw std::runtime_error("file_500_part_1 should be on /disk1000/");
+        if (write_file_lookup_2[1]->getStorageService()->getBaseRootPath() != "/disk510/") {
+            throw std::runtime_error("file_500_part_1 should be on /disk510/");
         }
+
+        wrench::S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
 
         return 0;
     }
@@ -704,11 +743,13 @@ private:
             throw std::runtime_error(exc_msg);
         }
 
-        auto css_File_500 = test->compound_storage_service->lookupFileLocation(test->file_500);
+        auto tmp_mailbox = wrench::S4U_Mailbox::getTemporaryMailbox();
+        auto css_File_500 = test->compound_storage_service->lookupFileLocation(test->file_500, tmp_mailbox);
         if (!css_File_500.empty()) {
             throw std::runtime_error("file_500 is still present on CSS, it shouldn't");
         }
 
+        wrench::S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
 
         return 0;
     }
@@ -804,11 +845,19 @@ private:
 
         // Retrieve internal SimpleStorageServices
         auto simple_storage_services = test->compound_storage_service->getAllServices();
-        std::set<std::shared_ptr<wrench::StorageService>> expected_services{test->simple_storage_service_100_0, test->simple_storage_service_510_1};
-        if (simple_storage_services != expected_services) {
-            throw std::runtime_error("The list of returned simple storage services is incorrect");
+        std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> expected_services{
+            {"SimpleStorageHost0", {test->simple_storage_service_100_0}}, 
+            {"SimpleStorageHost1", {test->simple_storage_service_510_1}}
+        };
+        
+        for (auto const& svc: simple_storage_services) {
+            if (expected_services.find(svc.first) == expected_services.end()) {
+                throw std::runtime_error("Can't find one of the hosts in the services list");
+            }
+            if (expected_services[svc.first] != svc.second) {
+                throw std::runtime_error("One of the Storage hosts has a different list of associated disk services than expected");
+            }
         }
-
 
         // Verify synchronous request for current free space (currently same as capacity, as no file has been placed on internal services)
         auto expected_capacity = 100.0 + 510.0;
