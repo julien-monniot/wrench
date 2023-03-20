@@ -987,10 +987,7 @@ namespace wrench {
                                   const std::shared_ptr<FileLocation> &location,
                                   double num_bytes,
                                   bool wait_for_answer) {
-
-        WRENCH_INFO("#########################################################################");
-        WRENCH_INFO("################# CSS::readFile(): Reading file %s", location->getFile()->getID().c_str());
-        WRENCH_INFO("#########################################################################");
+        WRENCH_INFO("CSS::readFile(): Reading file %s", location->getFile()->getID().c_str());
 
         if (!answer_mailbox or !location or (num_bytes < 0.0)) {
             throw std::invalid_argument("StorageService::readFile(): Invalid nullptr/0 arguments");
