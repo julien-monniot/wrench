@@ -7,7 +7,6 @@
  * (at your option) any later version.
  */
 
-#include <wrench/failure_causes/InvalidDirectoryPath.h>
 #include <wrench/failure_causes/FileNotFound.h>
 #include <wrench/failure_causes/StorageServiceNotEnoughSpace.h>
 
@@ -60,8 +59,7 @@ namespace wrench {
         }
 
         if (bufferized) {
-            auto sss = (SimpleStorageService *) (new SimpleStorageServiceBufferized(hostname, mount_points, property_list, messagepayload_list));
-            return sss;
+            return (SimpleStorageService *) (new SimpleStorageServiceBufferized(hostname, mount_points, property_list, messagepayload_list));
         } else {
             return (SimpleStorageService *) (new SimpleStorageServiceNonBufferized(hostname, mount_points, property_list, messagepayload_list));
         }
@@ -82,7 +80,6 @@ namespace wrench {
      * @brief Destructor
      */
     SimpleStorageService::~SimpleStorageService() {
-        this->default_property_values.clear();
     }
 
     /**
@@ -105,6 +102,10 @@ namespace wrench {
 
         this->setProperties(this->default_property_values, std::move(property_list));
         this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
+
+        //        this->StorageServiceMessagePayload_FILE_READ_REQUEST_MESSAGE_PAYLOAD = this->getMessagePayloadValue(StorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD);
+        //        this->StorageServiceMessagePayload_FILE_READ_ANSWER_MESSAGE_PAYLOAD = this->getMessagePayloadValue(StorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD);
+
         this->validateProperties();
 
         if (mount_points.empty()) {
@@ -147,8 +148,7 @@ namespace wrench {
             auto fs = this->file_systems[mount_point].get();
             auto file = location->getFile();
 
-            if ((not fs->doesDirectoryExist(path_at_mount_point)) or
-                (not fs->isFileInDirectory(file, path_at_mount_point))) {
+            if ((not fs->isFileInDirectory(file, path_at_mount_point))) {
                 // If this is scratch, we don't care, perhaps it was taken care of elsewhere...
                 if (not this->isScratch()) {
                     failure_cause = std::shared_ptr<FailureCause>(
@@ -390,6 +390,22 @@ namespace wrench {
         if (fs->doesDirectoryExist(path_at_mount_point)) {
             fs->removeAllFilesInDirectory(path_at_mount_point);
             fs->removeEmptyDirectory(path_at_mount_point);
+        }
+    }
+
+    /**
+     * @brief Remove a file at the storage service (in zero simulated time)
+     * @param location: a location
+     */
+    void SimpleStorageService::removeFile(const std::shared_ptr<FileLocation> &location) {
+        std::string mount_point;
+        std::string path_at_mount_point;
+        if (not this->splitPath(FileLocation::sanitizePath(location->getPath()), mount_point, path_at_mount_point)) {
+            return;
+        }
+        auto fs = this->file_systems[mount_point].get();
+        if (fs->doesDirectoryExist(path_at_mount_point)) {
+            fs->removeFileFromDirectory(location->getFile(), path_at_mount_point);
         }
     }
 

@@ -41,6 +41,7 @@ namespace wrench {
      * @param grid_post_overhead: grid job post-overhead
      * @param non_grid_pre_overhead: non-grid job pre-overhead
      * @param non_grid_post_overhead: non-grid job post-overhead
+     * @param fast_bmcs_resource_availability: whether to obtain direct availabily information from bare-metal services
      * @param compute_services: a set of 'child' compute resources available to and via the HTCondor pool
      * @param property_list: a property list ({} means "use all defaults")
      * @param messagepayload_list: a message payload list ({} means "use all defaults")
@@ -54,6 +55,7 @@ namespace wrench {
             double grid_post_overhead,
             double non_grid_pre_overhead,
             double non_grid_post_overhead,
+            bool fast_bmcs_resource_availability,
             std::set<shared_ptr<ComputeService>> compute_services,
             WRENCH_PROPERTY_COLLECTION_TYPE property_list,
             WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list)
@@ -64,6 +66,7 @@ namespace wrench {
         this->grid_post_overhead = grid_post_overhead;
         this->non_grid_pre_overhead = non_grid_pre_overhead;
         this->non_grid_post_overhead = non_grid_post_overhead;
+        this->fast_bmcs_resource_availability = fast_bmcs_resource_availability;
 
         this->compute_services = compute_services;
 
@@ -78,9 +81,6 @@ namespace wrench {
      * @brief Destructor
      */
     HTCondorCentralManagerService::~HTCondorCentralManagerService() {
-        this->pending_jobs.clear();
-        this->compute_services.clear();
-        this->running_jobs.clear();
     }
 
     /**
@@ -151,6 +151,7 @@ namespace wrench {
                             this->negotiator_startup_overhead,
                             this->grid_pre_overhead,
                             this->non_grid_pre_overhead,
+                            this->fast_bmcs_resource_availability,
                             this->compute_services,
                             this->running_jobs, this->pending_jobs, this->mailbox);
                     negotiator->setSimulation(this->simulation);
@@ -393,40 +394,40 @@ namespace wrench {
         this->running_jobs.clear();
     }
 
-    /**
-   * @brief Helper function to check whether a job kind is supported
-   * @param job: the job
-   * @param service_specific_arguments: the service-specific argument
-   * @return true or false
-   */
-    bool HTCondorCentralManagerService::jobKindIsSupported(
-            const std::shared_ptr<Job> &job,
-            std::map<std::string, std::string> service_specific_arguments) {
-        bool is_grid_universe =
-                (service_specific_arguments.find("-universe") != service_specific_arguments.end()) and
-                (service_specific_arguments["-universe"] == "grid");
-        bool is_standard_job = (std::dynamic_pointer_cast<StandardJob>(job) != nullptr);
-
-        bool found_one = false;
-        for (auto const &cs: this->compute_services) {
-            if (is_grid_universe and (std::dynamic_pointer_cast<BatchComputeService>(cs) == nullptr)) {
-                continue;
-            }
-            if ((not is_grid_universe) and (std::dynamic_pointer_cast<BareMetalComputeService>(cs) == nullptr)) {
-                continue;
-            }
-            if (is_standard_job and (not cs->supportsStandardJobs())) {
-                continue;
-            }
-            if ((not is_standard_job) and (not cs->supportsPilotJobs())) {
-                continue;
-            }
-            found_one = true;
-            break;
-        }
-
-        return found_one;
-    }
+    //    /**
+    //   * @brief Helper function to check whether a job kind is supported
+    //   * @param job: the job
+    //   * @param service_specific_arguments: the service-specific argument
+    //   * @return true or false
+    //   */
+    //    bool HTCondorCentralManagerService::jobKindIsSupported(
+    //            const std::shared_ptr<Job> &job,
+    //            std::map<std::string, std::string> service_specific_arguments) {
+    //        bool is_grid_universe =
+    //                (service_specific_arguments.find("-universe") != service_specific_arguments.end()) and
+    //                (service_specific_arguments["-universe"] == "grid");
+    //        bool is_standard_job = (std::dynamic_pointer_cast<StandardJob>(job) != nullptr);
+    //
+    //        bool found_one = false;
+    //        for (auto const &cs: this->compute_services) {
+    //            if (is_grid_universe and (std::dynamic_pointer_cast<BatchComputeService>(cs) == nullptr)) {
+    //                continue;
+    //            }
+    //            if ((not is_grid_universe) and (std::dynamic_pointer_cast<BareMetalComputeService>(cs) == nullptr)) {
+    //                continue;
+    //            }
+    //            if (is_standard_job and (not cs->supportsStandardJobs())) {
+    //                continue;
+    //            }
+    //            if ((not is_standard_job) and (not cs->supportsPilotJobs())) {
+    //                continue;
+    //            }
+    //            found_one = true;
+    //            break;
+    //        }
+    //
+    //        return found_one;
+    //    }
 
     /**
      * @brief Helper function to check whether a job can run on at least one child compute service

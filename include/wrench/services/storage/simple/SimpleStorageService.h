@@ -93,6 +93,7 @@ namespace wrench {
         bool hasFile(const std::shared_ptr<FileLocation> &location) override;
 
         void removeDirectory(const std::string &path) override;
+        void removeFile(const std::shared_ptr<FileLocation> &location) override;
 
         //std::string getMountPoint();
         std::set<std::string> getMountPoints();
@@ -226,7 +227,9 @@ namespace wrench {
 
         void validateProperties();
 
+#ifdef PAGE_CACHE_SIMULATION
         std::shared_ptr<MemoryManager> memory_manager;
+#endif
     };
 
 }// namespace wrench

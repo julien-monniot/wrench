@@ -288,6 +288,40 @@ namespace wrench {
          */
         virtual void createFile(const std::shared_ptr<FileLocation> &location) = 0;
 
+
+        /** File removal methods */
+        /**
+         * @brief Remove a file at a location (in zero simulated time)
+         * @param location: a location
+         */
+        static void removeFileAtLocation(const std::shared_ptr<FileLocation> &location) {
+            if (location == nullptr) {
+                throw std::invalid_argument("StorageService::removeFileAtLocation(): invalid argument argument");
+            }
+            location->getStorageService()->removeFile(location);
+        }
+        /**
+         * @brief Remove a file at the storage service (in zero simulated time)
+         * @param file: a file
+         */
+        void removeFile(const std::shared_ptr<DataFile> &file) {
+            this->removeFile(file, "/");
+        }
+        /**
+         * @brief Remove a file at the storage service (in zero simulated time)
+         * @param file: a file
+         * @param path: a path
+         */
+        virtual void removeFile(const std::shared_ptr<DataFile> &file, const std::string &path) {
+            this->removeFile(wrench::FileLocation::LOCATION(this->getSharedPtr<StorageService>(), FileLocation::sanitizePath(path), file));
+        }
+        /**
+         * @brief Remove a file at the storage service (in zero simulated time)
+         * @param location: a location
+         */
+        virtual void removeFile(const std::shared_ptr<FileLocation> &location) = 0;
+
+
         /**
          * @brief Remove a directory and all files at the storage service (in zero simulated time)
          * @param path a path
@@ -467,6 +501,7 @@ namespace wrench {
 
         /**
 	 * @brief Decrement the number of operations for a location
+     * @param location: a location
 	 **/
         virtual void decrementNumRunningOperationsForLocation(const std::shared_ptr<FileLocation> &location) {
             // do nothing
@@ -474,6 +509,7 @@ namespace wrench {
 
         /**
 	 * @brief Increment the number of operations for a location
+     * @param location: a location
 	 **/
         virtual void incrementNumRunningOperationsForLocation(const std::shared_ptr<FileLocation> &location) {
             // no nothing
@@ -495,6 +531,9 @@ namespace wrench {
 
         virtual void setIsScratch(bool is_scratch);
 
+        /** Fast-Access common message payloads! **/
+        //        double StorageServiceMessagePayload_FILE_READ_REQUEST_MESSAGE_PAYLOAD;
+        //        double StorageServiceMessagePayload_FILE_READ_ANSWER_MESSAGE_PAYLOAD;
         /***********************/
         /** \endcond          **/
         /***********************/

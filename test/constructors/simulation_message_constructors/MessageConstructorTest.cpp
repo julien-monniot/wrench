@@ -23,7 +23,7 @@
 #include "wrench/services/network_proximity/NetworkProximityMessage.h"
 #include <wrench/services/compute/batch/BatchJob.h>
 #include <wrench/failure_causes/FatalFailure.h>
-#include <wrench/managers/JobManager.h>
+#include "wrench/managers/job_manager/JobManager.h"
 #include <wrench/services/storage/simple/SimpleStorageService.h>
 
 #include "../../include/TestWithFork.h"
@@ -111,7 +111,7 @@ private:
     MessageConstructorTest *test;
     std::shared_ptr<wrench::Workflow> workflow;
 
-    int main() {
+    int main() override {
 
         // Create a job manager
         auto job_manager = this->createJobManager();

@@ -47,9 +47,11 @@ namespace wrench {
             using StorageService::hasFile;
             using StorageService::lookupFile;
             using StorageService::readFile;
+            using StorageService::removeFile;
             using StorageService::writeFile;
 
             void createFile(const std::shared_ptr<FileLocation> &location) override;
+            void removeFile(const std::shared_ptr<FileLocation> &location) override;
 
             virtual void writeFile(simgrid::s4u::Mailbox *answer_mailbox,
                                    const std::shared_ptr<FileLocation> &location,
@@ -126,10 +128,6 @@ namespace wrench {
             int main() override;
             bool processNextMessage();
             Node(Deployment *deployment, const std::string &hostname, WRENCH_PROPERTY_COLLECTION_TYPE storage_property_list, WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE storage_messagepayload_list);
-
-            /***********************/
-            /** \endcond           */
-            /***********************/
 
         private:
             Deployment *deployment;

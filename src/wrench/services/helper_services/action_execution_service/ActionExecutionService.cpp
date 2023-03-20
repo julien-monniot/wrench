@@ -39,7 +39,6 @@ namespace wrench {
      * @brief Destructor
      */
     ActionExecutionService::~ActionExecutionService() {
-        this->default_property_values.clear();
     }
 
     /**
@@ -109,6 +108,9 @@ namespace wrench {
         if (action->getState() != Action::State::READY) {
             throw std::runtime_error("Can only submit a ready action to the ActionExecutionService");
         }
+
+#if 0// These checks should have ALL happened before
+
         // Check that service-specific args that are provided are well-formatted
         std::string action_name = action->getName();
         auto service_specific_args = action->getJob()->getServiceSpecificArguments();
@@ -150,6 +152,7 @@ namespace wrench {
                 }
             }
         }
+#endif
 
         // At this point, there may still be insufficient resources to run the action, but that will
         // be handled later (and some ExecutionError with a "not enough resources" FailureCause
@@ -735,19 +738,23 @@ namespace wrench {
      */
     void ActionExecutionService::processActionExecutorCompletion(
             const std::shared_ptr<ActionExecutor> &executor) {
+
+        auto executor_hostname = executor->getHostname();
+        auto action = executor->getAction();
+
         // Update RAM availabilities and running thread counts
-        this->ram_availabilities[executor->getHostname()] += executor->getMemoryAllocated();
-        this->running_thread_counts[executor->getHostname()] -= executor->getNumCoresAllocated();
+        this->ram_availabilities[executor_hostname] += executor->getMemoryAllocated();
+        this->running_thread_counts[executor_hostname] -= executor->getNumCoresAllocated();
 
         // Forget the action executor
-        this->action_executors.erase(executor->getAction());
-        this->all_actions.erase(executor->getAction());
-        this->action_run_specs.erase(executor->getAction());
+        this->action_executors.erase(action);
+        this->all_actions.erase(action);
+        this->action_run_specs.erase(action);
 
         // Send the notification to the originator
         S4U_Mailbox::dputMessage(
                 this->parent_service->mailbox, new ActionExecutionServiceActionDoneMessage(
-                                                       executor->getAction(), 0.0));
+                                                       action, 0.0));
     }
 
     /**

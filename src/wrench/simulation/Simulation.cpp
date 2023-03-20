@@ -84,7 +84,6 @@ namespace wrench {
      */
     Simulation::~Simulation() {
         this->s4u_simulation->shutdown();
-        this->compute_services.clear();
     }
 
     /**
@@ -127,8 +126,6 @@ namespace wrench {
         }
 
         std::vector<std::string> cleanedup_args;
-
-
         for (i = 0; i < *argc; i++) {
             if (not strcmp(argv[i], "--help")) {
                 simulator_help_requested = true;
@@ -139,7 +136,7 @@ namespace wrench {
                        (not strcmp(argv[i], "--wrench-log-full")) or
                        (not strcmp(argv[i], "--wrench-logs-full"))) {
                 xbt_log_control_set("root.thresh:info");
-            } else if (not strncmp(argv[i], "--wrench-mailbox-pool-size", strlen("--mailbox-pool-size"))) {
+            } else if (not strncmp(argv[i], "--wrench-mailbox-pool-size", strlen("--wrench-mailbox-pool-size"))) {
                 char *equal_sign = strchr(argv[i], '=');
                 if (!equal_sign) {
                     throw std::invalid_argument("Invalid --wrench-mailbox-pool-size argument value");
@@ -233,7 +230,8 @@ namespace wrench {
 
         *argc = 0;
         for (const auto &a: cleanedup_args) {
-            //free(argv[(*argc)]);//you cant free the base args, so no one is going to try to free ours.  This is just going to have to stay a memory leak
+            //free(argv[(*argc)]);//you cant free the base args, so no one is going to try to free ours.
+            //This is just going to have to stay a memory leak
             argv[(*argc)] = strdup(a.c_str());
             (*argc)++;
         }
@@ -515,9 +513,11 @@ namespace wrench {
             this->is_running = true;
             this->s4u_simulation->runSimulation();
             wrench::FileLocation::file_location_map.clear();
+            //            Service::deleteLifeSaversOfAutorestartServices();
             this->is_running = false;
         } catch (std::runtime_error &e) {
             wrench::FileLocation::file_location_map.clear();
+            //            Service::deleteLifeSaversOfAutorestartServices();
             this->is_running = false;
             throw;
         }
@@ -561,6 +561,7 @@ namespace wrench {
      * @throw std::runtime_error
      */
     void Simulation::startAllProcesses() {
+
         try {
             // Start the execution controllers
             for (const auto &execution_controller: this->execution_controllers) {
@@ -576,6 +577,7 @@ namespace wrench {
             for (const auto &storage_service: this->storage_services) {
                 storage_service->start(storage_service, true, true);// Daemonized, AUTO-RESTART
             }
+
 
             //            // Start the scratch services
             //            for (const auto &compute_service: this->compute_services) {
@@ -710,6 +712,7 @@ namespace wrench {
         this->bandwidth_meter_services.insert(service);
     }
 
+#ifdef PAGE_CACHE_SIMULATION
     /**
       * @brief Add a MemoryManager to the simulation.
       *
@@ -724,6 +727,7 @@ namespace wrench {
         memory_manager->simulation = this;
         this->memory_managers.insert(memory_manager);
     }
+#endif
 
     /**
      * @brief Stage a copy of a file at a location (and add entries to all file registry services, if any)
@@ -755,21 +759,40 @@ namespace wrench {
         }
     }
 
+
+    /**
+     * @brief Method to create a new disk in the platform, which can be handy
+     * @param hostname: the name of the host to which the disk should be attached
+     * @param disk_id: the nae of the disk
+     * @param read_bandwidth_in_bytes_per_sec: the disk's read bandwidth in byte/sec
+     * @param write_bandwidth_in_bytes_per_sec: the disk's write bandwidth in byte/sec
+     * @param capacity_in_bytes: the disk's capacity in bytes
+     * @param mount_point: the disk's mount point (most people use "/")
+     */
+    void Simulation::createNewDisk(const std::string &hostname, const std::string &disk_id,
+                                   double read_bandwidth_in_bytes_per_sec,
+                                   double write_bandwidth_in_bytes_per_sec,
+                                   double capacity_in_bytes,
+                                   const std::string &mount_point) {
+        S4U_Simulation::createNewDisk(hostname, disk_id, read_bandwidth_in_bytes_per_sec, write_bandwidth_in_bytes_per_sec, capacity_in_bytes, mount_point);
+    }
+
     /**
      * @brief Wrapper enabling timestamps for disk reads
      *
-     * @param num_bytes - number of bytes read
-     * @param hostname - hostname to read from
-     * @param mount_point - mount point of disk to read from
+     * @param num_bytes: number of bytes read
+     * @param hostname: hostname to read from
+     * @param mount_point: mount point of disk to read from
+     * @param disk: disk to read from (nullptr if not known)
      *
      * @throw invalid_argument
      */
-    void Simulation::readFromDisk(double num_bytes, const std::string &hostname, const std::string &mount_point) {
+    void Simulation::readFromDisk(double num_bytes, const std::string &hostname, const std::string &mount_point, simgrid::s4u::Disk *disk) {
         unique_disk_sequence_number += 1;
         int temp_unique_sequence_number = unique_disk_sequence_number;
         this->getOutput().addTimestampDiskReadStart(Simulation::getCurrentSimulatedDate(), hostname, mount_point, num_bytes, temp_unique_sequence_number);
         try {
-            S4U_Simulation::readFromDisk(num_bytes, hostname, mount_point);
+            S4U_Simulation::readFromDisk(num_bytes, hostname, mount_point, disk);
         } catch (const std::invalid_argument &ia) {
             this->getOutput().addTimestampDiskReadFailure(Simulation::getCurrentSimulatedDate(), hostname, mount_point, num_bytes,
                                                           temp_unique_sequence_number);
@@ -786,13 +809,17 @@ namespace wrench {
      * @param hostname - hostname where disk is located
      * @param read_mount_point - mount point of disk to read from
      * @param write_mount_point - mount point of disk to write to
+     * @param src_disk: source disk (nullptr if not known)
+     * @param dst_disk: dst disk (nullptr if not known)
      *
      * @throw invalid_argument
      */
     void Simulation::readFromDiskAndWriteToDiskConcurrently(double num_bytes_to_read, double num_bytes_to_write,
                                                             const std::string &hostname,
                                                             const std::string &read_mount_point,
-                                                            const std::string &write_mount_point) {
+                                                            const std::string &write_mount_point,
+                                                            simgrid::s4u::Disk *src_disk,
+                                                            simgrid::s4u::Disk *dst_disk) {
         unique_disk_sequence_number += 1;
         int temp_unique_sequence_number = unique_disk_sequence_number;
         this->getOutput().addTimestampDiskReadStart(Simulation::getCurrentSimulatedDate(), hostname, read_mount_point, num_bytes_to_read,
@@ -801,7 +828,7 @@ namespace wrench {
                                                      temp_unique_sequence_number);
         try {
             S4U_Simulation::readFromDiskAndWriteToDiskConcurrently(num_bytes_to_read, num_bytes_to_write, hostname,
-                                                                   read_mount_point, write_mount_point);
+                                                                   read_mount_point, write_mount_point, src_disk, dst_disk);
         } catch (const std::invalid_argument &ia) {
             this->getOutput().addTimestampDiskWriteFailure(Simulation::getCurrentSimulatedDate(), hostname, write_mount_point, num_bytes_to_write,
                                                            temp_unique_sequence_number);
@@ -821,15 +848,16 @@ namespace wrench {
      * @param num_bytes: number of bytes written
      * @param hostname: name of the host to write to
      * @param mount_point: mount point of the disk to write to at the host
+     * @param disk: a simgrid disk to write to (nullptr if not known)
      *
      * @throw invalid_argument
      */
-    void Simulation::writeToDisk(double num_bytes, const std::string &hostname, const std::string &mount_point) {
+    void Simulation::writeToDisk(double num_bytes, const std::string &hostname, const std::string &mount_point, simgrid::s4u::Disk *disk) {
         unique_disk_sequence_number += 1;
         int temp_unique_sequence_number = unique_disk_sequence_number;
         this->getOutput().addTimestampDiskWriteStart(Simulation::getCurrentSimulatedDate(), hostname, mount_point, num_bytes, temp_unique_sequence_number);
         try {
-            S4U_Simulation::writeToDisk(num_bytes, hostname, mount_point);
+            S4U_Simulation::writeToDisk(num_bytes, hostname, mount_point, disk);
         } catch (const std::invalid_argument &ia) {
             this->getOutput().addTimestampDiskWriteFailure(Simulation::getCurrentSimulatedDate(), hostname, mount_point, num_bytes,
                                                            temp_unique_sequence_number);
@@ -966,7 +994,6 @@ namespace wrench {
         this->getOutput().addTimestampDiskWriteCompletion(Simulation::getCurrentSimulatedDate(), hostname, location->getMountPoint(), n_bytes,
                                                           temp_unique_sequence_number);
     }
-#endif
 
     /**
      * @brief Find MemoryManager running on a host based on hostname
@@ -982,6 +1009,7 @@ namespace wrench {
         }
         return nullptr;
     }
+#endif
 
     /**
      * @brief Wrapper for S4U_Simulation hostExists()
@@ -1144,6 +1172,20 @@ namespace wrench {
      */
     void Simulation::compute(double flops) {
         S4U_Simulation::compute(flops);
+    }
+
+    /**
+     * @brief Simulates a multi-threaded computation
+     * @param num_threads: the number of threads
+     * @param thread_creation_overhead: the thread creation overhead in seconds
+     * @param sequential_work: the sequential work (in flops)
+     * @param parallel_per_thread_work: the parallel per thread work (in flops)
+     */
+    void Simulation::computeMultiThreaded(unsigned long num_threads,
+                                          double thread_creation_overhead,
+                                          double sequential_work,
+                                          double parallel_per_thread_work) {
+        S4U_Simulation::compute_multi_threaded(num_threads, thread_creation_overhead, sequential_work, parallel_per_thread_work);
     }
 
     /**
@@ -1382,6 +1424,7 @@ namespace wrench {
         return shared_ptr;
     }
 
+#ifdef PAGE_CACHE_SIMULATION
     /**
      * @brief Starts a new memory_manager_service manager service during execution (i.e., one that was not passed to Simulation::add() before
      *        Simulation::launch() was called). The simulation takes ownership of
@@ -1407,6 +1450,7 @@ namespace wrench {
 
         return shared_ptr;
     }
+#endif
 
     /**
      * @brief Checks that the platform is well defined

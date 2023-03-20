@@ -64,8 +64,11 @@ set(HEADER_FILES
         include/wrench.h
         include/wrench/exceptions/ExecutionException.h
         include/wrench/logging/TerminalOutput.h
-        include/wrench/managers/DataMovementManager.h
-        include/wrench/managers/JobManager.h
+        include/wrench/managers/data_movement_manager/DataMovementManager.h
+        include/wrench/managers/data_movement_manager/DataMovementManagerMessage.h
+        include/wrench/managers/data_movement_manager/FileReaderThread.h
+        include/wrench/managers/data_movement_manager/FileWriterThread.h
+        include/wrench/managers/job_manager/JobManager.h
         include/wrench/services/Service.h
         include/wrench/services/ServiceMessage.h
         include/wrench/services/ServiceMessagePayload.h
@@ -157,12 +160,18 @@ set(HEADER_FILES
         include/wrench/execution_events/PilotJobExpiredEvent.h
         include/wrench/execution_events/FileCopyCompletedEvent.h
         include/wrench/execution_events/FileCopyFailedEvent.h
+        include/wrench/execution_events/FileReadCompletedEvent.h
+        include/wrench/execution_events/FileReadFailedEvent.h
+        include/wrench/execution_events/FileWriteCompletedEvent.h
+        include/wrench/execution_events/FileWriteFailedEvent.h
         include/wrench/execution_events/TimerEvent.h
         include/wrench/failure_causes/ComputationHasDied.h
         include/wrench/failure_causes/FailureCause.h
         include/wrench/failure_causes/SomeActionsHaveFailed.h
         include/wrench/failure_causes/FatalFailure.h
         include/wrench/failure_causes/FileAlreadyBeingCopied.h
+        include/wrench/failure_causes/FileAlreadyBeingRead.h
+        include/wrench/failure_causes/FileAlreadyBeingWritten.h
         include/wrench/failure_causes/FileNotFound.h
         include/wrench/failure_causes/FunctionalityNotAvailable.h
         include/wrench/failure_causes/HostError.h
@@ -181,6 +190,7 @@ set(HEADER_FILES
         include/wrench/action/Action.h
         include/wrench/action/SleepAction.h
         include/wrench/action/CustomAction.h
+        include/wrench/action/MPIAction.h
         include/wrench/action/FileReadAction.h
         include/wrench/action/FileWriteAction.h
         include/wrench/action/FileCopyAction.h
@@ -207,6 +217,8 @@ set(HEADER_FILES
         include/wrench/services/storage/xrootd/XRootDProperty.h
         include/wrench/services/storage/proxy/StorageServiceProxy.h
         include/wrench/services/storage/proxy/StorageServiceProxyProperty.h
+        include/wrench/communicator/Communicator.h
+        include/wrench/communicator/SMPIExecutor.h
         )
 
 # source files
@@ -218,10 +230,13 @@ set(SOURCE_FILES
         include/wrench/services/storage/storage_helpers/LogicalFileSystemNoCaching.h
         include/wrench/services/storage/storage_helpers/LogicalFileSystemLRUCaching.h
         src/wrench/logging/TerminalOutput.cpp
-        src/wrench/managers/DataMovementManager.cpp
-        src/wrench/managers/JobManager.cpp
-        src/wrench/managers/JobManagerMessage.cpp
-        include/wrench/managers/JobManagerMessage.h
+        src/wrench/managers/data_movement_manager/DataMovementManager.cpp
+        src/wrench/managers/data_movement_manager/DataMovementManagerMessage.cpp
+        src/wrench/managers/data_movement_manager/FileReaderThread.cpp
+        src/wrench/managers/data_movement_manager/FileWriterThread.cpp
+        src/wrench/managers/job_manager/JobManager.cpp
+        src/wrench/managers/job_manager/JobManagerMessage.cpp
+        include/wrench/managers/job_manager/JobManagerMessage.h
         src/wrench/services/Service.cpp
         src/wrench/services/ServiceMessage.cpp
         src/wrench/services/ServiceMessagePayload.cpp
@@ -349,6 +364,8 @@ set(SOURCE_FILES
         src/wrench/failure_causes/SomeActionsHaveFailed.cpp
         src/wrench/failure_causes/FatalFailure.cpp
         src/wrench/failure_causes/FileAlreadyBeingCopied.cpp
+        src/wrench/failure_causes/FileAlreadyBeingRead.cpp
+        src/wrench/failure_causes/FileAlreadyBeingWritten.cpp
         src/wrench/failure_causes/FileNotFound.cpp
         src/wrench/failure_causes/FunctionalityNotAvailable.cpp
         src/wrench/failure_causes/HostError.cpp
@@ -367,6 +384,7 @@ set(SOURCE_FILES
         src/wrench/action/Action.cpp
         src/wrench/action/SleepAction.cpp
         src/wrench/action/CustomAction.cpp
+        src/wrench/action/MPIAction.cpp
         src/wrench/action/FileReadAction.cpp
         src/wrench/action/FileWriteAction.cpp
         src/wrench/action/FileCopyAction.cpp
@@ -386,6 +404,8 @@ set(SOURCE_FILES
         src/wrench/services/storage/xrootd/XRootDProperty.cpp
         src/wrench/services/storage/proxy/StorageServiceProxy.cpp
         src/wrench/services/storage/proxy/StorageServiceProxyProperty.cpp
+        src/wrench/communicator/Communicator.cpp
+        src/wrench/communicator/SMPIExecutor.cpp
         )
 
 # test files
@@ -411,7 +431,7 @@ set(TEST_FILES
         test/services/storage_services/SimpleStorageService/SimpleStorageServicePerformanceTest.cpp
         test/services/storage_services/SimpleStorageService/SimpleStorageServiceLimitedConnectionsTest.cpp
         test/services/storage_services/SimpleStorageService/StorageServiceDeleteRegisterTest.cpp
-        test/services/storage_services/SimpleStorageService/DataMovementManagerCopyRegisterTest.cpp
+        test/managers/DataMovementManagerTest.cpp
         test/services/storage_services/SimpleStorageService/ZeroSizeFileTest.cpp
         test/services/storage_services/SimpleStorageService/ChunkingTest.cpp
         test/services/storage_services/SimpleStorageService/CopyBufferizedNonBufferizedTest.cpp
@@ -430,6 +450,7 @@ set(TEST_FILES
         test/services/helper_services/action_execution_service/ActionExecutionServiceTest.cpp
         test/services/compute_services/bare_metal_standard_jobs/BareMetalComputeServiceResourceInformationTest.cpp
         test/services/compute_services/batch_compound_jobs/BatchComputeServiceOneActionTests.cpp
+        test/services/compute_services/batch_compound_jobs/BatchComputeServiceMPIActionTests.cpp
         test/services/compute_services/batch_standard_and_pilot_jobs/HomeGrownTimeLineTest.cpp
         test/services/compute_services/batch_standard_and_pilot_jobs/BatchServiceTest.cpp
         test/services/compute_services/batch_standard_and_pilot_jobs/BatchServiceFCFSTest.cpp
@@ -482,6 +503,7 @@ set(TEST_FILES
         test/services/bandwidth_meter_service/BandwidthMeterServiceTest.cpp
         test/simulated_failures/host_failures/ServiceStartReStartTest.cpp
         test/simulated_failures/host_failures/ComprehensiveIntegrationTest.cpp
+        test/simulated_failures/FailureCommandLineArgsTest.cpp
         test/simulated_failures/host_failures/FailureDetectorHostFailuresTest.cpp
         test/simulated_failures/host_failures/BareMetalComputeServiceHostFailuresTest.cpp
         test/simulated_failures/host_failures/CloudComputeServiceHostFailuresTest.cpp
@@ -504,6 +526,7 @@ set(TEST_FILES
         test/misc/UnitParserTest.cpp
         test/services/storage_services/StorageServiceProxy/StorageServiceProxyBasicTest.cpp
         test/services/storage_services/StorageServiceProxy/StorageServiceProxySequentialTest.cpp
+        test/services/compute_services/bare_metal_compound_jobs/BareMetalComputeServiceActionsThatCommunicateTests.cpp
         )
 
 
@@ -537,9 +560,6 @@ else()
 endif()
 
 
-
-
-
 # additional packages
 include(${CMAKE_HOME_DIRECTORY}/conf/cmake/DefinePackages.cmake)
 
@@ -548,6 +568,9 @@ include(${CMAKE_HOME_DIRECTORY}/conf/cmake/Tools.cmake)
 
 # build examples
 include(${CMAKE_HOME_DIRECTORY}/conf/cmake/Examples.cmake)
+
+# build benchmark
+include(${CMAKE_HOME_DIRECTORY}/conf/cmake/Benchmark.cmake)
 
 # build documentation
 include(${CMAKE_HOME_DIRECTORY}/conf/cmake/Documentation.cmake)
