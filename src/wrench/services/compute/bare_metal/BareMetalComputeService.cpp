@@ -128,11 +128,7 @@ namespace wrench {
                 (not service_specific_args.at(action->getName()).empty())) {
                 std::tuple<std::string, unsigned long> parsed_spec;
 
-                try {
-                    parsed_spec = BareMetalComputeService::parseResourceSpec(service_specific_args.at(action->getName()));
-                } catch (std::invalid_argument &e) {
-                    throw;
-                }
+                parsed_spec = BareMetalComputeService::parseResourceSpec(service_specific_args.at(action->getName()));
 
                 std::string target_host = std::get<0>(parsed_spec);
                 unsigned long target_num_cores = std::get<1>(parsed_spec);
@@ -353,21 +349,17 @@ namespace wrench {
         this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
 
         // Create an ActionExecutionService
-        try {
-            this->action_execution_service = std::shared_ptr<ActionExecutionService>(new ActionExecutionService(
-                    hostname,
-                    compute_resources,
-                    nullptr,
-                    {
-                            {ActionExecutionServiceProperty::THREAD_CREATION_OVERHEAD, this->getPropertyValueAsString(BareMetalComputeServiceProperty::THREAD_STARTUP_OVERHEAD)},
-                            {ActionExecutionServiceProperty::FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASH, this->getPropertyValueAsString(BareMetalComputeServiceProperty::FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASH)},
-                            {ActionExecutionServiceProperty::TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWN, this->getPropertyValueAsString(BareMetalComputeServiceProperty::TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWN)},
-                    },
-                    {}));
-            this->action_execution_service->setSimulation(this->simulation);
-        } catch (std::invalid_argument &e) {
-            throw;
-        }
+        this->action_execution_service = std::shared_ptr<ActionExecutionService>(new ActionExecutionService(
+                hostname,
+                compute_resources,
+                nullptr,
+                {
+                        {ActionExecutionServiceProperty::THREAD_CREATION_OVERHEAD, this->getPropertyValueAsString(BareMetalComputeServiceProperty::THREAD_STARTUP_OVERHEAD)},
+                        {ActionExecutionServiceProperty::FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASH, this->getPropertyValueAsString(BareMetalComputeServiceProperty::FAIL_ACTION_AFTER_ACTION_EXECUTOR_CRASH)},
+                        {ActionExecutionServiceProperty::TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWN, this->getPropertyValueAsString(BareMetalComputeServiceProperty::TERMINATE_WHENEVER_ALL_RESOURCES_ARE_DOWN)},
+                },
+                {}));
+        this->action_execution_service->setSimulation(this->simulation);
     }
 
     /**
@@ -686,14 +678,10 @@ namespace wrench {
     void BareMetalComputeService::cleanUpScratch() {
         for (auto const &j: this->files_in_scratch) {
             for (auto const &f: j.second) {
-                try {
-                    this->getScratch()->deleteFile(
-                            f,
-                            this->getScratch()->getBaseRootPath() +
-                                    j.first->getName());
-                } catch (ExecutionException &e) {
-                    throw;
-                }
+                this->getScratch()->deleteFile(
+                        f,
+                        this->getScratch()->getBaseRootPath() +
+                                j.first->getName());
             }
         }
     }

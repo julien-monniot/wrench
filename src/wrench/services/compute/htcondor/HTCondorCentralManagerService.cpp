@@ -474,14 +474,10 @@ namespace wrench {
                 }
                 unsigned long num_hosts = 0;
                 unsigned long num_cores_per_host = 0;
-                try {
-                    num_hosts = BatchComputeService::parseUnsignedLongServiceSpecificArgument(
-                            "-N", service_specific_arguments);
-                    num_cores_per_host = BatchComputeService::parseUnsignedLongServiceSpecificArgument(
-                            "-c", service_specific_arguments);
-                } catch (std::invalid_argument &e) {
-                    throw;
-                }
+                num_hosts = BatchComputeService::parseUnsignedLongServiceSpecificArgument(
+                        "-N", service_specific_arguments);
+                num_cores_per_host = BatchComputeService::parseUnsignedLongServiceSpecificArgument(
+                        "-c", service_specific_arguments);
                 if (cs->getNumHosts() < num_hosts) {
                     continue;
                 }
