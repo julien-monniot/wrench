@@ -195,8 +195,6 @@ namespace wrench {
             this->scheduler = std::unique_ptr<BatchScheduler>(new ConservativeBackfillingBatchScheduler(this));
         } else if (batch_scheduling_alg == "conservative_bf_core_level") {
             this->scheduler = std::unique_ptr<BatchScheduler>(new ConservativeBackfillingBatchSchedulerCoreLevel(this));
-        } else if (batch_scheduling_alg == "conservative_bf_storage") {
-            this->scheduler = std::make_unique<ConservativeBackfillingBatchSchedulerStorage>(this);
         }
 #endif
 
