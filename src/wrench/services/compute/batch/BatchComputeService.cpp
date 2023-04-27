@@ -27,7 +27,6 @@
 #include "wrench/services/compute/batch/batch_schedulers/homegrown/fcfs/FCFSBatchScheduler.h"
 #include "wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf/ConservativeBackfillingBatchScheduler.h"
 #include "wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_core_level/ConservativeBackfillingBatchSchedulerCoreLevel.h"
-#include "wrench/services/compute/batch/batch_schedulers/homegrown/conservative_bf_storage/ConservativeBackfillingBatchSchedulerStorage.h"
 #include "wrench/services/compute/batch/batch_schedulers/batsched/BatschedBatchScheduler.h"
 #include <wrench/failure_causes/FunctionalityNotAvailable.h>
 #include <wrench/failure_causes/JobKilled.h>
@@ -353,8 +352,6 @@ namespace wrench {
             throw std::invalid_argument(
                     "BatchComputeService::submitCompoundJob(): service-specific arguments should have non-zero values");
         }
-
-        WRENCH_INFO("Creating batch job from compound job %s", job->getName().c_str());
 
         // Create a Batch Job
         unsigned long jobid = wrench::BatchComputeService::generateUniqueJobID();
@@ -1409,3 +1406,4 @@ namespace wrench {
     }
 
 }// namespace wrench
+

@@ -437,7 +437,6 @@ namespace wrench {
         if ((src_location == nullptr) || (dst_location == nullptr)) {
             throw std::invalid_argument("StorageService::copyFile(): Invalid nullptr arguments");
         }
-
         if (src_location->getFile() != dst_location->getFile()) {
             throw std::invalid_argument("StorageService::copyFile(): src and dst locations should be for the same file");
         }
@@ -455,6 +454,7 @@ namespace wrench {
         bool src_is_non_bufferized = not src_is_bufferized;
         bool dst_is_bufferized = dst_location->getStorageService()->isBufferized();
         bool dst_is_non_bufferized = not dst_is_bufferized;
+
         //        if (src_is_non_bufferized and dst_is_bufferized) {
         //            throw std::runtime_error("Cannot copy a file from a non-bufferized storage service to a bufferized storage service (not implemented, yet)");
         //        }
@@ -467,6 +467,7 @@ namespace wrench {
         } else {
             mailbox_to_contact = dst_location->getStorageService()->mailbox;
         }
+
 
         // Send a message to the daemon of the dst service
         auto answer_mailbox = S4U_Daemon::getRunningActorRecvMailbox();
@@ -484,6 +485,7 @@ namespace wrench {
 
         // Wait for a reply
         std::unique_ptr<SimulationMessage> message = nullptr;
+
 
         auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(answer_mailbox);
 
