@@ -21,21 +21,39 @@ namespace wrench {
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &,
             const std::vector<std::shared_ptr<FileLocation>>& previous_allocations)>;
 
+    /**
+     * @brief Enum for IO actions in traces
+    */
+    enum class IOAction: std::uint8_t {
+        ReadStart = 1, 
+        ReadEnd = 2, 
+        WriteStart = 3, 
+        WriteEnd = 4, 
+        CopyToStart = 5, 
+        CopyToEnd = 6, 
+        CopyFromStart = 7, 
+        CopyFromEnd = 8, 
+        DeleteStart = 9, 
+        DeleteEnd = 10,
+        None = 11,
+    };
+
+    struct DiskUsage {
+        std::shared_ptr<StorageService> service;
+        double free_space;
+        std::string file_name;
+        double load;        // not actually used so far
+    };
 
     /**
      * @brief Structure for tracing file allocations for each job 
      */
     struct AllocationTrace {
-        std::string file_name;
         double ts;
-        std::vector<std::shared_ptr<FileLocation>> internal_locations;
+        IOAction act;
+        std::vector<DiskUsage> disk_usage;                              // new usage stats for updated disks
+        std::vector<std::shared_ptr<FileLocation>> internal_locations;  
     };
-
-    struct DiskUsage {
-        double free_space;
-        double load;
-    };
-
 
     /**
      * @brief An abstract storage service which holds a collection of concrete storage services (eg. 
@@ -44,11 +62,10 @@ namespace wrench {
      *        action (read, write, copy, etc) until a later time in the simulation, rather than during
      *        job definition. A typical use for the CompoundStorageService is to select a definitive
      *        SimpleStorageService for each action of a job during its scheduling in a BatchScheduler class.
-     *        This service is able to receive and handle the same messages as any standard storage service 
-     *        (File Read/Write/Delete/Copy/Lookup requests), but will always answer that it is unable to 
-     *        process any of these requests, which should be addressed directly to the correct underlying 
-     *        storage service. (A possible future patch could give it the ability to automatically forward 
-     *        said request to one of the underlying storage services).
+     *        This should never receive messages for I/O operations, as any standard storage service 
+     *        (File Read/Write/Delete/Copy/Lookup requests), instead, it overides the main functions of 
+     *        StorageService (readFile / writeFile /...) and will craft messages intended for one or many of 
+     *        its underlying storage services.
      */
     class CompoundStorageService : public StorageService {
     public:
@@ -173,6 +190,10 @@ namespace wrench {
         bool lookupFile(simgrid::s4u::Mailbox *answer_mailbox,
                         const std::shared_ptr<FileLocation> &location) override;
 
+        /**
+         * @brief Intended to be called by StorageService::copyFile() when the use 
+         *        of a CSS is detected in a file copy.
+        */
         static void copyFile(const std::shared_ptr<FileLocation> &src_location,
                              const std::shared_ptr<FileLocation> &dst_location);
         
@@ -187,7 +208,7 @@ namespace wrench {
         std::map<std::string, AllocationTrace> write_traces = {};
         std::map<std::string, AllocationTrace> copy_traces = {};
         std::map<std::string, AllocationTrace> delete_traces = {};
-        std::vector<std::pair<double, std::map<std::shared_ptr<StorageService>, DiskUsage>>> internal_storage_use = {};
+        std::vector<std::pair<double, AllocationTrace>> internal_storage_use = {};
 
         /***********************/
         /** \endcond           */
@@ -255,29 +276,23 @@ namespace wrench {
 
         bool processNextMessage(SimulationMessage *message);
 
-        /*
-        bool processFileDeleteRequest(StorageServiceFileDeleteRequestMessage *msg);
-
-        bool processFileLookupRequest(StorageServiceFileLookupRequestMessage *msg);
-
-        bool processFileCopyRequest(StorageServiceFileCopyRequestMessage *msg);
-
-        bool processFileWriteRequest(StorageServiceFileWriteRequestMessage *msg);
-
-        bool processFileReadRequest(StorageServiceFileReadRequestMessage *msg);
-        */
-
         std::map<std::string, std::vector<std::shared_ptr<StorageService>>> storage_services = {};
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
 
         StorageSelectionStrategyCallback storage_selection;
 
-        bool isStorageSelectionUserProvided;
-
+        /**
+         * @brief Chunk size for file stripping
+         *        Should usually be user-provided, or will be 
+         *        set to the smallest disk size as default.
+        */
         double max_chunk_size = 0;
 
-        void traceInternalStorageUse();
+        /**
+         * @brief Dirty log tracing method (needs to be improved)
+        */
+        void traceInternalStorageUse(IOAction action, const std::vector<std::shared_ptr<FileLocation>> &locations = {});
     };
 
 };// namespace wrench

@@ -16,8 +16,7 @@ WRENCH_LOG_CATEGORY(wrench_core_compound_storage_system,
                     "Log category for Compound Storage Service");
 
 namespace wrench {
-
-
+        
     /** 
      *  @brief Default StorageSelectionStrategyCallback: strategy used by the CompoundStorageService 
      *         when no strategy is provided at instanciation. By default, it returns a nullptr, which 
@@ -127,16 +126,16 @@ namespace wrench {
             }
         }
         this->storage_selection = std::move(storage_selection);
-        this->isStorageSelectionUserProvided = storage_selection_user_provided;
 
         if (property_list.find(wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE) == property_list.end()) {
             // If MAX_ALLOCATION_CHUNK_SIZE was not probided, update it now that we have validated the SSS list
-            // (Set as smallest disk capacity in bytes)
+            // (Set as smallest disk capacity in bytes for instance ?)
             // TODO
             // this->setProperty(CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "2000000B");
         }   
 
         this->max_chunk_size = this->getPropertyValueAsSizeInByte(CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE);
+        this->traceInternalStorageUse(IOAction::None);
     }
 
 
@@ -461,8 +460,6 @@ namespace wrench {
                                     bool wait_for_answer) {
         WRENCH_INFO("CSS::deleteFile(): Starting for file %s", location->getFile()->getID().c_str());
 
-        this->traceInternalStorageUse();
-
         if (!answer_mailbox or !location) {
             throw std::invalid_argument("CSS::deleteFile(): Invalid nullptr arguments");
         }
@@ -471,10 +468,13 @@ namespace wrench {
             throw std::invalid_argument("CSS::deleteFile(): Cannot be called on a SCRATCH location");
         }
 
+
         auto designated_locations = this->lookupFileLocation(location);
         if ( designated_locations.empty() ) {
             throw ExecutionException(std::make_shared<FileNotFound>(location));
         }
+
+        this->traceInternalStorageUse(IOAction::DeleteStart, designated_locations);
 
         // Send a message to the storage service's daemon
         for (const auto& loc : designated_locations) {
@@ -507,12 +507,13 @@ namespace wrench {
 
         // Collect traces
         wrench::AllocationTrace trace;
-        trace.file_name = location->getFile()->getID();
+        // trace.file_name = location->getFile()->getID();
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = designated_locations;
+        trace.act = IOAction::DeleteEnd;
         this->delete_traces[location->getFile()->getID()] = trace;
         
-        this->traceInternalStorageUse();
+        this->traceInternalStorageUse(IOAction::DeleteEnd, designated_locations);
 
         WRENCH_INFO("CSS::deleteFile Done for file %s", location->getFile()->getID().c_str());
     }
@@ -707,9 +708,10 @@ namespace wrench {
 
         // Collect traces
         wrench::AllocationTrace trace;
-        trace.file_name = src_location->getFile()->getID();
+        // trace.file_name = src_location->getFile()->getID();
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = src_parts;
+        trace.act = IOAction::CopyToEnd;
         this->copy_traces[src_location->getFile()->getID()] = trace;
 
         WRENCH_INFO("CSS::copyFileIamSource(): Done (cleanup + tracing)");
@@ -725,7 +727,7 @@ namespace wrench {
         
         WRENCH_INFO("CSS::copyFileIamDestination()");
 
-        this->traceInternalStorageUse();
+        // this->traceInternalStorageUse(IOAction::CopyToStart);
 
         std::vector<std::shared_ptr<FileLocation>> src_parts = {};
         std::vector<std::shared_ptr<FileLocation>> dst_parts = {};
@@ -735,6 +737,8 @@ namespace wrench {
         if (dst_parts.empty()) {
             throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(dst_location->getFile(), this->getSharedPtr<CompoundStorageService>()));
         }
+
+        this->traceInternalStorageUse(IOAction::CopyToStart, dst_parts);
         WRENCH_INFO("CSS::copyFileIamDestination(): Destination file will be written as %zu file part(s)", dst_parts.size());
         if (dst_parts.size() > 1) {
             for (const auto& dst_part : dst_parts) {
@@ -778,7 +782,7 @@ namespace wrench {
                          dst_parts[copy_idx]->getStorageService()->getHostname().c_str(),
                          dst_parts[copy_idx]->getStorageService()->getBaseRootPath().c_str());
 
-            // 
+            // Useful ?
             assertServiceIsUp(src_parts[copy_idx]->getStorageService());
             assertServiceIsUp(dst_parts[copy_idx]->getStorageService());
 
@@ -798,7 +802,7 @@ namespace wrench {
             }
 
             // Send a message to the daemon of the dst service
-            auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox(); 
+            auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
             tmp_mailboxes.push_back(tmp_mailbox);
 
             this->simulation->getOutput().addTimestampFileCopyStart(Simulation::getCurrentSimulatedDate(), file,
@@ -809,6 +813,7 @@ namespace wrench {
             // we keep track of future space usage on various storage nodes while allocating multiple chunks of a given
             // file. So right before we actually start the copy, we unreserve space.
             dst_parts[copy_idx]->getStorageService()->unreserveSpace(dst_parts[copy_idx]);
+            // TODO : Replace with iputMessage()
             S4U_Mailbox::dputMessage(
                     mailbox_to_contact,
                     new StorageServiceFileCopyRequestMessage(
@@ -856,12 +861,13 @@ namespace wrench {
 
         // Collect traces
         wrench::AllocationTrace trace;
-        trace.file_name = dst_location->getFile()->getID();
+        // trace.file_name = dst_location->getFile()->getID();
+        trace.act = IOAction::WriteEnd;
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = dst_parts;
         this->copy_traces[dst_location->getFile()->getID()] = trace;
 
-        this->traceInternalStorageUse();
+        this->traceInternalStorageUse(IOAction::CopyToEnd, dst_parts);
 
         WRENCH_INFO("CSS::copyFileIamDestination(): Done (cleanup + tracing)");
     }
@@ -881,7 +887,7 @@ namespace wrench {
                                    bool wait_for_answer) {
 
         WRENCH_INFO("CSS::writeFile(): Writing file %s", location->getFile()->getID().c_str());
-        this->traceInternalStorageUse();
+        //this->traceInternalStorageUse(IOAction::WriteStart);
 
         if (location == nullptr) {
             throw std::invalid_argument("CSS::writeFile(): Invalid arguments");
@@ -891,12 +897,14 @@ namespace wrench {
 
         // Find the file, or allocate file/parts of file onto known SSS
         auto designated_locations = this->lookupOrDesignateStorageService(location);
+
         if (designated_locations.empty()) {
             throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(location->getFile(), this->getSharedPtr<CompoundStorageService>()));
         }
         std::vector<std::unique_ptr<wrench::StorageServiceFileWriteAnswerMessage>> messages = {};
         std::vector<std::pair<simgrid::s4u::Mailbox*, std::unique_ptr<wrench::StorageServiceFileWriteAnswerMessage>>> mailbox_msg_pairs = {};
 
+        this->traceInternalStorageUse(IOAction::WriteStart, designated_locations);
         WRENCH_INFO("CSS::writeFile(): Destination file %s will have %zu", 
                      location->getFile()->getID().c_str(), designated_locations.size());
 
@@ -912,6 +920,7 @@ namespace wrench {
             // we keep track of future space usage on various storage nodes while allocating multiple chunks of a given
             // file. So right before we actually start the copy, we unreserve space.
             dloc->getStorageService()->unreserveSpace(dloc);
+            // TODO : Replace with iputMessage()
             S4U_Mailbox::dputMessage(
                 dloc->getStorageService()->mailbox,
                 new StorageServiceFileWriteRequestMessage(
@@ -965,11 +974,11 @@ namespace wrench {
         }
 
         WRENCH_INFO("CSS::writeFile(): All writes done and ack");
-        this->traceInternalStorageUse();
+        this->traceInternalStorageUse(IOAction::WriteEnd, designated_locations);
 
         // Collect traces
         wrench::AllocationTrace trace;
-        trace.file_name = location->getFile()->getID();
+        trace.act = IOAction::WriteEnd;
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = designated_locations;
         this->write_traces[location->getFile()->getID()] = trace;
@@ -1013,6 +1022,7 @@ namespace wrench {
             auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox(); 
             mailbox_msg_pairs.push_back(std::make_pair(tmp_mailbox, nullptr));
                     
+            // REPLACE WITH iputMessage()?
             S4U_Mailbox::dputMessage(
                 dloc->getStorageService()->mailbox,
                 new StorageServiceFileReadRequestMessage(
@@ -1080,10 +1090,11 @@ namespace wrench {
 
         // Collect traces
         wrench::AllocationTrace trace;
-        trace.file_name = location->getFile()->getID();
+        // trace.file_name = location->getFile()->getID();
         trace.ts = S4U_Simulation::getClock();
+        trace.act = IOAction::ReadEnd;
         trace.internal_locations = designated_locations;
-        this->read_traces[location->getFile()->getID()] = trace;
+        // this->read_traces[location->getFile()->getID()] = trace;
     }
 
     /**
@@ -1235,20 +1246,41 @@ namespace wrench {
     }
 
 
-    void CompoundStorageService::traceInternalStorageUse() {
-        auto ts = S4U_Simulation::getClock();
-        std::map<std::shared_ptr<StorageService>, DiskUsage> trace;
+    void CompoundStorageService::traceInternalStorageUse(IOAction action, const std::vector<std::shared_ptr<FileLocation>> &locations) {
 
-        for (const auto &storage_server: this->storage_services) {
-            for (const auto &service : storage_server.second) {
-                DiskUsage disk_usage;
-                disk_usage.load = service->getLoad();                   // number of concurrent reads
-                disk_usage.free_space = service->traceTotalFreeSpace();
-                trace[service] = disk_usage;
+        auto ts = S4U_Simulation::getClock();
+        AllocationTrace trace;
+        trace.act = action;
+        trace.ts = ts;
+
+        if (locations.empty()) {
+
+            for (const auto& storage : this->storage_services) {
+                for (const auto& storage_service : storage.second) {
+                    DiskUsage disk_usage;
+                    disk_usage.service = storage_service;
+                    disk_usage.load = storage_service->getLoad();                       // number of concurrent reads
+                    disk_usage.free_space = storage_service->traceTotalFreeSpace();
+                    trace.disk_usage.push_back(disk_usage);
+                }
             }
+    
+        } else {
+
+            for (const auto &location: locations) {
+                auto storage_service = location->getStorageService();
+                DiskUsage disk_usage;
+                disk_usage.service = storage_service;
+                disk_usage.file_name = location->getFile()->getID();
+                disk_usage.load = storage_service->getLoad();                           // number of concurrent reads
+                disk_usage.free_space = storage_service->traceTotalFreeSpace();
+                trace.disk_usage.push_back(disk_usage);
+            }
+
         }
 
         this->internal_storage_use.push_back(std::make_pair(ts, trace));
+
     }
 
 };// namespace wrench

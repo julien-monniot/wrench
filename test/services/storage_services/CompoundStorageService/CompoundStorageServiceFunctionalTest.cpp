@@ -303,10 +303,10 @@ void CompoundStorageServiceFunctionalTest::do_CopyToCSS_test() {
     // Create and initialize a simulation
     auto simulation = wrench::Simulation::createSimulation();
 
-    // xbt_log_control_set("wrench_core_storage_service.thres:debug");
     // xbt_log_control_set("wrench_core_file_transfer_thread.thres:info");
     // xbt_log_control_set("wrench_core_compound_storage_system.thresh:debug");
     // xbt_log_control_set("wrench_core_file_transfer_thread.thres:info");
+    // xbt_log_control_set("wrench_core_storage_service.thres:debug");
 
     int argc = 1;
     char **argv = (char **) calloc(argc, sizeof(char *));
