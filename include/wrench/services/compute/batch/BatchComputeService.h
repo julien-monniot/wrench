@@ -143,7 +143,6 @@ namespace wrench {
         friend class FCFSBatchScheduler;
         friend class ConservativeBackfillingBatchScheduler;
         friend class ConservativeBackfillingBatchSchedulerCoreLevel;
-        friend class ConservativeBackfillingBatchSchedulerStorage;
 
         friend class BatschedBatchScheduler;
 
