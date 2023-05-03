@@ -27,6 +27,12 @@ namespace wrench {
          *         to have the CSS take the decision upon receiving an IO request.
          */
         DECLARE_PROPERTY_NAME(MAX_ALLOCATION_CHUNK_SIZE);
+
+        /** @brief Property that defines whether the striping of a file should occur
+         *         inside the CSS (when allocating a new file) or inside the external
+         *         allocation function (pass it an entire file and it may or may not stripe it)
+         */
+        DECLARE_PROPERTY_NAME(INTERNAL_STRIPING);
     };
 
 };// namespace wrench

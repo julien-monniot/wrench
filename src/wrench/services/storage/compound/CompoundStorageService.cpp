@@ -28,12 +28,13 @@ namespace wrench {
      * 
      *  @return nullptr (instead of a valid FileLocation)
     */
-    std::shared_ptr<FileLocation> nullptrStorageServiceSelection(
+    std::vector<std::shared_ptr<FileLocation>> nullptrStorageServiceSelection(
             const std::shared_ptr<DataFile> &file,
             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
             const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
-        return nullptr;
+
+        return std::vector<std::shared_ptr<FileLocation>>();
     };
 
 
@@ -135,6 +136,7 @@ namespace wrench {
         }   
 
         this->max_chunk_size = this->getPropertyValueAsSizeInByte(CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE);
+        this->internal_stripping = this->getPropertyValueAsBoolean(CompoundStorageServiceProperty::INTERNAL_STRIPING);
         this->traceInternalStorageUse(IOAction::None);
     }
 
@@ -264,7 +266,7 @@ namespace wrench {
         auto file_name = file->getID();
 
         // Stripping case
-        if (file_size > this->max_chunk_size) {
+        if (file_size > this->max_chunk_size && this->internal_stripping) {
             WRENCH_INFO("CSS::lookupOrDesignateStorageService(): Stripping file");
             double remaining = file_size;
             auto part_id = 0;
@@ -285,10 +287,12 @@ namespace wrench {
         std::vector<std::shared_ptr<FileLocation>> designated_locations = {};
         for (const auto& part : parts) {
             WRENCH_INFO("CSS::lookupOrDesignateStorageService(): File %s NOT already known by CSS", part->getID().c_str());
-            auto new_loc = this->storage_selection(part, this->storage_services, this->file_location_mapping, designated_locations);
-            if (new_loc) {
-                new_loc->getStorageService()->reserveSpace(new_loc);
-                designated_locations.push_back(new_loc);
+            auto locations = this->storage_selection(part, this->storage_services, this->file_location_mapping, designated_locations);
+            if (!locations.empty()) {
+                for (auto new_loc : locations) {
+                    new_loc->getStorageService()->reserveSpace(new_loc);
+                    designated_locations.push_back(new_loc);
+                }
             } else {
                 WRENCH_INFO("CSS::lookupOrDesignateStorageService(): File %s (or parts) could not be placed on any ss", file->getID().c_str());
                 designated_locations = {};

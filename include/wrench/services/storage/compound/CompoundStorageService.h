@@ -23,7 +23,7 @@ namespace wrench {
     /**
      * @brief Specification of a callback
      */
-    using StorageSelectionStrategyCallback = std::function<std::shared_ptr<FileLocation>(
+    using StorageSelectionStrategyCallback = std::function<std::vector<std::shared_ptr<FileLocation>>(
             const std::shared_ptr<DataFile> &,
             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &,
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &,
@@ -237,6 +237,7 @@ namespace wrench {
         /** @brief Default property values **/
         WRENCH_PROPERTY_COLLECTION_TYPE default_property_values = {
                 {CompoundStorageServiceProperty::CACHING_BEHAVIOR, "NONE"},
+                {CompoundStorageServiceProperty::INTERNAL_STRIPING, "True"},
         };
 
         /** @brief Default message payload values 
@@ -296,6 +297,13 @@ namespace wrench {
          *        set to the smallest disk size as default.
         */
         double max_chunk_size = 0;
+
+
+        /**
+         *  @brief  Whether to strip a file in the CSS or in the external allocation function.
+         *          Internal flag set from CSS property.
+        */
+        bool internal_stripping;
 
         /**
          * @brief Dirty log tracing method (needs to be improved)

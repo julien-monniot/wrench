@@ -127,7 +127,7 @@ protected:
 
 
 /* For testing purpose, dummy rr StorageSelectionStrategyCallback */
-std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
+std::vector<std::shared_ptr<wrench::FileLocation>> defaultStorageServiceSelection(
         const std::shared_ptr<wrench::DataFile> &file,
         const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
         const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
@@ -190,7 +190,10 @@ std::shared_ptr<wrench::FileLocation> defaultStorageServiceSelection(
     // std::cout << "# Call count 2: "<< std::to_string(call_count) << std::endl;
 
     // std::cout << "smartStorageSelectionStrategy has done its work." << std::endl;
-    return designated_location;
+    std::vector<std::shared_ptr<wrench::FileLocation>> ret;
+    if (designated_location != nullptr)
+        ret.push_back(designated_location);
+    return ret;
 }
 
 
@@ -1158,7 +1161,7 @@ private:
             throw std::runtime_error("5-Unexpected job state: " + jobDeleteError->getStateAsString());
         if (!std::dynamic_pointer_cast<wrench::FileNotFound>(fileDeleteActionCSS->getFailureCause()))
             throw std::runtime_error("5-Did not receive a 'FileNotFound' failure cause as expected");
-        
+
 
         return 0;
     }
