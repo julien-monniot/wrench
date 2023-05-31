@@ -85,7 +85,11 @@ namespace wrench {
     /***********************/
     /** \endcond INTERNAL     */
     /***********************/
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> upstream/master
 }// namespace wrench
 
 
