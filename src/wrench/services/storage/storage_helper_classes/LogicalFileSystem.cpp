@@ -192,13 +192,13 @@ namespace wrench {
     }
 
     /**
- * @brief Get the files in a directory as a set
- * @param absolute_path: the directory's absolute path
- *
- * @return a set of files
- *
- * @throw std::invalid_argument
- */
+     * @brief Get the files in a directory as a set
+     * @param absolute_path: the directory's absolute path
+     *
+     * @return a set of files
+     *
+     * @throw std::invalid_argument
+     */
     std::set<std::shared_ptr<DataFile>> LogicalFileSystem::listFilesInDirectory(const std::string &absolute_path) {
         std::set<std::shared_ptr<DataFile>> to_return;
         if (devnull) {
@@ -211,6 +211,22 @@ namespace wrench {
             to_return.insert(f.first);
         }
         return to_return;
+    }
+
+    /**
+     * @brief 
+     * @return Total number of files currently stored in Filesytem
+     * 
+    */
+    double LogicalFileSystem::getTotalFiles() const {
+
+        double files = 0;
+
+        for (const auto& item : this->content) {
+            files += item.second.size();
+        }
+
+        return files;
     }
 
     /**

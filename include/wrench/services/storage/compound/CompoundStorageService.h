@@ -285,6 +285,7 @@ namespace wrench {
 
         bool processNextMessage(SimulationMessage *message);
 
+        /* Key : hostname of storage server, value : list of storage services (one per disk / raid / ...) on this storage server */
         std::map<std::string, std::vector<std::shared_ptr<StorageService>>> storage_services = {};
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};

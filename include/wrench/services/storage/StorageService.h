@@ -403,6 +403,16 @@ namespace wrench {
             throw std::runtime_error("StorageService::traceTotalFreeSpace: should have been overridden by derived class");
         }
 
+        /** Service number of allocated files tracing (doesn't incur simulated overhead) */
+        /**
+         *  @brief Get the number of files registered to the filesystem(s) associated with this service (no simulated overhead)
+         *  @return Current number of registered Datafile for all filesystem(s) from this service
+         * 
+        */
+        virtual double traceTotalFiles() {
+            throw std::runtime_error("StorageService::traceTotalFiles: should have been overridden by derived class");
+        }
+
         /**
          * @brief Get the storage's service base root path
          * @return a path
