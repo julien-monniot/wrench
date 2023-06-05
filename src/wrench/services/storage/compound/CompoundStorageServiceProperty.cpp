@@ -13,9 +13,4 @@ namespace wrench {
 
     SET_PROPERTY_NAME(CompoundStorageServiceProperty, MAX_ALLOCATION_CHUNK_SIZE);
 
-<<<<<<< HEAD
-    SET_PROPERTY_NAME(CompoundStorageServiceProperty, INTERNAL_STRIPING);
-=======
->>>>>>> upstream/master
-
 };

@@ -226,7 +226,6 @@ namespace wrench {
         return free_space;
     }
 
-<<<<<<< HEAD
     double SimpleStorageService::traceTotalFiles() {
         double files = 0;
         for (auto const &mp: this->file_systems) {
@@ -235,8 +234,6 @@ namespace wrench {
         return files;
     }
 
-=======
->>>>>>> upstream/master
     /**
      * @brief Determine whether the storage service has multiple mount points
      * @return true if multiple mount points, false otherwise

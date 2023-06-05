@@ -27,27 +27,11 @@ namespace wrench {
             const std::shared_ptr<DataFile> &,
             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &,
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &,
-<<<<<<< HEAD
-            const std::vector<std::shared_ptr<FileLocation>>& previous_allocations)>;
-=======
             const std::vector<std::shared_ptr<FileLocation>> &previous_allocations)>;
->>>>>>> upstream/master
 
     /**
      * @brief Enum for IO actions in traces
     */
-<<<<<<< HEAD
-    enum class IOAction: std::uint8_t {
-        ReadStart = 1, 
-        ReadEnd = 2, 
-        WriteStart = 3, 
-        WriteEnd = 4, 
-        CopyToStart = 5, 
-        CopyToEnd = 6, 
-        CopyFromStart = 7, 
-        CopyFromEnd = 8, 
-        DeleteStart = 9, 
-=======
     enum class IOAction : std::uint8_t {
         ReadStart = 1,
         ReadEnd = 2,
@@ -58,26 +42,18 @@ namespace wrench {
         CopyFromStart = 7,
         CopyFromEnd = 8,
         DeleteStart = 9,
->>>>>>> upstream/master
         DeleteEnd = 10,
         None = 11,
     };
 
-<<<<<<< HEAD
-=======
     /**
-     * @brief Structure to tracking disk usage 
+     * @brief Structure to track disk usage 
      */
->>>>>>> upstream/master
     struct DiskUsage {
         std::shared_ptr<StorageService> service;
         double free_space;
         std::string file_name;
-<<<<<<< HEAD
-        double load;        // not actually used so far
-=======
         double load;// not actually used so far
->>>>>>> upstream/master
     };
 
     /**
@@ -86,13 +62,8 @@ namespace wrench {
     struct AllocationTrace {
         double ts;
         IOAction act;
-<<<<<<< HEAD
-        std::vector<DiskUsage> disk_usage;                              // new usage stats for updated disks
-        std::vector<std::shared_ptr<FileLocation>> internal_locations;  
-=======
         std::vector<DiskUsage> disk_usage;// new usage stats for updated disks
         std::vector<std::shared_ptr<FileLocation>> internal_locations;
->>>>>>> upstream/master
     };
 
     /**
@@ -236,21 +207,12 @@ namespace wrench {
         */
         static void copyFile(const std::shared_ptr<FileLocation> &src_location,
                              const std::shared_ptr<FileLocation> &dst_location);
-<<<<<<< HEAD
-        
-        void copyFileIamSource(const std::shared_ptr<FileLocation> &src_location,
-                             const std::shared_ptr<FileLocation> &dst_location);
-
-        void copyFileIamDestination(const std::shared_ptr<FileLocation> &src_location,
-                             const std::shared_ptr<FileLocation> &dst_location);
-=======
 
         void copyFileIamSource(const std::shared_ptr<FileLocation> &src_location,
                                const std::shared_ptr<FileLocation> &dst_location);
 
         void copyFileIamDestination(const std::shared_ptr<FileLocation> &src_location,
                                     const std::shared_ptr<FileLocation> &dst_location);
->>>>>>> upstream/master
 
         // Publicly accessible traces... (TODO: cleanup access to traces)
         std::map<std::string, AllocationTrace> read_traces = {};
@@ -300,12 +262,7 @@ namespace wrench {
                 {CompoundStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD, 0},
                 {CompoundStorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD, 0},
                 {CompoundStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD, 0},
-<<<<<<< HEAD
-                {CompoundStorageServiceMessagePayload::STORAGE_SELECTION_PAYLOAD, 1024}
-        };
-=======
                 {CompoundStorageServiceMessagePayload::STORAGE_SELECTION_PAYLOAD, 1024}};
->>>>>>> upstream/master
 
         static unsigned long getNewUniqueNumber();
 
@@ -324,22 +281,13 @@ namespace wrench {
 
         std::vector<std::shared_ptr<FileLocation>> lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location);
 
-<<<<<<< HEAD
-        bool processStorageSelectionMessage(const CompoundStorageAllocationRequestMessage* msg);
-
-        bool processStorageLookupMessage(const CompoundStorageLookupRequestMessage* msg);
-
-        bool processNextMessage(SimulationMessage *message);
-
-        /* Key : hostname of storage server, value : list of storage services (one per disk / raid / ...) on this storage server */
-=======
         bool processStorageSelectionMessage(const CompoundStorageAllocationRequestMessage *msg);
 
         bool processStorageLookupMessage(const CompoundStorageLookupRequestMessage *msg);
 
         bool processNextMessage(SimulationMessage *message);
 
->>>>>>> upstream/master
+        /* Key : hostname of storage server, value : list of storage services (one per disk / raid / ...) on this storage server */
         std::map<std::string, std::vector<std::shared_ptr<StorageService>>> storage_services = {};
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
@@ -353,7 +301,6 @@ namespace wrench {
         */
         double max_chunk_size = 0;
 
-<<<<<<< HEAD
 
         /**
          *  @brief  Whether to strip a file in the CSS or in the external allocation function.
@@ -361,8 +308,6 @@ namespace wrench {
         */
         bool internal_stripping;
 
-=======
->>>>>>> upstream/master
         /**
          * @brief Dirty log tracing method (needs to be improved)
         */
