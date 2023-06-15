@@ -1369,6 +1369,7 @@ namespace wrench
                     disk_usage.service = storage_service;
                     disk_usage.load = storage_service->getLoad(); // number of concurrent reads
                     disk_usage.free_space = storage_service->traceTotalFreeSpace();
+                    disk_usage.file_count = storage_service->traceTotalFiles();
                     trace.disk_usage.push_back(disk_usage);
                 }
             }
@@ -1384,6 +1385,7 @@ namespace wrench
                 disk_usage.file_name = location->getFile()->getID();
                 disk_usage.load = storage_service->getLoad(); // number of concurrent reads
                 disk_usage.free_space = storage_service->traceTotalFreeSpace();
+                disk_usage.file_count = storage_service->traceTotalFiles();
                 trace.disk_usage.push_back(disk_usage);
             }
         }

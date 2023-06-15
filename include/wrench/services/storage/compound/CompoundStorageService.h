@@ -83,6 +83,7 @@ namespace wrench
     {
         std::shared_ptr<StorageService> service;
         double free_space;
+        uint64_t file_count;
         std::string file_name;
         double load; // not actually used so far
     };
