@@ -10,16 +10,15 @@
 #ifndef WRENCH_COMPOUNDSTORAGESERVICE_H
 #define WRENCH_COMPOUNDSTORAGESERVICE_H
 
+#include "wrench/services/memory/MemoryManager.h"
 #include "wrench/services/storage/StorageService.h"
 #include "wrench/services/storage/StorageServiceMessage.h"
-#include "wrench/services/memory/MemoryManager.h"
-#include "wrench/simgrid_S4U_util/S4U_PendingCommunication.h"
-#include "wrench/services/storage/compound/CompoundStorageServiceProperty.h"
-#include "wrench/services/storage/compound/CompoundStorageServiceMessagePayload.h"
 #include "wrench/services/storage/compound/CompoundStorageServiceMessage.h"
+#include "wrench/services/storage/compound/CompoundStorageServiceMessagePayload.h"
+#include "wrench/services/storage/compound/CompoundStorageServiceProperty.h"
+#include "wrench/simgrid_S4U_util/S4U_PendingCommunication.h"
 
-namespace wrench
-{
+namespace wrench {
 
     /**
      * @brief Specification of a callback
@@ -33,12 +32,10 @@ namespace wrench
     /**
      * @brief Interface for a CompoundStorageService allocator
      */
-    class StorageAllocator
-    {
+    class StorageAllocator {
     public:
-
-        StorageAllocator() {};
-        virtual ~StorageAllocator() {};
+        StorageAllocator(){};
+        virtual ~StorageAllocator(){};
 
         /**
          * @brief Allocate a Datafile onto the storage resources
@@ -52,8 +49,7 @@ namespace wrench
             const std::shared_ptr<DataFile> &file,
             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
-            const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) 
-        {
+            const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
             return std::vector<std::shared_ptr<FileLocation>>();
         };
     };
@@ -61,8 +57,7 @@ namespace wrench
     /**
      * @brief Enum for IO actions in traces
      */
-    enum class IOAction : std::uint8_t
-    {
+    enum class IOAction : std::uint8_t {
         ReadStart = 1,
         ReadEnd = 2,
         WriteStart = 3,
@@ -79,8 +74,7 @@ namespace wrench
     /**
      * @brief Structure to track disk usage
      */
-    struct DiskUsage
-    {
+    struct DiskUsage {
         std::shared_ptr<StorageService> service;
         double free_space;
         uint64_t file_count;
@@ -91,8 +85,7 @@ namespace wrench
     /**
      * @brief Structure for tracing file allocations for each job
      */
-    struct AllocationTrace
-    {
+    struct AllocationTrace {
         double ts;
         IOAction act;
         std::vector<DiskUsage> disk_usage; // new usage stats for updated disks
@@ -111,8 +104,7 @@ namespace wrench
      *        StorageService (readFile / writeFile /...) and will craft messages intended for one or many of
      *        its underlying storage services.
      */
-    class CompoundStorageService : public StorageService
-    {
+    class CompoundStorageService : public StorageService {
     public:
         using StorageService::createFile;
         using StorageService::deleteFile;
@@ -153,8 +145,7 @@ namespace wrench
          * @brief Determine whether the storage service is bufferized
          * @return true if bufferized, false otherwise
          */
-        bool isBufferized() const override
-        {
+        bool isBufferized() const override {
             return false;
         }
 
@@ -162,8 +153,7 @@ namespace wrench
          * @brief Determine the storage service's buffer size
          * @return a size in bytes
          */
-        double getBufferSize() const override
-        {
+        double getBufferSize() const override {
             return 0;
         }
 
@@ -172,8 +162,7 @@ namespace wrench
          * @param location a location
          * @return true if success, false otherwise
          */
-        bool reserveSpace(std::shared_ptr<FileLocation> &location) override
-        {
+        bool reserveSpace(std::shared_ptr<FileLocation> &location) override {
             throw std::runtime_error("CompoundStorageService::reserveSpace(): not implemented");
         }
 
@@ -181,8 +170,7 @@ namespace wrench
          * @brief Remove a directory and all its content at the storage service (in zero simulated time)
          * @param path: a path
          */
-        void removeDirectory(const std::string &path) override
-        {
+        void removeDirectory(const std::string &path) override {
             throw std::runtime_error("CompoundStorageService::removeDirectory(): not implemented");
         }
 
@@ -190,8 +178,7 @@ namespace wrench
          * @brief Unreserve space at the storage service
          * @param location a location
          */
-        void unreserveSpace(std::shared_ptr<FileLocation> &location) override
-        {
+        void unreserveSpace(std::shared_ptr<FileLocation> &location) override {
             throw std::runtime_error("CompoundStorageService::unreserveSpace(): not implemented");
         }
 
@@ -199,8 +186,7 @@ namespace wrench
          * @brief Create a file at the storage service (in zero simulated time)
          * @param location a location
          */
-        void createFile(const std::shared_ptr<FileLocation> &location) override
-        {
+        void createFile(const std::shared_ptr<FileLocation> &location) override {
             throw std::runtime_error("CompoundStorageService::createFile(): not implemented");
         }
 
@@ -208,8 +194,7 @@ namespace wrench
          * @brief Remove a file at the storage service (in zero simulated time)
          * @param location a location
          */
-        void removeFile(const std::shared_ptr<FileLocation> &location) override
-        {
+        void removeFile(const std::shared_ptr<FileLocation> &location) override {
             throw std::runtime_error("CompoundStorageService::removeFile(): not implemented");
         }
 

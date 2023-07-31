@@ -229,7 +229,7 @@ namespace wrench {
     double SimpleStorageService::traceTotalFiles() {
         double files = 0;
         for (auto const &mp: this->file_systems) {
-            files += mp.second->getTotalFiles();
+            files += mp.second->getTotalNumFiles();
         }
         return files;
     }
