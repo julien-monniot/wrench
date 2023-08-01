@@ -595,13 +595,14 @@ namespace wrench {
         auto copy_idx = 0;
         int total_parts = src_parts.size(); // = dst_parts.size()
 
-        std::vector<simgrid::s4u::Mailbox *> tmp_mailboxes = {};
+        auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
+        // std::vector<simgrid::s4u::Mailbox *> tmp_mailboxes = {};
 
         while (copy_idx < total_parts) {
             WRENCH_INFO("CSS::copyFileIamSource(): Running StorageService::copyFile for part %i", copy_idx);
 
-            auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            tmp_mailboxes.push_back(tmp_mailbox);
+            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
+            // tmp_mailboxes.push_back(tmp_mailbox);
 
             assertServiceIsUp(src_parts[copy_idx]->getStorageService());
             assertServiceIsUp(dst_parts[copy_idx]->getStorageService());
@@ -640,6 +641,20 @@ namespace wrench {
         WRENCH_INFO("CSS::copyFileIamSource(): Copy/ies started");
 
         // Wait for all replies
+        auto rcv = 0;
+        while (rcv < total_parts) {
+            auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(tmp_mailbox);
+            rcv += 1;
+
+            if (msg->failure_cause) {
+                WRENCH_DEBUG("%s", msg->failure_cause->toString().c_str());
+                throw ExecutionException(std::move(msg->failure_cause));
+            }
+        }
+        S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
+
+        /*
+        // Wait for all replies
         for (const auto &mailbox : tmp_mailboxes) {
 
             auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(mailbox);
@@ -651,6 +666,7 @@ namespace wrench {
 
             S4U_Mailbox::retireTemporaryMailbox(mailbox);
         }
+        */
 
         WRENCH_INFO("CSS::copyFileIamSource(): Copy/ies started (answers received)");
 
@@ -722,7 +738,8 @@ namespace wrench {
         auto copy_idx = 0;
         int total_parts = src_parts.size(); // = dst_parts.size()
 
-        std::vector<simgrid::s4u::Mailbox *> tmp_mailboxes = {};
+        // std::vector<simgrid::s4u::Mailbox *> tmp_mailboxes = {};
+        auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
         while (copy_idx < total_parts) {
             WRENCH_INFO("CSS::copyFileIamDestination(): Running StorageService::copyFile for part %i", copy_idx);
@@ -759,8 +776,8 @@ namespace wrench {
             }
 
             // Send a message to the daemon of the dst service
-            auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            tmp_mailboxes.push_back(tmp_mailbox);
+            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
+            // tmp_mailboxes.push_back(tmp_mailbox);
 
             this->simulation->getOutput().addTimestampFileCopyStart(Simulation::getCurrentSimulatedDate(), file,
                                                                     src_parts[copy_idx],
@@ -786,6 +803,19 @@ namespace wrench {
         WRENCH_INFO("CSS::copyFileIamDestination(): Copy/ies started");
 
         // Wait for all replies
+        auto rcv = 0;
+        while (rcv < total_parts) {
+            auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(tmp_mailbox);
+            rcv += 1;
+
+            if (msg->failure_cause) {
+                WRENCH_DEBUG("%s", msg->failure_cause->toString().c_str());
+                throw ExecutionException(std::move(msg->failure_cause));
+            }
+        }
+        S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
+
+        /*
         for (const auto &mailbox : tmp_mailboxes) {
 
             auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(mailbox);
@@ -796,7 +826,7 @@ namespace wrench {
             }
 
             S4U_Mailbox::retireTemporaryMailbox(mailbox);
-        }
+        }*/
 
         WRENCH_INFO("CSS::copyFileIamDestination(): Copy/ies started (answers received)");
 
@@ -857,6 +887,7 @@ namespace wrench {
         }
         std::vector<std::unique_ptr<wrench::StorageServiceFileWriteAnswerMessage>> messages = {};
         std::vector<std::pair<simgrid::s4u::Mailbox *, std::unique_ptr<wrench::StorageServiceFileWriteAnswerMessage>>> mailbox_msg_pairs = {};
+        auto recv_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
         this->traceInternalStorageUse(IOAction::WriteStart, designated_locations);
         WRENCH_INFO("CSS::writeFile(): Destination file %s will have %zu",
@@ -865,8 +896,8 @@ namespace wrench {
         // Contact every SimpleStorageService that we want to use, and request a FileWrite
         auto request_count = 0;
         for (auto &dloc : designated_locations) {
-            auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            mailbox_msg_pairs.push_back(std::make_pair(tmp_mailbox, nullptr));
+            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
+            mailbox_msg_pairs.push_back(std::make_pair(recv_mailbox, nullptr));
 
             WRENCH_INFO("CSS:writeFile(): Sending write request for part %d to %s", request_count, dloc->getStorageService()->getName().c_str());
 
@@ -878,7 +909,7 @@ namespace wrench {
             S4U_Mailbox::dputMessage(
                 dloc->getStorageService()->mailbox,
                 new StorageServiceFileWriteRequestMessage(
-                    tmp_mailbox,
+                    recv_mailbox, // tmp_mailbox
                     simgrid::s4u::this_actor::get_host(),
                     dloc,
                     this->getMessagePayloadValue(
@@ -923,8 +954,10 @@ namespace wrench {
         for (const auto &mailbx_msg : mailbox_msg_pairs) {
             WRENCH_INFO("CSS::writeFile(): Waiting for final ack");
             S4U_Mailbox::getMessage<StorageServiceAckMessage>(mailbx_msg.first, "CSS::writeFile(): ");
-            S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.first);
+            // S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.first);
         }
+
+        S4U_Mailbox::retireTemporaryMailbox(recv_mailbox);
 
         WRENCH_INFO("CSS::writeFile(): All writes done and ack");
         this->traceInternalStorageUse(IOAction::WriteEnd, designated_locations);
@@ -965,6 +998,7 @@ namespace wrench {
         // Contact every SSS
         auto left_to_receive = designated_locations.size();
         std::vector<std::pair<simgrid::s4u::Mailbox *, std::unique_ptr<wrench::StorageServiceFileReadAnswerMessage>>> mailbox_msg_pairs = {};
+        auto recv_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
         for (const auto &dloc : designated_locations) {
             WRENCH_INFO("CSS::readFile(): Sending read file request for file %s at path %s, to storage service %s",
@@ -972,14 +1006,14 @@ namespace wrench {
                         dloc->getPath().c_str(),
                         dloc->getStorageService()->getName().c_str());
 
-            auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            mailbox_msg_pairs.push_back(std::make_pair(tmp_mailbox, nullptr));
+            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
+            mailbox_msg_pairs.push_back(std::make_pair(recv_mailbox, nullptr));
 
             // REPLACE WITH iputMessage()?
             S4U_Mailbox::dputMessage(
                 dloc->getStorageService()->mailbox,
                 new StorageServiceFileReadRequestMessage(
-                    tmp_mailbox,
+                    recv_mailbox,
                     simgrid::s4u::this_actor::get_host(),
                     dloc,
                     dloc->getFile()->getSize(),
@@ -1034,9 +1068,11 @@ namespace wrench {
                 }
             }
 
-            S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.first);
+            // S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.first);
         }
         WRENCH_INFO("CSS::readFile(): All read done and ack");
+
+        S4U_Mailbox::retireTemporaryMailbox(recv_mailbox);
 
         // Collect traces
         wrench::AllocationTrace trace;
