@@ -78,8 +78,6 @@ namespace wrench {
         std::shared_ptr<StorageService> service;
         double free_space;
         uint64_t file_count;
-        std::string file_name;
-        double load; // not actually used so far
     };
 
     /**
@@ -88,6 +86,7 @@ namespace wrench {
     struct AllocationTrace {
         double ts;
         IOAction act;
+        int parts_count;                   // number of file parts in location array
         std::vector<DiskUsage> disk_usage; // new usage stats for updated disks
         std::vector<std::shared_ptr<FileLocation>> internal_locations;
     };
@@ -238,7 +237,7 @@ namespace wrench {
         void copyFileIamDestination(const std::shared_ptr<FileLocation> &src_location,
                                     const std::shared_ptr<FileLocation> &dst_location);
 
-        // Publicly accessible traces... (TODO: cleanup access to traces)
+        // Publicly accessible traces...
         std::map<std::string, AllocationTrace> read_traces = {};
         std::map<std::string, AllocationTrace> write_traces = {};
         std::map<std::string, AllocationTrace> copy_traces = {};

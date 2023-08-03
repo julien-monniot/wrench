@@ -104,7 +104,7 @@ namespace wrench {
         }
 
         if (property_list.find(wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE) == property_list.end()) {
-            // If MAX_ALLOCATION_CHUNK_SIZE was not probided, update it now that we have validated the SSS list
+            // If MAX_ALLOCATION_CHUNK_SIZE was not provided, update it now that we have validated the SSS list
             // (Set as smallest disk capacity in bytes for instance ?)
             // TODO
             // this->setProperty(CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "2000000B");
@@ -242,12 +242,10 @@ namespace wrench {
             while (remaining - this->max_chunk_size > DBL_EPSILON) {
                 parts.push_back(
                     this->simulation->addFile(file_name + "_part_" + std::to_string(part_id), this->max_chunk_size));
-                // std::make_shared<DataFile>(file_name + "_part_" + std::to_string(part_id), this->max_chunk_size));
                 part_id++;
                 remaining -= this->max_chunk_size;
             }
             parts.push_back(this->simulation->addFile(file_name + "_part_" + std::to_string(part_id), remaining));
-            // parts.push_back(std::make_shared<DataFile>(file_name + "_part_" + std::to_string(part_id), remaining));
         } else {
             parts.push_back(file);
         }
@@ -266,7 +264,6 @@ namespace wrench {
                 WRENCH_INFO("CSS::lookupOrDesignateStorageService(): File %s (or parts) could not be placed on any ss", file->getID().c_str());
                 designated_locations = {};
                 break;
-                // throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(file, this->getSharedPtr<CompoundStorageService>()));
             }
         }
 
@@ -445,7 +442,7 @@ namespace wrench {
 
             WRENCH_INFO("CSS:deleteFile Issuing delete message to SSS %s", loc->getStorageService()->getName().c_str());
 
-            assertServiceIsUp(loc->getStorageService());
+            // assertServiceIsUp(loc->getStorageService());
 
             S4U_Mailbox::putMessage(loc->getStorageService()->mailbox,
                                     new StorageServiceFileDeleteRequestMessage(
@@ -455,11 +452,9 @@ namespace wrench {
 
             if (wait_for_answer) {
 
-                // Wait for a reply
                 std::unique_ptr<SimulationMessage> message = nullptr;
 
                 auto msg = S4U_Mailbox::getMessage<StorageServiceFileDeleteAnswerMessage>(answer_mailbox, this->network_timeout, "StorageService::deleteFile():");
-                // On failure, throw an exception
                 if (!msg->success) {
                     throw ExecutionException(std::move(msg->failure_cause));
                 }
@@ -471,11 +466,11 @@ namespace wrench {
 
         // Collect traces
         wrench::AllocationTrace trace;
-        // trace.file_name = location->getFile()->getID();
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = designated_locations;
         trace.act = IOAction::DeleteEnd;
         this->delete_traces[location->getFile()->getID()] = trace;
+
         this->traceInternalStorageUse(IOAction::DeleteEnd, designated_locations);
 
         WRENCH_INFO("CSS::deleteFile Done for file %s", location->getFile()->getID().c_str());
@@ -596,16 +591,12 @@ namespace wrench {
         int total_parts = src_parts.size(); // = dst_parts.size()
 
         auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-        // std::vector<simgrid::s4u::Mailbox *> tmp_mailboxes = {};
 
         while (copy_idx < total_parts) {
             WRENCH_INFO("CSS::copyFileIamSource(): Running StorageService::copyFile for part %i", copy_idx);
 
-            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            // tmp_mailboxes.push_back(tmp_mailbox);
-
-            assertServiceIsUp(src_parts[copy_idx]->getStorageService());
-            assertServiceIsUp(dst_parts[copy_idx]->getStorageService());
+            // assertServiceIsUp(src_parts[copy_idx]->getStorageService());
+            // assertServiceIsUp(dst_parts[copy_idx]->getStorageService());
 
             auto file = src_parts[copy_idx]->getFile();
             bool src_is_bufferized = src_parts[copy_idx]->getStorageService()->isBufferized();
@@ -634,7 +625,6 @@ namespace wrench {
                     dst_parts[copy_idx]->getStorageService()->getMessagePayloadValue(
                         StorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD)));
 
-            // StorageService::copyFile(src_parts[copy_idx], dst_parts[copy_idx]);
             copy_idx++;
         }
 
@@ -652,43 +642,26 @@ namespace wrench {
             }
         }
         S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
-
-        /*
-        // Wait for all replies
-        for (const auto &mailbox : tmp_mailboxes) {
-
-            auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(mailbox);
-
-            if (msg->failure_cause) {
-                WRENCH_DEBUG("%s", msg->failure_cause->toString().c_str());
-                throw ExecutionException(std::move(msg->failure_cause));
-            }
-
-            S4U_Mailbox::retireTemporaryMailbox(mailbox);
-        }
-        */
-
         WRENCH_INFO("CSS::copyFileIamSource(): Copy/ies started (answers received)");
 
-        // Cleanup
+        // Cleanup - Once all the copies are made, we need to delete parts on destination and merge into a single file
         if (total_parts > 1) {
-            // once all the copies are made, we need to delete parts on destination and merge into a single file
+
+            auto dest_storage_svc = dst_location->getStorageService();
             for (const auto &part : dst_parts) {
-                dst_location->getStorageService()->deleteFileAtLocation(part);
+                dest_storage_svc->deleteFileAtLocation(part);
             }
-            dst_location->getStorageService()->createFileAtLocation(FileLocation::LOCATION(
-                dst_location->getStorageService(), dst_location->getPath(), dst_location->getFile()));
+            dest_storage_svc->createFileAtLocation(FileLocation::LOCATION(dest_storage_svc, dst_location->getPath(), dst_location->getFile()));
         }
 
         // Collect traces
         wrench::AllocationTrace trace;
-        // trace.file_name = src_location->getFile()->getID();
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = src_parts;
         trace.act = IOAction::CopyToEnd;
         this->copy_traces[src_location->getFile()->getID()] = trace;
 
-        WRENCH_INFO("CSS::copyFileIamSource(): Done (cleanup + tracing)");
+        WRENCH_INFO("CSS::copyFileIamSource(): Done");
     }
 
     /**
@@ -738,7 +711,6 @@ namespace wrench {
         auto copy_idx = 0;
         int total_parts = src_parts.size(); // = dst_parts.size()
 
-        // std::vector<simgrid::s4u::Mailbox *> tmp_mailboxes = {};
         auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
         while (copy_idx < total_parts) {
@@ -757,8 +729,8 @@ namespace wrench {
                         dst_parts[copy_idx]->getStorageService()->getBaseRootPath().c_str());
 
             // Useful ?
-            assertServiceIsUp(src_parts[copy_idx]->getStorageService());
-            assertServiceIsUp(dst_parts[copy_idx]->getStorageService());
+            // assertServiceIsUp(src_parts[copy_idx]->getStorageService());
+            // assertServiceIsUp(dst_parts[copy_idx]->getStorageService());
 
             auto file = src_parts[copy_idx]->getFile();
             bool src_is_bufferized = src_parts[copy_idx]->getStorageService()->isBufferized();
@@ -775,10 +747,6 @@ namespace wrench {
                 mailbox_to_contact = dst_parts[copy_idx]->getStorageService()->mailbox;
             }
 
-            // Send a message to the daemon of the dst service
-            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            // tmp_mailboxes.push_back(tmp_mailbox);
-
             this->simulation->getOutput().addTimestampFileCopyStart(Simulation::getCurrentSimulatedDate(), file,
                                                                     src_parts[copy_idx],
                                                                     dst_parts[copy_idx]);
@@ -787,7 +755,6 @@ namespace wrench {
             // we keep track of future space usage on various storage nodes while allocating multiple chunks of a given
             // file. So right before we actually start the copy, we unreserve space.
             dst_parts[copy_idx]->getStorageService()->unreserveSpace(dst_parts[copy_idx]);
-            // TODO : Replace with iputMessage()
             S4U_Mailbox::dputMessage(
                 mailbox_to_contact,
                 new StorageServiceFileCopyRequestMessage(
@@ -815,19 +782,6 @@ namespace wrench {
         }
         S4U_Mailbox::retireTemporaryMailbox(tmp_mailbox);
 
-        /*
-        for (const auto &mailbox : tmp_mailboxes) {
-
-            auto msg = S4U_Mailbox::getMessage<StorageServiceFileCopyAnswerMessage>(mailbox);
-
-            if (msg->failure_cause) {
-                WRENCH_DEBUG("%s", msg->failure_cause->toString().c_str());
-                throw ExecutionException(std::move(msg->failure_cause));
-            }
-
-            S4U_Mailbox::retireTemporaryMailbox(mailbox);
-        }*/
-
         WRENCH_INFO("CSS::copyFileIamDestination(): Copy/ies started (answers received)");
 
         // Once copy is done, remove links (only if source file was stripped)
@@ -840,13 +794,11 @@ namespace wrench {
                 StorageService::deleteFileAtLocation(src_part);
                 src_part->getFile()->setSize(part_size);
             }
+            WRENCH_INFO("CSS::copyFileIamDestination(): Source parts deleted");
         }
-
-        WRENCH_INFO("CSS::copyFileIamDestination(): Source parts deleted (if needed)");
 
         // Collect traces
         wrench::AllocationTrace trace;
-        // trace.file_name = dst_location->getFile()->getID();
         trace.act = IOAction::WriteEnd;
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = dst_parts;
@@ -886,7 +838,6 @@ namespace wrench {
             throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(location->getFile(), this->getSharedPtr<CompoundStorageService>()));
         }
         std::vector<std::unique_ptr<wrench::StorageServiceFileWriteAnswerMessage>> messages = {};
-        std::vector<std::pair<simgrid::s4u::Mailbox *, std::unique_ptr<wrench::StorageServiceFileWriteAnswerMessage>>> mailbox_msg_pairs = {};
         auto recv_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
         this->traceInternalStorageUse(IOAction::WriteStart, designated_locations);
@@ -896,8 +847,6 @@ namespace wrench {
         // Contact every SimpleStorageService that we want to use, and request a FileWrite
         auto request_count = 0;
         for (auto &dloc : designated_locations) {
-            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            mailbox_msg_pairs.push_back(std::make_pair(recv_mailbox, nullptr));
 
             WRENCH_INFO("CSS:writeFile(): Sending write request for part %d to %s", request_count, dloc->getStorageService()->getName().c_str());
 
@@ -905,7 +854,6 @@ namespace wrench {
             // we keep track of future space usage on various storage nodes while allocating multiple chunks of a given
             // file. So right before we actually start the copy, we unreserve space.
             dloc->getStorageService()->unreserveSpace(dloc);
-            // TODO : Replace with iputMessage()
             S4U_Mailbox::dputMessage(
                 dloc->getStorageService()->mailbox,
                 new StorageServiceFileWriteRequestMessage(
@@ -917,26 +865,28 @@ namespace wrench {
             request_count++;
         }
 
-        for (auto &mailbox_pair : mailbox_msg_pairs) {
+        auto recv = 0;
+        while (recv < request_count) {
             // Wait for answer to current reqeust
-            auto msg = S4U_Mailbox::getMessage<StorageServiceFileWriteAnswerMessage>(mailbox_pair.first, this->network_timeout, "CSS::writeFile(): ");
+            auto msg = S4U_Mailbox::getMessage<StorageServiceFileWriteAnswerMessage>(recv_mailbox, this->network_timeout, "CSS::writeFile(): ");
             if (not msg->success)
                 throw ExecutionException(msg->failure_cause);
 
-            mailbox_pair.second = std::move(msg);
+            messages.push_back(std::move(msg));
+            recv++;
         }
 
         WRENCH_INFO("CSS::writeFile(): All requests sent and validated");
 
-        for (const auto &mailbx_msg : mailbox_msg_pairs) {
+        for (const auto &msg : messages) {
 
             // Update buffer size according to which storage service actually answered.
-            auto buffer_size = mailbx_msg.second->buffer_size;
+            auto buffer_size = msg->buffer_size;
 
             if (buffer_size >= 1) {
 
                 auto file = location->getFile();
-                for (auto const &dwmb : mailbx_msg.second->data_write_mailboxes_and_bytes) {
+                for (auto const &dwmb : msg->data_write_mailboxes_and_bytes) {
                     // Bufferized
                     double remaining = dwmb.second;
                     while (remaining - buffer_size > DBL_EPSILON) {
@@ -951,12 +901,10 @@ namespace wrench {
             }
         }
 
-        for (const auto &mailbx_msg : mailbox_msg_pairs) {
-            WRENCH_INFO("CSS::writeFile(): Waiting for final ack");
-            S4U_Mailbox::getMessage<StorageServiceAckMessage>(mailbx_msg.first, "CSS::writeFile(): ");
-            // S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.first);
+        WRENCH_INFO("CSS::writeFile(): Waiting for final acks");
+        for (const auto &mailbx_msg : messages) {
+            S4U_Mailbox::getMessage<StorageServiceAckMessage>(recv_mailbox, "CSS::writeFile(): ");
         }
-
         S4U_Mailbox::retireTemporaryMailbox(recv_mailbox);
 
         WRENCH_INFO("CSS::writeFile(): All writes done and ack");
@@ -997,19 +945,16 @@ namespace wrench {
 
         // Contact every SSS
         auto left_to_receive = designated_locations.size();
-        std::vector<std::pair<simgrid::s4u::Mailbox *, std::unique_ptr<wrench::StorageServiceFileReadAnswerMessage>>> mailbox_msg_pairs = {};
+        std::vector<std::unique_ptr<wrench::StorageServiceFileReadAnswerMessage>> messages = {};
         auto recv_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
+        auto request_count = 0;
         for (const auto &dloc : designated_locations) {
             WRENCH_INFO("CSS::readFile(): Sending read file request for file %s at path %s, to storage service %s",
                         dloc->getFile()->getID().c_str(),
                         dloc->getPath().c_str(),
                         dloc->getStorageService()->getName().c_str());
 
-            // auto tmp_mailbox = S4U_Mailbox::getTemporaryMailbox();
-            mailbox_msg_pairs.push_back(std::make_pair(recv_mailbox, nullptr));
-
-            // REPLACE WITH iputMessage()?
             S4U_Mailbox::dputMessage(
                 dloc->getStorageService()->mailbox,
                 new StorageServiceFileReadRequestMessage(
@@ -1019,27 +964,29 @@ namespace wrench {
                     dloc->getFile()->getSize(),
                     dloc->getStorageService()->getMessagePayloadValue(
                         CompoundStorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD)));
+            request_count++;
         }
 
-        for (auto &mailbox_pair : mailbox_msg_pairs) {
+        auto recv = 0;
+        while (recv < request_count) {
             // Wait for answer to current reqeust
-            auto msg = S4U_Mailbox::getMessage<StorageServiceFileReadAnswerMessage>(mailbox_pair.first, this->network_timeout, "CSS::readFile(): ");
+            auto msg = S4U_Mailbox::getMessage<StorageServiceFileReadAnswerMessage>(recv_mailbox, this->network_timeout, "CSS::readFile(): ");
             if (not msg->success)
                 throw ExecutionException(msg->failure_cause);
 
-            mailbox_pair.second = std::move(msg);
+            messages.push_back(std::move(msg));
+            recv++;
         }
 
         WRENCH_INFO("CSS::readFile(): All requests sent and validated");
 
-        for (const auto &mailbx_msg : mailbox_msg_pairs) {
+        for (const auto &msg : messages) {
 
-            if (mailbx_msg.second->buffer_size < 1) {
-                // Non-Bufferized
-                // Just wait for the final ack (no timeout!)
-                S4U_Mailbox::getMessage<StorageServiceAckMessage>(mailbx_msg.first, "CSS::readFile(): ");
+            if (msg->buffer_size < 1) {
+                // Non-Bufferized ; just wait for an ack for this message (note this may not be THE ack to this precise message, but it doesn't matter)
+                S4U_Mailbox::getMessage<StorageServiceAckMessage>(recv_mailbox, "CSS::readFile(): ");
             } else {
-                unsigned long number_of_sources = mailbx_msg.second->number_of_sources;
+                unsigned long number_of_sources = msg->number_of_sources;
 
                 // Otherwise, retrieve the file chunks until the last one is received
                 // Noting that we have multiple sources
@@ -1047,36 +994,34 @@ namespace wrench {
                 while (true) {
                     std::shared_ptr<StorageServiceFileContentChunkMessage> file_content_chunk_msg = nullptr;
                     try {
-                        file_content_chunk_msg = S4U_Mailbox::getMessage<StorageServiceFileContentChunkMessage>(mailbx_msg.second->mailbox_to_receive_the_file_content, "StorageService::readFile(): Received an");
+                        file_content_chunk_msg = S4U_Mailbox::getMessage<StorageServiceFileContentChunkMessage>(msg->mailbox_to_receive_the_file_content, "StorageService::readFile(): Received an");
                     } catch (...) {
-                        S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.second->mailbox_to_receive_the_file_content);
+                        S4U_Mailbox::retireTemporaryMailbox(msg->mailbox_to_receive_the_file_content);
                         throw;
                     }
                     if (file_content_chunk_msg->last_chunk) {
                         num_final_chunks_received++;
-                        if (num_final_chunks_received == mailbx_msg.second->number_of_sources) {
+                        if (num_final_chunks_received == msg->number_of_sources) {
                             break;
                         }
                     }
                 }
 
-                S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.second->mailbox_to_receive_the_file_content);
+                S4U_Mailbox::retireTemporaryMailbox(msg->mailbox_to_receive_the_file_content);
 
-                // Waiting for all the final acks
+                // Waiting for all the final acks (same thing as for un buffered sources : we're waiting on N ack messages, not necessarily the ones corresponding to this exact message)
                 for (unsigned long source = 0; source < number_of_sources; source++) {
-                    S4U_Mailbox::getMessage<StorageServiceAckMessage>(mailbx_msg.first, this->network_timeout, "StorageService::readFile(): Received an");
+                    S4U_Mailbox::getMessage<StorageServiceAckMessage>(recv_mailbox, this->network_timeout, "StorageService::readFile(): Received an");
                 }
             }
-
-            // S4U_Mailbox::retireTemporaryMailbox(mailbx_msg.first);
         }
-        WRENCH_INFO("CSS::readFile(): All read done and ack");
 
         S4U_Mailbox::retireTemporaryMailbox(recv_mailbox);
 
+        WRENCH_INFO("CSS::readFile(): All reads done and ack");
+
         // Collect traces
         wrench::AllocationTrace trace;
-        // trace.file_name = location->getFile()->getID();
         trace.ts = S4U_Simulation::getClock();
         trace.act = IOAction::ReadEnd;
         trace.internal_locations = designated_locations;
@@ -1102,7 +1047,7 @@ namespace wrench {
      * @return A number of bytes
      */
     double CompoundStorageService::getTotalSpace() {
-        //        WRENCH_INFO("CompoundStorageService::getTotalSpace");
+        // WRENCH_INFO("CompoundStorageService::getTotalSpace");
         double free_space = 0.0;
         for (const auto &storage_server : this->storage_services) {
             for (const auto &service : storage_server.second) {
@@ -1237,6 +1182,7 @@ namespace wrench {
         AllocationTrace trace;
         trace.act = action;
         trace.ts = ts;
+        trace.parts_count = size(locations);
 
         if (locations.empty()) {
 
@@ -1244,7 +1190,6 @@ namespace wrench {
                 for (const auto &storage_service : storage.second) {
                     DiskUsage disk_usage;
                     disk_usage.service = storage_service;
-                    disk_usage.load = storage_service->getLoad(); // number of concurrent reads
                     disk_usage.free_space = storage_service->traceTotalFreeSpace();
                     disk_usage.file_count = storage_service->traceTotalFiles();
                     trace.disk_usage.push_back(disk_usage);
@@ -1252,19 +1197,26 @@ namespace wrench {
             }
         } else {
 
+            auto total_nb_storage_services = size(this->storage_services);
+            std::set<std::string> known_services;
+
             for (const auto &location : locations) {
+
                 auto storage_service = location->getStorageService();
-                DiskUsage disk_usage;
-                disk_usage.service = storage_service;
-                disk_usage.file_name = location->getFile()->getID();
-                disk_usage.load = storage_service->getLoad(); // number of concurrent reads
-                disk_usage.free_space = storage_service->traceTotalFreeSpace();
-                disk_usage.file_count = storage_service->traceTotalFiles();
-                trace.disk_usage.push_back(disk_usage);
+                if (known_services.find(storage_service->getName()) == known_services.end()) {
+                    DiskUsage disk_usage;
+                    disk_usage.service = storage_service;
+                    disk_usage.free_space = storage_service->traceTotalFreeSpace();
+                    disk_usage.file_count = storage_service->traceTotalFiles();
+                    trace.disk_usage.push_back(disk_usage);
+
+                    if (size(trace.disk_usage) == total_nb_storage_services) {
+                        break;
+                    }
+                }
             }
         }
 
         this->internal_storage_use.push_back(std::make_pair(ts, trace));
     }
-
 }; // namespace wrench
