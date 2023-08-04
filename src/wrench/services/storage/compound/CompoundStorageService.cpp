@@ -101,6 +101,7 @@ namespace wrench {
             } else {
                 this->storage_services[storage_service->getHostname()] = std::vector<std::shared_ptr<wrench::StorageService>>{storage_service};
             }
+            this->total_nb_storage_services++;
         }
 
         if (property_list.find(wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE) == property_list.end()) {
@@ -472,7 +473,6 @@ namespace wrench {
         this->delete_traces[location->getFile()->getID()] = trace;
 
         this->traceInternalStorageUse(IOAction::DeleteEnd, designated_locations);
-
         WRENCH_INFO("CSS::deleteFile Done for file %s", location->getFile()->getID().c_str());
     }
 
@@ -805,7 +805,6 @@ namespace wrench {
         this->copy_traces[dst_location->getFile()->getID()] = trace;
 
         this->traceInternalStorageUse(IOAction::CopyToEnd, dst_parts);
-
         WRENCH_INFO("CSS::copyFileIamDestination(): Done (cleanup + tracing)");
     }
 
@@ -823,7 +822,6 @@ namespace wrench {
                                            bool wait_for_answer) {
 
         WRENCH_INFO("CSS::writeFile(): Writing file %s", location->getFile()->getID().c_str());
-        // this->traceInternalStorageUse(IOAction::WriteStart);
 
         if (location == nullptr) {
             throw std::invalid_argument("CSS::writeFile(): Invalid arguments");
@@ -907,15 +905,15 @@ namespace wrench {
         }
         S4U_Mailbox::retireTemporaryMailbox(recv_mailbox);
 
-        WRENCH_INFO("CSS::writeFile(): All writes done and ack");
-        this->traceInternalStorageUse(IOAction::WriteEnd, designated_locations);
-
         // Collect traces
         wrench::AllocationTrace trace;
         trace.act = IOAction::WriteEnd;
         trace.ts = S4U_Simulation::getClock();
         trace.internal_locations = designated_locations;
         this->write_traces[location->getFile()->getID()] = trace;
+
+        this->traceInternalStorageUse(IOAction::WriteEnd, designated_locations);
+        WRENCH_INFO("CSS::writeFile(): All writes done and ack");
     }
 
     /**
@@ -1186,6 +1184,8 @@ namespace wrench {
 
         if (locations.empty()) {
 
+            trace.file_name = "nofile";
+
             for (const auto &storage : this->storage_services) {
                 for (const auto &storage_service : storage.second) {
                     DiskUsage disk_usage;
@@ -1195,9 +1195,11 @@ namespace wrench {
                     trace.disk_usage.push_back(disk_usage);
                 }
             }
+
         } else {
 
-            auto total_nb_storage_services = size(this->storage_services);
+            trace.file_name = locations.begin()->get()->getFile()->getID();
+
             std::set<std::string> known_services;
 
             for (const auto &location : locations) {
@@ -1210,7 +1212,7 @@ namespace wrench {
                     disk_usage.file_count = storage_service->traceTotalFiles();
                     trace.disk_usage.push_back(disk_usage);
 
-                    if (size(trace.disk_usage) == total_nb_storage_services) {
+                    if (size(trace.disk_usage) == this->total_nb_storage_services) {
                         break;
                     }
                 }

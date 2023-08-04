@@ -86,7 +86,8 @@ namespace wrench {
     struct AllocationTrace {
         double ts;
         IOAction act;
-        int parts_count;                   // number of file parts in location array
+        int parts_count; // number of file parts in location array
+        std::string file_name;
         std::vector<DiskUsage> disk_usage; // new usage stats for updated disks
         std::vector<std::shared_ptr<FileLocation>> internal_locations;
     };
@@ -312,6 +313,8 @@ namespace wrench {
 
         /* Key : hostname of storage server, value : list of storage services (one per disk / raid / ...) on this storage server */
         std::map<std::string, std::vector<std::shared_ptr<StorageService>>> storage_services = {};
+
+        int total_nb_storage_services = 0;
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
 
