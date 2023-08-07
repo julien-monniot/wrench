@@ -75,20 +75,37 @@ namespace wrench {
      * @brief Structure to track disk usage
      */
     struct DiskUsage {
+        /** @brief Storage service */
         std::shared_ptr<StorageService> service;
+        /** @brief Free space in byte */
         double free_space;
+<<<<<<< HEAD
         uint64_t file_count;
+=======
+        /** @brief File name */
+        std::string file_name;
+        /** @brief Load */
+        double load;// not actually used so far
+>>>>>>> upstream/master
     };
 
     /**
      * @brief Structure for tracing file allocations for each job
      */
     struct AllocationTrace {
+        /** @brief time stamp */
         double ts;
+        /** @brief IO action */
         IOAction act;
+<<<<<<< HEAD
         int parts_count; // number of file parts in location array
         std::string file_name;
         std::vector<DiskUsage> disk_usage; // new usage stats for updated disks
+=======
+        /** @brief Disk usage */
+        std::vector<DiskUsage> disk_usage;// new usage stats for updated disks
+                                          /** @brief internal file locations */
+>>>>>>> upstream/master
         std::vector<std::shared_ptr<FileLocation>> internal_locations;
     };
 
@@ -238,11 +255,20 @@ namespace wrench {
         void copyFileIamDestination(const std::shared_ptr<FileLocation> &src_location,
                                     const std::shared_ptr<FileLocation> &dst_location);
 
+<<<<<<< HEAD
         // Publicly accessible traces...
+=======
+        // Publicly accessible traces... (TODO: cleanup access to traces)
+        /** @brief File read traces */
+>>>>>>> upstream/master
         std::map<std::string, AllocationTrace> read_traces = {};
+        /** @brief File write traces */
         std::map<std::string, AllocationTrace> write_traces = {};
+        /** @brief File copy traces */
         std::map<std::string, AllocationTrace> copy_traces = {};
+        /** @brief File delete traces */
         std::map<std::string, AllocationTrace> delete_traces = {};
+        /** @brief Internal storage use */
         std::vector<std::pair<double, AllocationTrace>> internal_storage_use = {};
 
         /***********************/
