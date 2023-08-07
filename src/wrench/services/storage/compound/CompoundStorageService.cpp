@@ -324,13 +324,8 @@ namespace wrench {
      * @brief Lookup for a DataFile in the internal file mapping of the CompoundStorageService (a simplified FileRegistry)
      *
      * @param file: the file of interest
-<<<<<<< HEAD
-     * @param answer_mailbox: the answer mailbox
-     *
-=======
      * @param answer_mailbox: the answer mailbox to which the reply from the server should be sent
-     * 
->>>>>>> upstream/master
+     *
      * @return A vector of shared_ptr on a FileLocation if the DataFile is known to the CompoundStorageService or empty vector if it's not.
      */
     std::vector<std::shared_ptr<FileLocation>> CompoundStorageService::lookupFileLocation(const std::shared_ptr<DataFile> &file, simgrid::s4u::Mailbox *answer_mailbox) {
@@ -373,14 +368,9 @@ namespace wrench {
      *  @brief Lookup for a DataFile in the internal file mapping of the CompoundStorageService, and if it is not found,
      *         try to allocate the file on one of the underlying storage services, using the user-provided 'storage_selection'
      *         callback.
-<<<<<<< HEAD
      *
-     *  @param file the file of interest
-=======
-     * 
      *  @param file: the file of interest
      *  @param answer_mailbox: the answer mailbox to which the reply from the server should be sent
->>>>>>> upstream/master
      *
      *  @return A vector of shared_ptr on a FileLocation if the DataFile is known to the CompoundStorageService or could be allocated
      *          or empty vector if it's not / could not be allocated.
@@ -579,12 +569,9 @@ namespace wrench {
      * @brief Copy file from css to a simple storage service (file might be stripped within the CSS, but should be
      *        reassembled on the SSS)
      *
-<<<<<<< HEAD
-=======
      * @param src_location: the source location
      * @param dst_location: the destination location
-     * 
->>>>>>> upstream/master
+     *
      */
     void CompoundStorageService::copyFileIamSource(const std::shared_ptr<FileLocation> &src_location,
                                                    const std::shared_ptr<FileLocation> &dst_location) {
