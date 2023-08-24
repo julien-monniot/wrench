@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <wrench/services/storage/compound/CompoundStorageService.h>
 
 #include "wrench/services/storage/StorageServiceMessage.h"
@@ -28,30 +30,32 @@ namespace wrench {
      *  @param property_list: the configurable properties
      *  @param messagepayload_list: the configurable message payloads
      */
+    /*
     CompoundStorageService::CompoundStorageService(const std::string &hostname,
                                                    std::set<std::shared_ptr<StorageService>> storage_services,
                                                    WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, std::make_shared<StorageAllocator>(), false,
+                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, NullAllocator, false,
                                                                                                                                        property_list, messagepayload_list, "_" + std::to_string(getNewUniqueNumber())){};
+    */
 
-    /**
-     *  @brief Constructor for the case where the user provides a callback (StorageSelectionStrategyCallback)
-     *         which will be used by the CompoundStorageService any time it receives a file write or file copy
-     *         request, in order to determine which underlying StorageService to use for the (potentially) new
-     *         file in the request.
-     *         Note that nothing prevents the user from also intercepting some actions (see use case for other
-     *         constructor), but resulting behaviour is undefined.
-     *  @param hostname: the name of the host on which this service will run
-     *  @param storage_services: subordinate storage services
-     *  @param storage_selection: the storage selection strategy callback
-     *  @param property_list: the configurable properties
-     *  @param messagepayload_list: the configurable message payloads
-     */
+        /**
+         *  @brief Constructor for the case where the user provides a callback (StorageSelectionStrategyCallback)
+         *         which will be used by the CompoundStorageService any time it receives a file write or file copy
+         *         request, in order to determine which underlying StorageService to use for the (potentially) new
+         *         file in the request.
+         *         Note that nothing prevents the user from also intercepting some actions (see use case for other
+         *         constructor), but resulting behaviour is undefined.
+         *  @param hostname: the name of the host on which this service will run
+         *  @param storage_services: subordinate storage services
+         *  @param storage_selection: the storage selection strategy callback
+         *  @param property_list: the configurable properties
+         *  @param messagepayload_list: the configurable message payloads
+         */
     CompoundStorageService::CompoundStorageService(const std::string &hostname,
                                                    std::set<std::shared_ptr<StorageService>> storage_services,
-                                                   std::shared_ptr<StorageAllocator> allocator,
+                                                   const StorageSelectionStrategyCallback &allocate,
                                                    WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, allocator, true, property_list, messagepayload_list,
+                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, allocate, true, property_list, messagepayload_list,
                                                                                                                                        "_" + std::to_string(getNewUniqueNumber())){};
 
     /**
@@ -67,13 +71,13 @@ namespace wrench {
     CompoundStorageService::CompoundStorageService(
         const std::string &hostname,
         std::set<std::shared_ptr<StorageService>> storage_services,
-        std::shared_ptr<StorageAllocator> allocator,
+        const StorageSelectionStrategyCallback &allocate,
         bool storage_selection_user_provided,
         WRENCH_PROPERTY_COLLECTION_TYPE property_list,
         WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
         const std::string &suffix) : StorageService(hostname,
                                                     "compound_storage" + suffix),
-                                     allocator(allocator) {
+                                     allocate(allocate) {
 
         this->setProperties(this->default_property_values, std::move(property_list));
         this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
@@ -113,6 +117,8 @@ namespace wrench {
 
         this->max_chunk_size = this->getPropertyValueAsSizeInByte(CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE);
         this->internal_stripping = this->getPropertyValueAsBoolean(CompoundStorageServiceProperty::INTERNAL_STRIPING);
+        std::cout << "Internal striping : " << this->internal_stripping << std::endl;
+        std::cout << "max_chunk_size: " << this->max_chunk_size << std::endl;
         this->traceInternalStorageUse(IOAction::None);
     }
 
@@ -254,20 +260,26 @@ namespace wrench {
         // Resolve allocations for all parts (possibly only one part)
         std::vector<std::shared_ptr<FileLocation>> designated_locations = {};
         for (const auto &part : parts) {
+            std::cout << "OK- 9" << std::endl;
             WRENCH_INFO("CSS::lookupOrDesignateStorageService(): File %s NOT already known by CSS", part->getID().c_str());
-            auto locations = this->allocator->allocate(part, this->storage_services, this->file_location_mapping, designated_locations);
+            auto locations = this->allocate(part, this->storage_services, this->file_location_mapping, designated_locations);
+            std::cout << "OK- 9" << std::endl;
             if (!locations.empty()) {
+                std::cout << "OK- 9 if" << std::endl;
                 for (auto new_loc : locations) {
                     new_loc->getStorageService()->reserveSpace(new_loc);
                     designated_locations.push_back(new_loc);
                 }
+                std::cout << "OK- 9 if" << std::endl;
             } else {
+                std::cout << "OK- 9 else" << std::endl;
                 WRENCH_INFO("CSS::lookupOrDesignateStorageService(): File %s (or parts) could not be placed on any ss", file->getID().c_str());
                 designated_locations = {};
                 break;
             }
         }
 
+        std::cout << "OK - 7" << std::endl;
         if (!designated_locations.empty()) {
             this->file_location_mapping[file] = designated_locations;
             WRENCH_INFO("CSS::lookupOrDesignateStorageService(): Local mapping updated");
@@ -690,7 +702,7 @@ namespace wrench {
         std::vector<std::shared_ptr<FileLocation>> src_parts = {};
         std::vector<std::shared_ptr<FileLocation>> dst_parts = {};
 
-        // Find one or many SSS location(s) for the destination file (depending on whether the original file needs stripping or not)
+        // Find one or many SSS location(s) for the destination file (depending on whether the original file needs stripping or not)*
         dst_parts = this->lookupOrDesignateStorageService(dst_location);
         if (dst_parts.empty()) {
             throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(dst_location->getFile(), this->getSharedPtr<CompoundStorageService>()));

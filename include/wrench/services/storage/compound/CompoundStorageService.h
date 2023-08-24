@@ -20,39 +20,55 @@
 
 namespace wrench {
 
+    const auto NullAllocator = [](
+                                   const std::shared_ptr<DataFile> &file,
+                                   const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
+                                   const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
+                                   const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
+        return std::vector<std::shared_ptr<FileLocation>>();
+    };
+
     /**
      * @brief Specification of a callback
+     *
+     * @param file File/file part/chunk of data which needs to be allocated
+     * @param resources Map of storage node hostnames and associated StorageServices (one per disk)
+     * @param mapping Mapping of current allocations (files and the file parts locations)
+     * @param previous_allocations Previous allocations of parts of the same file as the current file part (when the allocator doesn't do striping internally)
+     * @return Vector of FileLocation (potentially with one element only) which should be used for the given file.
      */
     using StorageSelectionStrategyCallback = std::function<std::vector<std::shared_ptr<FileLocation>>(
-        const std::shared_ptr<DataFile> &,
-        const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &,
-        const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &,
+        const std::shared_ptr<DataFile> &file,
+        const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
+        const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
         const std::vector<std::shared_ptr<FileLocation>> &previous_allocations)>;
 
     /**
      * @brief Interface for a CompoundStorageService allocator
      */
+    /*
     class StorageAllocator {
     public:
         StorageAllocator(){};
         virtual ~StorageAllocator(){};
 
-        /**
-         * @brief Allocate a Datafile onto the storage resources
-         * @param file File/file part/chunk of data which needs to be allocated
-         * @param resources Map of storage node hostnames and associated StorageServices (one per disk)
-         * @param mapping Mapping of current allocations (files and the file parts locations)
-         * @param previous_allocations Previous allocations of parts of the same file as the current file part (when the allocator doesn't do striping internally)
-         * @return Vector of FileLocation (potentially with one element only) which should be used for the given file.
-         */
-        virtual std::vector<std::shared_ptr<FileLocation>> allocate(
+        virtual std::vector<std::shared_ptr<FileLocation>> operator()(
             const std::shared_ptr<DataFile> &file,
             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
             const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
             return std::vector<std::shared_ptr<FileLocation>>();
         };
+
+        virtual std::vector<std::shared_ptr<FileLocation>> operator()(
+            const std::shared_ptr<DataFile> &file,
+            const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
+            const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
+            const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) const {
+            return std::vector<std::shared_ptr<FileLocation>>();
+        };
     };
+    */
 
     /**
      * @brief Enum for IO actions in traces
@@ -124,7 +140,7 @@ namespace wrench {
 
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
-                               std::shared_ptr<StorageAllocator> allocator,
+                               const StorageSelectionStrategyCallback &allocate,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {});
 
@@ -264,7 +280,7 @@ namespace wrench {
         /***********************/
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
-                               std::shared_ptr<StorageAllocator> allocator,
+                               const StorageSelectionStrategyCallback &allocate,
                                bool storage_selection_user_provided,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
@@ -272,8 +288,8 @@ namespace wrench {
 
         /** @brief Default property values **/
         WRENCH_PROPERTY_COLLECTION_TYPE default_property_values = {
-            {CompoundStorageServiceProperty::CACHING_BEHAVIOR, "NONE"},
-            {CompoundStorageServiceProperty::INTERNAL_STRIPING, "True"},
+            {CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "64000000"},
+            {CompoundStorageServiceProperty::INTERNAL_STRIPING, "true"},
         };
 
         /** @brief Default message payload values
@@ -327,7 +343,7 @@ namespace wrench {
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
 
-        std::shared_ptr<StorageAllocator> allocator;
+        const StorageSelectionStrategyCallback &allocate;
 
         /**
          * @brief Chunk size for file stripping
