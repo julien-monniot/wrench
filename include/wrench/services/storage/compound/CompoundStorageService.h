@@ -20,14 +20,6 @@
 
 namespace wrench {
 
-    const auto NullAllocator = [](
-                                   const std::shared_ptr<DataFile> &file,
-                                   const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
-                                   const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
-                                   const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
-        return std::vector<std::shared_ptr<FileLocation>>();
-    };
-
     /**
      * @brief Specification of a callback
      *
@@ -44,31 +36,12 @@ namespace wrench {
         const std::vector<std::shared_ptr<FileLocation>> &previous_allocations)>;
 
     /**
-     * @brief Interface for a CompoundStorageService allocator
+     * @brief NullAllocator
      */
-    /*
-    class StorageAllocator {
-    public:
-        StorageAllocator(){};
-        virtual ~StorageAllocator(){};
-
-        virtual std::vector<std::shared_ptr<FileLocation>> operator()(
-            const std::shared_ptr<DataFile> &file,
-            const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
-            const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
-            const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
-            return std::vector<std::shared_ptr<FileLocation>>();
-        };
-
-        virtual std::vector<std::shared_ptr<FileLocation>> operator()(
-            const std::shared_ptr<DataFile> &file,
-            const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
-            const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
-            const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) const {
-            return std::vector<std::shared_ptr<FileLocation>>();
-        };
-    };
-    */
+    std::vector<std::shared_ptr<FileLocation>> NullAllocator(const std::shared_ptr<DataFile> &file,
+                                                             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
+                                                             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
+                                                             const std::vector<std::shared_ptr<FileLocation>> &previous_allocations);
 
     /**
      * @brief Enum for IO actions in traces
@@ -140,7 +113,7 @@ namespace wrench {
 
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
-                               const StorageSelectionStrategyCallback &allocate,
+                               StorageSelectionStrategyCallback allocate,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {});
 
@@ -280,7 +253,7 @@ namespace wrench {
         /***********************/
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
-                               const StorageSelectionStrategyCallback &allocate,
+                               StorageSelectionStrategyCallback allocate,
                                bool storage_selection_user_provided,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
@@ -343,7 +316,7 @@ namespace wrench {
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
 
-        const StorageSelectionStrategyCallback &allocate;
+        StorageSelectionStrategyCallback allocate;
 
         /**
          * @brief Chunk size for file stripping

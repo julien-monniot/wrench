@@ -1014,7 +1014,10 @@ void CompoundStorageServiceFunctionalTest::do_BasicFunctionality_test() {
 
     // Fail to create a Compound Storage Service (one of the storage service is just a nullptr)
     ASSERT_THROW(compound_storage_service = simulation->add(
-                     new wrench::CompoundStorageService("CompoundStorageHost", {simple_storage_service_1000_0, simple_storage_service_100_0})),
+                     new wrench::CompoundStorageService(
+                         "CompoundStorageHost",
+                         {simple_storage_service_1000_0, simple_storage_service_100_0},
+                         wrench::NullAllocator)),
                  std::invalid_argument);
 
     // Create a valid Compound Storage Service, without user provided callback
