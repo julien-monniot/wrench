@@ -10,6 +10,8 @@
 #ifndef WRENCH_COMPOUNDSTORAGESERVICE_H
 #define WRENCH_COMPOUNDSTORAGESERVICE_H
 
+#include <type_traits>
+
 #include "wrench/services/memory/MemoryManager.h"
 #include "wrench/services/storage/StorageService.h"
 #include "wrench/services/storage/StorageServiceMessage.h"
@@ -34,14 +36,6 @@ namespace wrench {
         const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
         const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
         const std::vector<std::shared_ptr<FileLocation>> &previous_allocations)>;
-
-    /**
-     * @brief NullAllocator
-     */
-    std::vector<std::shared_ptr<FileLocation>> NullAllocator(const std::shared_ptr<DataFile> &file,
-                                                             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
-                                                             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
-                                                             const std::vector<std::shared_ptr<FileLocation>> &previous_allocations);
 
     /**
      * @brief Enum for IO actions in traces
@@ -97,6 +91,7 @@ namespace wrench {
      *        StorageService (readFile / writeFile /...) and will craft messages intended for one or many of
      *        its underlying storage services.
      */
+    // template <typename StorageSelection>
     class CompoundStorageService : public StorageService {
     public:
         using StorageService::createFile;
@@ -113,7 +108,7 @@ namespace wrench {
 
         CompoundStorageService(const std::string &hostname,
                                std::set<std::shared_ptr<StorageService>> storage_services,
-                               StorageSelectionStrategyCallback allocate,
+                               StorageSelectionStrategyCallback &allocate,
                                WRENCH_PROPERTY_COLLECTION_TYPE property_list = {},
                                WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list = {});
 
@@ -251,13 +246,6 @@ namespace wrench {
         /***********************/
         /** \cond INTERNAL     */
         /***********************/
-        CompoundStorageService(const std::string &hostname,
-                               std::set<std::shared_ptr<StorageService>> storage_services,
-                               StorageSelectionStrategyCallback allocate,
-                               bool storage_selection_user_provided,
-                               WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-                               WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
-                               const std::string &suffix);
 
         /** @brief Default property values **/
         WRENCH_PROPERTY_COLLECTION_TYPE default_property_values = {
@@ -294,7 +282,6 @@ namespace wrench {
         /** \endcond           */
         /***********************/
 
-    private:
         friend class Simulation;
 
         int main() override;
@@ -316,7 +303,7 @@ namespace wrench {
 
         std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> file_location_mapping = {};
 
-        StorageSelectionStrategyCallback allocate;
+        StorageSelectionStrategyCallback &allocate;
 
         /**
          * @brief Chunk size for file stripping

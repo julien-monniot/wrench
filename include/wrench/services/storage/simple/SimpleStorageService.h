@@ -102,8 +102,10 @@ namespace wrench {
 
         double getTotalSpace() override;
 
+        // getTotalFreeSpace() ?
         double traceTotalFreeSpace() override;
 
+        // getTotalFilesZeroTime() ?
         double traceTotalFiles() override;
 
         virtual std::string getBaseRootPath() override;

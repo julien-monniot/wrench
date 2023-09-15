@@ -19,12 +19,12 @@ WRENCH_LOG_CATEGORY(wrench_core_compound_storage_system,
 
 namespace wrench {
 
-    std::vector<std::shared_ptr<FileLocation>> NullAllocator(const std::shared_ptr<DataFile> &file,
-                                                             const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
-                                                             const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
-                                                             const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
+    StorageSelectionStrategyCallback NullAllocator = [](const std::shared_ptr<DataFile> &file,
+                                                        const std::map<std::string, std::vector<std::shared_ptr<StorageService>>> &resources,
+                                                        const std::map<std::shared_ptr<DataFile>, std::vector<std::shared_ptr<FileLocation>>> &mapping,
+                                                        const std::vector<std::shared_ptr<FileLocation>> &previous_allocations) {
         return std::vector<std::shared_ptr<FileLocation>>();
-    }
+    };
 
     /**
      *  @brief Constructor for the case where no request message (for I/O operations) should ever reach
@@ -41,47 +41,23 @@ namespace wrench {
     CompoundStorageService::CompoundStorageService(const std::string &hostname,
                                                    std::set<std::shared_ptr<StorageService>> storage_services,
                                                    WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, std::move(NullAllocator), false,
-                                                                                                                                       property_list, messagepayload_list, "_" + std::to_string(getNewUniqueNumber())){};
-
-    /**
-     *  @brief Constructor for the case where the user provides a callback (StorageSelectionStrategyCallback)
-     *         which will be used by the CompoundStorageService any time it receives a file write or file copy
-     *         request, in order to determine which underlying StorageService to use for the (potentially) new
-     *         file in the request.
-     *         Note that nothing prevents the user from also intercepting some actions (see use case for other
-     *         constructor), but resulting behaviour is undefined.
-     *  @param hostname: the name of the host on which this service will run
-     *  @param storage_services: subordinate storage services
-     *  @param storage_selection: the storage selection strategy callback
-     *  @param property_list: the configurable properties
-     *  @param messagepayload_list: the configurable message payloads
-     */
-    CompoundStorageService::CompoundStorageService(const std::string &hostname,
-                                                   std::set<std::shared_ptr<StorageService>> storage_services,
-                                                   StorageSelectionStrategyCallback allocate,
-                                                   WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, allocate, true, property_list, messagepayload_list,
-                                                                                                                                       "_" + std::to_string(getNewUniqueNumber())){};
+                                                   WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : CompoundStorageService(hostname, storage_services, NullAllocator,
+                                                                                                                                       property_list, messagepayload_list){};
 
     /**
      *  @brief Constructor
      *  @param hostname: the name of the host on which this service will run
      *  @param storage_services: subordinate storage services
      *  @param storage_selection: the storage selection strategy callback
-     *  @param storage_selection_user_provided: whether the storage selection is user-provided
      *  @param property_list: the configurable properties
      *  @param messagepayload_list: the configurable message payloads
-     *  @param suffix: the suffix to add to the service name
      */
     CompoundStorageService::CompoundStorageService(
         const std::string &hostname,
         std::set<std::shared_ptr<StorageService>> storage_services,
-        StorageSelectionStrategyCallback allocate,
-        bool storage_selection_user_provided,
+        StorageSelectionStrategyCallback &allocate,
         WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-        WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
-        const std::string &suffix) : StorageService(hostname, "compound_storage" + suffix), allocate(allocate) {
+        WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) : StorageService(hostname, "compound_storage_" + std::to_string(getNewUniqueNumber())), allocate(allocate) {
 
         this->setProperties(this->default_property_values, std::move(property_list));
         this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
@@ -221,7 +197,6 @@ namespace wrench {
     }
 
     bool CompoundStorageService::processStorageSelectionMessage(const CompoundStorageAllocationRequestMessage *msg) {
-
         WRENCH_INFO("CSS::processStorageSelectionMessage()");
 
         auto file = msg->file;
@@ -293,7 +268,6 @@ namespace wrench {
     }
 
     bool CompoundStorageService::processStorageLookupMessage(const CompoundStorageLookupRequestMessage *msg) {
-
         WRENCH_INFO("CSS::processStorageLookupMessage()");
 
         auto file = msg->file;
@@ -337,7 +311,6 @@ namespace wrench {
      * @return A vector of shared_ptr on a FileLocation if the DataFile is known to the CompoundStorageService or empty vector if it's not.
      */
     std::vector<std::shared_ptr<FileLocation>> CompoundStorageService::lookupFileLocation(const std::shared_ptr<DataFile> &file, simgrid::s4u::Mailbox *answer_mailbox) {
-
         WRENCH_INFO("CSS::lookupFileLocation() - DataFile + Mailbox");
 
         S4U_Mailbox::putMessage(this->mailbox,
@@ -361,7 +334,6 @@ namespace wrench {
      *  @return A shared_ptr on a FileLocation if the DataFile is known to the CompoundStorageService or nullptr if it's not.
      */
     std::vector<std::shared_ptr<FileLocation>> CompoundStorageService::lookupFileLocation(const std::shared_ptr<FileLocation> &location) {
-
         WRENCH_INFO("CSS::lookupFileLocation() - FileLocation");
         auto temp_mailbox = S4U_Mailbox::getTemporaryMailbox();
 
@@ -384,7 +356,6 @@ namespace wrench {
      *          or empty vector if it's not / could not be allocated.
      */
     std::vector<std::shared_ptr<FileLocation>> CompoundStorageService::lookupOrDesignateStorageService(const std::shared_ptr<DataFile> file, simgrid::s4u::Mailbox *answer_mailbox) {
-
         WRENCH_INFO("CSS::lookupOrDesignateStorageService() - DataFile + mailbox");
 
         S4U_Mailbox::putMessage(this->mailbox,
@@ -409,7 +380,6 @@ namespace wrench {
      *          or nullptr if it's not.
      */
     std::vector<std::shared_ptr<FileLocation>> CompoundStorageService::lookupOrDesignateStorageService(const std::shared_ptr<FileLocation> location) {
-
         WRENCH_INFO("CSS::lookupOrDesignateStorageService() - FileLocation");
 
         auto temp_mailbox = S4U_Mailbox::getTemporaryMailbox();
@@ -537,7 +507,6 @@ namespace wrench {
      */
     void CompoundStorageService::copyFile(const std::shared_ptr<FileLocation> &src_location,
                                           const std::shared_ptr<FileLocation> &dst_location) {
-
         WRENCH_INFO("CSS::copyFile(): Copy %s between %s and %s",
                     src_location->getFile()->getID().c_str(),
                     src_location->getStorageService()->getName().c_str(),
@@ -838,7 +807,6 @@ namespace wrench {
     void CompoundStorageService::writeFile(simgrid::s4u::Mailbox *answer_mailbox,
                                            const std::shared_ptr<FileLocation> &location,
                                            bool wait_for_answer) {
-
         WRENCH_INFO("CSS::writeFile(): Writing file %s", location->getFile()->getID().c_str());
 
         if (location == nullptr) {
@@ -1124,7 +1092,6 @@ namespace wrench {
      * @return a date in seconds, or -1 if the file is not found
      */
     double CompoundStorageService::getFileLastWriteDate(const std::shared_ptr<FileLocation> &location) {
-
         if (location == nullptr) {
             throw std::invalid_argument("CSS::getFileLastWriteDate(): Invalid nullptr argument");
         }
@@ -1193,7 +1160,6 @@ namespace wrench {
     }
 
     void CompoundStorageService::traceInternalStorageUse(IOAction action, const std::vector<std::shared_ptr<FileLocation>> &locations) {
-
         auto ts = S4U_Simulation::getClock();
         AllocationTrace trace;
         trace.act = action;

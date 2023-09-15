@@ -337,11 +337,18 @@ void CompoundStorageServiceFunctionalTest::do_CopyToCSS_test() {
     // std::shared_ptr<wrench::StorageAllocator> allocator = std::make_shared<TestAllocator>();
 
     TestAllocator allocator;
+    wrench::StorageSelectionStrategyCallback allocatorCallback = [&allocator](
+                                                                     const std::shared_ptr<wrench::DataFile> &file,
+                                                                     const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
+                                                                     const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
+                                                                     const std::vector<std::shared_ptr<wrench::FileLocation>> &previous_allocations) {
+        return allocator(file, resources, mapping, previous_allocations);
+    };
     ASSERT_NO_THROW(compound_storage_service = simulation->add(
                         new wrench::CompoundStorageService(
                             "CompoundStorageHost",
                             {simple_storage_service_510_0, simple_storage_service_1000_0},
-                            allocator,
+                            allocatorCallback,
                             {{wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "400"}}, {})));
 
     // Create a Controler
@@ -463,11 +470,18 @@ void CompoundStorageServiceFunctionalTest::do_WriteToCSS_test() {
 
     // Create a valid Compound Storage Service, without user provided callback (no intercept capabilities)
     TestAllocator allocator;
+    wrench::StorageSelectionStrategyCallback allocatorCallback = [&allocator](
+                                                                     const std::shared_ptr<wrench::DataFile> &file,
+                                                                     const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
+                                                                     const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
+                                                                     const std::vector<std::shared_ptr<wrench::FileLocation>> &previous_allocations) {
+        return allocator(file, resources, mapping, previous_allocations);
+    };
     ASSERT_NO_THROW(compound_storage_service = simulation->add(
                         new wrench::CompoundStorageService(
                             "CompoundStorageHost",
                             {simple_storage_service_510_0, simple_storage_service_1000_0},
-                            allocator,
+                            allocatorCallback,
                             {{wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "400"}}, {})));
 
     // Create a Controler
@@ -613,11 +627,18 @@ void CompoundStorageServiceFunctionalTest::do_CopyFromCSS_test() {
 
     // Create a valid Compound Storage Service, without user provided callback (no intercept capabilities)
     TestAllocator allocator;
+    wrench::StorageSelectionStrategyCallback allocatorCallback = [&allocator](
+                                                                     const std::shared_ptr<wrench::DataFile> &file,
+                                                                     const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
+                                                                     const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
+                                                                     const std::vector<std::shared_ptr<wrench::FileLocation>> &previous_allocations) {
+        return allocator(file, resources, mapping, previous_allocations);
+    };
     ASSERT_NO_THROW(compound_storage_service = simulation->add(
                         new wrench::CompoundStorageService(
                             "CompoundStorageHost",
                             {simple_storage_service_510_0, simple_storage_service_1000_0},
-                            allocator,
+                            allocatorCallback,
                             {{wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "400"}}, {})));
 
     // Create a Controler
@@ -782,11 +803,18 @@ void CompoundStorageServiceFunctionalTest::do_fullJob_test() {
 
     // Create a valid Compound Storage Service, without user provided callback (no intercept capabilities)
     TestAllocator allocator;
+    wrench::StorageSelectionStrategyCallback allocatorCallback = [&allocator](
+                                                                     const std::shared_ptr<wrench::DataFile> &file,
+                                                                     const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
+                                                                     const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
+                                                                     const std::vector<std::shared_ptr<wrench::FileLocation>> &previous_allocations) {
+        return allocator(file, resources, mapping, previous_allocations);
+    };
     ASSERT_NO_THROW(compound_storage_service = simulation->add(
                         new wrench::CompoundStorageService(
                             "CompoundStorageHost",
                             {simple_storage_service_510_0, simple_storage_service_100_1, simple_storage_service_1000_0},
-                            allocator,
+                            allocatorCallback,
                             {{wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "100"}}, {})));
 
     // Create a Controler
@@ -1016,8 +1044,7 @@ void CompoundStorageServiceFunctionalTest::do_BasicFunctionality_test() {
     ASSERT_THROW(compound_storage_service = simulation->add(
                      new wrench::CompoundStorageService(
                          "CompoundStorageHost",
-                         {simple_storage_service_1000_0, simple_storage_service_100_0},
-                         wrench::NullAllocator)),
+                         {simple_storage_service_1000_0, simple_storage_service_100_0})),
                  std::invalid_argument);
 
     // Create a valid Compound Storage Service, without user provided callback
@@ -1025,7 +1052,6 @@ void CompoundStorageServiceFunctionalTest::do_BasicFunctionality_test() {
     ASSERT_NO_THROW(compound_storage_service = simulation->add(
                         new wrench::CompoundStorageService("CompoundStorageHost",
                                                            {simple_storage_service_100_0, simple_storage_service_510_1},
-                                                           wrench::NullAllocator,
                                                            {{wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "100"},
                                                             {wrench::CompoundStorageServiceProperty::INTERNAL_STRIPING, "true"}})));
 
@@ -1207,11 +1233,18 @@ void CompoundStorageServiceFunctionalTest::do_BasicError_test() {
     // Create a valid Compound Storage Service (using a non-bufferized storage service in this case) with a user-provided callback
     // CAREFUL -> REUSING CALLBACK FROM PREVIOUS TEST
     TestAllocator allocator;
+    wrench::StorageSelectionStrategyCallback allocatorCallback = [&allocator](
+                                                                     const std::shared_ptr<wrench::DataFile> &file,
+                                                                     const std::map<std::string, std::vector<std::shared_ptr<wrench::StorageService>>> &resources,
+                                                                     const std::map<std::shared_ptr<wrench::DataFile>, std::vector<std::shared_ptr<wrench::FileLocation>>> &mapping,
+                                                                     const std::vector<std::shared_ptr<wrench::FileLocation>> &previous_allocations) {
+        return allocator(file, resources, mapping, previous_allocations);
+    };
     ASSERT_NO_THROW(compound_storage_service = simulation->add(
                         new wrench::CompoundStorageService(
                             "CompoundStorageHost",
                             {simple_storage_service_510_1},
-                            allocator,
+                            allocatorCallback,
                             {{wrench::CompoundStorageServiceProperty::MAX_ALLOCATION_CHUNK_SIZE, "100"}})));
 
     // Create a Controller
