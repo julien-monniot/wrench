@@ -1174,8 +1174,8 @@ namespace wrench {
                 for (const auto &storage_service : storage.second) {
                     DiskUsage disk_usage;
                     disk_usage.service = storage_service;
-                    disk_usage.free_space = storage_service->traceTotalFreeSpace();
-                    disk_usage.file_count = storage_service->traceTotalFiles();
+                    disk_usage.free_space = storage_service->getTotalFreeSpaceZeroTime();
+                    disk_usage.file_count = storage_service->getTotalFilesZeroTime();
                     trace.disk_usage.push_back(disk_usage);
                 }
             }
@@ -1192,8 +1192,8 @@ namespace wrench {
                 if (known_services.find(storage_service->getName()) == known_services.end()) {
                     DiskUsage disk_usage;
                     disk_usage.service = storage_service;
-                    disk_usage.free_space = storage_service->traceTotalFreeSpace();
-                    disk_usage.file_count = storage_service->traceTotalFiles();
+                    disk_usage.free_space = storage_service->getTotalFreeSpaceZeroTime();
+                    disk_usage.file_count = storage_service->getTotalFilesZeroTime();
                     trace.disk_usage.push_back(disk_usage);
 
                     if (size(trace.disk_usage) == this->total_nb_storage_services) {
