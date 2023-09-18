@@ -24,7 +24,6 @@ if (ENABLE_WRENCH_INTERNAL_EXCEPTIONS)
     add_definitions(-DWRENCH_INTERNAL_EXCEPTIONS)
 endif ()
 
-
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/conf/cmake/")
 find_package(Boost REQUIRED)
 find_package(SimGrid REQUIRED)
@@ -35,7 +34,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # build the version number
 set(WRENCH_VERSION_MAJOR "2")
-set(WRENCH_VERSION_MINOR "2")
+set(WRENCH_VERSION_MINOR "3")
 set(WRENCH_VERSION_PATCH "0")
 set(WRENCH_VERSION_EXTRA "dev")
 

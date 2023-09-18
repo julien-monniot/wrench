@@ -10,11 +10,11 @@
 #ifndef WRENCH_SIMPLESTORAGESERVICE_H
 #define WRENCH_SIMPLESTORAGESERVICE_H
 
-#include "wrench/services/storage/storage_helpers/FileTransferThread.h"
-#include "wrench/services/storage/StorageService.h"
-#include "SimpleStorageServiceProperty.h"
 #include "SimpleStorageServiceMessagePayload.h"
+#include "SimpleStorageServiceProperty.h"
 #include "wrench/services/memory/MemoryManager.h"
+#include "wrench/services/storage/StorageService.h"
+#include "wrench/services/storage/storage_helpers/FileTransferThread.h"
 #include "wrench/simgrid_S4U_util/S4U_PendingCommunication.h"
 
 namespace wrench {
@@ -46,28 +46,27 @@ namespace wrench {
     protected:
         /** @brief Default property values */
         WRENCH_PROPERTY_COLLECTION_TYPE default_property_values = {
-                {SimpleStorageServiceProperty::MAX_NUM_CONCURRENT_DATA_CONNECTIONS, "infinity"},
-                {SimpleStorageServiceProperty::BUFFER_SIZE, "10000000"},// 10 MEGA BYTE
-                {SimpleStorageServiceProperty::CACHING_BEHAVIOR, "NONE"}};
+            {SimpleStorageServiceProperty::MAX_NUM_CONCURRENT_DATA_CONNECTIONS, "infinity"},
+            {SimpleStorageServiceProperty::BUFFER_SIZE, "10000000"}, // 10 MEGA BYTE
+            {SimpleStorageServiceProperty::CACHING_BEHAVIOR, "NONE"}};
 
         /** @brief Default message payload values */
         WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE default_messagepayload_values = {
-                {SimpleStorageServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FREE_SPACE_ANSWER_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_DELETE_REQUEST_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_LOOKUP_REQUEST_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD, 1024},
-                {SimpleStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::STOP_DAEMON_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FREE_SPACE_REQUEST_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FREE_SPACE_ANSWER_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_DELETE_REQUEST_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_LOOKUP_REQUEST_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_COPY_REQUEST_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_COPY_ANSWER_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_WRITE_REQUEST_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_WRITE_ANSWER_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_READ_REQUEST_MESSAGE_PAYLOAD, 1024},
+            {SimpleStorageServiceMessagePayload::FILE_READ_ANSWER_MESSAGE_PAYLOAD, 1024},
         };
-
 
     public:
         using StorageService::createFile;
@@ -95,17 +94,18 @@ namespace wrench {
         void removeDirectory(const std::string &path) override;
         void removeFile(const std::shared_ptr<FileLocation> &location) override;
 
-        //std::string getMountPoint();
+        // std::string getMountPoint();
         std::set<std::string> getMountPoints();
         bool hasMultipleMountPoints();
         bool hasMountPoint(const std::string &mp);
 
         double getTotalSpace() override;
 
-        double traceTotalFreeSpace() override;
+        double getTotalFreeSpaceZeroTime() override;
+
+        double getTotalFilesZeroTime() override;
 
         virtual std::string getBaseRootPath() override;
-
 
         /**
          * @brief Reserve space at the storage service
@@ -130,13 +130,12 @@ namespace wrench {
             this->file_systems[mount_point]->unreserveSpace(location->getFile(), path_at_mount_point);
         }
 
-
         /**
-	 * @brief Get the mount point that stores a path
-	 * @param path: path
-	 *
-	 * @return a mount point
-	 */
+         * @brief Get the mount point that stores a path
+         * @param path: path
+         *
+         * @return a mount point
+         */
         std::string getPathMountPoint(const std::string &path) {
             std::string mount_point, path_at_mount_point;
             this->splitPath(path, mount_point, path_at_mount_point);
@@ -173,14 +172,12 @@ namespace wrench {
             return this->buffer_size;
         }
 
-
         virtual void decrementNumRunningOperationsForLocation(const std::shared_ptr<FileLocation> &location) override;
 
         virtual void incrementNumRunningOperationsForLocation(const std::shared_ptr<FileLocation> &location) override;
         /***********************/
         /** \endcond          **/
         /***********************/
-
 
     protected:
         /***********************/
@@ -191,7 +188,6 @@ namespace wrench {
                              WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                              WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
                              const std::string &suffix);
-
 
         static unsigned long getNewUniqueNumber();
 
@@ -205,7 +201,6 @@ namespace wrench {
                                       simgrid::s4u::Mailbox *answer_mailbox);
         bool processFreeSpaceRequest(simgrid::s4u::Mailbox *answer_mailbox,
                                      const std::string &path);
-
 
         /** @brief The service's buffer size */
         double buffer_size = 10000000;
@@ -232,6 +227,6 @@ namespace wrench {
 #endif
     };
 
-}// namespace wrench
+} // namespace wrench
 
-#endif//WRENCH_SIMPLESTORAGESERVICE_H
+#endif // WRENCH_SIMPLESTORAGESERVICE_H

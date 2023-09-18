@@ -10,18 +10,18 @@
 #include <wrench/failure_causes/FileNotFound.h>
 #include <wrench/failure_causes/StorageServiceNotEnoughSpace.h>
 
+#include "wrench/services/storage/StorageServiceMessage.h"
+#include <wrench/data_file/DataFile.h>
+#include <wrench/exceptions/ExecutionException.h>
+#include <wrench/logging/TerminalOutput.h>
+#include <wrench/services/ServiceMessage.h>
+#include <wrench/services/memory/MemoryManager.h>
 #include <wrench/services/storage/simple/SimpleStorageService.h>
 #include <wrench/services/storage/simple/SimpleStorageServiceBufferized.h>
 #include <wrench/services/storage/simple/SimpleStorageServiceNonBufferized.h>
-#include <wrench/services/ServiceMessage.h>
-#include "wrench/services/storage/StorageServiceMessage.h"
-#include <wrench/simgrid_S4U_util/S4U_Mailbox.h>
-#include <wrench/logging/TerminalOutput.h>
-#include <wrench/data_file/DataFile.h>
-#include <wrench/exceptions/ExecutionException.h>
-#include <wrench/simulation/SimulationTimestampTypes.h>
 #include <wrench/services/storage/storage_helpers/FileLocation.h>
-#include <wrench/services/memory/MemoryManager.h>
+#include <wrench/simgrid_S4U_util/S4U_Mailbox.h>
+#include <wrench/simulation/SimulationTimestampTypes.h>
 #include <wrench/util/UnitParser.h>
 
 WRENCH_LOG_CATEGORY(wrench_core_simple_storage_service,
@@ -43,14 +43,14 @@ namespace wrench {
                                                                            WRENCH_PROPERTY_COLLECTION_TYPE property_list,
                                                                            WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list) {
 
-        bool bufferized = false;// By default, non-bufferized
+        bool bufferized = false; // By default, non-bufferized
         //        bool bufferized = true; // By default, bufferized
 
         if (property_list.find(wrench::SimpleStorageServiceProperty::BUFFER_SIZE) != property_list.end()) {
             double buffer_size = UnitParser::parse_size(property_list[wrench::SimpleStorageServiceProperty::BUFFER_SIZE]);
-            bufferized = buffer_size >= 1.0;// more than one byte means bufferized
+            bufferized = buffer_size >= 1.0; // more than one byte means bufferized
         } else {
-            property_list[wrench::SimpleStorageServiceProperty::BUFFER_SIZE] = "0B";// enforce a zero buffersize
+            property_list[wrench::SimpleStorageServiceProperty::BUFFER_SIZE] = "0B"; // enforce a zero buffersize
         }
 
         if (Simulation::isLinkShutdownSimulationEnabled() and (not bufferized)) {
@@ -59,18 +59,17 @@ namespace wrench {
         }
 
         if (bufferized) {
-            return (SimpleStorageService *) (new SimpleStorageServiceBufferized(hostname, mount_points, property_list, messagepayload_list));
+            return (SimpleStorageService *)(new SimpleStorageServiceBufferized(hostname, mount_points, property_list, messagepayload_list));
         } else {
-            return (SimpleStorageService *) (new SimpleStorageServiceNonBufferized(hostname, mount_points, property_list, messagepayload_list));
+            return (SimpleStorageService *)(new SimpleStorageServiceNonBufferized(hostname, mount_points, property_list, messagepayload_list));
         }
     }
 
-
     /**
-    * @brief Generate a unique number
-    *
-    * @return a unique number
-    */
+     * @brief Generate a unique number
+     *
+     * @return a unique number
+     */
     unsigned long SimpleStorageService::getNewUniqueNumber() {
         static unsigned long sequence_number = 0;
         return (sequence_number++);
@@ -94,11 +93,11 @@ namespace wrench {
      * @throw std::invalid_argument
      */
     SimpleStorageService::SimpleStorageService(
-            const std::string &hostname,
-            const std::set<std::string> &mount_points,
-            WRENCH_PROPERTY_COLLECTION_TYPE property_list,
-            WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
-            const std::string &suffix) : StorageService(hostname, "simple_storage" + suffix) {
+        const std::string &hostname,
+        const std::set<std::string> &mount_points,
+        WRENCH_PROPERTY_COLLECTION_TYPE property_list,
+        WRENCH_MESSAGE_PAYLOADCOLLECTION_TYPE messagepayload_list,
+        const std::string &suffix) : StorageService(hostname, "simple_storage" + suffix) {
 
         this->setProperties(this->default_property_values, std::move(property_list));
         this->setMessagePayloads(this->default_messagepayload_values, std::move(messagepayload_list));
@@ -111,16 +110,15 @@ namespace wrench {
         if (mount_points.empty()) {
             throw std::invalid_argument("SimpleStorageService::SimpleStorageService(): A storage service must have at least one mount point");
         }
-        for (const auto &mp: mount_points) {
+        for (const auto &mp : mount_points) {
             this->file_systems[mp] = LogicalFileSystem::createLogicalFileSystem(
-                    this->getHostname(), this,
-                    FileLocation::sanitizePath(mp), this->getPropertyValueAsString(wrench::StorageServiceProperty::CACHING_BEHAVIOR));
+                this->getHostname(), this,
+                FileLocation::sanitizePath(mp), this->getPropertyValueAsString(wrench::StorageServiceProperty::CACHING_BEHAVIOR));
         }
 
         this->num_concurrent_connections = this->getPropertyValueAsUnsignedLong(
-                SimpleStorageServiceProperty::MAX_NUM_CONCURRENT_DATA_CONNECTIONS);
+            SimpleStorageServiceProperty::MAX_NUM_CONCURRENT_DATA_CONNECTIONS);
     }
-
 
     /**
      * @brief Process a file deletion request
@@ -129,8 +127,8 @@ namespace wrench {
      * @return false if the daemon should terminate
      */
     bool SimpleStorageService::processFileDeleteRequest(
-            const std::shared_ptr<FileLocation> &location,
-            simgrid::s4u::Mailbox *answer_mailbox) {
+        const std::shared_ptr<FileLocation> &location,
+        simgrid::s4u::Mailbox *answer_mailbox) {
         std::shared_ptr<FailureCause> failure_cause = nullptr;
 
         std::string mount_point;
@@ -138,7 +136,7 @@ namespace wrench {
 
         if (not this->splitPath(location->getPath(), mount_point, path_at_mount_point)) {
             failure_cause = std::shared_ptr<FailureCause>(
-                    new FileNotFound(location));
+                new FileNotFound(location));
         } else {
 
             auto fs = this->file_systems[mount_point].get();
@@ -148,7 +146,7 @@ namespace wrench {
                 // If this is scratch, we don't care, perhaps it was taken care of elsewhere...
                 if (not this->isScratch()) {
                     failure_cause = std::shared_ptr<FailureCause>(
-                            new FileNotFound(location));
+                        new FileNotFound(location));
                 }
             } else {
                 fs->removeFileFromDirectory(file, path_at_mount_point);
@@ -156,17 +154,16 @@ namespace wrench {
         }
 
         S4U_Mailbox::dputMessage(
-                answer_mailbox,
-                new StorageServiceFileDeleteAnswerMessage(
-                        location->getFile(),
-                        this->getSharedPtr<SimpleStorageService>(),
-                        (failure_cause == nullptr),
-                        failure_cause,
-                        this->getMessagePayloadValue(
-                                SimpleStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD)));
+            answer_mailbox,
+            new StorageServiceFileDeleteAnswerMessage(
+                location->getFile(),
+                this->getSharedPtr<SimpleStorageService>(),
+                (failure_cause == nullptr),
+                failure_cause,
+                this->getMessagePayloadValue(
+                    SimpleStorageServiceMessagePayload::FILE_DELETE_ANSWER_MESSAGE_PAYLOAD)));
         return true;
     }
-
 
     /**
      * @brief Process a file lookup request
@@ -175,8 +172,8 @@ namespace wrench {
      * @return false if the daemon should terminate
      */
     bool SimpleStorageService::processFileLookupRequest(
-            const std::shared_ptr<FileLocation> &location,
-            simgrid::s4u::Mailbox *answer_mailbox) {
+        const std::shared_ptr<FileLocation> &location,
+        simgrid::s4u::Mailbox *answer_mailbox) {
 
         bool file_found;
 
@@ -192,22 +189,22 @@ namespace wrench {
         }
 
         S4U_Mailbox::dputMessage(
-                answer_mailbox,
-                new StorageServiceFileLookupAnswerMessage(
-                        location->getFile(),
-                        file_found,
-                        this->getMessagePayloadValue(
-                                SimpleStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD)));
+            answer_mailbox,
+            new StorageServiceFileLookupAnswerMessage(
+                location->getFile(),
+                file_found,
+                this->getMessagePayloadValue(
+                    SimpleStorageServiceMessagePayload::FILE_LOOKUP_ANSWER_MESSAGE_PAYLOAD)));
         return true;
     }
 
     /**
-    * @brief Get the total static capacity of the storage service (in zero simulation time)
-    * @return capacity of the storage service in bytes
-    */
+     * @brief Get the total static capacity of the storage service (in zero simulation time)
+     * @return capacity of the storage service in bytes
+     */
     double SimpleStorageService::getTotalSpace() {
         double capacity = 0.0;
-        for (auto const &fs: this->file_systems) {
+        for (auto const &fs : this->file_systems) {
             capacity += fs.second->getTotalCapacity();
         }
         return capacity;
@@ -217,13 +214,21 @@ namespace wrench {
      * @brief Return current total free space from all mount point (in zero simulation time)
      *        for IO tracing purpose.
      * @return total free space in bytes
-    */
-    double SimpleStorageService::traceTotalFreeSpace() {
+     */
+    double SimpleStorageService::getTotalFreeSpaceZeroTime() {
         double free_space = 0;
-        for (auto const &mp: this->file_systems) {
+        for (auto const &mp : this->file_systems) {
             free_space += mp.second->getFreeSpace();
         }
         return free_space;
+    }
+
+    double SimpleStorageService::getTotalFilesZeroTime() {
+        double files = 0;
+        for (auto const &mp : this->file_systems) {
+            files += mp.second->getTotalNumFiles();
+        }
+        return files;
     }
 
     /**
@@ -247,7 +252,6 @@ namespace wrench {
         }
     }
 
-
     //    /**
     //     * @brief Get the mount point (will throw is more than one)
     //     * @return the (sole) mount point of the service
@@ -266,22 +270,21 @@ namespace wrench {
      */
     std::set<std::string> SimpleStorageService::getMountPoints() {
         std::set<std::string> to_return;
-        for (auto const &fs: this->file_systems) {
+        for (auto const &fs : this->file_systems) {
             to_return.insert(fs.first);
         }
         return to_return;
     }
 
     /**
-    * @brief Checked whether the storage service has a particular mount point
-    * @param mp: a mount point
-    *
-    * @return true whether the service has that mount point
-    */
+     * @brief Checked whether the storage service has a particular mount point
+     * @param mp: a mount point
+     *
+     * @return true whether the service has that mount point
+     */
     bool SimpleStorageService::hasMountPoint(const std::string &mp) {
         return (this->file_systems.find(mp) != this->file_systems.end());
     }
-
 
     /**
      * @brief Process a free space request
@@ -293,18 +296,18 @@ namespace wrench {
         double free_space = 0;
 
         auto sanitized_path = FileLocation::sanitizePath(path);
-        for (auto const &mp: this->file_systems) {
+        for (auto const &mp : this->file_systems) {
             if ((sanitized_path == "/") or (sanitized_path == FileLocation::sanitizePath(mp.first))) {
                 free_space += mp.second->getFreeSpace();
             }
         }
 
         S4U_Mailbox::dputMessage(
-                answer_mailbox,
-                new StorageServiceFreeSpaceAnswerMessage(
-                        free_space,
-                        this->getMessagePayloadValue(
-                                SimpleStorageServiceMessagePayload::FREE_SPACE_ANSWER_MESSAGE_PAYLOAD)));
+            answer_mailbox,
+            new StorageServiceFreeSpaceAnswerMessage(
+                free_space,
+                this->getMessagePayloadValue(
+                    SimpleStorageServiceMessagePayload::FREE_SPACE_ANSWER_MESSAGE_PAYLOAD)));
         return true;
     }
 
@@ -317,8 +320,9 @@ namespace wrench {
         try {
             S4U_Mailbox::putMessage(ack_mailbox,
                                     new ServiceDaemonStoppedMessage(this->getMessagePayloadValue(
-                                            SimpleStorageServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD)));
-        } catch (ExecutionException &ignore) {}
+                                        SimpleStorageServiceMessagePayload::DAEMON_STOPPED_MESSAGE_PAYLOAD)));
+        } catch (ExecutionException &ignore) {
+        }
         return false;
     }
 
@@ -330,7 +334,6 @@ namespace wrench {
         this->getPropertyValueAsUnsignedLong(SimpleStorageServiceProperty::MAX_NUM_CONCURRENT_DATA_CONNECTIONS);
         this->getPropertyValueAsSizeInByte(SimpleStorageServiceProperty::BUFFER_SIZE);
     }
-
 
     /**
      * @brief Get a file's last write date at a location (in zero simulated time)
@@ -405,7 +408,6 @@ namespace wrench {
         }
     }
 
-
     /**
      * @brief Helper method to split a path into mountpoint:path_at_mount_point
      * @param path: a path string
@@ -415,7 +417,7 @@ namespace wrench {
      */
     bool SimpleStorageService::splitPath(const std::string &path, std::string &mount_point, std::string &path_at_mount_point) {
         auto sanitized_path = FileLocation::sanitizePath(path);
-        for (auto const &fs: this->file_systems) {
+        for (auto const &fs : this->file_systems) {
             auto mp = fs.first;
             if (FileLocation::properPathPrefix(mp, sanitized_path)) {
                 mount_point = mp;
@@ -456,7 +458,8 @@ namespace wrench {
      */
     void SimpleStorageService::createFile(const std::shared_ptr<FileLocation> &location) {
         // If the file's already there, nothing to do
-        if (StorageService::hasFileAtLocation(location)) return;
+        if (StorageService::hasFileAtLocation(location))
+            return;
 
         std::string mount_point, path_at_mount_point;
         this->splitPath(location->getPath(), mount_point, path_at_mount_point);
@@ -464,11 +467,10 @@ namespace wrench {
         bool enough_space = (this->file_systems[mount_point]->getFreeSpace() >= location->getFile()->getSize());
         if (!enough_space) {
             throw ExecutionException(std::make_shared<StorageServiceNotEnoughSpace>(
-                    location->getFile(), location->getStorageService()));
+                location->getFile(), location->getStorageService()));
         }
         this->file_systems[mount_point]->storeFileInDirectory(location->getFile(), path_at_mount_point);
     }
-
 
     /**
      * @brief Get a file's last write date at a the storage service (in zero simulated time)
@@ -500,5 +502,4 @@ namespace wrench {
         return this->file_systems[mount_point]->getDisk();
     }
 
-
-}// namespace wrench
+} // namespace wrench

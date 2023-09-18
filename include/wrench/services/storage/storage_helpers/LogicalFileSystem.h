@@ -10,16 +10,15 @@
 #ifndef WRENCH_LOGICALFILESYSTEM_H
 #define WRENCH_LOGICALFILESYSTEM_H
 
+#include <iostream>
+#include <map>
+#include <memory>
+#include <set>
 #include <stdexcept>
 #include <string>
-#include <map>
 #include <unordered_map>
-#include <set>
-#include <memory>
-#include <iostream>
 
 #include <simgrid/disk.h>
-
 
 #include <wrench/data_file/DataFile.h>
 
@@ -28,7 +27,6 @@ namespace wrench {
     /***********************/
     /** \cond INTERNAL     */
     /***********************/
-
 
     class StorageService;
 
@@ -41,19 +39,19 @@ namespace wrench {
         virtual ~LogicalFileSystem() = default;
 
         /**
-	 * @brief A helper class to describe a file instance on the file system
-	 */
+         * @brief A helper class to describe a file instance on the file system
+         */
         class FileOnDisk {
         public:
             /**
-	     * @brief Constructor
-	     * @param last_write_date: the file's last write date
-	     */
+             * @brief Constructor
+             * @param last_write_date: the file's last write date
+             */
             explicit FileOnDisk(double last_write_date) : last_write_date(last_write_date) {}
 
             /**
-	     * @brief the file's last write date
-	     */
+             * @brief the file's last write date
+             */
             double last_write_date;
         };
 
@@ -69,6 +67,7 @@ namespace wrench {
 
         double getTotalCapacity() const;
         double getFreeSpace() const;
+        double getTotalNumFiles() const;
         //        bool hasEnoughFreeSpace(double bytes);
 
         void stageFile(const std::shared_ptr<DataFile> &file, std::string absolute_path);
@@ -233,12 +232,10 @@ namespace wrench {
         }
     };
 
-
     /***********************/
     /** \endcond           */
     /***********************/
 
-}// namespace wrench
+} // namespace wrench
 
-
-#endif//WRENCH_LOGICALFILESYSTEM_H
+#endif // WRENCH_LOGICALFILESYSTEM_H

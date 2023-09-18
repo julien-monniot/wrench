@@ -26,11 +26,14 @@ namespace wrench {
      */
     std::shared_ptr<Workflow> WfCommonsWorkflowParser::createWorkflowFromJSON(const std::string &filename,
                                                                               const std::string &reference_flop_rate,
+                                                                              bool ignore_machine_specs,
                                                                               bool redundant_dependencies,
                                                                               bool ignore_cycle_creating_dependencies,
                                                                               unsigned long min_cores_per_task,
                                                                               unsigned long max_cores_per_task,
-                                                                              bool enforce_num_cores) {
+                                                                              bool enforce_num_cores,
+                                                                              bool ignore_avg_cpu,
+                                                                              bool show_warnings) {
         std::ifstream file;
         nlohmann::json j;
         std::set<std::string> ignored_auxiliary_jobs;
@@ -93,6 +96,7 @@ namespace wrench {
                     try {
                         mhz = core_spec.at("speed");
                     } catch (nlohmann::detail::out_of_range &e) {
+                        if (show_warnings) std::cerr << "[WARNING]: Machine " + name + " does not define a speed\n";
                         mhz = -1.0;// unknown
                     }
                     machines[name] = std::make_pair(num_cores, mhz);
@@ -102,15 +106,68 @@ namespace wrench {
 
         std::shared_ptr<wrench::WorkflowTask> workflow_task;
 
-
         // Process the tasks
         for (nlohmann::json::iterator it = workflow_spec.begin(); it != workflow_spec.end(); ++it) {
             if (it.key() == "tasks") {
                 std::vector<nlohmann::json> tasks = it.value();
 
                 for (auto &task: tasks) {
-                    std::string name = task.at("name");
+
+                    std::string name = task.at("name");// required
+                    std::string task_id = "";          // not required, which is terrible
+                    try {
+                        task_id = task.at("id");
+                    } catch (nlohmann::json::out_of_range &ignore) {
+                        // do nothing
+                    }
+                    if (not task_id.empty()) {
+                        name = name + "_" + task_id;// Will break parent/children specifications
+                    }
+
+
                     double runtime = task.at("runtimeInSeconds");
+
+                    double avg_cpu = -1.0;
+                    try {
+                        avg_cpu = task.at("avgCPU");
+                    } catch (nlohmann::json::out_of_range &e) {
+                        // do nothing
+                    }
+
+                    double num_cores = -1.0;
+                    try {
+                        num_cores = task.at("cores");
+                    } catch (nlohmann::json::out_of_range &e) {
+                        // do nothing
+                    }
+
+                    // Scale runtime based on avgCPU unless disabled
+                    if (not ignore_avg_cpu) {
+                        if ((num_cores < 0) and (avg_cpu < 0)) {
+                            if (show_warnings) std::cerr << "[WARNING]: Task " << name << " does not specify a number of cores or an avgCPU: "
+                                                                                          "Assuming 1 core and avgCPU at 100%.\n";
+                            num_cores = 1.0;
+                            avg_cpu = 100.0;
+                        } else if (num_cores < 0) {
+                            if (show_warnings) std::cerr << "[WARNING]: Task " << name << " has avgCPU " << avg_cpu
+                                                         << "% but does not specify the number of cores:"
+                                                         << "Assuming " << std::ceil(avg_cpu / 100.0) << " cores\n";
+                            num_cores = std::ceil(avg_cpu / 100.0);
+                        } else if (avg_cpu < 0) {
+                            if (show_warnings) std::cerr << "[WARNING]: Task " + name + " does not specify avgCPU: "
+                                                                                        "Assuming 100%.\n";
+                            avg_cpu = 100.0 * num_cores;
+                        } else if (avg_cpu > 100 * num_cores) {
+                            if (show_warnings) {
+                                std::cerr << "[WARNING]: Task " << name << " specifies " << (unsigned long) num_cores << " cores and avgCPU " << avg_cpu << "%, "
+                                          << "which is impossible: Assuming avgCPU " << 100.0 * num_cores << " instead.\n";
+                            }
+                            avg_cpu = 100.0 * num_cores;
+                        }
+
+                        runtime = runtime * avg_cpu / (100.0 * num_cores);
+                    }
+
                     unsigned long min_num_cores, max_num_cores;
                     // Set the default values
                     min_num_cores = min_cores_per_task;
@@ -142,7 +199,7 @@ namespace wrench {
                     if (task.find("machine") != task.end()) {
                         execution_machine = task.at("machine");
                     }
-                    if (execution_machine.empty()) {
+                    if (ignore_machine_specs or execution_machine.empty()) {
                         flop_amount = runtime * flop_rate;
                     } else {
                         if (machines.find(execution_machine) == machines.end()) {
@@ -169,13 +226,6 @@ namespace wrench {
                         // do nothing
                     }
 
-                    // task average CPU
-                    try {
-                        workflow_task->setAverageCPU(task.at("avgCPU"));
-                    } catch (nlohmann::json::out_of_range &e) {
-                        // do nothing
-                    }
-
                     // task bytes read
                     try {
                         workflow_task->setBytesRead(task.at("readBytes"));
@@ -197,6 +247,21 @@ namespace wrench {
                         double size_in_bytes = f.at("sizeInBytes");
                         std::string link = f.at("link");
                         std::string id = f.at("name");
+                        std::string file_path = "";
+                        try {
+                            file_path = f.at("path");
+                            // Remove the training "/" if it's there
+                            if (not file_path.empty() and file_path.back() == '/') {
+                                file_path.erase(file_path.length() - 1);
+                            }
+                        } catch (nlohmann::json::out_of_range &ignore) {}
+
+                        // Prepend the id with the path, if any, to ensure uniqueness
+                        if (not file_path.empty()) {
+                            std::replace(file_path.begin(), file_path.end(), '/', '_');
+                            id = file_path + "_" + id;
+                        }
+
                         std::shared_ptr<wrench::DataFile> workflow_file = nullptr;
                         // Check whether the file already exists
                         try {
@@ -255,17 +320,5 @@ namespace wrench {
         return workflow;
     }
 
-
-    /**
-     * Documentation in .h file
-     */
-    std::shared_ptr<Workflow> WfCommonsWorkflowParser::createExecutableWorkflowFromJSON(const std::string &filename, const std::string &reference_flop_rate,
-                                                                                        bool redundant_dependencies,
-                                                                                        bool ignore_cycle_creating_dependencies,
-                                                                                        unsigned long min_cores_per_task,
-                                                                                        unsigned long max_cores_per_task,
-                                                                                        bool enforce_num_cores) {
-        throw std::runtime_error("WfCommonsWorkflowParser::createExecutableWorkflowFromJSON(): not implemented yet");
-    }
 
 };// namespace wrench
